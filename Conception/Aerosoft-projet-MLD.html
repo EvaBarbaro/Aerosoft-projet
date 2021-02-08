@@ -11,17 +11,17 @@
 <div id='mld'>
 <div>
   <span class='relation'>UTILISATEUR</span> (
-    <span class='primary'>idUtilisateur</span>,
-    <span class='normal'>mail</span>,
-    <span class='normal'>motDePasse</span>,
-    <span class='normal'>statut</span>,
-    <span class='foreign'>idRole</span>
+    <span class='primary'>IdUtilisateur</span>,
+    <span class='normal'>Mail</span>,
+    <span class='normal'>MotDePasse</span>,
+    <span class='normal'>Statut</span>,
+    <span class='foreign'>IdRole</span>
   )
 </div>
 <div>
-  <span class='relation'>ROLE</span> (
-    <span class='primary'>idRole</span>,
-    <span class='normal'>roleNom</span>
+  <span class='relation'>ROLES</span> (
+    <span class='primary'>IdRole</span>,
+    <span class='normal'>RoleNom</span>
   )
 </div>
 <div>
@@ -51,7 +51,7 @@
   <span class='relation'>AFFECTATION</span> (
     <span class='primary'>IdAffectation</span>,
     <span class='normal'>DateVol</span>,
-    <span class='normal'>affectationCode</span>,
+    <span class='normal'>AffectationCode</span>,
     <span class='foreign'>NumAvion</span>,
     <span class='foreign'>NumVol</span>,
     <span class='foreign'>IdPilote</span>
@@ -69,7 +69,7 @@
     <span class='primary'>IdPilote</span>,
     <span class='normal'>NomPilote</span>,
     <span class='normal'>PrenomPilote</span>,
-    <span class='normal'>matricule</span>
+    <span class='normal'>Matricule</span>
   )
 </div>
 <div>

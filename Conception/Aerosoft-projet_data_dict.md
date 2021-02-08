@@ -4,18 +4,18 @@
 
 | Nom | Description | Type | Commentaire |
 |---|---|---|---|---|
-| idUtilisateur | Identifiant de l'utilisateur | Int | Clé primaire |
+| IdUtilisateur | Identifiant de l'utilisateur | Int | Clé primaire |
 | Mail | E-mail de l'utilisateur | Char |   |
-| motDePasse | Mot de passe de l'utilisateur | Char |   |
+| MotDePasse | Mot de passe de l'utilisateur | Char |   |
 | Statut | Statut de l'utlisateur | Bool |   |
-| idRole | Identifiant de rôle | Int | Clé étrangère |
+| IdRole | Identifiant de rôle | Int | Clé étrangère |
 
-## ROLE
+## ROLES
 
 | Nom | Description | Type | Commentaire |
 |---|---|---|---|---|
-| idRole | Identifiant du rôle | Int | Clé primaire |
-| roleNom | Intitulé du rôle | Char | |
+| IdRole | Identifiant du rôle | Int | Clé primaire |
+| RoleNom | Intitulé du rôle | Char | |
 
 ## VOL
 
@@ -26,7 +26,7 @@
 | Hdepart | Heure de départ | Time |   |
 | AeroportArr | Code de l'aéroport d'arrivée | Char |   |
 | Harrivée | Heure d'arrivée | Time |   |
-| idAeroport | Identifiant de l'aéroport | Char | Clé étrangère |
+| IdAeroport | Identifiant de l'aéroport | Char | Clé étrangère |
 
 ## AEROPORT
 
