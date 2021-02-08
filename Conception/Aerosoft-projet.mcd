@@ -1,0 +1,21 @@
+UTILISATEUR: idUtilisateur, mail, motDePasse, statut
+A UN, 11 UTILISATEUR, 11 ROLE
+ROLE: idRole, roleNom
+
+VOL: NumVol, AeroportDept, Hdepart, AeroportArr, Harrivée
+PART DE, 11 VOL, 11 AEROPORT
+AEROPORT: IdAeroport, NomAeroport, NomVilleDesservie
+OCCUPE, 1N AEROPORT, 11 AVION
+CONSTRUCTEUR: IdConstructeur, NomConstructeur
+
+EST AFFECTE A, 1N VOL, 11 AFFECTATION
+AFFECTATION: IdAffectation, DateVol, affectationCode
+EST ENREGISTRE, 1N AVION, 11 AFFECTATION
+AVION: NumAvion
+APPARTIENT A, 11 DETAILAVION, 1N CONSTRUCTEUR
+
+:
+EST LIE A, 1N PILOTE, 11 AFFECTATION
+PILOTE: IdPilote, NomPilote, PrenomPilote, matricule
+EST, 11 AVION, 1N DETAILAVION
+DETAILAVION: TypeAvion, Capacite
