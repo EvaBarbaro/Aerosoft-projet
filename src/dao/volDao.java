@@ -4,9 +4,10 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import connexion.ConnectionBdd;
+import interfaces.Dao;
 import models.*;
 
-public class VolDao {
+public class VolDao implements Dao{
 
 	public VolDao() {
 	};
@@ -80,5 +81,35 @@ public class VolDao {
 		}
 	}
 	// -----------------------------------------------------------------
+
+	@Override
+	public Object get(Object id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void save(Object t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void update(Object t, String[] params) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(Object t) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
