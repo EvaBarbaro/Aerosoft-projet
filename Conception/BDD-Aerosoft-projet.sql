@@ -1,14 +1,14 @@
 CREATE TABLE ROLES (
-    IdRole       	integer primary key auto_increment,
+    IdRole       	varchar(20) primary key,
     RoleNom 		varchar(50) not null
 ) ENGINE InnoDB;
 
 CREATE TABLE UTILISATEUR (
-    IdUtilisateur 	integer primary key auto_increment,
+    IdUtilisateur 	varchar(20) primary key,
 	Mail 		    varchar(50) not null,
     MotDePasse 		varchar(50) not null,
     Statut          boolean,
-	IdRole 	        integer not null, foreign key(IdRole) references ROLES(IdRole)
+	IdRole 	        varchar(20) not null, foreign key(IdRole) references ROLES(IdRole)
 ) ENGINE InnoDB;
 
 CREATE TABLE CONSTRUCTEUR (
@@ -61,19 +61,17 @@ CREATE TABLE AFFECTATION (
 -- création des tuples
 
 INSERT INTO ROLES VALUES 
-(101,'Chargé Clientèle'),
-(202,'Technicien d''exploitation'),
-(303,'Administrateur'),
-(404,'Pilote'),
-(505, 'SuperAdmin')
+('01011','Chargé Clientèle'),
+('44444','Technicien d''exploitation'),
+('55555','Administrateur'),
+('01211','Pilote')
 ;
 
 INSERT INTO UTILISATEUR VALUES 
-(1,'clientele@aerosoft.com', 'pass123', TRUE, 101),
-(2,'technique@aerosoft.com', 'pass123', TRUE, 202),
-(3,'admin@aerosoft.com', 'pass123', TRUE, 303),
-(4,'pilote@aerosoft.com', 'pass123', TRUE, 404),
-(5, 'superadmin@aerosoft.com', 'pass123', TRUE, 505)
+(1,'clientele@aerosoft.com', 'pass123', TRUE, '01011'),
+(2,'technique@aerosoft.com', 'pass123', TRUE, '44444'),
+(3,'admin@aerosoft.com', 'pass123', TRUE, '55555'),
+(4,'pilote@aerosoft.com', 'pass123', TRUE, '01211')
 ;
 
 INSERT INTO CONSTRUCTEUR VALUES 
