@@ -64,14 +64,14 @@ INSERT INTO ROLES VALUES
 ('01011','Chargé Clientèle'),
 ('44444','Technicien d''exploitation'),
 ('55555','Administrateur'),
-('01211','Pilote')
+('11111','Pilote')
 ;
 
 INSERT INTO UTILISATEUR VALUES 
 (1,'clientele@aerosoft.com', 'pass123', TRUE, '01011'),
 (2,'technique@aerosoft.com', 'pass123', TRUE, '44444'),
 (3,'admin@aerosoft.com', 'pass123', TRUE, '55555'),
-(4,'pilote@aerosoft.com', 'pass123', TRUE, '01211')
+(4,'pilote@aerosoft.com', 'pass123', TRUE, '11111')
 ;
 
 INSERT INTO CONSTRUCTEUR VALUES 
