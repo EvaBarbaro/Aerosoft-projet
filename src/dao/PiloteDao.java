@@ -23,7 +23,7 @@ public class PiloteDao {
 			while (res.next()) {
 
 				//Retrieve by column name
-				Pilote pilote = new Pilote(res.getInt("idPilote"),res.getString("nomPilote"), res.getString("prenomPilote"));
+				Pilote pilote = new Pilote(res.getInt("IdPilote"),res.getString("NomPilote"), res.getString("PrenomPilote"), res.getString("Matricule"));
 
 				listePilotes.add(pilote);
 			}
@@ -42,7 +42,7 @@ public class PiloteDao {
 	public static void insertPilote(Pilote pilote) {
 			Connection conn = null;
 			PreparedStatement stmt = null;
-			String sql = "INSERT INTO pilote (nom_pilote,prenom_pilote) VALUES (?,?)";
+			String sql = "INSERT INTO pilote (NomPilote,PrenomPilote) VALUES (?,?)";
 		try {
 			conn = ConnectionBdd.getConnection();
 			stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -51,7 +51,7 @@ public class PiloteDao {
 			stmt.setString(2,pilote.getPrenomPilote());
 			stmt.execute();
 			
-			System.out.println(pilote.getNomPilote()+ " � bien �t� ajout�");
+			System.out.println(pilote.getNomPilote()+ " a bien été ajouté");
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -66,7 +66,7 @@ public class PiloteDao {
 
 		try {
 			conn = ConnectionBdd.getConnection();
-			stmt = conn.prepareStatement("UPDATE pilote SET nom_pilote=?,prenom_pilote=? WHERE id_pilote=?");
+			stmt = conn.prepareStatement("UPDATE pilote SET NomPilote=?,PrenomPilote=? WHERE IdPilote=?");
 			stmt.setString(1, newNom);
 			stmt.setString(2, newPrenom);
 			stmt.setInt(3, id);

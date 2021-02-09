@@ -17,9 +17,9 @@ public class AffectationDao {
 				+ "Affectation.DateVol,"
 				+  "Affectation.NumAvion, "
 				+ "Affectation.idPilote, "
-				+ "(Select PrenomPilote from Pilote WHERE  Pilote.idPilote = Affectation.idPilote) as PrenomPilote,"
-				+ "(Select NomPilote from Pilote WHERE  Pilote.idPilote = Affectation.idPilote) as NomPilote "
-				+ "from Affectation";
+				+ "(Select PrenomPilote FROM Pilote WHERE  Pilote.idPilote = Affectation.idPilote) as PrenomPilote,"
+				+ "(Select NomPilote FROM Pilote WHERE  Pilote.idPilote = Affectation.idPilote) as NomPilote "
+				+ "FROM Affectation";
 
 		ArrayList<Affectation> listeAffectations = new ArrayList<>();
 
@@ -63,7 +63,7 @@ public class AffectationDao {
 	public static void modifVol(String numVol, String newDateVol) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		String sql = "UPDATE affectation SET date_vol= ? WHERE num_vol_fk=?";
+		String sql = "UPDATE affectation SET DateVol= ? WHERE NumVol=?";
 		try {
 			conn = ConnectionBdd.getConnection();
 			stmt = conn.prepareStatement(sql);
@@ -88,8 +88,8 @@ public class AffectationDao {
 	public static void delVol(String numVolDel){
 		Connection conn = null;
 		Statement stmt = null;
-		String sqlDelete = "DELETE FROM affectation" + " WHERE num_vol_fk ='"+numVolDel+"'";
-		String sqlDelete2 = "DELETE FROM vol" + " WHERE num_vol='"+numVolDel+"'";
+		String sqlDelete = "DELETE FROM affectation" + " WHERE NumVol ='"+numVolDel+"'";
+		String sqlDelete2 = "DELETE FROM vol" + " WHERE NumVol='"+numVolDel+"'";
 		try {
 			conn = ConnectionBdd.getConnection();
 			stmt = conn.createStatement();

@@ -23,7 +23,7 @@ public class AvionDao {
 			while (res.next()) {
 
 				//Retrieve by column name
-				Avion avion = new Avion(res.getInt("numAvion"),res.getString("typeAvion"), res.getString("idAeroport"));
+				Avion avion = new Avion(res.getInt("NumAvion"),res.getString("TypeAvion"), res.getString("BaseAeroport"));
 
 				listeAvions.add(avion);
 			}

@@ -11,7 +11,7 @@ public class AeroportDao {
 	public ArrayList<Aeroport> listeAeroports() {
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		String sql = "SELECT * FROM aeroport ORDER BY nom_ville";
+		String sql = "SELECT * FROM aeroport ORDER BY NomVilleDesservie";
 
 		ArrayList<Aeroport> listeAeroports = new ArrayList<>();
 
@@ -23,8 +23,8 @@ public class AeroportDao {
 			while (res.next()) {
 
 				//Retrieve by column name
-				Aeroport aeroport = new Aeroport(res.getString("idAeroport"), res.getString("nom_aeroport"),
-						res.getString("nom_ville"));
+				Aeroport aeroport = new Aeroport(res.getString("idAeroport"), res.getString("NomAeroport"),
+						res.getString("NomVilleDesservie"));
 
 				listeAeroports.add(aeroport);
 			}

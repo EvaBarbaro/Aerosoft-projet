@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class ConnectionBdd {
 	private static final String driver_name = "com.mysql.jdbc.Driver";
-	private static final String url = "jdbc:mysql://localhost/aeroport";
+	private static final String url = "jdbc:mysql://localhost/aerosoft";
 	private static final String username = "root";
 	private static final String password = "";
 	
