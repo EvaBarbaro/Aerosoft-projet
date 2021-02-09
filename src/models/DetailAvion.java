@@ -1,15 +1,15 @@
 package models;
 
-public class Caracteristique {
+public class DetailAvion {
 	// Creation des variables
 	private String typeAvion;
 	private int capaciteAvion;
 	private int idConstructeur;
 	
 	// Creation des constructeur
-	public Caracteristique() {
+	public DetailAvion() {
 	}
-	public Caracteristique(String typeAvion, int capaciteAvion, int idConstructeur) {
+	public DetailAvion(String typeAvion, int capaciteAvion, int idConstructeur) {
 			this.setTypeAvion(typeAvion);
 			this.setCapaciteAvion(capaciteAvion);
 			this.setIdConstructeur(idConstructeur);

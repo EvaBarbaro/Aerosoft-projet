@@ -23,16 +23,7 @@ public class PiloteDao {
 			while (res.next()) {
 
 				//Retrieve by column name
-<<<<<<< HEAD
-				Pilote pilote = new Pilote(
-						res.getInt("idPilote"),
-						res.getString("nomPilote"), 
-						res.getString("prenomPilote"), 
-						res.getString("matricule")
-					);
-=======
 				Pilote pilote = new Pilote(res.getInt("IdPilote"),res.getString("NomPilote"), res.getString("PrenomPilote"), res.getString("Matricule"));
->>>>>>> 596b3d347553d912fa728ba3ab0b0ba80296cf43
 
 				listePilotes.add(pilote);
 			}

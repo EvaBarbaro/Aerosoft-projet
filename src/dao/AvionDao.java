@@ -26,15 +26,7 @@ public class AvionDao {
 			while (res.next()) {
 
 				//Retrieve by column name
-<<<<<<< HEAD
-				Avion avion = new Avion(
-						res.getInt("numAvion"), 
-						res.getString("typeAvion"), 
-						res.getString("idAeroport")
-					);
-=======
 				Avion avion = new Avion(res.getInt("NumAvion"),res.getString("TypeAvion"), res.getString("BaseAeroport"));
->>>>>>> 596b3d347553d912fa728ba3ab0b0ba80296cf43
 
 				listeAvions.add(avion);
 			}

@@ -26,16 +26,8 @@ public class AeroportDao {
 			while (res.next()) {
 
 				//Retrieve by column name
-<<<<<<< HEAD
-				Aeroport aeroport = new Aeroport(
-						res.getString("idAeroport"), 
-						res.getString("nom_aeroport"),
-						res.getString("NomVilleDesservie")
-						);
-=======
 				Aeroport aeroport = new Aeroport(res.getString("idAeroport"), res.getString("NomAeroport"),
 						res.getString("NomVilleDesservie"));
->>>>>>> 596b3d347553d912fa728ba3ab0b0ba80296cf43
 
 				listeAeroports.add(aeroport);
 			}
