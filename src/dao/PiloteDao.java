@@ -1,11 +1,44 @@
 package dao;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 import connexion.ConnectionBdd;
 import models.*;
 
 public class PiloteDao {
+
+	public ArrayList<Pilote> listePilotes() {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		String sql = "SELECT * FROM pilote";
+
+		ArrayList<Pilote> listePilotes = new ArrayList<>();
+
+		try {
+			conn = ConnectionBdd.getConnection();
+			stmt = conn.prepareStatement(sql);
+			ResultSet res = stmt.executeQuery(sql);
+
+			while (res.next()) {
+
+				//Retrieve by column name
+				Pilote pilote = new Pilote(res.getInt("idPilote"),res.getString("nomPilote"), res.getString("prenomPilote"));
+
+				listePilotes.add(pilote);
+			}
+			  
+		    res.close();
+			conn.close();
+			
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.out.println("Impossible d'afficher les vols");
+			}
+		return listePilotes;
+	}
+
 	public static void insertPilote(Pilote pilote) {
 			Connection conn = null;
 			PreparedStatement stmt = null;
@@ -13,12 +46,12 @@ public class PiloteDao {
 		try {
 			conn = ConnectionBdd.getConnection();
 			stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			//Les points d'interogation vont prendre les info de stmt.setString() dans l'ordre par rapport à la requete
+			//Les points d'interogation vont prendre les info de stmt.setString() dans l'ordre par rapport ï¿½ la requete
 			stmt.setString(1,pilote.getNomPilote());
 			stmt.setString(2,pilote.getPrenomPilote());
 			stmt.execute();
 			
-			System.out.println(pilote.getNomPilote()+ " à bien été ajouté");
+			System.out.println(pilote.getNomPilote()+ " ï¿½ bien ï¿½tï¿½ ajoutï¿½");
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -26,21 +59,24 @@ public class PiloteDao {
 			System.out.println("Impossible d'ajouter un pilote");
 		}
 	}
-	public static int modifPilote(int id,String newNom, String newPrenom) {
+
+	public static int modifPilote(int id, String newNom, String newPrenom) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		
+
 		try {
 			conn = ConnectionBdd.getConnection();
-			stmt=conn.prepareStatement("UPDATE pilote SET nom_pilote=?,prenom_pilote=? WHERE id_pilote=?");
+			stmt = conn.prepareStatement("UPDATE pilote SET nom_pilote=?,prenom_pilote=? WHERE id_pilote=?");
 			stmt.setString(1, newNom);
 			stmt.setString(2, newPrenom);
 			stmt.setInt(3, id);
-			
+
 			return stmt.executeUpdate();
 		} catch (SQLException e) {
 			// e.printStackTrace();
 			throw new RuntimeException(e);
-		} 
+		}
 	}
+	
+
 }

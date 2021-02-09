@@ -4,17 +4,21 @@ import java.util.Date;
 public class Affectation {
 	private String numVol;
 	private Date dateVol;
+	private Boolean affectationCode;
 	private int numAvion;
-	private int idPilote;
+	private Pilote pilote;
 	
 	public Affectation() {
 	}
-	public Affectation(String numVol, Date dateVol, int numAvion, int idPilote) {
+
+	public Affectation(String numVol,Boolean affectationCode, Date dateVol, int numAvion, Pilote pilote) {
 		this.setNumVol(numVol);
 		this.setDateVol(dateVol);
+		this.setAffectationCode(affectationCode);
 		this.setNumAvion(numAvion);
-		this.setIdPilote(idPilote);
+		this.setPilote(pilote);
 	}
+	
 	public String getNumVol() {
 		return numVol;
 	}
@@ -33,11 +37,20 @@ public class Affectation {
 	public void setNumAvion(int numAvion) {
 		this.numAvion = numAvion;
 	}
-	public int getIdPilote() {
-		return idPilote;
+	public Pilote getPilote() {
+		return pilote;
 	}
-	public void setIdPilote(int idPilote) {
-		this.idPilote = idPilote;
+
+	public void setPilote(Pilote pilote) {
+		this.pilote = pilote;
+	}
+
+	public Boolean getAffectationCode() {
+		return this.affectationCode;
+	}
+
+	public void setAffectationCode(Boolean affectationCode) {
+		this.affectationCode = affectationCode;
 	}
 	
 }

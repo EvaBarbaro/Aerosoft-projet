@@ -1,42 +1,45 @@
 package dao;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 import connexion.ConnectionBdd;
 import models.*;
 
-public class volDao {
+public class VolDao {
 
 	// -------------------FONCTION AFFICHE VOL-------------
-	public static void afficheVol() {
+	public ArrayList<Vol> listeVols() {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		String sql = "SELECT * FROM vol";
+
+		ArrayList<Vol> listeVols = new ArrayList<>();
+
 		try {
 			conn = ConnectionBdd.getConnection();
 			stmt = conn.prepareStatement(sql);
 			ResultSet res = stmt.executeQuery(sql);
-			while(res.next()){
-		         //Retrieve by column name
-		         String numVol  = res.getString("num_vol");
-		         String aDepart = res.getString("aeroport_depart_fk");
-		         String hDepart = res.getString("heure_depart");
-		         String aArrive = res.getString("aeroport_arrive_fk");
-		         String hArrive = res.getString("heure_arrive");
 
-		         //Display values
-		         System.out.print("Numero de vol: " + numVol);
-		         System.out.print(", From : " + aDepart);
-		         System.out.print(", Heure de depart : " + hDepart);
-		         System.out.print(", To : " + aArrive);
-		         System.out.println(", Heure d'arrive: " + hArrive);
+			while(res.next()){
+		         //Retrieve by column name		
+				 Vol vol = new  Vol(
+					 res.getString("num_vol"), 
+					 res.getString("aeroport_depart_fk"), 
+					 res.getString("heure_depart"), 
+					 res.getString("aeroport_arrive_fk"), 
+					 res.getString("heure_arrive")
+					 );
+						listeVols.add(vol);
 		      }
-		      res.close();
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		    res.close();
+			conn.close();
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return listeVols;
 	}
 	// -----------------------------------------------------------------
 	// -------------------FONCTION RECHERCHE VOL------------------------
@@ -65,7 +68,9 @@ public class volDao {
 		         System.out.print(", To : " + aArrive);
 		         System.out.println(", Heure d'arrive: " + hArrive);
 		      }
-		      res.close();
+			res.close();
+			conn.close();
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

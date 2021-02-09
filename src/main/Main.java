@@ -17,8 +17,11 @@ public class Main {
 		System.out.println("Tapez 7 : Modifier un pilote");
 		System.out.print("Veuillez entrer votre choix :");
 		int choix = scanner.nextInt();
+
+		VolDao volDao = VolDao();
 		
 		Scanner sc = new Scanner(System.in);
+		
 		switch (choix) {
 		// 1 - Add a pilot
 		case 1:
@@ -30,32 +33,39 @@ public class Main {
 			System.out.println("Entrer le prenom : "); 
 			String firstName = sc.nextLine(); 
 			p1.setPrenomPilote(firstName);
-			PiloteDao piloteDao = new PiloteDao();
+			
 			PiloteDao.insertPilote(p1);
 			break;
-		case 2:
-			volDao.afficheVol();
+
+		case 2:			
+			volDao.listeVols();
 			break;
+
 		case 3:
 			System.out.println("Entrer votre numéro de vol: "); 
 			String numVolUser = sc.nextLine();
-			volDao.rechercheVol(numVolUser);
+			VolDao.rechercheVol(numVolUser);
 			break;
+
 		case 4:
-			aeroportDao.listeAeroport();
+			AeroportDao aeroportDao = new AeroportDao();
+			aeroportDao.listeAeroports();
 			break;
+
 		case 5:
 			System.out.println("Entrer le numéro du vol à modifier"); 
 			String numVol = sc.nextLine(); 
 			System.out.println("Entrer votre nouvelle date :"); 
 			String newDateVol = sc.nextLine(); 
-			affectationDao.modifVol(numVol, newDateVol);
+			AffectationDao.modifVol(numVol, newDateVol);
 			break;
+
 		case 6:
 			System.out.println("Entrer le numero de vol à supprimer"); 
 			String numVolDel = sc.nextLine();
-			affectationDao.delVol(numVolDel);
+			AffectationDao.delVol(numVolDel);
 			break;
+
 		case 7:
 			System.out.println("Entrer l'id du pilote à modifier");
 			int idPilote = sc.nextInt();
@@ -67,5 +77,9 @@ public class Main {
 			PiloteDao.modifPilote(idPilote, newNom, newPrenom);
 			break;
 		}
+	}
+
+	private static VolDao VolDao() {
+		return null;
 	}
 }

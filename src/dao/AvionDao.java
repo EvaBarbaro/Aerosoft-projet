@@ -6,14 +6,14 @@ import java.util.ArrayList;
 import connexion.ConnectionBdd;
 import models.*;
 
-public class AeroportDao {
+public class AvionDao {
 	
-	public ArrayList<Aeroport> listeAeroports() {
+	public ArrayList<Avion> listeAvions() {
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		String sql = "SELECT * FROM aeroport ORDER BY nom_ville";
+		String sql = "SELECT * FROM avion";
 
-		ArrayList<Aeroport> listeAeroports = new ArrayList<>();
+		ArrayList<Avion> listeAvions = new ArrayList<>();
 
 		try {
 			conn = ConnectionBdd.getConnection();
@@ -23,10 +23,9 @@ public class AeroportDao {
 			while (res.next()) {
 
 				//Retrieve by column name
-				Aeroport aeroport = new Aeroport(res.getString("idAeroport"), res.getString("nom_aeroport"),
-						res.getString("nom_ville"));
+				Avion avion = new Avion(res.getInt("numAvion"),res.getString("typeAvion"), res.getString("idAeroport"));
 
-				listeAeroports.add(aeroport);
+				listeAvions.add(avion);
 			}
 			  
 		      res.close();
@@ -37,6 +36,6 @@ public class AeroportDao {
 				e.printStackTrace();
 				System.out.println("Impossible d'afficher les vols");
 			}
-		return listeAeroports;
+		return listeAvions;
 	}
 }
