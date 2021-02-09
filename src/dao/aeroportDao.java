@@ -4,14 +4,16 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import connexion.ConnectionBdd;
+import interfaces.Dao;
 import models.*;
 
-public class AeroportDao {
+public class AeroportDao implements Dao{
 
 	public AeroportDao() {
-	};
-	
-	public ArrayList<Aeroport> listeAeroports() {
+	}
+
+	@Override
+	public ArrayList<Aeroport> getAll() {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		String sql = "SELECT * FROM aeroport ORDER BY NomVilleDesservie";
@@ -31,15 +33,39 @@ public class AeroportDao {
 
 				listeAeroports.add(aeroport);
 			}
-			  
-		      res.close();
-			  conn.close();
-			
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				System.out.println("Impossible d'afficher les vols");
-			}
+
+			res.close();
+			conn.close();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Impossible d'afficher les vols");
+		}
 		return listeAeroports;
+	}
+
+	@Override
+	public Object get(Object id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void save(Object t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void update(Object t, String[] params) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(Object t) {
+		// TODO Auto-generated method stub
+		
 	}
 }
