@@ -4,7 +4,7 @@ public class Caracteristique {
 	// Creation des variables
 	private String typeAvion;
 	private int capaciteAvion;
-	private int idContructeur;
+	private int idConstructeur;
 	
 	// Creation des constructeur
 	public Caracteristique() {
@@ -12,14 +12,14 @@ public class Caracteristique {
 	public Caracteristique(String typeAvion, int capaciteAvion, int idConstructeur) {
 			this.setTypeAvion(typeAvion);
 			this.setCapaciteAvion(capaciteAvion);
-			this.setIdContructeur(idConstructeur);
+			this.setIdConstructeur(idConstructeur);
 	}
 	//Creation des getter et setter
-	public int getIdContructeur() {
-		return idContructeur;
+	public int getIdConstructeur() {
+		return idConstructeur;
 	}
-	public void setIdContructeur(int idContructeur) {
-		this.idContructeur = idContructeur;
+	public void setIdConstructeur(int idConstructeur) {
+		this.idConstructeur = idConstructeur;
 	}
 	public int getCapaciteAvion() {
 		return capaciteAvion;
