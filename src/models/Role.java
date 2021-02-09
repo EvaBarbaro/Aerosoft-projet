@@ -3,15 +3,15 @@ package models;
 public class Role {
     // Creation des variables
     private String idRole;
-    private String RoleNom;
+    private String roleNom;
 
     // Creation des constructeur
 	public Role() {
 	}
 
-	public Role(String idRole, String RoleNom) {
+	public Role(String idRole, String roleNom) {
         this.setIdRole(idRole);
-        this.setRoleNom(RoleNom);
+        this.setRoleNom(roleNom);
 	}
 	//Creation des getter et setter
     public String getIdRole() {
@@ -23,10 +23,10 @@ public class Role {
     }
 
     public String getRoleNom() {
-        return this.RoleNom;
+        return this.roleNom;
     }
 
-    public void setRoleNom(String RoleNom) {
-        this.RoleNom = RoleNom;
+    public void setRoleNom(String roleNom) {
+        this.roleNom = roleNom;
     }
 }

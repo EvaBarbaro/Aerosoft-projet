@@ -8,6 +8,9 @@ import models.*;
 
 public class VolDao {
 
+	public VolDao() {
+	};
+
 	// -------------------FONCTION AFFICHE VOL-------------
 	public ArrayList<Vol> listeVols() {
 		Connection conn = null;

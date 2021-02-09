@@ -7,6 +7,9 @@ import connexion.ConnectionBdd;
 import models.*;
 
 public class AeroportDao {
+
+	public AeroportDao() {
+	};
 	
 	public ArrayList<Aeroport> listeAeroports() {
 		Connection conn = null;
@@ -23,8 +26,11 @@ public class AeroportDao {
 			while (res.next()) {
 
 				//Retrieve by column name
-				Aeroport aeroport = new Aeroport(res.getString("idAeroport"), res.getString("nom_aeroport"),
-						res.getString("nom_ville"));
+				Aeroport aeroport = new Aeroport(
+						res.getString("idAeroport"), 
+						res.getString("nom_aeroport"),
+						res.getString("NomVilleDesservie")
+						);
 
 				listeAeroports.add(aeroport);
 			}

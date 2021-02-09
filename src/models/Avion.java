@@ -5,16 +5,16 @@ public class Avion {
 	// Creation des variables
 	private int numAvion;
 	private String typeAvion;
-	private String idAeroport;
+	private String baseAeroport;
 	
 	// Creation des constructeur
 	public Avion() {	
 	}
 	
-	public Avion(int numAvion, String typeAvion, String idAeroport) {
+	public Avion(int numAvion, String typeAvion, String baseAeroport) {
 		this.setNumAvion(numAvion);
 		this.setTypeAvion(typeAvion);
-		this.setIdAeroport(idAeroport);
+		this.setIdAeroport(baseAeroport);
 	}
 
 	// Creation des getter et setter
@@ -34,11 +34,11 @@ public class Avion {
 	}
 
 	public String getIdAeroport() {
-		return idAeroport;
+		return baseAeroport;
 	}
 
-	public void setIdAeroport(String idAeroport) {
-		this.idAeroport = idAeroport;
+	public void setIdAeroport(String baseAeroport) {
+		this.baseAeroport = baseAeroport;
 	}
 	
 	

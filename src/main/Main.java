@@ -18,7 +18,7 @@ public class Main {
 		System.out.print("Veuillez entrer votre choix :");
 		int choix = scanner.nextInt();
 
-		VolDao volDao = VolDao();
+		VolDao volDao = new VolDao();
 		
 		Scanner sc = new Scanner(System.in);
 		
@@ -78,8 +78,5 @@ public class Main {
 			break;
 		}
 	}
-
-	private static VolDao VolDao() {
-		return null;
-	}
+	
 }

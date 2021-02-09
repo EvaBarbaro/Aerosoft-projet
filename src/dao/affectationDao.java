@@ -8,6 +8,9 @@ import connexion.ConnectionBdd;
 
 public class AffectationDao {
 
+	public AffectationDao() {
+	};
+
 		public ArrayList<Affectation> listeAffectations() {
 		Connection conn = null;
 		PreparedStatement stmt = null;

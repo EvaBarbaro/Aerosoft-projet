@@ -7,6 +7,9 @@ import connexion.ConnectionBdd;
 import models.*;
 
 public class AvionDao {
+
+	public AvionDao() {
+	};
 	
 	public ArrayList<Avion> listeAvions() {
 		Connection conn = null;
@@ -23,7 +26,11 @@ public class AvionDao {
 			while (res.next()) {
 
 				//Retrieve by column name
-				Avion avion = new Avion(res.getInt("numAvion"),res.getString("typeAvion"), res.getString("idAeroport"));
+				Avion avion = new Avion(
+						res.getInt("numAvion"), 
+						res.getString("typeAvion"), 
+						res.getString("idAeroport")
+					);
 
 				listeAvions.add(avion);
 			}
