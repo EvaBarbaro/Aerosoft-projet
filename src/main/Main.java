@@ -10,6 +10,7 @@ public class Main {
 		AvionDao ad = new AvionDao();
 
 		PiloteDao pdao = new PiloteDao();
+		AffectationDao afd = new AffectationDao();
 
 		//int NumAvion = 109;
 		//Avion a = (Avion) ad.get(NumAvion);
@@ -48,11 +49,16 @@ public class Main {
 			Pilote p1 = new Pilote();
 			System.out.println("Ajouter un nouveau Pilote");
 			System.out.println("Entrer le nom : "); 
-			String lastName = sc.nextLine(); 
+			String lastName = sc.nextLine();			
 			p1.setNomPilote(lastName);
+
 			System.out.println("Entrer le prenom : "); 
 			String firstName = sc.nextLine(); 
 			p1.setPrenomPilote(firstName);
+
+			System.out.println("Entrer le Matricule : "); 
+			String matricule = sc.nextLine(); 
+			p1.setMatricule(matricule);
 			
 			pdao.save(p1);
 			break;
@@ -76,14 +82,17 @@ public class Main {
 			System.out.println("Entrer le numéro du vol à modifier"); 
 			String numVol = sc.nextLine(); 
 			System.out.println("Entrer votre nouvelle date :"); 
-			String newDateVol = sc.nextLine(); 
-			AffectationDao.modifVol(numVol, newDateVol);
+			String newDateVol = sc.nextLine();
+			
+			String[] paramsAffectationDao = {numVol,newDateVol};
+			Affectation af = new Affectation();
+			afd.update(af, paramsAffectationDao) ;
 			break;
 
 		case 6:
 			System.out.println("Entrer le numero de vol à supprimer"); 
 			String numVolDel = sc.nextLine();
-			AffectationDao.delVol(numVolDel);
+			afd.delete(numVolDel);
 			break;
 
 		case 7:
