@@ -12,8 +12,43 @@ public class VolDao implements Dao{
 	public VolDao() {
 	};
 
-	// -------------------FONCTION AFFICHE VOL-------------
-	public ArrayList<Vol> listeVols() {
+	@Override
+	public Object get(Object id) {
+		Vol vol = null;
+
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		String sql = "SELECT * FROM vol WHERE NumVol=?";
+
+		try {
+			conn = ConnectionBdd.getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setObject(1, id);
+
+			System.out.println("Voici les informations du vol " + id);
+			ResultSet res = stmt.executeQuery();
+
+			while(res.next()){
+				vol = new Vol(
+					res.getString("NumVol"), 
+					res.getString("AeroportDept"),
+					res.getString("HDepart"),
+					res.getString("AeroportArr"),
+					res.getString("HArrivee")
+					);
+		      }
+			res.close();
+			conn.close();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return vol;
+	}
+
+	@Override
+	public ArrayList<Vol> getAll() {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		String sql = "SELECT * FROM vol";
@@ -25,8 +60,7 @@ public class VolDao implements Dao{
 			stmt = conn.prepareStatement(sql);
 			ResultSet res = stmt.executeQuery(sql);
 
-			while(res.next()){
-		         //Retrieve by column name		
+			while(res.next()){	
 				 Vol vol = new  Vol(
 					 res.getString("NumVol"), 
 					 res.getString("AeroportDept"), 
@@ -40,58 +74,9 @@ public class VolDao implements Dao{
 			conn.close();
 
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return listeVols;
-	}
-	// -----------------------------------------------------------------
-	// -------------------FONCTION RECHERCHE VOL------------------------
-	public static void rechercheVol(String numVolUser) {
-		Connection conn = null;
-		PreparedStatement stmt = null;
-		String sql = "SELECT * FROM vol WHERE NumVol=?";
-		try {
-			conn = ConnectionBdd.getConnection();
-			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, numVolUser);
-			System.out.println("Voici les informations du vol " + numVolUser);
-			ResultSet res = stmt.executeQuery();
-			while(res.next()){
-		         //Retrieve by column name
-		         String numVol  = res.getString("NumVol");
-		         String aDepart = res.getString("AeroportDept");
-		         String hDepart = res.getString("HDepart");
-		         String aArrive = res.getString("AeroportArr");
-		         String hArrive = res.getString("HArrivee");
-
-		         //Display values
-		         System.out.print("Numero de vol: " + numVol);
-		         System.out.print(", From : " + aDepart);
-		         System.out.print(", Heure de depart : " + hDepart);
-		         System.out.print(", To : " + aArrive);
-		         System.out.println(", Heure d'arrive: " + hArrive);
-		      }
-			res.close();
-			conn.close();
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	// -----------------------------------------------------------------
-
-	@Override
-	public Object get(Object id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList getAll() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
