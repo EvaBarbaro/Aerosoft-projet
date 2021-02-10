@@ -1,8 +1,8 @@
 package models;
-import java.util.Date;
+import java.sql.Date;
 
 public class Affectation {
-	private int id;
+	private String id;
 	private String numVol;
 	private Date dateVol;
 	private Boolean affectationCode;
@@ -12,25 +12,20 @@ public class Affectation {
 	public Affectation() {
 	}
 
-	public Affectation(int id, String numVol, Boolean affectationCode, Date dateVol, int numAvion, Pilote pilote) {
+	public Affectation(String id, String numVol, Boolean affectationCode, Date dateVol, int numAvion, Pilote pilote) {
 		this.setNumVol(numVol);
 		this.setDateVol(dateVol);
 		this.setAffectationCode(affectationCode);
 		this.setNumAvion(numAvion);
 		this.setPilote(pilote);
 	}
-	
 
-	public int getId() {
+	public String getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
-	}
-
-	public Boolean isAffectationCode() {
-		return this.affectationCode;
 	}
 
 	public Boolean getAffectationCode() {
@@ -63,7 +58,9 @@ public class Affectation {
 		this.pilote = pilote;
 	}
 
-
+	public Boolean isAffectationCode() {
+		return this.affectationCode;
+	}
 
 	public void setAffectationCode(Boolean affectationCode) {
 		this.affectationCode = affectationCode;

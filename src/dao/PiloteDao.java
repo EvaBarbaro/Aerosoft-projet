@@ -146,6 +146,5 @@ public class PiloteDao implements Dao {
 		}
 
 	}
-	
 
 }
