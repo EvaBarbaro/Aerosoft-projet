@@ -7,6 +7,23 @@ import java.util.*;
 public class Main {
 
 	public static void main(String[] args) {
+		AvionDao ad = new AvionDao();
+		int NumAvion = 110;
+		Avion a = (Avion) ad.get(NumAvion);
+
+		System.out.println("Avion : " + a.getTypeAvion());
+
+		/*Avion a2 = new Avion();
+		a2.setTypeAvion("ATR42");
+		a2.setBaseAeroport("ORL");
+		ad.save(a2);*/
+
+		String[] params = {"B747","GRE"};
+
+		ad.update(a, params);
+
+		ad.delete(a);
+
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Tapez 1 : Ajouter un nouveau pilote");
 		System.out.println("Tapez 2 : Afficher la liste des vols");
@@ -49,7 +66,7 @@ public class Main {
 
 		case 4:
 			AeroportDao aeroportDao = new AeroportDao();
-			aeroportDao.listeAeroports();
+			aeroportDao.getAll();
 			break;
 
 		case 5:

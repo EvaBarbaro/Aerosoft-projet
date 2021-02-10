@@ -14,7 +14,7 @@ public class Avion {
 	public Avion(int numAvion, String typeAvion, String baseAeroport) {
 		this.setNumAvion(numAvion);
 		this.setTypeAvion(typeAvion);
-		this.setIdAeroport(baseAeroport);
+		this.setBaseAeroport(baseAeroport);
 	}
 
 	// Creation des getter et setter
@@ -33,11 +33,11 @@ public class Avion {
 		this.typeAvion = typeAvion;
 	}
 
-	public String getIdAeroport() {
+	public String getBaseAeroport() {
 		return baseAeroport;
 	}
 
-	public void setIdAeroport(String baseAeroport) {
+	public void setBaseAeroport(String baseAeroport) {
 		this.baseAeroport = baseAeroport;
 	}
 	
