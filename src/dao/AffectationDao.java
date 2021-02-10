@@ -18,6 +18,7 @@ public class AffectationDao implements Dao {
 
 		Connection conn = null;
 		PreparedStatement stmt = null;
+
 		String sql = "SELECT "
 		+ "Affectation.NumVol,"
 		+ "Affectation.affectationCode,"
@@ -117,6 +118,7 @@ public class AffectationDao implements Dao {
 
 			Connection conn = null;
 			PreparedStatement stmt = null;
+			PreparedStatement stmt1 = null;
 			String sql = "INSERT INTO affectation (NumVol,DateVol,AffectationCode,NumAvion,IdPilote) VALUES (?,?,?,?,?)";
 		try {
 			conn = ConnectionBdd.getConnection();
@@ -127,6 +129,9 @@ public class AffectationDao implements Dao {
 			stmt.setInt(4, affectation.getNumAvion());
 			stmt.setInt(5, pilote.getIdPilote());
 			stmt.execute();
+
+			stmt1 = conn.prepareStatement("UPDATE AFFECTATION SET IdAffectation=CONCAT(NumVol, DateVol)");
+			stmt1.executeUpdate();
 			
 			System.out.println(affectation.getNumVol()+ " a bien été ajouté");
 			
