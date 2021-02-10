@@ -5,13 +5,61 @@ import java.util.ArrayList;
 
 import models.*;
 import connexion.ConnectionBdd;
+import interfaces.Dao;
 
-public class AffectationDao {
+public class AffectationDao implements Dao {
 
 	public AffectationDao() {
 	};
 
-		public ArrayList<Affectation> listeAffectations() {
+	@Override
+	public Object get(Object id) {
+		Affectation affectation = new Affectation();
+
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		String sql = "SELECT "
+		+ "Affectation.NumVol,"
+		+ "Affectation.affectationCode,"
+		+ "Affectation.DateVol,"
+		+  "Affectation.NumAvion, "
+		+ "Affectation.idPilote, "
+		+ "(Select PrenomPilote FROM Pilote WHERE  Pilote.idPilote = Affectation.idPilote) as PrenomPilote,"
+		+ "(Select NomPilote FROM Pilote WHERE  Pilote.idPilote = Affectation.idPilote) as NomPilote "+ " FROM affectation WHERE IdAffectation=?";
+		try {
+			conn = ConnectionBdd.getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, affectation.getId());
+
+			System.out.println("Voici les informations du vol " + id);
+			ResultSet res = stmt.executeQuery();
+
+			while (res.next()) {
+				affectation.setNumVol(res.getString(1));
+				affectation.setDateVol(res.getDate(2));
+				affectation.setAffectationCode(res.getBoolean(3));
+				affectation.setNumAvion(res.getInt(4));
+
+				Pilote pilote = new Pilote();
+
+				pilote.setIdPilote(res.getInt(5));
+				pilote.setPrenomPilote(res.getString(7));
+				pilote.setNomPilote(res.getString(8));
+
+				affectation.setPilote(pilote);
+			}
+			res.close();
+			conn.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return affectation;
+	}
+
+	@Override
+	public ArrayList<Affectation> getAll() {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		String sql = "SELECT "
@@ -55,27 +103,56 @@ public class AffectationDao {
 			conn.close();
 			  
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				System.out.println("Impossible d'afficher les vols");
 			}
 			return listeAffectations;
 	}
-	
-	// -------------------FONCTION MODIF VOL------------------------
-	public static void modifVol(String numVol, String newDateVol) {
+
+	@Override
+	public void save(Object t) {
+			Affectation affectation = (Affectation) t;
+
+			Pilote pilote = new Pilote();
+
+			Connection conn = null;
+			PreparedStatement stmt = null;
+			String sql = "INSERT INTO affectation (NumVol,DateVol,AffectationCode,NumAvion,IdPilote) VALUES (?,?,?,?,?)";
+		try {
+			conn = ConnectionBdd.getConnection();
+			stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			stmt.setString(1,affectation.getNumVol());
+			stmt.setDate(2,affectation.getDateVol());
+			stmt.setBoolean(3, affectation.getAffectationCode());
+			stmt.setInt(4, affectation.getNumAvion());
+			stmt.setInt(5, pilote.getIdPilote());
+			stmt.execute();
+			
+			System.out.println(affectation.getNumVol()+ " a bien été ajouté");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Impossible d'ajouter un pilote");
+		}
+	}
+
+	@Override
+	public void update(Object t, String[] params) {
+		Affectation affectation = (Affectation) t;
+
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		String sql = "UPDATE affectation SET DateVol= ? WHERE NumVol=?";
+		String sql = "UPDATE affectation SET NumVol=?, DateVol=?, NumAvion=?, IdPilote=? WHERE IdAffectation=?";
 		try {
 			conn = ConnectionBdd.getConnection();
 			stmt = conn.prepareStatement(sql);
-			stmt.setString(1,newDateVol);
-			stmt.setString(2,numVol);
+			stmt.setString(1, params[0]);
+			stmt.setString(2, params[1]);
+			stmt.setString(3, params[2]);
+			stmt.setString(4, params[3]);
+			stmt.setString(5, affectation.getId());
 			stmt.executeUpdate();
-			//System.out.println("Votre date de vol a bien �t� modifi�e au : " + newDateVol);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -83,24 +160,27 @@ public class AffectationDao {
 			stmt.close();
 			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	// -------------------FONCTION DELETE VOL------------------------
-	public static void delVol(String numVolDel){
+
+	@Override
+	public void delete(Object t) {
+		Affectation affectation = (Affectation) t;
 		Connection conn = null;
-		Statement stmt = null;
-		String sqlDelete = "DELETE FROM affectation" + " WHERE NumVol ='"+numVolDel+"'";
-		String sqlDelete2 = "DELETE FROM vol" + " WHERE NumVol='"+numVolDel+"'";
+		PreparedStatement stmt = null;
+		PreparedStatement stmt1 =null;
+
 		try {
 			conn = ConnectionBdd.getConnection();
-			stmt = conn.createStatement();
-			stmt.executeUpdate(sqlDelete);
-			stmt.executeUpdate(sqlDelete2);
-			//System.out.println("Le vol num�ro " + numVolDel + " est bien supprim�.");
+			stmt = conn.prepareStatement("DELETE FROM `vol` WHERE `NumVol`=?", Statement.RETURN_GENERATED_KEYS);
+			stmt.setInt(1, Integer.parseInt(affectation.getNumVol()));
+			stmt.execute();
+
+			stmt1 = conn.prepareStatement("UPDATE affectation SET AffectationCode=false WHERE IdAffectation=?", Statement.RETURN_GENERATED_KEYS);
+			stmt1.setString(1, affectation.getId());
+
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -108,8 +188,8 @@ public class AffectationDao {
 			stmt.close();
 			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	}
 }
