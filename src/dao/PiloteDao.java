@@ -26,7 +26,6 @@ public class PiloteDao implements Dao {
 			System.out.println("Voici les informations du vol " + id);
 			ResultSet res = stmt.executeQuery();
 			while (res.next()) {
-
 				pilote = new Pilote(
 					res.getInt("IdPilote"), 
 					res.getString("NomPilote"),
@@ -123,15 +122,11 @@ public class PiloteDao implements Dao {
 		Pilote pilote = (Pilote) t;
 
 		Connection conn = null;
-		Statement stmt = null;
-		String sql = "DELETE FROM `AVION` WHERE IdPilote=?";
+		PreparedStatement stmt = null;
 		try {
 			conn = ConnectionBdd.getConnection();
-			stmt = conn.prepareStatement("DELETE FROM `AVION` WHERE IdPilote=?", Statement.RETURN_GENERATED_KEYS);
-			stmt.setInt(1,pilote.getIdPilote());
-			
-			System.out.println(stmt.toString());
-			
+			stmt = conn.prepareStatement("DELETE FROM `pilote` WHERE `IdPilote`=?", Statement.RETURN_GENERATED_KEYS);
+			stmt.setInt(1, pilote.getIdPilote());
 			stmt.execute();
 			
 			System.out.println(pilote.getMatricule()+ " a bien été Supprimé");

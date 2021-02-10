@@ -14,6 +14,7 @@ public class AeroportDao implements Dao{
 
 	@Override
 	public ArrayList<Aeroport> getAll() {
+		
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		String sql = "SELECT * FROM aeroport ORDER BY NomVilleDesservie";
@@ -28,8 +29,11 @@ public class AeroportDao implements Dao{
 			while (res.next()) {
 
 				//Retrieve by column name
-				Aeroport aeroport = new Aeroport(res.getString("idAeroport"), res.getString("NomAeroport"),
-						res.getString("NomVilleDesservie"));
+				Aeroport aeroport = new Aeroport(
+						res.getString("idAeroport"), 
+						res.getString("NomAeroport"),
+						res.getString("NomVilleDesservie")
+						);
 
 				listeAeroports.add(aeroport);
 			}
