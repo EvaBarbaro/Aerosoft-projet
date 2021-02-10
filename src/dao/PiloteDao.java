@@ -79,12 +79,14 @@ public class PiloteDao implements Dao {
 
 			Connection conn = null;
 			PreparedStatement stmt = null;
-			String sql = "INSERT INTO pilote (NomPilote,PrenomPilote) VALUES (?,?)";
+			String sql = "INSERT INTO `PILOTE` (NomPilote,PrenomPilote,Matricule) VALUES (?,?,?)";
 		try {
 			conn = ConnectionBdd.getConnection();
 			stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1,pilote.getNomPilote());
-			stmt.setString(2,pilote.getPrenomPilote());
+			stmt.setString(2, pilote.getPrenomPilote());
+			stmt.setString(3, pilote.getMatricule());
+			
 			stmt.execute();
 			
 			System.out.println(pilote.getNomPilote()+ " a bien été ajouté");
@@ -105,10 +107,12 @@ public class PiloteDao implements Dao {
 
 		try {
 			conn = ConnectionBdd.getConnection();
-			stmt = conn.prepareStatement("UPDATE pilote SET NomPilote=?,PrenomPilote=? WHERE IdPilote=?");
+			stmt = conn.prepareStatement("UPDATE `PILOTE` SET NomPilote=?,PrenomPilote=?,Matricule=? WHERE IdPilote=?");
 			stmt.setString(1, params[0]);
 			stmt.setString(2, params[1]);
-			stmt.setInt(3, pilote.getIdPilote());
+			stmt.setString(3, params[2]);
+			stmt.setInt(4, pilote.getIdPilote());
+			System.out.println(stmt.toString());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			// e.printStackTrace();
@@ -125,7 +129,7 @@ public class PiloteDao implements Dao {
 		PreparedStatement stmt = null;
 		try {
 			conn = ConnectionBdd.getConnection();
-			stmt = conn.prepareStatement("DELETE FROM `pilote` WHERE `IdPilote`=?", Statement.RETURN_GENERATED_KEYS);
+			stmt = conn.prepareStatement("DELETE FROM `PILOTE` WHERE `IdPilote`=?", Statement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1, pilote.getIdPilote());
 			stmt.execute();
 			

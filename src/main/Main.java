@@ -8,21 +8,24 @@ public class Main {
 
 	public static void main(String[] args) {
 		AvionDao ad = new AvionDao();
-		int NumAvion = 110;
-		Avion a = (Avion) ad.get(NumAvion);
 
-		System.out.println("Avion : " + a.getTypeAvion());
+		PiloteDao pdao = new PiloteDao();
 
-		/*Avion a2 = new Avion();
-		a2.setTypeAvion("ATR42");
-		a2.setBaseAeroport("ORL");
-		ad.save(a2);*/
+		//int NumAvion = 109;
+		//Avion a = (Avion) ad.get(NumAvion);
 
-		String[] params = {"B747","GRE"};
+		//System.out.println("Avion : " + a.getTypeAvion());
 
-		ad.update(a, params);
+		//Avion a2 = new Avion();
+		//a2.setTypeAvion("ATR42");
+		//a2.setBaseAeroport("ORL");
+		//ad.save(a2);
 
-		ad.delete(a);
+		//String[] params = {"B747","GRE"};
+
+		//ad.update(a, params);
+
+		//ad.delete(a);
 
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Tapez 1 : Ajouter un nouveau pilote");
@@ -51,7 +54,7 @@ public class Main {
 			String firstName = sc.nextLine(); 
 			p1.setPrenomPilote(firstName);
 			
-			PiloteDao.insertPilote(p1);
+			pdao.save(p1);
 			break;
 
 		case 2:			
@@ -90,8 +93,14 @@ public class Main {
 			System.out.println("Entrer le new nom :"); 
 			String newNom = sc.nextLine();
 			System.out.println("Entrer le new prenom"); 
-			String newPrenom = sc.nextLine(); 
-			PiloteDao.modifPilote(idPilote, newNom, newPrenom);
+			String newPrenom = sc.nextLine();
+			
+			String[] params2 = {newNom, newPrenom};
+				
+			Pilote p = new Pilote();
+			p.setIdPilote(idPilote);
+
+			pdao.update(p, params2);
 			break;
 		}
 	}
