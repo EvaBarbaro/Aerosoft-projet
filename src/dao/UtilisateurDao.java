@@ -3,9 +3,6 @@ package dao;
 import java.sql.*;
 import java.util.ArrayList;
 
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.PreparedStatement;
-
 import connexion.ConnectionBdd;
 import interfaces.Dao;
 import models.Utilisateur;
@@ -28,8 +25,8 @@ public class UtilisateurDao implements Dao {
 		System.out.println(sql);
 
 		try {
-			conn = (Connection) ConnectionBdd.getConnection();
-			stmt = (PreparedStatement) conn.prepareStatement(sql);
+			conn = ConnectionBdd.getConnection();
+			stmt = conn.prepareStatement(sql);
 			ResultSet res = stmt.executeQuery(sql);
 			
 			while (res.next()) {
@@ -64,8 +61,8 @@ public class UtilisateurDao implements Dao {
 		ArrayList<Utilisateur> listeUtilisateurs = new ArrayList<>();
 
 		try {
-			conn = (Connection) ConnectionBdd.getConnection();
-			stmt = (PreparedStatement) conn.prepareStatement(sql);
+			conn = ConnectionBdd.getConnection();
+			stmt = conn.prepareStatement(sql);
 			ResultSet res = stmt.executeQuery(sql);
 
 			while (res.next()) {
@@ -100,8 +97,8 @@ public class UtilisateurDao implements Dao {
 			String sql = "INSERT INTO `UTILISATEUR` (IdUtilisateur,Mail,MotDePasse,Statut,IdRole) VALUES (?,?,?,?,?)";
 
 		try {
-			conn = (Connection) ConnectionBdd.getConnection();
-			stmt = (PreparedStatement) conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			conn = ConnectionBdd.getConnection();
+			stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1,utilisateur.getIdUtilisateur());
 			stmt.setString(2, utilisateur.getMail());
 			stmt.setString(3, utilisateur.getMotDePasse());
@@ -126,8 +123,8 @@ public class UtilisateurDao implements Dao {
 		PreparedStatement stmt = null;
 
 		try {
-			conn = (Connection) ConnectionBdd.getConnection();
-			stmt = (PreparedStatement) conn.prepareStatement("UPDATE `UTILISATEUR` SET IdUtilisateur=?,Mail=?,MotDePasse=?,Statut=?,IdRole=? WHERE IdUtilisateur=?");
+			conn = ConnectionBdd.getConnection();
+			stmt = conn.prepareStatement("UPDATE `UTILISATEUR` SET IdUtilisateur=?,Mail=?,MotDePasse=?,Statut=?,IdRole=? WHERE IdUtilisateur=?");
 			stmt.setString(1, params[0]);
 			stmt.setString(2, params[1]);
 			stmt.setString(3, params[2]);
@@ -149,8 +146,8 @@ public class UtilisateurDao implements Dao {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		try {
-			conn = (Connection) ConnectionBdd.getConnection();
-			stmt = (PreparedStatement) conn.prepareStatement("DELETE FROM `UTILISATEUR` WHERE `IdUtilisateur`=?", Statement.RETURN_GENERATED_KEYS);
+			conn = ConnectionBdd.getConnection();
+			stmt = conn.prepareStatement("DELETE FROM `UTILISATEUR` WHERE `IdUtilisateur`=?", Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, utilisateur.getIdUtilisateur());
 			stmt.execute();
 			
