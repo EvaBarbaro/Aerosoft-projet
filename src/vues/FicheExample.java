@@ -30,18 +30,6 @@ public class FicheExample extends JFrame {
 				};
 		bdao = new PiloteDao();
 		
-		/*
-		 * Fiche.Fiche(
-		 * String titre, 
-		 * BookDaoInterface dao, 
-		 * Object transport, 
-		 * int id, 
-		 * String[] listLabels, 
-		 * String[] listTextFields, 
-		 * String[][] listSuperDialog
-		 * ) 
-		 */
-		
 		new Fiche(
 				"Fiche Book", 
 				bdao, 

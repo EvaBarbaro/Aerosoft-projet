@@ -58,7 +58,7 @@ public class Fiche extends JFrame {
 			String titre, 
 			Dao dao, 
 			Object transport, 
-			int id, 
+			Object id, 
 			String [] listLabels, 
 			String [] listTextFields,
 			String [][] listSuperDialog
