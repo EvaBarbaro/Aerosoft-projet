@@ -1,5 +1,7 @@
 package dao;
 
+import interfaces.*;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -7,7 +9,7 @@ import connexion.ConnectionBdd;
 import models.Utilisateur;
 import vues.SDialog;
 
-public class UtilisateurDao {
+public class UtilisateurDao implements Dao {
     
 	public UtilisateurDao() {
 	}
@@ -89,7 +91,7 @@ public class UtilisateurDao {
 		return listeUtilisateurs;
 	}
 
-	public void save(Object t) {
+	public void save(Object t, String[] params) {
 		Utilisateur utilisateur =(Utilisateur) t;
 
 		Connection conn = null;

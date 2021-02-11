@@ -196,6 +196,7 @@ String passwordString = new String(pass);
                             public void actionPerformed(ActionEvent eventValidatePilote) {
                                 UtilisateurDao utilisateurDao = new UtilisateurDao();
                                 Utilisateur utilisateur = new Utilisateur();
+                                String superUseless[] = null;
                                 int uniqueID = UUID.randomUUID().hashCode();
 
                                 utilisateur.setIdUtilisateur(uniqueID);
@@ -204,7 +205,7 @@ String passwordString = new String(pass);
                                 utilisateur.setStatut(false);
                                 utilisateur.setIdRole(roleField.getText());
 
-                                utilisateurDao.save(utilisateur);
+                                utilisateurDao.save(utilisateur, superUseless);
 
                                 PiloteDao piloteDao = new PiloteDao();
                                 Pilote pilote = new Pilote();
@@ -246,6 +247,7 @@ String passwordString = new String(pass);
                 UtilisateurDao utilisateurDao = new UtilisateurDao();
                 Utilisateur utilisateur = new Utilisateur();
                 int uniqueID = UUID.randomUUID().hashCode();
+                String[] megaUseless = null;
 
                 utilisateur.setIdUtilisateur(uniqueID);
                 utilisateur.setMail(textFieldLogin.getText());
@@ -253,7 +255,7 @@ String passwordString = new String(pass);
                 utilisateur.setStatut(false);
                 utilisateur.setIdRole(roleField.getText());
 
-                utilisateurDao.save(utilisateur);
+                utilisateurDao.save(utilisateur, megaUseless);
 
                 dispose();
 
