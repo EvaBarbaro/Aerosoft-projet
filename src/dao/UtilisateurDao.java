@@ -53,7 +53,7 @@ public class UtilisateurDao implements Dao {
 	}
 
 	@Override
-	public ArrayList getAll() {
+	public ArrayList<Utilisateur> getAll() {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		String sql = "SELECT * FROM `UTILISATEUR`";
