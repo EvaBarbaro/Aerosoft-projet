@@ -30,7 +30,7 @@ public class AeroportDao implements Dao{
 
 				//Retrieve by column name
 				Aeroport aeroport = new Aeroport(
-						res.getString("idAeroport"), 
+						res.getString("IdAeroport"), 
 						res.getString("NomAeroport"),
 						res.getString("NomVilleDesservie")
 						);
@@ -44,32 +44,110 @@ public class AeroportDao implements Dao{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("Impossible d'afficher les vols");
 		}
 		return listeAeroports;
 	}
 
 	@Override
 	public Object get(Object id) {
-		// TODO Auto-generated method stub
-		return null;
+			Aeroport aeroport = null;
+
+			Connection conn = null;
+			PreparedStatement stmt = null;
+			String sql = "SELECT * FROM `AEROPORT` WHERE IdAeroport="+"'" + id +"'";
+			try {
+				conn = ConnectionBdd.getConnection();
+				stmt = conn.prepareStatement(sql);
+				ResultSet res = stmt.executeQuery(sql);
+				System.out.println("Voici les informations de l'aeroport " + id);
+				while (res.next()) {
+					aeroport = new Aeroport(
+						res.getString("IdAeroport"), 
+						res.getString("NomAeroport"),
+						res.getString("NomVilleDesservie")
+						);
+				}
+				res.close();
+				conn.close();
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			return aeroport;
 	}
 
 	@Override
 	public void save(Object t) {
-		// TODO Auto-generated method stub
+		Aeroport aeroport = (Aeroport) t;
+
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		String sql = "INSERT INTO `AEROPORT` (IdAeroport,NomAeroport,NomVilleDesservie) VALUES (?,?,?)";
+	try {
+		conn = ConnectionBdd.getConnection();
+		stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		stmt.setString(1,aeroport.getIdAeroport());
+		stmt.setString(2,aeroport.getNomAeroport());
+		stmt.setString(3,aeroport.getNomVille());
 		
+		stmt.execute();
+		
+		System.out.println(aeroport.getNomAeroport()+ " a bien été ajouté");
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
 	}
 
 	@Override
 	public void update(Object t, String[] params) {
-		// TODO Auto-generated method stub
+		Aeroport aeroport = (Aeroport) t;
+
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		String sql ="UPDATE `AEROPORT` SET NomAeroport=?,NomVilleDesservie=? WHERE IdAeroport=?";
+		try {
+			conn = ConnectionBdd.getConnection();
+			stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			stmt.setString(1, params[0]);
+			stmt.setString(2, params[1]);
+			stmt.setString(3, aeroport.getIdAeroport());
+			stmt.executeUpdate();
+
+			System.out.println(aeroport.getIdAeroport()+ " a bien été modifié");
+		} catch (SQLException e) {
+			// e.printStackTrace();
+			throw new RuntimeException(e);
+		}
 		
 	}
 
 	@Override
 	public void delete(Object t) {
-		// TODO Auto-generated method stub
+		Aeroport aeroport = (Aeroport) t;
+
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		String sql ="DELETE FROM `AEROPORT` WHERE IdAeroport=?";
+		try {
+			conn = ConnectionBdd.getConnection();
+			stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			stmt.setString(1, aeroport.getIdAeroport());
+			stmt.execute();
+			
+			System.out.println(aeroport.getIdAeroport()+ " a bien été supprimé");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
 }
