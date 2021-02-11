@@ -51,14 +51,15 @@ public class AeroportDao implements Dao{
 	@Override
 	public Object get(Object id) {
 			Aeroport aeroport = null;
-
+			String idSearch = String.valueOf(id);
 			Connection conn = null;
 			PreparedStatement stmt = null;
-			String sql = "SELECT * FROM `AEROPORT` WHERE IdAeroport="+"'" + id +"'";
+			String sql = "SELECT * FROM `AEROPORT` WHERE IdAeroport=?";
 			try {
 				conn = ConnectionBdd.getConnection();
-				stmt = conn.prepareStatement(sql);
-				ResultSet res = stmt.executeQuery(sql);
+				stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+				stmt.setString(1,idSearch);
+				ResultSet res = stmt.executeQuery();
 				System.out.println("Voici les informations de l'aeroport " + id);
 				while (res.next()) {
 					aeroport = new Aeroport(
@@ -94,7 +95,7 @@ public class AeroportDao implements Dao{
 		
 		stmt.execute();
 		
-		System.out.println(aeroport.getNomAeroport()+ " a bien été ajouté");
+		System.out.println(aeroport.getNomAeroport()+ " a bien Ã©tÃ© ajoutÃ©");
 		
 	} catch (SQLException e) {
 		e.printStackTrace();
@@ -116,7 +117,7 @@ public class AeroportDao implements Dao{
 			stmt.setString(3, aeroport.getIdAeroport());
 			stmt.executeUpdate();
 
-			System.out.println(aeroport.getIdAeroport()+ " a bien été modifié");
+			System.out.println(aeroport.getIdAeroport()+ " a bien ï¿½tï¿½ modifiï¿½");
 		} catch (SQLException e) {
 			// e.printStackTrace();
 			throw new RuntimeException(e);
@@ -137,7 +138,7 @@ public class AeroportDao implements Dao{
 			stmt.setString(1, aeroport.getIdAeroport());
 			stmt.execute();
 			
-			System.out.println(aeroport.getIdAeroport()+ " a bien été supprimé");
+			System.out.println(aeroport.getIdAeroport()+ " a bien ï¿½tï¿½ supprimï¿½");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
