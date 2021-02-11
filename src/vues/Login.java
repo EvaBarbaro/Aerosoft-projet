@@ -14,7 +14,7 @@ public class Login extends JFrame implements ActionListener {
 
 private static final long serialVersionUID = 1618223497137316296L;
 JLabel labelTitle, labelEmail, labelPassword;
-JTextField textFieldLogin;
+JTextField textFieldLogin, roleField;
 JButton btnValider, btnInscription;
 JPasswordField passwordField;
 
@@ -122,10 +122,14 @@ String passwordString = new String(pass);
                 JButton btnValidatePilote;
 
                 String stringBox = (String) comboBoxRole.getSelectedItem();
+
+                Role roleAtt = (Role) roleDao.get(stringBox);
         
                 switch (stringBox) {
                     case "Chargé Clientèle":
-                        roleDao.get(stringBox);
+                        roleField = new JTextField(roleAtt.getIdRole());
+                        roleField.setVisible(false);
+                        add(roleField);
                         break;
                     case "Pilote":
                         roleDao.get(stringBox);
@@ -154,6 +158,10 @@ String passwordString = new String(pass);
                         invalidate();
                         validate();
                         repaint();
+
+                        roleField = new JTextField(roleAtt.getIdRole());
+                        roleField.setVisible(false);
+                        add(roleField);
                         
                         btnValidatePilote.addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent eventValidatePilote) {
@@ -163,9 +171,15 @@ String passwordString = new String(pass);
                         break;
                     case "Technicien d'exploitation":
                         roleDao.get(stringBox);
+                        roleField = new JTextField(roleAtt.getIdRole());
+                        roleField.setVisible(false);
+                        add(roleField);
                         break;
                     case "Administrateur":
                         roleDao.get(stringBox);
+                        roleField = new JTextField(roleAtt.getIdRole());
+                        roleField.setVisible(false);
+                        add(roleField);
                         break;
                 }
             }
@@ -173,7 +187,17 @@ String passwordString = new String(pass);
 
         btnValidateReg.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent eventValidateReg) {
-                
+                UtilisateurDao utilisateurDao = new UtilisateurDao();
+                Utilisateur utilisateur = new Utilisateur();
+                int uniqueID = UUID.randomUUID().hashCode();
+
+                utilisateur.setIdUtilisateur(uniqueID);
+                utilisateur.setMail(textFieldLogin.getText());
+                utilisateur.setMotDePasse(passwordField.getText().toString());
+                utilisateur.setStatut(false);
+                utilisateur.setIdRole(roleField.getText());
+
+                utilisateurDao.save(utilisateur);
             }
         });
     }
