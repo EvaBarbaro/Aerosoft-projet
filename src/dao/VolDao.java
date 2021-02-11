@@ -152,6 +152,5 @@ public class VolDao implements Dao{
 
 	}
 		
-	}
-
 }
+
