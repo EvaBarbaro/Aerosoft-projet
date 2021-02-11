@@ -172,7 +172,7 @@ String passwordString = new String(pass);
         });
 
         btnValidateReg.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent eventValidatePilote) {
+            public void actionPerformed(ActionEvent eventValidateReg) {
                 
             }
         });
