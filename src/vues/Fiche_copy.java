@@ -1,13 +1,13 @@
 package vues;
 
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
 import javax.swing.JFrame;
-
 import javax.swing.JPanel;
-
 import javax.swing.border.EmptyBorder;
 
 import interfaces.Dao;
-
 import vues.SuperDialog;
 
 import javax.swing.GroupLayout;
@@ -26,25 +26,19 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.ActionEvent;
 
-public class Fiche extends JFrame {
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 1L;
+public class Fiche_copy extends JFrame {
 
 	private JPanel contentPane;
-
-	private JLabel lblNewTitre ;
 	
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_2;
-	private JLabel lblNewLabel_3 = new JLabel("");
-	private JLabel lblNewLabel_4 = new JLabel("");
+	private JLabel lblNewLabel_3;
+	private JLabel lblNewLabel_4;
 	
 	private JTextField textField_1;
 	private JTextField textField_2;
-	private JTextField textField_3 = new JTextField();
-	private JTextField textField_4 = new JTextField();
+	private JTextField textField_3;
+	private JTextField textField_4;
 
 	private String oldValue_1;
 	private String oldValue_2;
@@ -54,7 +48,7 @@ public class Fiche extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Fiche(
+	public Fiche_copy(
 			String titre, 
 			Dao dao, 
 			Object transport, 
@@ -65,11 +59,6 @@ public class Fiche extends JFrame {
 			) {
 
 		setTitle(titre);
-		
-		lblNewTitre = new JLabel(titre);
-		lblNewTitre.setForeground(Color.blue);
-		lblNewTitre.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		
 		setFont(new Font("Dialog", Font.PLAIN, 15));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -192,37 +181,34 @@ public class Fiche extends JFrame {
 							.addContainerGap()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(lblNewTitre, GroupLayout.PREFERRED_SIZE, 183, GroupLayout.PREFERRED_SIZE)
+									.addGap(12)
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+										.addGroup(gl_contentPane.createSequentialGroup()
+											.addComponent(lblNewLabel_1)
+											.addPreferredGap(ComponentPlacement.UNRELATED)
+											.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 259, GroupLayout.PREFERRED_SIZE))
+										.addGroup(gl_contentPane.createSequentialGroup()
+											.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+												.addComponent(lblNewLabel_3)
+												.addComponent(lblNewLabel_2)
+												.addComponent(lblNewLabel_4))
+											.addPreferredGap(ComponentPlacement.UNRELATED)
+											.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+												.addComponent(textField_3, GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+												.addComponent(textField_4, GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+												.addComponent(textField_2)))))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(lblNewLabel_3, GroupLayout.PREFERRED_SIZE, 183, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-									.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-									.addComponent(textField_4)
-									.addComponent(textField_3, GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
-									.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-										.addGap(12)
-										.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-											.addGroup(gl_contentPane.createSequentialGroup()
-												.addComponent(lblNewLabel_1)
-												.addPreferredGap(ComponentPlacement.UNRELATED)
-												.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 259, GroupLayout.PREFERRED_SIZE))
-											.addGroup(gl_contentPane.createSequentialGroup()
-												.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-													.addGroup(gl_contentPane.createSequentialGroup()
-														.addGap(12)
-														.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-															.addComponent(lblNewTitre, GroupLayout.PREFERRED_SIZE, 183, GroupLayout.PREFERRED_SIZE)
-															.addComponent(lblNewLabel_4)))
-													.addComponent(lblNewLabel_2))
-												.addPreferredGap(ComponentPlacement.UNRELATED)
-												.addComponent(textField_2))))))
-							.addGap(12)))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+									.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)))))
+					.addContainerGap(9, Short.MAX_VALUE))
 		);
+		
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblNewTitre)
+						.addComponent(lblNewLabel_3)
 						.addComponent(lblNewLabel))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
@@ -234,30 +220,18 @@ public class Fiche extends JFrame {
 						.addComponent(lblNewLabel_2))
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewTitre)
+						.addComponent(lblNewLabel_3)
 						.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(16)
-					.addComponent(lblNewLabel_4)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblNewLabel_4)
+						.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btn_Supprimer)
 						.addComponent(btn_Valider)))
 		);
 		contentPane.setLayout(gl_contentPane);
-		
-		if (listLabels.length >= 3) {
-			textField_3.setVisible(true);
-		}else {
-			textField_3.setVisible(false);
-		}
-		
-		if (listLabels.length >= 3) {
-			textField_4.setVisible(true);
-		}else {
-			textField_4.setVisible(false);
-		}
 
 		final Toolkit toolkit = Toolkit.getDefaultToolkit();
 		final Dimension screenSize = toolkit.getScreenSize();
