@@ -18,12 +18,12 @@ public class PiloteDao implements Dao {
 
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		String sql = "SELECT * FROM Pilote WHERE IdPilote=?";
+		String sql = "SELECT * FROM pilote WHERE IdPilote=?";
 		try {
 			conn = ConnectionBdd.getConnection();
 			stmt = conn.prepareStatement(sql);
 			stmt.setObject(1, id);
-			System.out.println("Voici les informations du vol " + id);
+			System.out.println("Voici les informations du pilote " + id);
 			ResultSet res = stmt.executeQuery();
 			while (res.next()) {
 				pilote = new Pilote(
@@ -68,7 +68,7 @@ public class PiloteDao implements Dao {
 			
 			} catch (SQLException e) {
 				e.printStackTrace();
-				System.out.println("Impossible d'afficher les vols");
+				System.out.println("Impossible d'afficher les pilotes");
 			}
 		return listePilotes;
 	}
