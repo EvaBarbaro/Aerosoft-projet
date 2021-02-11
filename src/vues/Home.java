@@ -65,7 +65,7 @@ public class Home extends JFrame {
             AeroportDao aeDao = new AeroportDao();
             String idAe = "CDG"; 
 			Aeroport ae = (Aeroport) aeDao.get(idAe);
-			new FicheAeroport(ae);
+			new FicheAjoutAeroport(ae);
     	}
     });
     menu1.add(i1); menu1.add(i2); menu1.add(i3);mb.add(menu1); 

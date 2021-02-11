@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import connexion.ConnectionBdd;
 import interfaces.Dao;
 import models.*;
+import vues.SDialog;
 
 public class VolDao implements Dao{
 
@@ -48,6 +49,7 @@ public class VolDao implements Dao{
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 		return vol;
 	}
@@ -80,12 +82,13 @@ public class VolDao implements Dao{
 
 			} catch (SQLException e) {
 				e.printStackTrace();
+				throw new RuntimeException(e);
 			}
 			return listeVols;
 	}
 
 	@Override
-	public void save(Object t) {
+	public void save(Object t, String[] params) {
 			Vol vol = (Vol) t;
 
 			Connection conn = null;
@@ -94,18 +97,21 @@ public class VolDao implements Dao{
 		try {
 			conn = ConnectionBdd.getConnection();
 			stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			stmt.setString(1, vol.getNumVol());
-			stmt.setString(2, vol.getAeroportDepart());
-			stmt.setString(3, vol.getHeureDepart());
-			stmt.setString(4, vol.getAeroportArrive());
-			stmt.setString(5, vol.getHeureArrive());
+			stmt.setString(1, params[0]);
+			stmt.setString(2, params[1]);
+			stmt.setString(3, params[2]);
+			stmt.setString(4, params[3]);
+			stmt.setString(5, params[4]);
 			stmt.execute();
 			
-			System.out.println(vol.getNumVol()+ " a bien été ajouté");
+			System.out.println(vol.getNumVol() + " a bien été ajouté");
+			new SDialog("Ajout", "Ajouter reussi", "Valider", "").setVisible(true);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Impossible d'ajouter un pilote");
+			System.out.println("Impossible d'ajouter un Vol");
+			new SDialog("Echec", "L'ajout n'a pas reussi car " + e, "ok", "").setVisible(true);
+			throw new RuntimeException(e);
 		}
 		
 	}
@@ -127,7 +133,11 @@ public class VolDao implements Dao{
 			stmt.setString(4, params[3]);
 			stmt.setString(5, vol.getNumVol());
 			stmt.executeUpdate();
+
+			new SDialog("Modification", "Modification reussi", "Valider", "").setVisible(true);
+
 		} catch (SQLException e) {
+			new SDialog("Echec", "La modification n'a pas reussi car " + e, "ok", "").setVisible(true);
 			throw new RuntimeException(e);
 		}
 		
@@ -145,9 +155,13 @@ public class VolDao implements Dao{
 			stmt.setString(1, vol.getNumVol());
 			stmt.execute();
 			
-			System.out.println(vol.getNumVol()+ " a bien été Supprimé");
+			System.out.println(vol.getNumVol() + " a bien été Supprimé");
+			new SDialog("Suppresssion", "Suppresssion reussi", "Valider", "").setVisible(true);
+
 		} catch (SQLException e) {
 			e.printStackTrace();
+			new SDialog("Echec", "La suppresssion n'a pas reussi car " + e, "ok", "").setVisible(true);
+			throw new RuntimeException(e);
 		}
 		
 		try {
@@ -155,6 +169,7 @@ public class VolDao implements Dao{
 			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			
 		}
 
 	}

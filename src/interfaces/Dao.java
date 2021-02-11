@@ -8,7 +8,7 @@ public interface Dao {
     
     ArrayList getAll();
     
-    void save(Object t);
+    void save(Object t, String[] params);
     
     void update(Object t, String[] params);
     

@@ -27,15 +27,16 @@ public class FicheExample extends JFrame {
 		String [] listLabels= {"IdUtilisateur","Mail","MotDePasse","Statut","IdRole","IdRole"};
 		String[] listTextFields = { u.getIdUtilisateur(), u.getMail(),u.getMotDePasse(), "" + u.getStatut(), u.getIdRole(), u.getIdRole()  };
 
-		//reste a implémenter 2 autres champs facultatif 
-		
-		String [][] listSuperDialog={ 
+
+		/*listSuperDialog Transferer dans la DOA*/
+		/*String [][] listSuperDialog={ 
 				{"Supprimer","Voulez-vous vraiment supprimer", "Oui", "Non"},
 				{"Enregistrer", "Il y a eu des modifications. Voulez-vous enregistrer", "Oui", "Non"} 
-		};
+		};*/
 				
 		String[] listTextBtns = { "Supprimer", "Valider" };
 		String[] listMethodeDoa = { "delete", "update" };
+
 		bdao = new UtilisateurDao();
 
 		/*
@@ -54,15 +55,11 @@ public class FicheExample extends JFrame {
 				"Fiche Utilisateur", 
 				bdao, 
 				(Object)u, 
-				u.getIdUtilisateur(), 
 				listLabels, 
 				listTextFields,
-				listSuperDialog,
 				listTextBtns,
 				listMethodeDoa
-				/*,
-				fonctionBtn2,
-				fonctionBtn1*/
+
 				);
 	}
 }

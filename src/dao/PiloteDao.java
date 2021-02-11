@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import connexion.ConnectionBdd;
 import models.*;
+import vues.SDialog;
 import interfaces.*;
 
 public class PiloteDao implements Dao {
@@ -39,6 +40,7 @@ public class PiloteDao implements Dao {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 
 		return pilote;
@@ -74,12 +76,13 @@ public class PiloteDao implements Dao {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				System.out.println("Impossible d'afficher les pilotes");
+				throw new RuntimeException(e);
 			}
 		return listePilotes;
 	}
 
 	@Override
-	public void save(Object t) {
+	public void save(Object t, String[] params) {
 			Pilote pilote = (Pilote) t;
 
 			Connection conn = null;
@@ -88,17 +91,20 @@ public class PiloteDao implements Dao {
 		try {
 			conn = ConnectionBdd.getConnection();
 			stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			stmt.setString(1,pilote.getNomPilote());
-			stmt.setString(2, pilote.getPrenomPilote());
-			stmt.setString(3, pilote.getMatricule());
+			stmt.setString(1, params[0]);
+			stmt.setString(2, params[1]);
+			stmt.setString(3, params[2]);
 			
 			stmt.execute();
 			
-			System.out.println(pilote.getNomPilote()+ " a bien été ajouté");
+			System.out.println(pilote.getNomPilote() + " a bien été ajouté");
+			new SDialog("Ajout", "Ajouter reussi", "Valider", "").setVisible(true);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("Impossible d'ajouter un pilote");
+			new SDialog("Echec", "L'ajout n'a pas reussi car " + e, "ok", "").setVisible(true);
+			throw new RuntimeException(e);
 		}
 
 	}
@@ -120,8 +126,12 @@ public class PiloteDao implements Dao {
 			stmt.setInt(4, pilote.getIdPilote());
 			System.out.println(stmt.toString());
 			stmt.executeUpdate();
+
+			new SDialog("Modification", "Modification reussi", "Valider", "").setVisible(true);
+
 		} catch (SQLException e) {
 			// e.printStackTrace();
+			new SDialog("Echec", "La modification n'a pas reussi car " + e, "ok", "").setVisible(true);
 			throw new RuntimeException(e);
 		}
 
@@ -139,9 +149,13 @@ public class PiloteDao implements Dao {
 			stmt.setInt(1, pilote.getIdPilote());
 			stmt.execute();
 			
-			System.out.println(pilote.getMatricule()+ " a bien été Supprimé");
+			System.out.println(pilote.getMatricule() + " a bien été Supprimé");
+			new SDialog("Suppresssion", "Suppresssion reussi", "Valider", "").setVisible(true);
+
 		} catch (SQLException e) {
 			e.printStackTrace();
+			new SDialog("Echec", "La suppresssion n'a pas reussi car " + e, "ok", "").setVisible(true);
+			throw new RuntimeException(e);
 		}
 		
 		try {
@@ -149,6 +163,7 @@ public class PiloteDao implements Dao {
 			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 
 	}

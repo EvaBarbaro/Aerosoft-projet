@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import connexion.ConnectionBdd;
 import interfaces.Dao;
 import models.*;
+import vues.SDialog;
 
 public class AvionDao implements Dao{
 
@@ -41,6 +42,7 @@ public class AvionDao implements Dao{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("Impossible d'afficher les vols");
+			throw new RuntimeException(e);
 		}
 		return listeAvions;
 	}
@@ -75,13 +77,14 @@ public class AvionDao implements Dao{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("Impossible d'afficher les vols");
+			throw new RuntimeException(e);
 		}
 
 		return avion;
 	}
 
 	@Override
-	public void save(Object t) {
+	public void save(Object t, String[] params) {
 		Avion avion = (Avion) t;
 
 		Connection conn = null;
@@ -91,16 +94,19 @@ public class AvionDao implements Dao{
 			conn = ConnectionBdd.getConnection();
 			stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			//Les points d'interogation vont prendre les info de stmt.setString() dans l'ordre par rapport � la requete
-			stmt.setString(1,avion.getTypeAvion());
-			stmt.setString(2,avion.getBaseAeroport());
+			stmt.setString(1,params[0]);
+			stmt.setString(2,params[1]);
 			stmt.execute();
 			
-			System.out.println(avion.getTypeAvion()+ " a bien été ajouté");
+			System.out.println(avion.getTypeAvion() + " a bien été ajouté");
+			new SDialog("Ajout", "Ajouter reussi", "Valider", "").setVisible(true);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("Impossible d'ajouter un pilote");
+			new SDialog("Echec", "L'ajout n'a pas reussi car " + e, "ok", "").setVisible(true);
+			throw new RuntimeException(e);
 		}
 		
 	}
@@ -128,12 +134,15 @@ public class AvionDao implements Dao{
 
 			stmt.execute();
 			
-			System.out.println(avion.getTypeAvion()+ " a bien été Modifier");
+			System.out.println(avion.getTypeAvion() + " a bien été Modifier");
+			new SDialog("Modification", "Modification reussi", "Valider", "").setVisible(true);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("Impossible d'ajouter un pilote");
+			new SDialog("Echec", "La modification n'a pas reussi car " + e, "ok", "").setVisible(true);
+			throw new RuntimeException(e);
 		}
 		
 	}
@@ -158,12 +167,15 @@ public class AvionDao implements Dao{
 			
 			stmt.execute();
 			
-			System.out.println(avion.getTypeAvion()+ " a bien été Supprimé");
+			System.out.println(avion.getTypeAvion() + " a bien été Supprimé");
+			new SDialog("Suppresssion", "Suppresssion reussi", "Valider", "").setVisible(true);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("Impossible d'ajouter un pilote");
+			new SDialog("Echec", "La suppresssion n'a pas reussi car " + e, "ok", "").setVisible(true);
+			throw new RuntimeException(e);
 		}
 	}
 }

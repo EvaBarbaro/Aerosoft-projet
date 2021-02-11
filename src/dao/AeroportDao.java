@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import connexion.ConnectionBdd;
 import interfaces.Dao;
 import models.*;
+import vues.SDialog;
 
 public class AeroportDao implements Dao{
 
@@ -81,7 +82,7 @@ public class AeroportDao implements Dao{
 	}
 
 	@Override
-	public void save(Object t) {
+	public void save(Object t, String[] params) {
 		Aeroport aeroport = (Aeroport) t;
 
 		Connection conn = null;
@@ -90,16 +91,18 @@ public class AeroportDao implements Dao{
 	try {
 		conn = ConnectionBdd.getConnection();
 		stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-		stmt.setString(1,aeroport.getIdAeroport());
-		stmt.setString(2,aeroport.getNomAeroport());
-		stmt.setString(3,aeroport.getNomVille());
+		stmt.setString(1,params[0]);
+		stmt.setString(2,params[1]);
+		stmt.setString(3,params[2]);
 		
 		stmt.execute();
 		
-		System.out.println(aeroport.getNomAeroport()+ " a bien été ajouté");
+		System.out.println(aeroport.getNomAeroport() + " a bien été ajouté");
+		new SDialog("Ajout", "Ajouter reussi", "Valider", "").setVisible(true);
 		
 	} catch (SQLException e) {
 		e.printStackTrace();
+		new SDialog("Echec", "L'ajout n'a pas reussi car " + e, "ok", "").setVisible(true);
 	}
 	}
 
@@ -119,9 +122,11 @@ public class AeroportDao implements Dao{
 			stmt.setString(3, aeroport.getIdAeroport());
 			stmt.executeUpdate();
 
-			System.out.println(aeroport.getIdAeroport()+ " a bien �t� modifi�");
+			System.out.println(aeroport.getIdAeroport() + " a bien �t� modifi�");
+			new SDialog("Modification", "Modification reussi", "Valider", "").setVisible(true);
+
 		} catch (SQLException e) {
-			// e.printStackTrace();
+			new SDialog("Echec", "La modification n'a pas reussi car " + e, "ok", "").setVisible(true);
 			throw new RuntimeException(e);
 		}
 		
@@ -140,9 +145,12 @@ public class AeroportDao implements Dao{
 			stmt.setString(1, aeroport.getIdAeroport());
 			stmt.execute();
 			
-			System.out.println(aeroport.getIdAeroport()+ " a bien �t� supprim�");
+			System.out.println(aeroport.getIdAeroport() + " a bien �t� supprim�");
+			new SDialog("Suppresssion", "Suppresssion reussi", "Valider", "").setVisible(true);
+
 		} catch (SQLException e) {
 			e.printStackTrace();
+			new SDialog("Echec", "La suppresssion n'a pas reussi car " + e, "ok", "").setVisible(true);
 		}
 		
 		try {

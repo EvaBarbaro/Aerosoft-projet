@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import models.*;
+import vues.SDialog;
 import connexion.ConnectionBdd;
 import interfaces.Dao;
 
@@ -60,6 +61,7 @@ public class AffectationDao implements Dao {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 
 		return affectation;
@@ -112,15 +114,16 @@ public class AffectationDao implements Dao {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				System.out.println("Impossible d'afficher les affectations");
+				throw new RuntimeException(e);
 			}
 			return listeAffectations;
 	}
 
 	@Override
-	public void save(Object t) {
+	public void save(Object t, String[] params) {
 			Affectation affectation = (Affectation) t;
 
-			Pilote pilote = new Pilote();
+			//Pilote pilote = new Pilote();
 
 			Connection conn = null;
 			PreparedStatement stmt = null;
@@ -129,21 +132,24 @@ public class AffectationDao implements Dao {
 		try {
 			conn = ConnectionBdd.getConnection();
 			stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			stmt.setString(1,affectation.getNumVol());
-			stmt.setDate(2,affectation.getDateVol());
-			stmt.setBoolean(3, affectation.getAffectationCode());
-			stmt.setInt(4, affectation.getNumAvion());
-			stmt.setInt(5, pilote.getIdPilote());
+			stmt.setString(1,params[0]);
+			stmt.setDate(2,Date.valueOf(params[2]));
+			stmt.setBoolean(3, Boolean.parseBoolean(params[3]));
+			stmt.setInt(4, Integer.parseInt(params[4]));
+			stmt.setInt(5, Integer.parseInt(params[5]));
 			stmt.execute();
 
 			stmt1 = conn.prepareStatement("UPDATE AFFECTATION SET IdAffectation=CONCAT(NumVol, DateVol)");
 			stmt1.executeUpdate();
 			
 			System.out.println(affectation.getNumVol()+ " a bien été ajouté");
+			new SDialog("Ajout", "Ajouter reussi", "Valider", "").setVisible(true);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("Impossible d'ajouter une affectation");
+			new SDialog("Echec", "L'ajout n'a pas reussi car " + e, "ok", "").setVisible(true);
+			throw new RuntimeException(e);
 		}
 	}
 
@@ -164,8 +170,13 @@ public class AffectationDao implements Dao {
 			stmt.setString(4, params[3]);
 			stmt.setString(5, affectation.getId());
 			stmt.executeUpdate();
+
+			new SDialog("Modification", "Modification reussi", "Valider", "").setVisible(true);
+
 		} catch (SQLException e) {
 			e.printStackTrace();
+			new SDialog("Echec", "La modification n'a pas reussi car " + e, "ok", "").setVisible(true);
+			throw new RuntimeException(e);
 		}
 		
 		try {
@@ -173,6 +184,7 @@ public class AffectationDao implements Dao {
 			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 	}
 
@@ -189,8 +201,12 @@ public class AffectationDao implements Dao {
 			stmt.setString(1, affectation.getId());
 			stmt.execute();
 
+			new SDialog("Suppresssion", "Suppresssion reussi", "Valider", "").setVisible(true);
+
 		} catch (SQLException e) {
 			e.printStackTrace();
+			new SDialog("Echec", "La suppresssion n'a pas reussi car " + e, "ok", "").setVisible(true);
+			throw new RuntimeException(e);
 		}
 		
 		try {
@@ -198,6 +214,7 @@ public class AffectationDao implements Dao {
 			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 
 	}

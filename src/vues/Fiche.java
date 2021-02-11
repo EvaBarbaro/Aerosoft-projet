@@ -69,16 +69,11 @@ public class Fiche extends JFrame {
 	public Fiche(
 			String titre, 
 			Dao dao, 
-			Object transport, 
-			String id, 
+			Object transport,
 			String [] listLabels, 
 			String [] listTextFields,
-			String[][] listSuperDialog,
 			String [] listTextBtns,
 			String[] listMethodeDoa
-			/*,
-			Method  fonctionBtn1,
-			Method  fonctionBtn2*/
 	) {
 
 		setTitle(titre);
@@ -98,7 +93,7 @@ public class Fiche extends JFrame {
 
 		setContentPane(contentPane);
 
-		lblNewID = new JLabel(id);
+		lblNewID = new JLabel("");
 
 		lblNewLabel_1 = new JLabel(listLabels[0]);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -172,23 +167,9 @@ public class Fiche extends JFrame {
 			oldValue_6 = listTextFields[5];
 		}
 
-		JButton btn_Supprimer = new JButton(listTextBtns[0]);
-		btn_Supprimer.addActionListener(new ActionListener() {
+		JButton btn_2 = new JButton(listTextBtns[0]);
+		btn_2.addActionListener(new ActionListener() {
 
-			public void actionPerformed(ActionEvent e) {
-				
-				executeDoa(listMethodeDoa[0], dao, transport, null);
-				dispose();
-			}
-
-		});
-
-		btn_Supprimer.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btn_Supprimer.setBackground(new Color(1, 175, 228));
-		btn_Supprimer.setForeground(Color.WHITE);
-
-		JButton btn_Valider = new JButton(listTextBtns[1]);
-		btn_Valider.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				if (!(oldValue_1.equals(textField_1.getText())) || (!(oldValue_2.equals(textField_2.getText())))
@@ -221,14 +202,30 @@ public class Fiche extends JFrame {
 					
 					System.out.println("params.length : "  + params.length);				
 		
-					executeDoa(listMethodeDoa[1], dao, transport, params);
-				}
-				dispose();
+					executeDoa(listMethodeDoa[0], dao, transport, params);
+
+					}
+				dispose();			
+
+			}
+
+		});
+
+		btn_2.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btn_2.setBackground(new Color(22, 219, 170));
+		btn_2.setForeground(Color.WHITE);
+
+		JButton btn_1 = new JButton(listTextBtns[1]);
+		btn_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				executeDoa(listMethodeDoa[1], dao, transport, null);
+				dispose();				
 			}
 		});
-		btn_Valider.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btn_Valider.setBackground(new Color(22, 219, 170));
-		btn_Valider.setForeground(Color.WHITE);
+		btn_1.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btn_1.setBackground(new Color(1, 175, 228));
+		btn_1.setForeground(Color.WHITE);
 
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
@@ -242,9 +239,9 @@ public class Fiche extends JFrame {
 							.addComponent(lblNewID, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(btn_Valider)
+							.addComponent(btn_1)
 							.addGap(18)
-							.addComponent(btn_Supprimer))
+							.addComponent(btn_2))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(23)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -300,8 +297,8 @@ public class Fiche extends JFrame {
 						.addComponent(lblNewLabel_6))
 					.addPreferredGap(ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btn_Supprimer)
-						.addComponent(btn_Valider))
+						.addComponent(btn_2)
+						.addComponent(btn_1))
 					.addGap(32))
 		);
 		contentPane.setLayout(gl_contentPane);
@@ -341,13 +338,15 @@ public class Fiche extends JFrame {
 	}
 
 	private void executeDoa(String methodeDao, Dao dao, Object transport, String[] params) {
+		
+		System.out.println("methodeDao: "  + methodeDao);
 		switch (methodeDao) {
 			case "get":
 				dao.get(transport);
 				break;
 
 			case "save":
-				dao.save(transport);
+				dao.save(transport,params);
 				break;
 
 			case "update":
@@ -357,6 +356,9 @@ public class Fiche extends JFrame {
 			case "delete":
 				dao.delete(transport);
 				break;
+
+			default: 
+                ; 
 		}
 	}
 	/*private Image getScaledImage(Image srcImg, int w, int h){
