@@ -13,7 +13,8 @@ public class PiloteDao implements Dao {
 	};
 
 	@Override
-	public Object get(Object id) {
+	public Object get(Object idObj) {
+		int id = (int) idObj;
 		Pilote pilote = null;
 
 		Connection conn = null;
