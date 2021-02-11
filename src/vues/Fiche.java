@@ -9,10 +9,12 @@ import javax.swing.border.EmptyBorder;
 import interfaces.Dao;
 
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.Image;
 
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -20,9 +22,7 @@ import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
+
 //import java.util.concurrent.Callable;
 import java.awt.event.ActionEvent;
 
@@ -32,8 +32,12 @@ public class Fiche extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	
 	private JPanel contentPane;
-
+	
+	ImageIcon i = new ImageIcon(
+			Toolkit.getDefaultToolkit().getImage(Fiche.class.getResource("/images/Aerosoft-logo.PNG")).getScaledInstance(160, 50, Image.SCALE_DEFAULT));
+	
 	private JLabel lblNewTitre;
 	
 	private JLabel lblNewID;
@@ -81,11 +85,13 @@ public class Fiche extends JFrame {
 
 		lblNewTitre = new JLabel(titre);
 		lblNewTitre.setForeground(Color.blue);
-		lblNewTitre.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewTitre.setFont(new Font("Tahoma", Font.PLAIN, 15));		
+		lblNewTitre.setIcon(i);
+		lblNewTitre.setBounds(1, 100, 30, 50);
 
 		setFont(new Font("Dialog", Font.PLAIN, 15));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 497, 400);
+		setBounds(100, 100, 510, 450);
 
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -177,7 +183,9 @@ public class Fiche extends JFrame {
 
 		});
 
-		btn_Supprimer.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btn_Supprimer.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btn_Supprimer.setBackground(new Color(1, 175, 228));
+		btn_Supprimer.setForeground(Color.WHITE);
 
 		JButton btn_Valider = new JButton(listTextBtns[1]);
 		btn_Valider.addActionListener(new ActionListener() {
@@ -186,7 +194,8 @@ public class Fiche extends JFrame {
 				if (!(oldValue_1.equals(textField_1.getText())) || (!(oldValue_2.equals(textField_2.getText())))
 						|| (oldValue_3 != null && !(oldValue_3.equals(textField_3.getText())))
 						|| (oldValue_4 != null && !(oldValue_4.equals(textField_4.getText())))
-						|| (oldValue_5 != null && !(oldValue_5.equals(textField_5.getText())))) {
+						|| (oldValue_5 != null && !(oldValue_5.equals(textField_5.getText()))) 
+						|| (oldValue_6 != null && !(oldValue_6.equals(textField_5.getText())))) {
 			
 					String[] params = new String[listTextFields.length];
 					System.out.println("listTextFields.length : "  + listTextFields.length);				
@@ -217,7 +226,9 @@ public class Fiche extends JFrame {
 				dispose();
 			}
 		});
-		btn_Valider.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btn_Valider.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btn_Valider.setBackground(new Color(22, 219, 170));
+		btn_Valider.setForeground(Color.WHITE);
 
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
@@ -294,6 +305,7 @@ public class Fiche extends JFrame {
 					.addGap(32))
 		);
 		contentPane.setLayout(gl_contentPane);
+		lblNewID.setVisible(false);
 
 		if (listTextFields.length >= 3) {
 			textField_3.setVisible(true);
@@ -328,23 +340,33 @@ public class Fiche extends JFrame {
 		setVisible(true);
 	}
 
-	private void executeDoa(String methodeDao,Dao dao, Object transport, String[] params) {
+	private void executeDoa(String methodeDao, Dao dao, Object transport, String[] params) {
 		switch (methodeDao) {
-			case "get":			
+			case "get":
 				dao.get(transport);
-			break;
+				break;
 
 			case "save":
-    			dao.save(transport);
-			break;
-    
-			case "update":
-    			dao.update(transport, params);
-			break;
+				dao.save(transport);
+				break;
 
-			case "delete":    
+			case "update":
+				dao.update(transport, params);
+				break;
+
+			case "delete":
 				dao.delete(transport);
-			break;
+				break;
 		}
 	}
+	/*private Image getScaledImage(Image srcImg, int w, int h){
+		BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2 = resizedImg.createGraphics();
+	
+		g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+		g2.drawImage(srcImg, 0, 0, w, h, null);
+		g2.dispose();
+	
+		return resizedImg;
+	}	*/
 }
