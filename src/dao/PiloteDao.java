@@ -83,13 +83,14 @@ public class PiloteDao implements Dao {
 
 			Connection conn = null;
 			PreparedStatement stmt = null;
-			String sql = "INSERT INTO `PILOTE` (NomPilote,PrenomPilote,Matricule) VALUES (?,?,?)";
+			String sql = "INSERT INTO `PILOTE` (IdPilote, NomPilote, PrenomPilote, Matricule) VALUES (?,?,?,?)";
 		try {
 			conn = ConnectionBdd.getConnection();
 			stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			stmt.setString(1,pilote.getNomPilote());
-			stmt.setString(2, pilote.getPrenomPilote());
-			stmt.setString(3, pilote.getMatricule());
+			stmt.setInt(1,pilote.getIdPilote());
+			stmt.setString(2,pilote.getNomPilote());
+			stmt.setString(3, pilote.getPrenomPilote());
+			stmt.setString(4, pilote.getMatricule());
 			
 			stmt.execute();
 			

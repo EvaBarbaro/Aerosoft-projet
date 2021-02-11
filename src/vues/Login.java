@@ -66,7 +66,7 @@ String passwordString = new String(pass);
 
         	Connection con=DriverManager.getConnection("jdbc:mysql://localhost/aerosoft","root",""); 
             
-        	PreparedStatement ps = con.prepareStatement("select IdUtilisateur from utilisateur where Mail=? and MotDePasse=?");
+        	PreparedStatement ps = con.prepareStatement("select IdUtilisateur from utilisateur where Mail=? and MotDePasse=? and Statut=false");
             ps.setString(1, loginString);
             ps.setString(2, passwordString);
             ResultSet rs = ps.executeQuery();
@@ -117,10 +117,6 @@ String passwordString = new String(pass);
 
         comboBoxRole.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent eventComboBox) {
-                JLabel nomPiloteLabel, prenomPiloteLabel, matriculeLabel;
-                JTextField nomPiloteField, prenomPiloteField, matriculeField;
-                JButton btnValidatePilote;
-
                 String stringBox = (String) comboBoxRole.getSelectedItem();
 
                 Role roleAtt = (Role) roleDao.get(stringBox);
@@ -130,8 +126,15 @@ String passwordString = new String(pass);
                         roleField = new JTextField(roleAtt.getIdRole());
                         roleField.setVisible(false);
                         add(roleField);
+                        invalidate();
+                        validate();
+                        repaint();
                         break;
                     case "Pilote":
+                        JLabel nomPiloteLabel, prenomPiloteLabel, matriculeLabel;
+                        JTextField nomPiloteField, prenomPiloteField, matriculeField;
+                        JButton btnValidatePilote;
+
                         roleDao.get(stringBox);
 
                         nomPiloteLabel = new JLabel("Votre nom");
@@ -165,7 +168,27 @@ String passwordString = new String(pass);
                         
                         btnValidatePilote.addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent eventValidatePilote) {
-                                
+                                UtilisateurDao utilisateurDao = new UtilisateurDao();
+                                Utilisateur utilisateur = new Utilisateur();
+                                int uniqueID = UUID.randomUUID().hashCode();
+
+                                utilisateur.setIdUtilisateur(uniqueID);
+                                utilisateur.setMail(textFieldLogin.getText());
+                                utilisateur.setMotDePasse(passwordField.getText().toString());
+                                utilisateur.setStatut(false);
+                                utilisateur.setIdRole(roleField.getText());
+
+                                utilisateurDao.save(utilisateur);
+
+                                PiloteDao piloteDao = new PiloteDao();
+                                Pilote pilote = new Pilote();
+
+                                pilote.setIdPilote(uniqueID);
+                                pilote.setNomPilote(nomPiloteField.getText());
+                                pilote.setPrenomPilote(prenomPiloteField.getText());
+                                pilote.setMatricule(matriculeField.getText());
+
+                                piloteDao.save(pilote);
                             }
                         });
                         break;
@@ -174,12 +197,18 @@ String passwordString = new String(pass);
                         roleField = new JTextField(roleAtt.getIdRole());
                         roleField.setVisible(false);
                         add(roleField);
+                        invalidate();
+                        validate();
+                        repaint();
                         break;
                     case "Administrateur":
                         roleDao.get(stringBox);
                         roleField = new JTextField(roleAtt.getIdRole());
                         roleField.setVisible(false);
                         add(roleField);
+                        invalidate();
+                        validate();
+                        repaint();
                         break;
                 }
             }
