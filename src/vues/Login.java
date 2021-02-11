@@ -66,7 +66,7 @@ String passwordString = new String(pass);
 
         	Connection con=DriverManager.getConnection("jdbc:mysql://localhost/aerosoft","root",""); 
             
-        	PreparedStatement ps = con.prepareStatement("select IdUtilisateur from utilisateur where Mail=? and MotDePasse=? and Statut=false");
+        	PreparedStatement ps = con.prepareStatement("select IdUtilisateur from utilisateur where Mail=? and MotDePasse=? and Statut=true");
             ps.setString(1, loginString);
             ps.setString(2, passwordString);
             ResultSet rs = ps.executeQuery();
@@ -90,8 +90,9 @@ String passwordString = new String(pass);
     public void register() {
         RoleDao roleDao = new RoleDao();
         ArrayList<Role> roles = roleDao.getAll();
-        String roleTab[] = new String[roles.size()];
-        int i = 0;
+        String roleTab[] = new String[5];
+        roleTab[0] = "Selectionner votre rôle";
+        int i = 1;
 
         for (Role role : roles) {
             roleTab[i] = role.getRoleNom();
@@ -126,9 +127,6 @@ String passwordString = new String(pass);
                         roleField = new JTextField(roleAtt.getIdRole());
                         roleField.setVisible(false);
                         add(roleField);
-                        invalidate();
-                        validate();
-                        repaint();
                         break;
                     case "Pilote":
                         JLabel nomPiloteLabel, prenomPiloteLabel, matriculeLabel;
@@ -158,9 +156,6 @@ String passwordString = new String(pass);
                         btnValidateReg.setVisible(false);
 
                         add(nomPiloteLabel); add(nomPiloteField); add(prenomPiloteLabel); add(prenomPiloteField); add(matriculeLabel); add(matriculeField);add(btnValidatePilote);
-                        invalidate();
-                        validate();
-                        repaint();
 
                         roleField = new JTextField(roleAtt.getIdRole());
                         roleField.setVisible(false);
@@ -174,7 +169,7 @@ String passwordString = new String(pass);
 
                                 utilisateur.setIdUtilisateur(uniqueID);
                                 utilisateur.setMail(textFieldLogin.getText());
-                                utilisateur.setMotDePasse(passwordField.getText().toString());
+                                utilisateur.setMotDePasse(String.valueOf(passwordField.getPassword()));
                                 utilisateur.setStatut(false);
                                 utilisateur.setIdRole(roleField.getText());
 
@@ -189,26 +184,27 @@ String passwordString = new String(pass);
                                 pilote.setMatricule(matriculeField.getText());
 
                                 piloteDao.save(pilote);
+
+                                dispose();
+
+                                new Login();
                             }
                         });
+                        invalidate();
+                        validate();
+                        repaint();
                         break;
                     case "Technicien d'exploitation":
                         roleDao.get(stringBox);
                         roleField = new JTextField(roleAtt.getIdRole());
                         roleField.setVisible(false);
                         add(roleField);
-                        invalidate();
-                        validate();
-                        repaint();
                         break;
                     case "Administrateur":
                         roleDao.get(stringBox);
                         roleField = new JTextField(roleAtt.getIdRole());
                         roleField.setVisible(false);
                         add(roleField);
-                        invalidate();
-                        validate();
-                        repaint();
                         break;
                 }
             }
@@ -222,11 +218,15 @@ String passwordString = new String(pass);
 
                 utilisateur.setIdUtilisateur(uniqueID);
                 utilisateur.setMail(textFieldLogin.getText());
-                utilisateur.setMotDePasse(passwordField.getText().toString());
+                utilisateur.setMotDePasse(String.valueOf(passwordField.getPassword()));
                 utilisateur.setStatut(false);
                 utilisateur.setIdRole(roleField.getText());
 
                 utilisateurDao.save(utilisateur);
+
+                dispose();
+
+                new Login();
             }
         });
     }
