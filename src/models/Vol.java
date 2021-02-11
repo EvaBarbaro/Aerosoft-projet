@@ -2,7 +2,7 @@ package models;
 
 public class Vol {
 	private String numVol;
-	private String aeroprtDepart;
+	private String aeroportDepart;
 	private String heureDepart;
 	private String aeroportArrive;
 	private String heureArrive;
@@ -22,11 +22,11 @@ public class Vol {
 	public void setNumVol(String numVol) {
 		this.numVol = numVol;
 	}
-	public String getAeroprtDepart() {
-		return aeroprtDepart;
+	public String getAeroportDepart() {
+		return aeroportDepart;
 	}
-	public void setAeroprtDepart(String aeroprtDepart) {
-		this.aeroprtDepart = aeroprtDepart;
+	public void setAeroprtDepart(String aeroportDepart) {
+		this.aeroportDepart = aeroportDepart;
 	}
 	public String getHeureDepart() {
 		return heureDepart;

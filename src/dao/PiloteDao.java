@@ -13,17 +13,18 @@ public class PiloteDao implements Dao {
 	};
 
 	@Override
-	public Object get(Object id) {
+	public Object get(Object idObj) {
+		int id = (int) idObj;
 		Pilote pilote = null;
 
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		String sql = "SELECT * FROM Pilote WHERE IdPilote=?";
+		String sql = "SELECT * FROM pilote WHERE IdPilote=?";
 		try {
 			conn = ConnectionBdd.getConnection();
 			stmt = conn.prepareStatement(sql);
 			stmt.setObject(1, id);
-			System.out.println("Voici les informations du vol " + id);
+			System.out.println("Voici les informations du pilote " + id);
 			ResultSet res = stmt.executeQuery();
 			while (res.next()) {
 				pilote = new Pilote(
@@ -52,13 +53,17 @@ public class PiloteDao implements Dao {
 		ArrayList<Pilote> listePilotes = new ArrayList<>();
 
 		try {
-			conn = ConnectionBdd.getConnection();
-			stmt = conn.prepareStatement(sql);
+			conn = (Connection) ConnectionBdd.getConnection();
+			stmt = (PreparedStatement) conn.prepareStatement(sql);
 			ResultSet res = stmt.executeQuery(sql);
 
 			while (res.next()) {
 
-				Pilote pilote = new Pilote(res.getInt("IdPilote"),res.getString("NomPilote"), res.getString("PrenomPilote"), res.getString("Matricule"));
+				Pilote pilote = new Pilote(
+					res.getInt("IdPilote"),
+					res.getString("NomPilote"), 
+					res.getString("PrenomPilote"), 
+					res.getString("Matricule"));
 
 				listePilotes.add(pilote);
 			}
@@ -68,7 +73,7 @@ public class PiloteDao implements Dao {
 			
 			} catch (SQLException e) {
 				e.printStackTrace();
-				System.out.println("Impossible d'afficher les vols");
+				System.out.println("Impossible d'afficher les pilotes");
 			}
 		return listePilotes;
 	}
@@ -100,6 +105,7 @@ public class PiloteDao implements Dao {
 
 	@Override
 	public void update(Object t, String[] params) {
+		
 		Pilote pilote = (Pilote) t;
 
 		Connection conn = null;

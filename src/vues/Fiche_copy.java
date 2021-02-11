@@ -124,7 +124,8 @@ public class Fiche_copy extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 
-				if (new SuperDialog(listSuperDialog[0][0],listSuperDialog[0][1], listSuperDialog[0][2], listSuperDialog[0][3]).getValidation() == true) {
+				//if (new SuperDialog(listSuperDialog[0][0],listSuperDialog[0][1], listSuperDialog[0][2], listSuperDialog[0][3]).getValidation() == true) {
+				if (new SuperDialog("Supprimer","Voulez-vous vraiment supprimer", "Oui", "Non").getValidation() == true) {
 					
 					//dao = new Dao();					
 					dao.delete(id);
@@ -151,7 +152,8 @@ public class Fiche_copy extends JFrame {
 						
 					) {
 
-					if (new SuperDialog(listSuperDialog[1][0],listSuperDialog[1][1], listSuperDialog[1][2], listSuperDialog[1][3])
+					//if (new SuperDialog(listSuperDialog[1][0],listSuperDialog[1][1], listSuperDialog[1][2], listSuperDialog[1][3])
+					if (new SuperDialog("Enregistrer", "Il y a eu des modifications. Voulez-vous enregistrer", "Oui", "Non")
 							.getValidation() == true) {
 						
 						String[]params = {textField_1.getText(),textField_2.getText()};
