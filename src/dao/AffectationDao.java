@@ -15,26 +15,30 @@ public class AffectationDao implements Dao {
 	@Override
 	public Object get(Object id) {
 		Affectation affectation = new Affectation();
-
+		//Transformer l'object 'id' en String pour l'envoyer dans la requete 
+		String idSearch = String.valueOf(id);
 		Connection conn = null;
 		PreparedStatement stmt = null;
 
+		//String sql = "SELECT * FROM affectation WHERE IdAffectation=?";
+		
 		String sql = "SELECT "
 		+ "affectation.NumVol,"
-		+ "affectation.affectationCode,"
 		+ "affectation.DateVol,"
+		+ "affectation.affectationCode,"
 		+ "affectation.NumAvion, "
 		+ "affectation.idPilote, "
 		+ "(Select PrenomPilote FROM pilote WHERE pilote.idPilote = affectation.idPilote) as PrenomPilote,"
 		+ "(Select NomPilote FROM pilote WHERE  pilote.idPilote = Affectation.idPilote) as NomPilote "+ " FROM affectation WHERE IdAffectation=?";
+		
 		try {
 			conn = ConnectionBdd.getConnection();
 			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, affectation.getId());
-
+			stmt.setString(1, idSearch);
 			System.out.println("Voici les informations de l'affectation " + id);
+				
 			ResultSet res = stmt.executeQuery();
-
+			
 			while (res.next()) {
 				affectation.setNumVol(res.getString(1));
 				affectation.setDateVol(res.getDate(2));
@@ -44,11 +48,13 @@ public class AffectationDao implements Dao {
 				Pilote pilote = new Pilote();
 
 				pilote.setIdPilote(res.getInt(5));
-				pilote.setPrenomPilote(res.getString(7));
-				pilote.setNomPilote(res.getString(8));
+				pilote.setPrenomPilote(res.getString(6));
+				pilote.setNomPilote(res.getString(7));
+			
 
 				affectation.setPilote(pilote);
 			}
+			
 			res.close();
 			conn.close();
 
