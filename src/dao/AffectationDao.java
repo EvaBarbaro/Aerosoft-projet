@@ -18,20 +18,21 @@ public class AffectationDao implements Dao {
 
 		Connection conn = null;
 		PreparedStatement stmt = null;
+
 		String sql = "SELECT "
-		+ "Affectation.NumVol,"
-		+ "Affectation.affectationCode,"
-		+ "Affectation.DateVol,"
-		+  "Affectation.NumAvion, "
-		+ "Affectation.idPilote, "
-		+ "(Select PrenomPilote FROM Pilote WHERE  Pilote.idPilote = Affectation.idPilote) as PrenomPilote,"
-		+ "(Select NomPilote FROM Pilote WHERE  Pilote.idPilote = Affectation.idPilote) as NomPilote "+ " FROM affectation WHERE IdAffectation=?";
+		+ "affectation.NumVol,"
+		+ "affectation.affectationCode,"
+		+ "affectation.DateVol,"
+		+ "affectation.NumAvion, "
+		+ "affectation.idPilote, "
+		+ "(Select PrenomPilote FROM pilote WHERE pilote.idPilote = affectation.idPilote) as PrenomPilote,"
+		+ "(Select NomPilote FROM pilote WHERE  pilote.idPilote = Affectation.idPilote) as NomPilote "+ " FROM affectation WHERE IdAffectation=?";
 		try {
 			conn = ConnectionBdd.getConnection();
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, affectation.getId());
 
-			System.out.println("Voici les informations du vol " + id);
+			System.out.println("Voici les informations de l'affectation " + id);
 			ResultSet res = stmt.executeQuery();
 
 			while (res.next()) {
@@ -63,14 +64,14 @@ public class AffectationDao implements Dao {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		String sql = "SELECT "
-				+ "Affectation.NumVol,"
-				+ "Affectation.affectationCode,"
-				+ "Affectation.DateVol,"
-				+  "Affectation.NumAvion, "
-				+ "Affectation.idPilote, "
-				+ "(Select PrenomPilote FROM Pilote WHERE  Pilote.idPilote = Affectation.idPilote) as PrenomPilote,"
-				+ "(Select NomPilote FROM Pilote WHERE  Pilote.idPilote = Affectation.idPilote) as NomPilote "
-				+ "FROM Affectation";
+				+ "affectation.NumVol,"
+				+ "affectation.affectationCode,"
+				+ "affectation.DateVol,"
+				+ "affectation.NumAvion, "
+				+ "affectation.idPilote, "
+				+ "(Select PrenomPilote FROM pilote WHERE  pilote.idPilote = affectation.idPilote) as PrenomPilote,"
+				+ "(Select NomPilote FROM pilote WHERE  pilote.idPilote = affectation.idPilote) as NomPilote "
+				+ "FROM affectation";
 
 		ArrayList<Affectation> listeAffectations = new ArrayList<>();
 
@@ -104,7 +105,7 @@ public class AffectationDao implements Dao {
 			  
 			} catch (SQLException e) {
 				e.printStackTrace();
-				System.out.println("Impossible d'afficher les vols");
+				System.out.println("Impossible d'afficher les affectations");
 			}
 			return listeAffectations;
 	}
@@ -117,6 +118,7 @@ public class AffectationDao implements Dao {
 
 			Connection conn = null;
 			PreparedStatement stmt = null;
+			PreparedStatement stmt1 = null;
 			String sql = "INSERT INTO affectation (NumVol,DateVol,AffectationCode,NumAvion,IdPilote) VALUES (?,?,?,?,?)";
 		try {
 			conn = ConnectionBdd.getConnection();
@@ -127,12 +129,15 @@ public class AffectationDao implements Dao {
 			stmt.setInt(4, affectation.getNumAvion());
 			stmt.setInt(5, pilote.getIdPilote());
 			stmt.execute();
+
+			stmt1 = conn.prepareStatement("UPDATE AFFECTATION SET IdAffectation=CONCAT(NumVol, DateVol)");
+			stmt1.executeUpdate();
 			
 			System.out.println(affectation.getNumVol()+ " a bien été ajouté");
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Impossible d'ajouter un pilote");
+			System.out.println("Impossible d'ajouter une affectation");
 		}
 	}
 
