@@ -118,7 +118,7 @@ public class VolDao implements Dao{
 			stmt.setString(2, params[1]);
 			stmt.setString(3, params[2]);
 			stmt.setString(4, params[3]);
-			stmt.setInt(5, vol.getNumVol());
+			stmt.setString(5, vol.getNumVol());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -135,7 +135,7 @@ public class VolDao implements Dao{
 		try {
 			conn = ConnectionBdd.getConnection();
 			stmt = conn.prepareStatement("DELETE FROM `vol` WHERE `NumVol`=?", Statement.RETURN_GENERATED_KEYS);
-			stmt.setInt(1, vol.getNumVol());
+			stmt.setString(1, vol.getNumVol());
 			stmt.execute();
 			
 			System.out.println(vol.getNumVol()+ " a bien été Supprimé");
