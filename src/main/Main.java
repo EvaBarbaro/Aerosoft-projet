@@ -29,14 +29,6 @@ public class Main {
 
 		//ad.delete(a);
 
-		// ArrayList<Vol> vols = volDao.getAll();
-		// for (Vol vol : vols) {
-		// 	System.out.println(vol.getNumVol());
-		// 	System.out.println(vol.getAeroportArrive());
-		// 	System.out.println(vol.getHeureArrive());
-		// 	System.out.println(vol.getAeroportDepart());
-		// 	System.out.println(vol.getHeureDepart());
-		// }
 		new Login();
 	}
 	
