@@ -64,13 +64,13 @@ public class Main {
 			break;
 
 		case 2:			
-			volDao.listeVols();
+			volDao.getAll();
 			break;
 
 		case 3:
 			System.out.println("Entrer votre numéro de vol: "); 
 			String numVolUser = sc.nextLine();
-			VolDao.rechercheVol(numVolUser);
+			volDao.get(numVolUser);
 			break;
 
 		case 4:
