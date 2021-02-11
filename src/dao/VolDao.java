@@ -36,6 +36,12 @@ public class VolDao implements Dao{
 					res.getString("AeroportArr"),
 					res.getString("HArrivee")
 					);
+
+					System.out.println("ID: " + vol.getNumVol());
+					System.out.println("Aeroport de départ: " + vol.getAeroportDepart());
+					System.out.println("Heure de départ: " + vol.getHeureDepart());
+					System.out.println("Aeroport d'arrivée: " + vol.getAeroportArrive());
+					System.out.println("Heure d'arrivée': " + vol.getHeureArrive());
 		      }
 			res.close();
 			conn.close();

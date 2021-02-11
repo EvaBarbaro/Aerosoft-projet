@@ -174,16 +174,13 @@ public class AffectationDao implements Dao {
 		Affectation affectation = (Affectation) t;
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		PreparedStatement stmt1 =null;
 
 		try {
 			conn = ConnectionBdd.getConnection();
-			stmt = conn.prepareStatement("DELETE FROM `vol` WHERE `NumVol`=?", Statement.RETURN_GENERATED_KEYS);
-			stmt.setInt(1, Integer.parseInt(affectation.getNumVol()));
-			stmt.execute();
 
-			stmt1 = conn.prepareStatement("UPDATE affectation SET AffectationCode=false WHERE IdAffectation=?", Statement.RETURN_GENERATED_KEYS);
-			stmt1.setString(1, affectation.getId());
+			stmt = conn.prepareStatement("UPDATE affectation SET AffectationCode=false WHERE IdAffectation=?", Statement.RETURN_GENERATED_KEYS);
+			stmt.setString(1, affectation.getId());
+			stmt.execute();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
