@@ -4,16 +4,14 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import connexion.ConnectionBdd;
-import interfaces.Dao;
 import models.Utilisateur;
 import vues.SDialog;
 
-public class UtilisateurDao implements Dao {
+public class UtilisateurDao {
     
 	public UtilisateurDao() {
 	}
 
-	@Override
 	public Object get(Object idOjb) {
 
 		String id = (String) idOjb;
@@ -33,7 +31,7 @@ public class UtilisateurDao implements Dao {
 			while (res.next()) {
 
 				utilisateur = new Utilisateur(
-					res.getString("IdUtilisateur"), 
+					res.getInt("IdUtilisateur"), 
 					res.getString("Mail"),
 					res.getString("MotDePasse"),
 					res.getBoolean("Statut"),
@@ -54,7 +52,6 @@ public class UtilisateurDao implements Dao {
 		return utilisateur;
 	}
 
-	@Override
 	public ArrayList<Utilisateur> getAll() {
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -70,7 +67,7 @@ public class UtilisateurDao implements Dao {
 			while (res.next()) {
 
 				Utilisateur utilisateur = new Utilisateur(
-					res.getString("IdUtilisateur"), 
+					res.getInt("IdUtilisateur"), 
 					res.getString("Mail"),
 					res.getString("MotDePasse"),
 					res.getBoolean("Statut"),
@@ -92,8 +89,7 @@ public class UtilisateurDao implements Dao {
 		return listeUtilisateurs;
 	}
 
-	@Override
-	public void save(Object t, String[] params) {
+	public void save(Object t) {
 		Utilisateur utilisateur =(Utilisateur) t;
 
 		Connection conn = null;
@@ -103,11 +99,11 @@ public class UtilisateurDao implements Dao {
 		try {
 			conn = ConnectionBdd.getConnection();
 			stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			stmt.setString(1, params[0]);
-			stmt.setString(2, params[1]);
-			stmt.setString(3, params[2]);
-			stmt.setBoolean(4,Boolean.parseBoolean(params[3]));
-			stmt.setString(5, params[4]);
+			stmt.setInt(1,utilisateur.getIdUtilisateur());
+			stmt.setString(2, utilisateur.getMail());
+			stmt.setString(3, utilisateur.getMotDePasse());
+			stmt.setBoolean(4, utilisateur.getStatut());
+			stmt.setString(5, utilisateur.getIdRole());
 			
 			stmt.execute();
 			
@@ -122,7 +118,6 @@ public class UtilisateurDao implements Dao {
 		}
 	}
 
-	@Override
 	public void update(Object t, String[] params) {		
 		Utilisateur utilisateur = (Utilisateur) t;
 		
@@ -137,7 +132,7 @@ public class UtilisateurDao implements Dao {
 			stmt.setString(3, params[2]);
 			stmt.setBoolean(4,Boolean.parseBoolean(params[3]));
 			stmt.setString(5, params[4]);
-			stmt.setString(6, utilisateur.getIdUtilisateur());
+			stmt.setInt(6, utilisateur.getIdUtilisateur());
 			System.out.println(stmt.toString());
 			stmt.executeUpdate();
 
@@ -150,7 +145,6 @@ public class UtilisateurDao implements Dao {
 		}
 	}
 
-	@Override
 	public void delete(Object t) {
 		Utilisateur utilisateur = (Utilisateur) t;
 		
@@ -159,7 +153,7 @@ public class UtilisateurDao implements Dao {
 		try {
 			conn = ConnectionBdd.getConnection();
 			stmt = conn.prepareStatement("DELETE FROM `UTILISATEUR` WHERE `IdUtilisateur`=?", Statement.RETURN_GENERATED_KEYS);
-			stmt.setString(1, utilisateur.getIdUtilisateur());
+			stmt.setInt(1, utilisateur.getIdUtilisateur());
 			stmt.execute();
 			
 			System.out.println(utilisateur.getIdUtilisateur() + " a bien été Supprimé");
