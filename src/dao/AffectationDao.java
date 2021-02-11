@@ -142,7 +142,8 @@ public class AffectationDao implements Dao {
 	}
 
 	@Override
-	public void update(Object t, String[] params) {
+	public void update(Object t, ArrayList paramsA) {
+		String[] params = (String[])  paramsA.toArray();
 		Affectation affectation = (Affectation) t;
 
 		Connection conn = null;

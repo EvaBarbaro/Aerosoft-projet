@@ -104,7 +104,8 @@ public class PiloteDao implements Dao {
 	}
 
 	@Override
-	public void update(Object t, String[] params) {
+	public void update(Object t, ArrayList paramsA) {
+		String[] params = (String[])  paramsA.toArray();
 		Pilote pilote = (Pilote) t;
 
 		Connection conn = null;

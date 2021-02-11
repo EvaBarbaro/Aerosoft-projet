@@ -116,7 +116,8 @@ public class UtilisateurDao implements Dao {
 	}
 
 	@Override
-	public void update(Object t, String[] params) {
+	public void update(Object t, ArrayList paramsA) {
+		String[] params = (String[])  paramsA.toArray();
 		Utilisateur utilisateur = (Utilisateur) t;
 		
 		Connection conn = null;

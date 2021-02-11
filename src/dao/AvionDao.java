@@ -106,7 +106,8 @@ public class AvionDao implements Dao{
 	}
 
 	@Override
-	public void update(Object t, String[] params) {
+	public void update(Object t, ArrayList paramsA) {
+		String[] params = (String[])  paramsA.toArray();
 		Avion avion = (Avion) t;
 
 		Connection conn = null;

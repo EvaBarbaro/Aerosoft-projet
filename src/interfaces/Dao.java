@@ -10,7 +10,7 @@ public interface Dao {
     
     void save(Object t);
     
-    void update(Object t, String[] params);
+    void update(Object t, ArrayList params);
     
     void delete(Object t);
 }

@@ -20,7 +20,10 @@ import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
-
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+//import java.util.concurrent.Callable;
 import java.awt.event.ActionEvent;
 
 public class Fiche extends JFrame {
@@ -58,57 +61,60 @@ public class Fiche extends JFrame {
 			String titre, 
 			Dao dao, 
 			Object transport, 
-			int id, 
+			String id, 
 			String [] listLabels, 
 			String [] listTextFields,
 			String[][] listSuperDialog,
-			String [] listTextBtns
-			) {
+			String [] listTextBtns,
+			String[] listMethodeDoa
+			/*,
+			Method  fonctionBtn1,
+			Method  fonctionBtn2*/
+	) {
 
 		setTitle(titre);
-		
+
 		lblNewTitre = new JLabel(titre);
 		lblNewTitre.setForeground(Color.blue);
 		lblNewTitre.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		
+
 		setFont(new Font("Dialog", Font.PLAIN, 15));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 497, 400);
-		
+
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		
+
 		setContentPane(contentPane);
 
-		JLabel lblNewID = new JLabel("" + id);		
+		JLabel lblNewID = new JLabel("" + id);
 		lblNewID.setFont(new Font("Tahoma", Font.BOLD, 15));
 
 		lblNewLabel_1 = new JLabel(listLabels[0]);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
-		textField_1 = new JTextField();		
+		textField_1 = new JTextField();
 		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textField_1.setColumns(10);
 		textField_1.setText(listTextFields[0]);
-		
+
 		oldValue_1 = listTextFields[0];
-		
 
 		lblNewLabel_2 = new JLabel(listLabels[1]);
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
-		textField_2 = new JTextField();		
+		textField_2 = new JTextField();
 		textField_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textField_2.setColumns(10);
 		textField_2.setText(listTextFields[1]);
-		
+
 		oldValue_2 = listTextFields[1];
 
 		if (listLabels.length >= 3) {
-			
+
 			lblNewLabel_3 = new JLabel(listLabels[2]);
 			lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			
+
 			textField_3 = new JTextField();
 			textField_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
 			textField_3.setColumns(10);
@@ -116,7 +122,7 @@ public class Fiche extends JFrame {
 
 			oldValue_3 = listTextFields[2];
 		}
-		
+
 		if (listLabels.length >= 4) {
 
 			lblNewLabel_4 = new JLabel(listLabels[3]);
@@ -129,63 +135,119 @@ public class Fiche extends JFrame {
 
 			oldValue_4 = listTextFields[3];
 		}
-		
+
 		if (listLabels.length >= 5) {
-			
+
 			lblNewLabel_5 = new JLabel(listLabels[4]);
 			lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			
-			textField_5 = new JTextField();		
+
+			textField_5 = new JTextField();
 			textField_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
 			textField_5.setColumns(10);
 			textField_5.setText(listTextFields[4]);
-		
+
 			oldValue_5 = listTextFields[4];
 		}
-
 
 		JButton btn_Supprimer = new JButton(listTextBtns[0]);
 		btn_Supprimer.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 
-				if (new SuperDialog(listSuperDialog[0][0],listSuperDialog[0][1], listSuperDialog[0][2], listSuperDialog[0][3]).getValidation() == true) {
-					
-					//dao = new Dao();					
-					dao.delete(id);
+				//if (new SuperDialog(listSuperDialog[0][0],listSuperDialog[0][1], listSuperDialog[0][2], listSuperDialog[0][3]).getValidation() == true) {
+				/*if (new SuperDialog("Supprimer", "Voulez-vous vraiment supprimer", "Oui", "Non")
+						.getValidation() == true) {
+				
+					//dao = new Dao();	
+					String[] params = { textField_1.getText(), textField_2.getText() };
+					try {
+						fonctionBtn1.invoke(transport, params);
+					} catch (Exception exception) {
+						exception.printStackTrace();
+					}
+				
 					dispose();
-
+				
 				} else {
 					dispose();
-				}
+				}*/
+				/*try {
+					String[] args = new String[0]; //No arguments
+
+					System.out.println("actionPerformed fonctionBtn2: " + fonctionBtn2);
+					System.out.println("actionPerformed transport: " + (Object) transport.getClass());
+
+					Object obj = new Object();
+					obj = (Object) transport;
+
+					fonctionBtn2.invoke(obj);
+
+				} catch (InvocationTargetException ex) { // Answer:
+					ex.getCause().printStackTrace();
+
+				} catch (Exception exception) {
+					exception.printStackTrace();
+				}*/
+
+				executeDoa(listMethodeDoa[0], dao, transport, null);
+				dispose();
 			}
+
 		});
-		
+
 		btn_Supprimer.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
 		JButton btn_Valider = new JButton(listTextBtns[1]);
 		btn_Valider.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
+				if (!(oldValue_1.equals(textField_1.getText())) || (!(oldValue_2.equals(textField_2.getText())))
+						|| (oldValue_3 != null && !(oldValue_3.equals(textField_3.getText())))
+						|| (oldValue_4 != null && !(oldValue_4.equals(textField_4.getText())))
+						|| (oldValue_5 != null && !(oldValue_5.equals(textField_5.getText())))) {
 
-				if (
-					!(oldValue_1.equals(textField_1.getText())) ||
-					(!(oldValue_2.equals(textField_2.getText()))) ||
-					(oldValue_3 != null && !(oldValue_3.equals(textField_3.getText()))) ||
-					(oldValue_4 != null && !(oldValue_4.equals(textField_4.getText()))) || 
-					(oldValue_5 != null && !(oldValue_5.equals(textField_5.getText())))						
-					) {
-
-					if (new SuperDialog(listSuperDialog[1][0],listSuperDialog[1][1], listSuperDialog[1][2], listSuperDialog[1][3])
-							.getValidation() == true) {
+					//if (new SuperDialog(listSuperDialog[1][0],listSuperDialog[1][1], listSuperDialog[1][2], listSuperDialog[1][3]).getValidation() == true) {
+					/*if (new SuperDialog("Enregistrer", "Il y a eu des modifications. Voulez-vous enregistrer", "Oui",
+							"Non").getValidation() == true) {
 						
-						String[]params = {textField_1.getText(),textField_2.getText()};
+						ArrayList params = new ArrayList();
 						
-						dao.update(transport,params);
-
+						params.add(textField_1.getText());
+						params.add(textField_2.getText());
+						
+						//dao.update(transport, params);
+						try{
+							//fonctionBtn2.invoke(transport, params);
+							dao.update(transport, params);
+						} catch (Exception exception) {
+							exception.printStackTrace();
+						}
+					
 					} else {
 						dispose();
-					}
+					}*/
+					ArrayList params = new ArrayList();
+
+					params.add(textField_1.getText());
+					params.add(textField_2.getText());
+
+					/*try {
+						System.out.println("actionPerformed fonctionBtn1: " + fonctionBtn1);	
+						System.out.println("actionPerformed transport: " + (Object) transport.getClass());
+						
+						Object obj = new Object();
+						obj = (Object) transport;
+					
+							fonctionBtn1.invoke((Object)obj, params);
+							//dao.update(transport, params);
+						} catch (InvocationTargetException ex) { // Answer:
+						
+							ex.getCause().printStackTrace();
+					
+						} catch (Exception exception) {
+							exception.printStackTrace();
+						}*/
+					executeDoa(listMethodeDoa[1], dao, transport, params);
 				}
 				dispose();
 			}
@@ -193,126 +255,111 @@ public class Fiche extends JFrame {
 		btn_Valider.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(lblNewTitre, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 158, Short.MAX_VALUE)
-							.addComponent(lblNewID, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(btn_Valider)
-							.addGap(18)
-							.addComponent(btn_Supprimer))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(23)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(
+				Alignment.TRAILING,
+				gl_contentPane.createSequentialGroup().addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_contentPane.createSequentialGroup().addContainerGap()
+								.addComponent(lblNewTitre, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED, 158, Short.MAX_VALUE)
+								.addComponent(lblNewID, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contentPane.createSequentialGroup().addContainerGap().addComponent(btn_Valider)
+								.addGap(18).addComponent(btn_Supprimer))
+						.addGroup(gl_contentPane.createSequentialGroup().addGap(23).addGroup(gl_contentPane
+								.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-									.addComponent(lblNewLabel_3, GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
-									.addComponent(lblNewLabel_2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-									.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+										.addComponent(lblNewLabel_3, GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+										.addComponent(lblNewLabel_2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+												Short.MAX_VALUE)
+										.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+												Short.MAX_VALUE))
 								.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblNewLabel_5))
-							.addGap(57)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(textField_5, GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
-								.addComponent(textField_4, GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
-								.addGroup(Alignment.TRAILING, gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-									.addComponent(textField_3)
-									.addComponent(textField_2)
-									.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)))))
-					.addGap(46))
-		);
+								.addComponent(lblNewLabel_5)).addGap(57)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addComponent(textField_5, GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+										.addComponent(textField_4, GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+										.addGroup(Alignment.TRAILING,
+												gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+														.addComponent(textField_3).addComponent(textField_2)
+														.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 259,
+																Short.MAX_VALUE)))))
+						.addGap(46)));
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(lblNewTitre, GroupLayout.PREFERRED_SIZE, 183, GroupLayout.PREFERRED_SIZE))
+				gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(Alignment.TRAILING, gl_contentPane
+						.createSequentialGroup().addGroup(gl_contentPane
+								.createParallelGroup(Alignment.TRAILING).addGroup(Alignment.LEADING,
+										gl_contentPane.createSequentialGroup().addContainerGap().addComponent(
+												lblNewTitre, GroupLayout.PREFERRED_SIZE, 183,
+												GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_contentPane
+										.createSequentialGroup().addContainerGap().addComponent(btn_Valider).addGap(18)
+										.addComponent(btn_Supprimer))
+								.addGroup(gl_contentPane.createSequentialGroup().addGap(23)
+										.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+												.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+														.addComponent(lblNewLabel_3, GroupLayout.DEFAULT_SIZE, 78,
+																Short.MAX_VALUE)
+														.addComponent(lblNewLabel_2, GroupLayout.DEFAULT_SIZE,
+																GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+														.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE,
+																GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+												.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 86,
+														GroupLayout.PREFERRED_SIZE)
+												.addComponent(lblNewLabel_5))
+										.addGap(57)
+										.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+												.addComponent(textField_5, GroupLayout.DEFAULT_SIZE, 259,
+														Short.MAX_VALUE)
+												.addComponent(textField_4, GroupLayout.DEFAULT_SIZE, 259,
+														Short.MAX_VALUE)
+												.addGroup(Alignment.TRAILING,
+														gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+																.addComponent(textField_3).addComponent(textField_2)
+																.addComponent(textField_1, GroupLayout.DEFAULT_SIZE,
+																		259, Short.MAX_VALUE)))))
+						.addGap(13)
+						.addComponent(lblNewID, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)));
+		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
+				.createSequentialGroup().addComponent(lblNewTitre).addGap(18)
+				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
+						.createSequentialGroup().addComponent(lblNewLabel_1).addGap(18).addComponent(lblNewLabel_2)
+						.addGap(30)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(lblNewLabel_3)
+								.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(btn_Valider)
-							.addGap(18)
-							.addComponent(btn_Supprimer))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(23)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-									.addComponent(lblNewLabel_3, GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
-									.addComponent(lblNewLabel_2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-									.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-								.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblNewLabel_5))
-							.addGap(57)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(textField_5, GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
-								.addComponent(textField_4, GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
-								.addGroup(Alignment.TRAILING, gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-									.addComponent(textField_3)
-									.addComponent(textField_2)
-									.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)))))
-					.addGap(13)
-					.addComponent(lblNewID, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addComponent(lblNewTitre)
-					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblNewLabel_1)
-							.addGap(18)
-							.addComponent(lblNewLabel_2)
-							.addGap(30)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblNewLabel_3)
-								.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblNewLabel_4)
-						.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(18)
-							.addComponent(lblNewLabel_5))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(18)
-							.addComponent(textField_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-					.addPreferredGap(ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btn_Supprimer)
+								.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)
+								.addGap(18).addComponent(textField_2, GroupLayout.PREFERRED_SIZE,
+										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+				.addGap(18)
+				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addComponent(lblNewLabel_4)
+						.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup().addGap(18).addComponent(lblNewLabel_5))
+						.addGroup(gl_contentPane.createSequentialGroup().addGap(18).addComponent(textField_5,
+								GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+				.addPreferredGap(ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+				.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(btn_Supprimer)
 						.addComponent(btn_Valider))
-					.addGap(32))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addComponent(lblNewID)
-					.addContainerGap())
-		);
+				.addGap(32)).addGroup(gl_contentPane.createSequentialGroup().addComponent(lblNewID).addContainerGap()));
 		contentPane.setLayout(gl_contentPane);
-		
+
 		if (listLabels.length >= 3) {
 			textField_3.setVisible(true);
-		}else {
+		} else {
 			textField_3.setVisible(false);
 		}
-		
+
 		if (listLabels.length >= 4) {
 			textField_4.setVisible(true);
 		} else {
 			textField_4.setVisible(false);
 		}
-		
+
 		if (listLabels.length >= 5) {
 			textField_5.setVisible(true);
-		}else {
+		} else {
 			textField_5.setVisible(false);
 		}
 
@@ -323,5 +370,25 @@ public class Fiche extends JFrame {
 		setLocation(x, y);
 		setLocationRelativeTo(null);
 		setVisible(true);
+	}
+
+	private void executeDoa(String methodeDao,Dao dao, Object transport, ArrayList params) {
+		switch (methodeDao) {
+			case "get":			
+				dao.get(transport);
+			break;
+
+			case "save":
+    			dao.save(transport);
+			break;
+    
+			case "update":
+    			dao.update(transport, params);
+			break;
+
+			case "delete":    
+				dao.delete(transport);
+			break;
+		}
 	}
 }

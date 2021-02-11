@@ -61,6 +61,7 @@ public class AeroportDao implements Dao{
 				stmt.setString(1,idSearch);
 				ResultSet res = stmt.executeQuery();
 				System.out.println("Voici les informations de l'aeroport " + id);
+
 				while (res.next()) {
 					aeroport = new Aeroport(
 						res.getString("IdAeroport"), 
@@ -103,7 +104,8 @@ public class AeroportDao implements Dao{
 	}
 
 	@Override
-	public void update(Object t, String[] params) {
+	public void update(Object t, ArrayList paramsA) {
+		String[] params = (String[])  paramsA.toArray();
 		Aeroport aeroport = (Aeroport) t;
 
 		Connection conn = null;

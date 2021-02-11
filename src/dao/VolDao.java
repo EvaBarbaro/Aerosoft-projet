@@ -111,7 +111,8 @@ public class VolDao implements Dao{
 	}
 
 	@Override
-	public void update(Object t, String[] params) {
+	public void update(Object t, ArrayList paramsA) {
+		String[] params = (String[])  paramsA.toArray();
 		Vol vol = (Vol) t;
 
 		Connection conn = null;

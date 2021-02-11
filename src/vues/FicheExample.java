@@ -1,10 +1,13 @@
 package vues;
 
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
 
-import dao.PiloteDao;
+
 import dao.UtilisateurDao;
-import models.Pilote;
+
 import models.Utilisateur;
 
 public class FicheExample extends JFrame {
@@ -31,9 +34,32 @@ public class FicheExample extends JFrame {
 				{"Enregistrer", "Il y a eu des modifications. Voulez-vous enregistrer", "Oui", "Non"} 
 		};
 				
-		String[] listTextBtns = { "Supprimer","Valider"};
+		String[] listTextBtns = { "Supprimer", "Valider" };
+		String[] listMethodeDoa = { "delete", "update" };
 		bdao = new UtilisateurDao();
+
+		/*Method fonctionBtn2=null ;
+		Method fonctionBtn1=null ;
 		
+		try {
+			Class parameterTypes[] = {Object.class, ArrayList.class };
+			
+			fonctionBtn2 = UtilisateurDao.class.getMethod("update", parameterTypes);
+			System.out.println("fonctionBtn2: " + fonctionBtn2);
+		} catch (NoSuchMethodException | SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		try {
+			Class[] parameterTypes = new Class[1];
+			parameterTypes[0] = Object.class;
+			fonctionBtn1 = UtilisateurDao.class.getMethod("delete", parameterTypes);
+			System.out.println("fonctionBtn1: " + fonctionBtn1);
+		} catch (NoSuchMethodException | SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
 		/*
 		 * Fiche.Fiche(
 		 * String titre, 
@@ -46,16 +72,19 @@ public class FicheExample extends JFrame {
 		 * String [] listTextBtns
 		 * ) 
 		 */
-		
 		new Fiche(
 				"Fiche Utilisateur", 
 				bdao, 
 				(Object)u, 
-				Integer.parseInt(u.getIdUtilisateur()), 
+				u.getIdUtilisateur(), 
 				listLabels, 
 				listTextFields,
 				listSuperDialog,
-				listTextBtns
+				listTextBtns,
+				listMethodeDoa
+				/*,
+				fonctionBtn2,
+				fonctionBtn1*/
 				);
 	}
 }
