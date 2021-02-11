@@ -102,8 +102,8 @@ public class UtilisateurDao implements Dao {
 			stmt.setString(1,utilisateur.getIdUtilisateur());
 			stmt.setString(2, utilisateur.getMail());
 			stmt.setString(3, utilisateur.getMotDePasse());
-			stmt.setBoolean(3, utilisateur.getStatut());
-			stmt.setString(3, utilisateur.getIdRole());
+			stmt.setBoolean(4, utilisateur.getStatut());
+			stmt.setString(5, utilisateur.getIdRole());
 			
 			stmt.execute();
 			
@@ -130,7 +130,7 @@ public class UtilisateurDao implements Dao {
 			stmt.setString(3, params[2]);
 			stmt.setBoolean(4,Boolean.parseBoolean(params[3]));
 			stmt.setString(5, params[4]);
-			stmt.setString(4, utilisateur.getIdUtilisateur());
+			stmt.setString(6, utilisateur.getIdUtilisateur());
 			System.out.println(stmt.toString());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
