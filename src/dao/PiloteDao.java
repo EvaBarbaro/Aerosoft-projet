@@ -52,13 +52,17 @@ public class PiloteDao implements Dao {
 		ArrayList<Pilote> listePilotes = new ArrayList<>();
 
 		try {
-			conn = ConnectionBdd.getConnection();
-			stmt = conn.prepareStatement(sql);
+			conn = (Connection) ConnectionBdd.getConnection();
+			stmt = (PreparedStatement) conn.prepareStatement(sql);
 			ResultSet res = stmt.executeQuery(sql);
 
 			while (res.next()) {
 
-				Pilote pilote = new Pilote(res.getInt("IdPilote"),res.getString("NomPilote"), res.getString("PrenomPilote"), res.getString("Matricule"));
+				Pilote pilote = new Pilote(
+					res.getInt("IdPilote"),
+					res.getString("NomPilote"), 
+					res.getString("PrenomPilote"), 
+					res.getString("Matricule"));
 
 				listePilotes.add(pilote);
 			}
