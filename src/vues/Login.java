@@ -1,7 +1,10 @@
 package vues;
 
 import javax.swing.*;
-
+import java.awt.image.*;
+import java.io.*;
+import java.net.MalformedURLException;
+import javax.imageio.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
@@ -9,50 +12,59 @@ import java.util.*;
 
 import models.*;
 import dao.*;
- 
+
 public class Login extends JFrame implements ActionListener {
 
-private static final long serialVersionUID = 1618223497137316296L;
-JLabel labelTitle, labelEmail, labelPassword;
-JTextField textFieldLogin, roleField;
-JButton btnValider, btnInscription;
-JPasswordField passwordField;
+    private static final long serialVersionUID = 1618223497137316296L;
+    JLabel labelTitle, labelEmail, labelPassword;
+    JTextField textFieldLogin, roleField;
+    JButton btnValider, btnInscription;
+    JPasswordField passwordField;
 
-public Login() {
-	
-	
-/*Label */
-labelTitle = new JLabel("Authentification");
-labelTitle.setForeground(Color.blue);
-labelTitle.setFont(new Font("Serif", Font.BOLD, 20));
+    public Login() {
 
-labelEmail = new JLabel("Votre Email:");
-labelPassword = new JLabel("Votre Mot de passe:");
-textFieldLogin = new JTextField();
-/* Mot de passe*/
-passwordField = new JPasswordField();
-/*Bouton */
-btnValider = new JButton("Valider");
-btnInscription = new JButton("Inscrivez-vous");
-/*Placement */
-labelTitle.setBounds(80, 10, 400, 30);
-labelEmail.setBounds(80, 70, 200, 30);
-labelPassword.setBounds(80, 110, 200, 30);
-textFieldLogin.setBounds(300, 70, 200, 30);
-passwordField.setBounds(300, 110, 200, 30);
-btnValider.setBounds(270, 150, 100, 30);
-btnInscription.setBounds(380, 150, 140, 30);
-btnValider.addActionListener(this);
-btnInscription.addActionListener(this);
-add(labelTitle);add(labelEmail);add(textFieldLogin); add(labelPassword);add(passwordField);add(btnValider);add(btnInscription);
+        String url = "./Conception/Aerosoft-logo.PNG";
+        BufferedImage img;
+        try {
+            img = ImageIO.read(new File(url));
+            ImageIcon icon = new ImageIcon(img);
+            JLabel labelimage = new JLabel();
+            labelimage.setBounds(80, 10, 400, 70); 
+            labelimage.setIcon(icon);
+            add(labelimage);
+        } catch (IOException e) {
+            e.printStackTrace();
+    }
 
-setTitle("Aerosoft");
 
-setSize(650, 350);
-setLayout(null);
-setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-setVisible(true);
-}
+    labelEmail = new JLabel("Votre Email:");
+    labelPassword = new JLabel("Votre Mot de passe:");
+    textFieldLogin = new JTextField();
+    /* Mot de passe*/
+    passwordField = new JPasswordField();
+    /*Bouton */
+    btnValider = new JButton("Valider");
+    btnInscription = new JButton("Inscrivez-vous");
+    /*Placement */
+    // labelTitle.setBounds(80, 10, 400, 30);
+    labelEmail.setBounds(80, 90, 200, 30);
+    labelPassword.setBounds(80, 130, 200, 30);
+    textFieldLogin.setBounds(300, 90, 200, 30);
+    passwordField.setBounds(300, 130, 200, 30);
+    btnValider.setBounds(270, 170, 100, 30);
+    btnInscription.setBounds(380, 170, 140, 30);
+    btnValider.addActionListener(this);
+    btnInscription.addActionListener(this);
+    // add(labelTitle);
+    add(labelEmail);add(textFieldLogin); add(labelPassword);add(passwordField);add(btnValider);add(btnInscription);
+
+    setTitle("Aerosoft");
+
+    setSize(650, 350);
+    setLayout(null);
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setVisible(true);
+    }
 
 public void getLogged() {
 
@@ -100,12 +112,12 @@ String passwordString = new String(pass);
 		}
 
         JComboBox<String> comboBoxRole = new JComboBox<String>(roleTab);
-        comboBoxRole.setBounds(310, 150, 180, 20);
+        comboBoxRole.setBounds(310, 170, 180, 20);
 
         JButton btnValidateReg;
 
         btnValidateReg = new JButton("Valider votre inscirption");
-        btnValidateReg.setBounds(305, 180, 190, 30);
+        btnValidateReg.setBounds(305, 200, 190, 30);
 
         btnValider.setVisible(false);
         btnInscription.setVisible(false);
@@ -127,13 +139,29 @@ String passwordString = new String(pass);
                         roleField = new JTextField(roleAtt.getIdRole());
                         roleField.setVisible(false);
                         add(roleField);
+                        revalidate();
+                        repaint();
                         break;
                     case "Pilote":
+                        JFrame framePilote = new JFrame("Informations pilote");
                         JLabel nomPiloteLabel, prenomPiloteLabel, matriculeLabel;
                         JTextField nomPiloteField, prenomPiloteField, matriculeField;
                         JButton btnValidatePilote;
 
                         roleDao.get(stringBox);
+
+                        String url = "./Conception/Aerosoft-logo.PNG";
+                        BufferedImage img;
+                        try {
+                            img = ImageIO.read(new File(url));
+                            ImageIcon icon = new ImageIcon(img);
+                            JLabel labelimage = new JLabel();
+                            labelimage.setBounds(80, 10, 400, 70); 
+                            labelimage.setIcon(icon);
+                            framePilote.add(labelimage);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                    }
 
                         nomPiloteLabel = new JLabel("Votre nom");
                         nomPiloteField = new JTextField("");
@@ -143,19 +171,24 @@ String passwordString = new String(pass);
                         matriculeField = new JTextField("");
 
                         btnValidatePilote = new JButton("Valider votre inscirption");
-                        btnValidatePilote.setBounds(305, 270, 190, 30);
+                        btnValidatePilote.setBounds(305, 230, 190, 30);
 
-                        nomPiloteLabel.setBounds(80, 180, 200, 30);
-                        nomPiloteField.setBounds(300, 180, 200, 30);
-                        prenomPiloteLabel.setBounds(80, 210, 200, 30);
-                        prenomPiloteField.setBounds(300, 210, 200, 30);
-                        matriculeLabel.setBounds(80, 240, 200, 30);
-                        matriculeField.setBounds(300, 240, 200, 30);
+                        nomPiloteLabel.setBounds(80, 100, 200, 30);
+                        nomPiloteField.setBounds(300, 100, 200, 30);
+                        prenomPiloteLabel.setBounds(80, 140, 200, 30);
+                        prenomPiloteField.setBounds(300, 140, 200, 30);
+                        matriculeLabel.setBounds(80, 180, 200, 30);
+                        matriculeField.setBounds(300, 180, 200, 30);
                         btnValider.setVisible(false);
                         btnInscription.setVisible(false);
-                        btnValidateReg.setVisible(false);
 
-                        add(nomPiloteLabel); add(nomPiloteField); add(prenomPiloteLabel); add(prenomPiloteField); add(matriculeLabel); add(matriculeField);add(btnValidatePilote);
+                        framePilote.add(nomPiloteLabel); framePilote.add(nomPiloteField); framePilote.add(prenomPiloteLabel); framePilote.add(prenomPiloteField); framePilote.add(matriculeLabel); framePilote.add(matriculeField);framePilote.add(btnValidatePilote);
+
+                        framePilote.setTitle("Aerosoft");
+                        framePilote.setSize(650, 350);
+                        framePilote.setLayout(null);
+                        framePilote.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+                        framePilote.setVisible(true);
 
                         roleField = new JTextField(roleAtt.getIdRole());
                         roleField.setVisible(false);
@@ -190,8 +223,7 @@ String passwordString = new String(pass);
                                 new Login();
                             }
                         });
-                        invalidate();
-                        validate();
+                        revalidate();
                         repaint();
                         break;
                     case "Technicien d'exploitation":
