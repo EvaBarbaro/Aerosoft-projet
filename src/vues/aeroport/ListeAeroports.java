@@ -83,7 +83,7 @@ public class ListeAeroports extends JFrame implements ActionListener{
 					if (b1 != null) {
 						
 						FicheModifAeroport fm = new FicheModifAeroport(b1);
-						
+
 						fm.addWindowListener(new WindowListener() {
 
 							@Override
@@ -93,7 +93,7 @@ public class ListeAeroports extends JFrame implements ActionListener{
 
 							@Override
 							public void windowClosing(WindowEvent e) {
-									
+								chargeData(dao);
 							}
 
 							@Override

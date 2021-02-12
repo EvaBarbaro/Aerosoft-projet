@@ -14,6 +14,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 
+import java.awt.Toolkit;
+import java.awt.Dimension;
+
 public class SDialog extends JDialog {
 
 	/**
@@ -86,10 +89,17 @@ public class SDialog extends JDialog {
 				});
 				cancelButton.setActionCommand(textDuBoutonNon);
 				if (textDuBoutonNon != "") {
-					buttonPane.add(cancelButton);					
+					buttonPane.add(cancelButton);
 				}
 			}
 		}
+		
+		final Toolkit toolkit = Toolkit.getDefaultToolkit();
+		final Dimension screenSize = toolkit.getScreenSize();
+		final int x = (screenSize.width - this.getWidth()) / 2;
+		final int y = (screenSize.height - this.getHeight()) / 2;
+		setLocation(x, y);
+		setLocationRelativeTo(null);
 		
 	}
 
