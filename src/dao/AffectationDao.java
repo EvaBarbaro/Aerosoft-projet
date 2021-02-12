@@ -24,33 +24,38 @@ public class AffectationDao implements Dao {
 		//String sql = "SELECT * FROM affectation WHERE IdAffectation=?";
 		
 		String sql = "SELECT "
+		+ "affectation.IdAffectation,"
 		+ "affectation.NumVol,"
 		+ "affectation.DateVol,"
 		+ "affectation.affectationCode,"
 		+ "affectation.NumAvion, "
 		+ "affectation.idPilote, "
-		+ "(Select PrenomPilote FROM pilote WHERE pilote.idPilote = affectation.idPilote) as PrenomPilote,"
-		+ "(Select NomPilote FROM pilote WHERE  pilote.idPilote = Affectation.idPilote) as NomPilote "+ " FROM affectation WHERE IdAffectation=?";
+		+ "(Select PrenomPilote FROM `PILOTE` as pilote WHERE pilote.idPilote = affectation.idPilote) as PrenomPilote,"
+		+ "(Select NomPilote FROM `PILOTE` as pilote WHERE  pilote.idPilote = affectation.idPilote) as NomPilote "
+		+ " FROM `AFFECTATION` as affectation WHERE affectation.IdAffectation=?";
 		
 		try {
 			conn = ConnectionBdd.getConnection();
 			stmt = conn.prepareStatement(sql);
+			System.out.println("get stmt " + stmt);
+
 			stmt.setString(1, idSearch);
 			System.out.println("Voici les informations de l'affectation " + id);
 				
 			ResultSet res = stmt.executeQuery();
 			
 			while (res.next()) {
-				affectation.setNumVol(res.getString(1));
-				affectation.setDateVol(res.getDate(2));
-				affectation.setAffectationCode(res.getBoolean(3));
-				affectation.setNumAvion(res.getInt(4));
+				affectation.setId(res.getString(1));
+				affectation.setNumVol(res.getString(2));
+				affectation.setDateVol(res.getDate(3));
+				affectation.setAffectationCode(res.getBoolean(4));
+				affectation.setNumAvion(res.getInt(5));
 
 				Pilote pilote = new Pilote();
 
-				pilote.setIdPilote(res.getInt(5));
-				pilote.setPrenomPilote(res.getString(6));
-				pilote.setNomPilote(res.getString(7));
+				pilote.setIdPilote(res.getInt(6));
+				pilote.setPrenomPilote(res.getString(7));
+				pilote.setNomPilote(res.getString(8));
 			
 
 				affectation.setPilote(pilote);
@@ -72,34 +77,37 @@ public class AffectationDao implements Dao {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		String sql = "SELECT "
+				+ "affectation.IdAffectation,"
 				+ "affectation.NumVol,"
 				+ "affectation.affectationCode,"
 				+ "affectation.DateVol,"
 				+ "affectation.NumAvion, "
 				+ "affectation.idPilote, "
-				+ "(Select PrenomPilote FROM pilote WHERE  pilote.idPilote = affectation.idPilote) as PrenomPilote,"
-				+ "(Select NomPilote FROM pilote WHERE  pilote.idPilote = affectation.idPilote) as NomPilote "
-				+ "FROM affectation";
+				+ "(Select PrenomPilote FROM `PILOTE` as pilote WHERE  pilote.idPilote = affectation.idPilote) as PrenomPilote,"
+				+ "(Select NomPilote FROM `PILOTE` as pilote WHERE  pilote.idPilote = affectation.idPilote) as NomPilote "
+				+ "FROM `AFFECTATION` as affectation";
 
 		ArrayList<Affectation> listeAffectations = new ArrayList<>();
 
 		try {
 			conn = ConnectionBdd.getConnection();
 			stmt = conn.prepareStatement(sql);
+			System.out.println("getAll stmt " + stmt);
 			ResultSet rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
 
 				Affectation affectation = new Affectation();
 
-				affectation.setNumVol(rs.getString(1));
-				affectation.setDateVol(rs.getDate(2));
+				affectation.setId(rs.getString(1));
+				affectation.setNumVol(rs.getString(2));
 				affectation.setAffectationCode(rs.getBoolean(3));
-				affectation.setNumAvion(rs.getInt(4));
+				affectation.setDateVol(rs.getDate(4));
+				affectation.setNumAvion(rs.getInt(5));
 
 				Pilote p = new Pilote();
 
-				p.setIdPilote(rs.getInt(5));
+				p.setIdPilote(rs.getInt(6));
 				p.setPrenomPilote(rs.getString(7));
 				p.setNomPilote(rs.getString(8));
 

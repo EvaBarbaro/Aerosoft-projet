@@ -13,6 +13,7 @@ public class Affectation {
 	}
 
 	public Affectation(String id, String numVol, Boolean affectationCode, Date dateVol, int numAvion, Pilote pilote) {
+		this.id = id;
 		this.setNumVol(numVol);
 		this.setDateVol(dateVol);
 		this.setAffectationCode(affectationCode);
