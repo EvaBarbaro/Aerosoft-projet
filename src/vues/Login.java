@@ -8,6 +8,8 @@ import java.awt.event.*;
 import java.sql.*;
 import java.util.*;
 
+import connexion.ConnectionBdd;
+
 import models.*;
 import dao.*;
 
@@ -70,19 +72,28 @@ String loginString = textFieldLogin.getText();
 char[] pass = passwordField.getPassword();
 String passwordString = new String(pass);
 
+
+
         try {
 
-        	Class.forName("com.mysql.jdbc.Driver");
-
-        	Connection con=DriverManager.getConnection("jdbc:mysql://localhost/aerosoft","root",""); 
+        	/*Class.forName("com.mysql.jdbc.Driver");
             
-        	PreparedStatement ps = con.prepareStatement("select IdUtilisateur from utilisateur where Mail=? and MotDePasse=? and Statut=true");
+            Connection con=DriverManager.getConnection("jdbc:mysql://localhost/aerosoft","root",""); */
+
+            String sql = "select IdUtilisateur from `UTILISATEUR` where Mail=? and MotDePasse=? and Statut=true";
+
+            Connection conn = ConnectionBdd.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+            
+        	
             ps.setString(1, loginString);
             ps.setString(2, passwordString);
+            System.out.println("sql : " + ps);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-            	this.setVisible(false);
+                this.setVisible(false);
+                new Home();
             } 
             else {
             	JOptionPane.showMessageDialog(null,"Email ou Mot de passe incorrect, Veuillez réessayer");
