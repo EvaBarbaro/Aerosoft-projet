@@ -234,16 +234,16 @@ String passwordString = new String(pass);
                             public void actionPerformed(ActionEvent eventValidatePilote) {
                                 UtilisateurDao utilisateurDao = new UtilisateurDao();
                                 Utilisateur utilisateur = new Utilisateur();
-                                String superUseless[] = null;
                                 int uniqueID = UUID.randomUUID().hashCode();
 
-                                utilisateur.setIdUtilisateur(uniqueID);
-                                utilisateur.setMail(textFieldLogin.getText());
-                                utilisateur.setMotDePasse(String.valueOf(passwordField.getPassword()));
-                                utilisateur.setStatut(false);
-                                utilisateur.setIdRole(roleField.getText());
+                                String userString[] = new String[5];
+                                userString[0] = String.valueOf(uniqueID);
+                                userString[1] = textFieldLogin.getText();
+                                userString[2] = String.valueOf(passwordField.getPassword());
+                                userString[3] = "false";
+                                userString[4] = roleField.getText();
 
-                                utilisateurDao.save(utilisateur, superUseless);
+                                utilisateurDao.save(utilisateur, userString);
 
                                 PiloteDao piloteDao = new PiloteDao();
                                 Pilote pilote = new Pilote();
@@ -293,15 +293,15 @@ String passwordString = new String(pass);
         UtilisateurDao utilisateurDao = new UtilisateurDao();
                 Utilisateur utilisateur = new Utilisateur();
                 int uniqueID = UUID.randomUUID().hashCode();
-                String[] megaUseless = null;
 
-                utilisateur.setIdUtilisateur(uniqueID);
-                utilisateur.setMail(textFieldLogin.getText());
-                utilisateur.setMotDePasse(String.valueOf(passwordField.getPassword()));
-                utilisateur.setStatut(false);
-                utilisateur.setIdRole(roleField.getText());
+                String userPiloteString[] = new String[5];
+                userPiloteString[0] = String.valueOf(uniqueID);
+                userPiloteString[1] = textFieldLogin.getText();
+                userPiloteString[2] = String.valueOf(passwordField.getPassword());
+                userPiloteString[3] = "false";
+                userPiloteString[4] = roleField.getText();
 
-                utilisateurDao.save(utilisateur, megaUseless);
+                utilisateurDao.save(utilisateur, userPiloteString);
 
                 dispose();
 

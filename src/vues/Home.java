@@ -12,6 +12,7 @@ import vues.aeroport.*;
 import vues.affectation.FicheAjoutAffectation;
 import vues.affectation.FicheSupprAffectation;
 import vues.affectation.RechercherAffectation;
+import vues.pilote.*;
 
 import javax.swing.*;
 
@@ -31,10 +32,11 @@ public class Home {
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
         /* Mise en place du menu  */
-        JMenu menu, menu1, menu2, menu3;
+        JMenu menu, menu1, menuPilote, menu3;
         //submenu;  
         JMenuItem i1, i2, i3, i4;
         JMenuItem af1, af2, af3, af4;
+        JMenuItem itemAddPilote, itemListPilote, itemReadPilote, itemDeletePilote;
         JMenuBar mb = new JMenuBar();
         /* Menu 1*/
         menu = new JMenu("Accueil");
@@ -87,10 +89,6 @@ public class Home {
         menu1.add(i4);
         mb.add(menu1);
 
-        /*Menu 2*/
-        menu2 = new JMenu("Pilote");
-        mb.add(menu2);
-
         /*Menu 3*/
         menu3 = new JMenu("Affectation");
 
@@ -138,6 +136,52 @@ public class Home {
         menu3.add(af4);
         mb.add(menu3);
 
+        menuPilote=new JMenu("Pilote"); 
+
+    itemReadPilote=new JMenuItem("Trouver un pilote");
+    itemReadPilote.addActionListener(new ActionListener()
+    {
+    	public void actionPerformed(ActionEvent evt)
+    	{
+    		frame.setVisible(true);
+            new FicheReadPilote();
+    	}
+    });
+
+    itemAddPilote=new JMenuItem("Ajouter un pilote");
+    itemAddPilote.addActionListener(new ActionListener()
+    {
+    	public void actionPerformed(ActionEvent evt)
+    	{
+    		frame.setVisible(true);
+  
+			Pilote pilote = new Pilote();
+			new FicheAjoutPilote(pilote);
+    	}
+    });
+
+    itemListPilote=new JMenuItem("Modifier les pilotes");
+    itemListPilote.addActionListener(new ActionListener()
+    {
+    	public void actionPerformed(ActionEvent evt)
+    	{
+    		frame.setVisible(true);
+			new FicheListPilote();
+    	}
+    });
+
+    itemDeletePilote=new JMenuItem("Supprimer un pilote");
+    itemDeletePilote.addActionListener(new ActionListener()
+    {
+    	public void actionPerformed(ActionEvent evt)
+    	{
+    		frame.setVisible(true);
+			new FicheListDeletePilot();
+    	}
+    });
+
+    mb.add(menuPilote); menuPilote.add(itemReadPilote); menuPilote.add(itemAddPilote); menuPilote.add(itemListPilote); menuPilote.add(itemDeletePilote);
+
         frame.setJMenuBar(mb);
         /*Ajout d'une image*/
         ImageIcon icon = new ImageIcon(
@@ -156,6 +200,7 @@ public class Home {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }    
+
 }
 
 
