@@ -30,6 +30,6 @@ public class Main {
 		//ad.delete(a);
 
 		//new Login();
-		new Home();
+		new Home(0);
 	}
 }
