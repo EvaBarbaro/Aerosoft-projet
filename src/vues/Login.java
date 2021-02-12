@@ -13,7 +13,7 @@ import connexion.ConnectionBdd;
 import models.*;
 import dao.*;
 
-public class Login extends JFrame implements ActionListener {
+public class Login extends JFrame implements ActionListener, KeyListener{
 
     private static final long serialVersionUID = 1618223497137316296L;
     JLabel labelTitle, labelEmail, labelPassword;
@@ -48,8 +48,13 @@ public class Login extends JFrame implements ActionListener {
     /*Placement */
     // labelTitle.setBounds(80, 10, 400, 30);
     labelEmail.setBounds(80, 90, 200, 30);
-    labelPassword.setBounds(80, 130, 200, 30);
+    labelPassword.setBounds(80, 130, 200, 30);    
+
     textFieldLogin.setBounds(300, 90, 200, 30);
+
+    //a retirer apres
+    textFieldLogin.setText("clientele@aerosoft.com");
+
     passwordField.setBounds(300, 130, 200, 30);
     btnValider.setBounds(270, 170, 100, 30);
     btnInscription.setBounds(380, 170, 140, 30);
@@ -118,7 +123,7 @@ String passwordString = new String(pass);
         for (Role role : roles) {
             roleTab[i] = role.getRoleNom();
             i++;
-		}
+        }
 
         JComboBox<String> comboBoxRole = new JComboBox<String>(roleTab);
         comboBoxRole.setBounds(310, 170, 180, 20);
@@ -131,7 +136,8 @@ String passwordString = new String(pass);
         btnValider.setVisible(false);
         btnInscription.setVisible(false);
 
-        add(comboBoxRole);add(btnValidateReg);
+        add(comboBoxRole);
+        add(btnValidateReg);
 
         this.invalidate();
         this.validate();
@@ -142,7 +148,7 @@ String passwordString = new String(pass);
                 String stringBox = (String) comboBoxRole.getSelectedItem();
 
                 Role roleAtt = (Role) roleDao.get(stringBox);
-        
+
                 switch (stringBox) {
                     case "Chargé Clientèle":
                         roleField = new JTextField(roleAtt.getIdRole());
@@ -165,17 +171,17 @@ String passwordString = new String(pass);
                             img = ImageIO.read(new File(url));
                             ImageIcon icon = new ImageIcon(img);
                             JLabel labelimage = new JLabel();
-                            labelimage.setBounds(80, 10, 400, 70); 
+                            labelimage.setBounds(80, 10, 400, 70);
                             labelimage.setIcon(icon);
                             framePilote.add(labelimage);
                         } catch (IOException e) {
                             e.printStackTrace();
-                    }
+                        }
 
                         nomPiloteLabel = new JLabel("Votre nom");
                         nomPiloteField = new JTextField("");
                         prenomPiloteLabel = new JLabel("Votre prénom");
-                        prenomPiloteField= new JTextField("");
+                        prenomPiloteField = new JTextField("");
                         matriculeLabel = new JLabel("Votre matricule");
                         matriculeField = new JTextField("");
 
@@ -191,7 +197,13 @@ String passwordString = new String(pass);
                         btnValider.setVisible(false);
                         btnInscription.setVisible(false);
 
-                        framePilote.add(nomPiloteLabel); framePilote.add(nomPiloteField); framePilote.add(prenomPiloteLabel); framePilote.add(prenomPiloteField); framePilote.add(matriculeLabel); framePilote.add(matriculeField);framePilote.add(btnValidatePilote);
+                        framePilote.add(nomPiloteLabel);
+                        framePilote.add(nomPiloteField);
+                        framePilote.add(prenomPiloteLabel);
+                        framePilote.add(prenomPiloteField);
+                        framePilote.add(matriculeLabel);
+                        framePilote.add(matriculeField);
+                        framePilote.add(btnValidatePilote);
 
                         framePilote.setTitle("Aerosoft");
                         framePilote.setSize(650, 350);
@@ -202,7 +214,7 @@ String passwordString = new String(pass);
                         roleField = new JTextField(roleAtt.getIdRole());
                         roleField.setVisible(false);
                         add(roleField);
-                        
+
                         btnValidatePilote.addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent eventValidatePilote) {
                                 UtilisateurDao utilisateurDao = new UtilisateurDao();
@@ -255,7 +267,14 @@ String passwordString = new String(pass);
 
         btnValidateReg.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent eventValidateReg) {
-                UtilisateurDao utilisateurDao = new UtilisateurDao();
+
+                testUtilisateur();
+            }
+        });
+    }
+    
+    private void testUtilisateur() {
+        UtilisateurDao utilisateurDao = new UtilisateurDao();
                 Utilisateur utilisateur = new Utilisateur();
                 int uniqueID = UUID.randomUUID().hashCode();
                 String[] megaUseless = null;
@@ -271,19 +290,35 @@ String passwordString = new String(pass);
                 dispose();
 
                 new Login();
-            }
-        });
     }
 
     public void actionPerformed(ActionEvent btnEvent) {
-  
-        if(btnEvent.getSource()==btnValider){  
+
+        if (btnEvent.getSource() == btnValider) {
             getLogged();
         }
-        
-        if(btnEvent.getSource()==btnInscription){ 
+
+        if (btnEvent.getSource() == btnInscription) {
             register();
-      }
+        }
     }
+    
+    public void keyPressed(KeyEvent e) {
+		
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+			testUtilisateur();
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

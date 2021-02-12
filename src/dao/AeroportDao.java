@@ -18,7 +18,7 @@ public class AeroportDao implements Dao{
 		
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		String sql = "SELECT * FROM aeroport ORDER BY NomVilleDesservie";
+		String sql = "SELECT * FROM `AEROPORT` ORDER BY NomVilleDesservie";
 
 		ArrayList<Aeroport> listeAeroports = new ArrayList<>();
 

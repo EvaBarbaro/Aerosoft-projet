@@ -1,20 +1,14 @@
 package vues;
 
-import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import javax.imageio.ImageIO;
+
 import java.awt.Toolkit;
-import java.awt.Image;
 
 import dao.*;
 import models.*;
-import vues.aeroport.FicheAjoutAeroport;
+import vues.aeroport.*;
 
 import javax.swing.*;
 
@@ -61,7 +55,8 @@ public class Home {
     {
     	public void actionPerformed(ActionEvent evt)
     	{
-    		frame.setVisible(true);    		
+            frame.setVisible(true);
+            new ListeAeroports(); 
     	}
     });
 
@@ -72,7 +67,7 @@ public class Home {
     	{
     		frame.setVisible(true);
     		//new searchLivre();
-           
+            new RechercherAeroport();
     	}
     });
     menu1.add(i1); menu1.add(i2); menu1.add(i3);mb.add(menu1); 
