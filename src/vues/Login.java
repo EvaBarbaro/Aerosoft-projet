@@ -1,10 +1,11 @@
 package vues;
 
 import javax.swing.*;
-import java.awt.image.*;
-import java.io.*;
-import javax.imageio.*;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.*;
+import java.awt.Font;
+import java.awt.Color;
 import java.sql.*;
 import java.util.*;
 
@@ -23,36 +24,46 @@ public class Login extends JFrame implements ActionListener {
 
     public Login() {
 
-        String url = "./Conception/Aerosoft-logo.PNG";
-        BufferedImage img;
-        try {
-            img = ImageIO.read(new File(url));
-            ImageIcon icon = new ImageIcon(img);
-            JLabel labelimage = new JLabel();
-            labelimage.setBounds(80, 10, 400, 70); 
-            labelimage.setIcon(icon);
-            add(labelimage);
-        } catch (IOException e) {
-            e.printStackTrace();
-    }
-
+    JLabel labelimage = new JLabel();
+        ImageIcon img = new ImageIcon(
+            Toolkit.getDefaultToolkit().getImage(
+                    Fiche.class.getResource("/images/Aerosoft-logo.PNG"))
+                    .getScaledInstance(160, 50, Image.SCALE_DEFAULT)
+                );
+        labelimage.setBounds(80, 10, 400, 70); 
+        labelimage.setIcon(img);
+        add(labelimage);
 
     labelEmail = new JLabel("Votre Email:");
+    labelEmail.setFont(new Font("Tahoma", Font.PLAIN, 15));
     labelPassword = new JLabel("Votre Mot de passe:");
+    labelPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
     textFieldLogin = new JTextField();
+    textFieldLogin.setFont(new Font("Tahoma", Font.PLAIN, 15));
     /* Mot de passe*/
     passwordField = new JPasswordField();
+    passwordField.setFont(new Font("Tahoma", Font.PLAIN, 15));
     /*Bouton */
     btnValider = new JButton("Valider");
     btnInscription = new JButton("Inscrivez-vous");
     /*Placement */
     // labelTitle.setBounds(80, 10, 400, 30);
     labelEmail.setBounds(80, 90, 200, 30);
+    labelEmail.setFont(new Font("Tahoma", Font.PLAIN, 15));
     labelPassword.setBounds(80, 130, 200, 30);
+    labelPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
     textFieldLogin.setBounds(300, 90, 200, 30);
+    textFieldLogin.setFont(new Font("Tahoma", Font.PLAIN, 15));
     passwordField.setBounds(300, 130, 200, 30);
+    passwordField.setFont(new Font("Tahoma", Font.PLAIN, 15));
     btnValider.setBounds(270, 170, 100, 30);
-    btnInscription.setBounds(380, 170, 140, 30);
+    btnValider.setFont(new Font("Tahoma", Font.BOLD, 15));
+    btnValider.setBackground(new Color(1, 175, 228));
+    btnValider.setForeground(Color.WHITE);
+    btnInscription.setBounds(380, 170, 150, 30);
+    btnInscription.setFont(new Font("Tahoma", Font.BOLD, 15));
+    btnInscription.setBackground(new Color(22, 219, 170));
+    btnInscription.setForeground(Color.WHITE);
     btnValider.addActionListener(this);
     btnInscription.addActionListener(this);
     // add(labelTitle);
@@ -75,10 +86,6 @@ String passwordString = new String(pass);
 
 
         try {
-
-        	/*Class.forName("com.mysql.jdbc.Driver");
-            
-            Connection con=DriverManager.getConnection("jdbc:mysql://localhost/aerosoft","root",""); */
 
             String sql = "select IdUtilisateur from `UTILISATEUR` where Mail=? and MotDePasse=? and Statut=true";
 
@@ -125,8 +132,11 @@ String passwordString = new String(pass);
 
         JButton btnValidateReg;
 
-        btnValidateReg = new JButton("Valider votre inscirption");
-        btnValidateReg.setBounds(305, 200, 190, 30);
+        btnValidateReg = new JButton("Valider votre inscription");
+        btnValidateReg.setFont(new Font("Tahoma", Font.BOLD, 15));
+        btnValidateReg.setBackground(new Color(22, 219, 170));
+        btnValidateReg.setBounds(290, 200, 220, 30);
+        btnValidateReg.setForeground(Color.WHITE);
 
         btnValider.setVisible(false);
         btnInscription.setVisible(false);
@@ -159,35 +169,47 @@ String passwordString = new String(pass);
 
                         roleDao.get(stringBox);
 
-                        String url = "./Conception/Aerosoft-logo.PNG";
-                        BufferedImage img;
-                        try {
-                            img = ImageIO.read(new File(url));
-                            ImageIcon icon = new ImageIcon(img);
-                            JLabel labelimage = new JLabel();
-                            labelimage.setBounds(80, 10, 400, 70); 
-                            labelimage.setIcon(icon);
-                            framePilote.add(labelimage);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                    }
+                        JLabel labelimage = new JLabel();
+                        ImageIcon img = new ImageIcon(
+                            Toolkit.getDefaultToolkit().getImage(
+                                    Fiche.class.getResource("/images/Aerosoft-logo.PNG"))
+                                    .getScaledInstance(160, 50, Image.SCALE_DEFAULT)
+                                );
+                        labelimage.setBounds(80, 10, 400, 70); 
+                        labelimage.setIcon(img);
+                        framePilote.add(labelimage);
 
                         nomPiloteLabel = new JLabel("Votre nom");
+                        nomPiloteLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
                         nomPiloteField = new JTextField("");
+                        nomPiloteField.setFont(new Font("Tahoma", Font.PLAIN, 15));
                         prenomPiloteLabel = new JLabel("Votre prénom");
+                        prenomPiloteLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
                         prenomPiloteField= new JTextField("");
+                        prenomPiloteField.setFont(new Font("Tahoma", Font.PLAIN, 15));
                         matriculeLabel = new JLabel("Votre matricule");
+                        matriculeLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
                         matriculeField = new JTextField("");
+                        matriculeField.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
-                        btnValidatePilote = new JButton("Valider votre inscirption");
-                        btnValidatePilote.setBounds(305, 230, 190, 30);
+                        btnValidatePilote = new JButton("Valider votre inscription");
+                        btnValidatePilote.setFont(new Font("Tahoma", Font.BOLD, 15));
+                        btnValidatePilote.setBackground(new Color(22, 219, 170));
+                        btnValidatePilote.setBounds(290, 230, 220, 30);
+                        btnValidatePilote.setForeground(Color.WHITE);
 
                         nomPiloteLabel.setBounds(80, 100, 200, 30);
+                        nomPiloteLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
                         nomPiloteField.setBounds(300, 100, 200, 30);
+                        nomPiloteField.setFont(new Font("Tahoma", Font.PLAIN, 15));
                         prenomPiloteLabel.setBounds(80, 140, 200, 30);
+                        prenomPiloteLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
                         prenomPiloteField.setBounds(300, 140, 200, 30);
+                        prenomPiloteField.setFont(new Font("Tahoma", Font.PLAIN, 15));
                         matriculeLabel.setBounds(80, 180, 200, 30);
+                        matriculeLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
                         matriculeField.setBounds(300, 180, 200, 30);
+                        matriculeField.setFont(new Font("Tahoma", Font.PLAIN, 15));
                         btnValider.setVisible(false);
                         btnInscription.setVisible(false);
 
