@@ -32,7 +32,7 @@ public class RechercherAeroport extends JFrame implements ActionListener {
 
 	public RechercherAeroport() {
 		/* Label */
-		l1 = new JLabel("RECHERCHER UN LIVRE");
+		l1 = new JLabel("RECHERCHER UN AEROPORT");
 		l1.setForeground(Color.blue);
 		l1.setFont(new Font("Serif", Font.BOLD, 20));
 
