@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.ListIterator;
 
  
-public class FicheListPilote extends JFrame implements ActionListener{
+public class FicheListDeletePilot extends JFrame implements ActionListener{
 	
 	/**
 	 *
@@ -34,7 +34,7 @@ public class FicheListPilote extends JFrame implements ActionListener{
 	String[] tblHead = { "IdPilote", "NomPilote", "PrenomPilote", "Matricule" };
 	 
 
-	public FicheListPilote() {
+	public FicheListDeletePilot() {
 		
 		/* Label */
 		l1 = new JLabel("LISTE DES PILOTES");
@@ -82,7 +82,7 @@ public class FicheListPilote extends JFrame implements ActionListener{
 
 					if (b1 != null) {
 						
-						FicheModifPilote fm = new FicheModifPilote(b1);
+						FicheDeletePilote fm = new FicheDeletePilote(b1);
 						
 						fm.addWindowListener(new WindowListener() {
 

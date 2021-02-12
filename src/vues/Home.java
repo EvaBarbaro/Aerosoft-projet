@@ -31,7 +31,7 @@ public class Home {
     /* Mise en place du menu  */
     JMenu menu,menu1,menu2, menuPilote; 
     //submenu;  
-    JMenuItem i1, i2, i3, itemAddPilote, itemListPilote, i5;
+    JMenuItem i1, i2, i3, itemAddPilote, itemListPilote, itemReadPilote, itemDeletePilote, i5;
     JMenuBar mb=new JMenuBar();  
     /* Menu 1*/
     menu=new JMenu("Accueil"); 
@@ -75,6 +75,16 @@ public class Home {
 
     menuPilote=new JMenu("Pilote"); 
 
+    itemReadPilote=new JMenuItem("Trouver un pilote");
+    itemReadPilote.addActionListener(new ActionListener()
+    {
+    	public void actionPerformed(ActionEvent evt)
+    	{
+    		frame.setVisible(true);
+            new FicheReadPilote();
+    	}
+    });
+
     itemAddPilote=new JMenuItem("Ajouter un pilote");
     itemAddPilote.addActionListener(new ActionListener()
     {
@@ -97,7 +107,17 @@ public class Home {
     	}
     });
 
-    menu1.add(i1); menu1.add(i2); menu1.add(i3);mb.add(menu1); mb.add(menuPilote); menuPilote.add(itemAddPilote); menuPilote.add(itemListPilote);
+    itemDeletePilote=new JMenuItem("Supprimer un pilote");
+    itemDeletePilote.addActionListener(new ActionListener()
+    {
+    	public void actionPerformed(ActionEvent evt)
+    	{
+    		frame.setVisible(true);
+			new FicheListDeletePilot();
+    	}
+    });
+
+    menu1.add(i1); menu1.add(i2); menu1.add(i3);mb.add(menu1); mb.add(menuPilote); menuPilote.add(itemReadPilote); menuPilote.add(itemAddPilote); menuPilote.add(itemListPilote); menuPilote.add(itemDeletePilote);
 
     frame.setJMenuBar(mb);
     /*Ajout d'une image*/
