@@ -9,6 +9,7 @@ import java.awt.Toolkit;
 import dao.*;
 import models.*;
 import vues.aeroport.*;
+import vues.pilote.*;
 
 import javax.swing.*;
 
@@ -28,9 +29,9 @@ public class Home {
     JPanel panel = new JPanel();  
     panel.setLayout(new FlowLayout());  
     /* Mise en place du menu  */
-    JMenu menu,menu1,menu2; 
+    JMenu menu,menu1,menu2, menuPilote; 
     //submenu;  
-    JMenuItem i1, i2, i3, i4, i5;
+    JMenuItem i1, i2, i3, itemAddPilote, itemListPilote, i5;
     JMenuBar mb=new JMenuBar();  
     /* Menu 1*/
     menu=new JMenu("Accueil"); 
@@ -71,12 +72,32 @@ public class Home {
             new RechercherAeroport();
     	}
     });
-    menu1.add(i1); menu1.add(i2); menu1.add(i3);mb.add(menu1); 
-    
-    /*Menu 2*/
-    menu2=new JMenu("Pilote"); 
-    mb.add(menu2);
 
+    menuPilote=new JMenu("Pilote"); 
+
+    itemAddPilote=new JMenuItem("Ajouter un pilote");
+    itemAddPilote.addActionListener(new ActionListener()
+    {
+    	public void actionPerformed(ActionEvent evt)
+    	{
+    		frame.setVisible(true);
+  
+			Pilote pilote = new Pilote();
+			new FicheAjoutPilote(pilote);
+    	}
+    });
+
+    itemListPilote=new JMenuItem("Modifier les pilotes");
+    itemListPilote.addActionListener(new ActionListener()
+    {
+    	public void actionPerformed(ActionEvent evt)
+    	{
+    		frame.setVisible(true);
+			new FicheListPilote();
+    	}
+    });
+
+    menu1.add(i1); menu1.add(i2); menu1.add(i3);mb.add(menu1); mb.add(menuPilote); menuPilote.add(itemAddPilote); menuPilote.add(itemListPilote);
 
     frame.setJMenuBar(mb);
     /*Ajout d'une image*/

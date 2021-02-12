@@ -101,11 +101,11 @@ public class UtilisateurDao implements Dao {
 		try {
 			conn = ConnectionBdd.getConnection();
 			stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			stmt.setInt(1,utilisateur.getIdUtilisateur());
-			stmt.setString(2, utilisateur.getMail());
-			stmt.setString(3, utilisateur.getMotDePasse());
-			stmt.setBoolean(4, utilisateur.getStatut());
-			stmt.setString(5, utilisateur.getIdRole());
+			stmt.setInt(1,Integer.parseInt(params[0]));
+			stmt.setString(2,params[1]);
+			stmt.setString(3, params[2]);
+			stmt.setBoolean(4,Boolean.parseBoolean(params[3]));
+			stmt.setString(5, params[4]);
 			
 			stmt.execute();
 			
