@@ -2,7 +2,7 @@ package models;
 
 public class Utilisateur {
     // Creation des variables
-	private String idUtilisateur;
+	private int idUtilisateur;
     private String mail;
     private String motDePasse;
     private boolean statut = false;
@@ -12,7 +12,7 @@ public class Utilisateur {
 	public Utilisateur() {
 	}
 
-	public Utilisateur(String idUtilisateur, String mail, String motDePasse, boolean statut, String idRole) {
+	public Utilisateur(int idUtilisateur, String mail, String motDePasse, boolean statut, String idRole) {
         this.setIdUtilisateur(idUtilisateur);
         this.setMail(mail);
         this.setMotDePasse(motDePasse);
@@ -20,10 +20,10 @@ public class Utilisateur {
         this.setIdRole(idRole);
 	}
 	//Creation des getter et setter
-	public String getIdUtilisateur() {
+	public int getIdUtilisateur() {
 		return idUtilisateur;
 	}
-	public void setIdUtilisateur(String idUtilisateur) {
+	public void setIdUtilisateur(int idUtilisateur) {
 		this.idUtilisateur = idUtilisateur;
 	}
 

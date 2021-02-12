@@ -25,7 +25,7 @@ public class FicheExample extends JFrame {
 	public FicheExample(Utilisateur u) {
 
 		String [] listLabels= {"IdUtilisateur","Mail","MotDePasse","Statut","IdRole","IdRole"};
-		String[] listTextFields = { u.getIdUtilisateur(), u.getMail(),u.getMotDePasse(), "" + u.getStatut(), u.getIdRole(), u.getIdRole()  };
+		String[] listTextFields = { "" + u.getIdUtilisateur(), u.getMail(),u.getMotDePasse(), "" + u.getStatut(), u.getIdRole(), u.getIdRole()  };
 
 
 		/*listSuperDialog Transferer dans la DOA*/
