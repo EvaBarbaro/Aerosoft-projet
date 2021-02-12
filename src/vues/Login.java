@@ -255,6 +255,8 @@ String passwordString = new String(pass);
 
                                 piloteDao.save(pilote, piloteString);
 
+                                framePilote.setVisible(false);
+
                                 dispose();
 
                                 new Login();
