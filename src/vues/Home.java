@@ -21,8 +21,9 @@ import javax.swing.*;
 
 public class Home {
 
-    public Home() {
+    public Home(int idUser) {
 		initialize();
+        System.out.println(idUser);
 	}
 	
     public void initialize(){

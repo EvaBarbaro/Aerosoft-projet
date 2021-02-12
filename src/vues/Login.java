@@ -93,7 +93,7 @@ String passwordString = new String(pass);
 
             if (rs.next()) {
                 this.setVisible(false);
-                new Home();
+                new Home(rs.getInt("IdUtilisateur"));
             } 
             else {
             	JOptionPane.showMessageDialog(null,"Email ou Mot de passe incorrect, Veuillez réessayer");
@@ -220,14 +220,13 @@ String passwordString = new String(pass);
 
                                 PiloteDao piloteDao = new PiloteDao();
                                 Pilote pilote = new Pilote();
-                                String useless[] = null;
+                                String piloteString[] = new String[4];
+                                piloteString[0] = String.valueOf(uniqueID);
+                                piloteString[1] = nomPiloteField.getText();
+                                piloteString[2] = prenomPiloteField.getText();
+                                piloteString[3] = matriculeField.getText();
 
-                                pilote.setIdPilote(uniqueID);
-                                pilote.setNomPilote(nomPiloteField.getText());
-                                pilote.setPrenomPilote(prenomPiloteField.getText());
-                                pilote.setMatricule(matriculeField.getText());
-
-                                piloteDao.save(pilote, useless);
+                                piloteDao.save(pilote, piloteString);
 
                                 dispose();
 
