@@ -19,7 +19,7 @@ public class VolDao implements Dao{
 
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		String sql = "SELECT * FROM vol WHERE NumVol=?";
+		String sql = "SELECT * FROM `VOL` WHERE NumVol=?";
 
 		try {
 			conn = ConnectionBdd.getConnection();
@@ -58,7 +58,7 @@ public class VolDao implements Dao{
 	public ArrayList<Vol> getAll() {
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		String sql = "SELECT * FROM vol";
+		String sql = "SELECT * FROM `VOL`";
 
 		ArrayList<Vol> listeVols = new ArrayList<>();
 
@@ -93,7 +93,7 @@ public class VolDao implements Dao{
 
 			Connection conn = null;
 			PreparedStatement stmt = null;
-			String sql = "INSERT INTO vol (NumVol, AeroportDept, HDepart, AeroportArr, HArrivee) VALUES (?,?,?,?,?)";
+			String sql = "INSERT INTO `VOL` (NumVol, AeroportDept, HDepart, AeroportArr, HArrivee) VALUES (?,?,?,?,?)";
 		try {
 			conn = ConnectionBdd.getConnection();
 			stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -126,7 +126,7 @@ public class VolDao implements Dao{
 
 		try {
 			conn = ConnectionBdd.getConnection();
-			stmt = conn.prepareStatement("UPDATE vol SET AeroportDept=?,HDepart=?,AeroportArr=?,HArrivee=? WHERE NumVol=?");
+			stmt = conn.prepareStatement("UPDATE `VOL` SET AeroportDept=?,HDepart=?,AeroportArr=?,HArrivee=? WHERE NumVol=?");
 			stmt.setString(1, params[0]);
 			stmt.setString(2, params[1]);
 			stmt.setString(3, params[2]);
@@ -151,7 +151,7 @@ public class VolDao implements Dao{
 		PreparedStatement stmt = null;
 		try {
 			conn = ConnectionBdd.getConnection();
-			stmt = conn.prepareStatement("DELETE FROM `vol` WHERE `NumVol`=?", Statement.RETURN_GENERATED_KEYS);
+			stmt = conn.prepareStatement("DELETE FROM `VOL` WHERE `NumVol`=?", Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, vol.getNumVol());
 			stmt.execute();
 			

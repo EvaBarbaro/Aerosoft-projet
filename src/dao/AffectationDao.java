@@ -128,7 +128,7 @@ public class AffectationDao implements Dao {
 			Connection conn = null;
 			PreparedStatement stmt = null;
 			PreparedStatement stmt1 = null;
-			String sql = "INSERT INTO affectation (NumVol,DateVol,AffectationCode,NumAvion,IdPilote) VALUES (?,?,?,?,?)";
+			String sql = "INSERT INTO `AFFECTATION` (NumVol,DateVol,AffectationCode,NumAvion,IdPilote) VALUES (?,?,?,?,?)";
 		try {
 			conn = ConnectionBdd.getConnection();
 			stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -139,7 +139,7 @@ public class AffectationDao implements Dao {
 			stmt.setInt(5, Integer.parseInt(params[5]));
 			stmt.execute();
 
-			stmt1 = conn.prepareStatement("UPDATE AFFECTATION SET IdAffectation=CONCAT(NumVol, DateVol)");
+			stmt1 = conn.prepareStatement("UPDATE `AFFECTATION` SET IdAffectation=CONCAT(NumVol, DateVol)");
 			stmt1.executeUpdate();
 			
 			System.out.println(affectation.getNumVol()+ " a bien été ajouté");
@@ -160,7 +160,7 @@ public class AffectationDao implements Dao {
 
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		String sql = "UPDATE affectation SET NumVol=?, DateVol=?, NumAvion=?, IdPilote=? WHERE IdAffectation=?";
+		String sql = "UPDATE `AFFECTATION` SET NumVol=?, DateVol=?, NumAvion=?, IdPilote=? WHERE IdAffectation=?";
 		try {
 			conn = ConnectionBdd.getConnection();
 			stmt = conn.prepareStatement(sql);
@@ -197,7 +197,7 @@ public class AffectationDao implements Dao {
 		try {
 			conn = ConnectionBdd.getConnection();
 
-			stmt = conn.prepareStatement("UPDATE affectation SET AffectationCode=false WHERE IdAffectation=?", Statement.RETURN_GENERATED_KEYS);
+			stmt = conn.prepareStatement("UPDATE `AFFECTATION` SET AffectationCode=false WHERE IdAffectation=?", Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, affectation.getId());
 			stmt.execute();
 

@@ -13,7 +13,7 @@ public class RoleDao {
 
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		String sql = "SELECT * FROM roles WHERE RoleNom=?";
+		String sql = "SELECT * FROM `ROLES` WHERE RoleNom=?";
 
 		try {
 			conn = ConnectionBdd.getConnection();
@@ -44,7 +44,7 @@ public class RoleDao {
     public ArrayList<Role> getAll() {
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		String sql = "SELECT * FROM roles";
+		String sql = "SELECT * FROM `ROLES`";
 
 		ArrayList<Role> listeRole = new ArrayList<>();
 

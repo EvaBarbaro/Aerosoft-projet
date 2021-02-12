@@ -46,7 +46,7 @@ public class ListeAffectations extends JFrame implements ActionListener{
 	public ListeAffectations() {
 		
 		/* Label */
-		l1 = new JLabel("LISTE DES AEROPORTS");
+		l1 = new JLabel("LISTE DES AFFECTATIONS");
 		l1.setForeground(Color.blue);
 		l1.setFont(new Font("Serif", Font.BOLD, 20));
 
@@ -57,13 +57,9 @@ public class ListeAffectations extends JFrame implements ActionListener{
 
 		tableModel = new DefaultTableModel(tblHead, 0);
 		
-		data = new JTable(tableModel);
-		
-		//javax.swing.JTable.setInner(5); 
-		
+		data = new JTable(tableModel);		
 		data.setFont(new Font("Chandas", Font.BOLD, 15));
-		data.setRowHeight(25);
-		
+		data.setRowHeight(25);		
 		data.setBounds(100, 100, 450, 450);
 		
 		chargeData(dao);
@@ -149,7 +145,7 @@ public class ListeAffectations extends JFrame implements ActionListener{
 		scrollPane.setLocation(50, 100);
 		getContentPane().add(scrollPane);
 
-		setTitle("LISTE DES AEROPORT");
+		setTitle("LISTE DES AFFECTATIONS");
 
 		setSize(639, 540);
 		getContentPane().setLayout(null);

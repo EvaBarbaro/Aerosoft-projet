@@ -17,7 +17,7 @@ public class AvionDao implements Dao{
 	public ArrayList<Avion> getAll() {
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		String sql = "SELECT * FROM avion";
+		String sql = "SELECT * FROM `AVION`";
 
 		ArrayList<Avion> listeAvions = new ArrayList<>();
 
