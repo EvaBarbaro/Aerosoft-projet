@@ -38,7 +38,7 @@ public class Login extends JFrame implements ActionListener, KeyListener{
     labelEmail.setFont(new Font("Tahoma", Font.PLAIN, 15));
     labelPassword = new JLabel("Votre Mot de passe:");
     labelPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
-    textFieldLogin = new JTextField();
+    textFieldLogin = new JTextField("");
     textFieldLogin.setFont(new Font("Tahoma", Font.PLAIN, 15));
     /* Mot de passe*/
     passwordField = new JPasswordField();
@@ -52,9 +52,6 @@ public class Login extends JFrame implements ActionListener, KeyListener{
     labelPassword.setBounds(80, 130, 200, 30);     
 
     textFieldLogin.setBounds(300, 90, 200, 30);
-
-    //a retirer apres
-    textFieldLogin.setText("clientele@aerosoft.com");
 
     passwordField.setBounds(300, 130, 200, 30);
     passwordField.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -103,6 +100,7 @@ String passwordString = new String(pass);
             if (rs.next()) {
                 this.setVisible(false);
                 new Home(rs.getInt("IdUtilisateur"));
+                dispose();
             } 
             else {
             	JOptionPane.showMessageDialog(null,"Email ou Mot de passe incorrect, Veuillez réessayer");
