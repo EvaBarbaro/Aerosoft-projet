@@ -36,21 +36,24 @@ public class Fiche extends JFrame {
 	private JPanel contentPane;
 	
 	ImageIcon i = new ImageIcon(
-			Toolkit.getDefaultToolkit().getImage(Fiche.class.getResource("/images/Aerosoft-logo.PNG")).getScaledInstance(160, 50, Image.SCALE_DEFAULT));
+			Toolkit.getDefaultToolkit().getImage(
+					Fiche.class.getResource("/images/Aerosoft-logo.PNG"))
+					.getScaledInstance(160, 50, Image.SCALE_DEFAULT)
+				);
 	
 	private JLabel lblNewTitre;
 	
 	private JLabel lblNewID;
 	
 	private JLabel lblNewLabel_1;
-	private JLabel lblNewLabel_2;
+	private JLabel lblNewLabel_2 = new JLabel("");
 	private JLabel lblNewLabel_3 = new JLabel("");
 	private JLabel lblNewLabel_4 = new JLabel("");
 	private JLabel lblNewLabel_5 = new JLabel("");
 	private JLabel lblNewLabel_6 = new JLabel("");
 	
 	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField textField_2 = new JTextField();
 	private JTextField textField_3 = new JTextField();
 	private JTextField textField_4 = new JTextField();
 	private JTextField textField_5 = new JTextField();
@@ -101,19 +104,22 @@ public class Fiche extends JFrame {
 		textField_1 = new JTextField();
 		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textField_1.setColumns(10);
-		textField_1.setText(listTextFields[0]);
+		textField_1.setText(listTextFields[0]);	
 
 		oldValue_1 = listTextFields[0];
 
-		lblNewLabel_2 = new JLabel(listLabels[1]);
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		if (listLabels.length >= 2) {
 
-		textField_2 = new JTextField();
-		textField_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		textField_2.setColumns(10);
-		textField_2.setText(listTextFields[1]);
+			lblNewLabel_2 = new JLabel(listLabels[1]);
+			lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
-		oldValue_2 = listTextFields[1];
+			textField_2 = new JTextField();
+			textField_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			textField_2.setColumns(10);
+			textField_2.setText(listTextFields[1]);
+
+			oldValue_2 = listTextFields[1];
+		}
 
 		if (listLabels.length >= 3) {
 
@@ -172,7 +178,8 @@ public class Fiche extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 
-				if (!(oldValue_1.equals(textField_1.getText())) || (!(oldValue_2.equals(textField_2.getText())))
+				if (!(oldValue_1.equals(textField_1.getText()))
+						|| (oldValue_2 != null && !(oldValue_2.equals(textField_2.getText())))
 						|| (oldValue_3 != null && !(oldValue_3.equals(textField_3.getText())))
 						|| (oldValue_4 != null && !(oldValue_4.equals(textField_4.getText())))
 						|| (oldValue_5 != null && !(oldValue_5.equals(textField_5.getText()))) 
@@ -182,7 +189,10 @@ public class Fiche extends JFrame {
 					System.out.println("listTextFields.length : "  + listTextFields.length);				
 
 					params[0] = textField_1.getText();
-					params[1] = textField_2.getText();
+
+					if (listTextFields.length >= 2) {
+						params[1] = textField_2.getText();
+					}
 					
 					if (listTextFields.length >= 3) {
 						params[2] = textField_3.getText();						
@@ -234,7 +244,7 @@ public class Fiche extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(lblNewTitre, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
+							.addComponent(lblNewTitre, GroupLayout.PREFERRED_SIZE, 400, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED, 259, Short.MAX_VALUE)
 							.addComponent(lblNewID, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_contentPane.createSequentialGroup()
@@ -303,6 +313,12 @@ public class Fiche extends JFrame {
 		);
 		contentPane.setLayout(gl_contentPane);
 		lblNewID.setVisible(false);
+
+		if (listTextFields.length >= 2) {
+			textField_2.setVisible(true);
+		} else {
+			textField_2.setVisible(false);
+		}
 
 		if (listTextFields.length >= 3) {
 			textField_3.setVisible(true);

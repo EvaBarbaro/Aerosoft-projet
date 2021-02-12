@@ -143,12 +143,12 @@ public class AffectationDao implements Dao {
 			stmt1.executeUpdate();
 			
 			System.out.println(affectation.getNumVol()+ " a bien été ajouté");
-			new SDialog("Ajout", "Ajouter reussi", "Valider", "").setVisible(true);
+			new SDialog("Ajout", "Ajouter reussie", "Valider", "").setVisible(true);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("Impossible d'ajouter une affectation");
-			new SDialog("Echec", "L'ajout n'a pas reussi car " + e, "ok", "").setVisible(true);
+			new SDialog("Echec", "L'ajout n'a pas reussie car " + e, "ok", "").setVisible(true);
 			throw new RuntimeException(e);
 		}
 	}
@@ -171,11 +171,11 @@ public class AffectationDao implements Dao {
 			stmt.setString(5, affectation.getId());
 			stmt.executeUpdate();
 
-			new SDialog("Modification", "Modification reussi", "Valider", "").setVisible(true);
+			new SDialog("Modification", "Modification reussie", "Valider", "").setVisible(true);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			new SDialog("Echec", "La modification n'a pas reussi car " + e, "ok", "").setVisible(true);
+			new SDialog("Echec", "La modification n'a pas reussie car " + e, "ok", "").setVisible(true);
 			throw new RuntimeException(e);
 		}
 		
@@ -201,11 +201,11 @@ public class AffectationDao implements Dao {
 			stmt.setString(1, affectation.getId());
 			stmt.execute();
 
-			new SDialog("Suppresssion", "Suppresssion reussi", "Valider", "").setVisible(true);
+			new SDialog("Suppresssion", "Suppresssion reussie", "Valider", "").setVisible(true);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			new SDialog("Echec", "La suppresssion n'a pas reussi car " + e, "ok", "").setVisible(true);
+			new SDialog("Echec", "La suppresssion n'a pas reussie car " + e, "ok", "").setVisible(true);
 			throw new RuntimeException(e);
 		}
 		

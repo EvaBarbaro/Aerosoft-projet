@@ -1,11 +1,11 @@
-package vues;
+package vues.aeroport;
 
 import javax.swing.JFrame;
 
 import dao.AeroportDao;
-import dao.UtilisateurDao;
 import models.Aeroport;
-import models.Utilisateur;
+import vues.Fiche;
+
 
 public class FicheAjoutAeroport extends JFrame {
 
@@ -24,16 +24,13 @@ public class FicheAjoutAeroport extends JFrame {
 		String[] listLabels = { "Id de l'aeroport", "Nom de l'aeroport", "Ville de l'aeroport"};
 		
 		String[] listTextFields = {"","",""};
-
-		//("Supprimer","Voulez-vous vraiment supprimer", "Oui", "Non")
-		//String[][] listSuperDialog = { { "Ajout", "Ajouter Reussi", "Valider", "" } };
-				
+			
 		String[] listTextBtns = { "Valider","Annuler" };
 		String[] listMethodeDoa = { "save","" };
 		bdao = new AeroportDao();
 
 		new Fiche(
-				"Ajout Aeroport", 
+				"Ajout d'un aeroport", 
 				bdao, 
 				(Object)a, 
 				listLabels, 

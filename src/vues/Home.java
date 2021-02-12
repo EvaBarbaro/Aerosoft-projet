@@ -9,17 +9,24 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import javax.imageio.ImageIO;
+import java.awt.Toolkit;
+import java.awt.Image;
 
 import dao.*;
 import models.*;
+import vues.aeroport.FicheAjoutAeroport;
 
 import javax.swing.*;
 
 
-public class Home extends JFrame {
+public class Home {
+
+    public Home() {
+		initialize();
+	}
 	
-	public Home() throws MalformedURLException, IOException
-	{
+    public void initialize(){
+        
 	/*Fenetre principal*/
 	JFrame frame = new JFrame("Tableau de bord");
 	/*Jpanel*/
@@ -42,7 +49,11 @@ public class Home extends JFrame {
     	public void actionPerformed(ActionEvent evt)
     	{
     		frame.setVisible(true);
-    		//new NouveauLivre();
+  
+            AeroportDao aeDao = new AeroportDao();
+            String idAe = "CDG"; 
+			Aeroport ae = (Aeroport) aeDao.get(idAe);
+			new FicheAjoutAeroport(ae);
     	}
     });
     i2=new JMenuItem("Lister les aeroport");
@@ -50,8 +61,7 @@ public class Home extends JFrame {
     {
     	public void actionPerformed(ActionEvent evt)
     	{
-    		frame.setVisible(true);
-    		//new listeLivre();
+    		frame.setVisible(true);    		
     	}
     });
 
@@ -62,10 +72,7 @@ public class Home extends JFrame {
     	{
     		frame.setVisible(true);
     		//new searchLivre();
-            AeroportDao aeDao = new AeroportDao();
-            String idAe = "CDG"; 
-			Aeroport ae = (Aeroport) aeDao.get(idAe);
-			new FicheAjoutAeroport(ae);
+           
     	}
     });
     menu1.add(i1); menu1.add(i2); menu1.add(i3);mb.add(menu1); 
@@ -77,21 +84,23 @@ public class Home extends JFrame {
 
     frame.setJMenuBar(mb);
     /*Ajout d'une image*/
-    String url = "./Conception/Banniere_aerosoft.jpg";
-    BufferedImage img = ImageIO.read(new File(url));
-    ImageIcon icon = new ImageIcon(img);
+    ImageIcon icon = new ImageIcon(
+            Toolkit.getDefaultToolkit().getImage(
+                    Fiche.class.getResource("/images/Banniere_aerosoft.jpg"))
+                    /*.getScaledInstance(160, 50, Image.SCALE_DEFAULT)*/
+                );
+
     /*label pour afficher l'image*/
     JLabel labelimage = new JLabel(); 
     labelimage.setIcon(icon);
     panel.add(labelimage);
    
     frame.add(panel);  
-    frame.setSize(900, 900);  
+    frame.setSize(1280, 780);  
     frame.setLocationRelativeTo(null);  
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
     frame.setVisible(true);  
-	}
-	
+	}	
 }
 
 

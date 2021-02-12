@@ -98,11 +98,11 @@ public class AeroportDao implements Dao{
 		stmt.execute();
 		
 		System.out.println(aeroport.getNomAeroport() + " a bien été ajouté");
-		new SDialog("Ajout", "Ajouter reussi", "Valider", "").setVisible(true);
+		new SDialog("Ajout", "Ajouter reussie", "Valider", "").setVisible(true);
 		
 	} catch (SQLException e) {
 		e.printStackTrace();
-		new SDialog("Echec", "L'ajout n'a pas reussi car " + e, "ok", "").setVisible(true);
+		new SDialog("Echec", "L'ajout n'a pas reussie car " + e, "ok", "").setVisible(true);
 	}
 	}
 
@@ -117,16 +117,16 @@ public class AeroportDao implements Dao{
 		try {
 			conn = ConnectionBdd.getConnection();
 			stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			stmt.setString(1, params[0]);
-			stmt.setString(2, params[1]);
+			stmt.setString(1, params[1]);
+			stmt.setString(2, params[2]);
 			stmt.setString(3, aeroport.getIdAeroport());
 			stmt.executeUpdate();
 
 			System.out.println(aeroport.getIdAeroport() + " a bien �t� modifi�");
-			new SDialog("Modification", "Modification reussi", "Valider", "").setVisible(true);
+			new SDialog("Modification", "Modification reussie", "Valider", "").setVisible(true);
 
 		} catch (SQLException e) {
-			new SDialog("Echec", "La modification n'a pas reussi car " + e, "ok", "").setVisible(true);
+			new SDialog("Echec", "La modification n'a pas reussie car " + e, "ok", "").setVisible(true);
 			throw new RuntimeException(e);
 		}
 		
@@ -146,11 +146,11 @@ public class AeroportDao implements Dao{
 			stmt.execute();
 			
 			System.out.println(aeroport.getIdAeroport() + " a bien �t� supprim�");
-			new SDialog("Suppresssion", "Suppresssion reussi", "Valider", "").setVisible(true);
+			new SDialog("Suppresssion", "Suppresssion reussie", "Valider", "").setVisible(true);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			new SDialog("Echec", "La suppresssion n'a pas reussi car " + e, "ok", "").setVisible(true);
+			new SDialog("Echec", "La suppresssion n'a pas reussie car " + e, "ok", "").setVisible(true);
 		}
 		
 		try {

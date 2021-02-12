@@ -112,12 +112,12 @@ public class UtilisateurDao implements Dao {
 			stmt.execute();
 			
 			System.out.println(utilisateur.getIdUtilisateur() + " a bien été ajouté");
-			new SDialog("Ajout", "Ajouter reussi", "Valider", "").setVisible(true);
+			new SDialog("Ajout", "Ajouter reussie", "Valider", "").setVisible(true);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("Impossible d'ajouter un pilote");
-			new SDialog("Echec", "L'ajout n'a pas reussi car " + e, "ok", "").setVisible(true);
+			new SDialog("Echec", "L'ajout n'a pas reussie car " + e, "ok", "").setVisible(true);
 			throw new RuntimeException(e);
 		}
 	}
@@ -141,11 +141,11 @@ public class UtilisateurDao implements Dao {
 			System.out.println(stmt.toString());
 			stmt.executeUpdate();
 
-			new SDialog("Modification", "Modification reussi", "Valider", "").setVisible(true);
+			new SDialog("Modification", "Modification reussie", "Valider", "").setVisible(true);
 
 		} catch (SQLException e) {
 			// e.printStackTrace();
-			new SDialog("Echec", "La modification n'a pas reussi car " + e, "ok", "").setVisible(true);
+			new SDialog("Echec", "La modification n'a pas reussie car " + e, "ok", "").setVisible(true);
 			throw new RuntimeException(e);
 		}
 	}
@@ -163,11 +163,11 @@ public class UtilisateurDao implements Dao {
 			stmt.execute();
 			
 			System.out.println(utilisateur.getIdUtilisateur() + " a bien été Supprimé");
-			new SDialog("Suppresssion", "Suppresssion reussi", "Valider", "").setVisible(true);
+			new SDialog("Suppresssion", "Suppresssion reussie", "Valider", "").setVisible(true);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			new SDialog("Echec", "La suppresssion n'a pas reussi car " + e, "ok", "").setVisible(true);
+			new SDialog("Echec", "La suppresssion n'a pas reussie car " + e, "ok", "").setVisible(true);
 		}
 		
 		try {
