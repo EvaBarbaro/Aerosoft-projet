@@ -20,7 +20,7 @@ public class PiloteDao implements Dao {
 
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		String sql = "SELECT * FROM pilote WHERE IdPilote=?";
+		String sql = "SELECT * FROM `PILOTE` WHERE IdPilote=?";
 		try {
 			conn = ConnectionBdd.getConnection();
 			stmt = conn.prepareStatement(sql);
@@ -50,7 +50,7 @@ public class PiloteDao implements Dao {
 	public ArrayList<Pilote> getAll() {
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		String sql = "SELECT * FROM pilote";
+		String sql = "SELECT * FROM `PILOTE`";
 
 		ArrayList<Pilote> listePilotes = new ArrayList<>();
 

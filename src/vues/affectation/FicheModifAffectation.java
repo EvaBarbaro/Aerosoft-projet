@@ -1,12 +1,17 @@
 package vues.affectation;
 
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
 
 import dao.AeroportDao;
 import dao.AffectationDao;
+import dao.PiloteDao;
 import models.Aeroport;
 import models.Affectation;
+import models.Pilote;
 import vues.Fiche;
+import vues.FicheAffectation;
 
 
 public class FicheModifAffectation extends JFrame {
@@ -38,14 +43,19 @@ public class FicheModifAffectation extends JFrame {
 		String[] listMethodeDoa = { "update","" };
 		bdao = new AffectationDao();
 
-		new Fiche(
-				"Modification d'une affectation", 
+		ArrayList<Pilote> listePilotes = new PiloteDao().getAll();
+
+		String [] jComboBoxTitles =(String []) listePilotes.toArray();
+
+		new FicheAffectation(
+				"Ajout d'une affectation", 
 				bdao, 
 				(Object)a, 
 				listLabels, 
 				listTextFields,
 				listTextBtns,
-				listMethodeDoa
+				listMethodeDoa,
+				jComboBoxTitles
 				);
 	}
 }

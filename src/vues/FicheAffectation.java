@@ -19,6 +19,8 @@ import java.awt.Image;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
@@ -26,7 +28,7 @@ import java.awt.event.ActionListener;
 //import java.util.concurrent.Callable;
 import java.awt.event.ActionEvent;
 
-public class Fiche extends JFrame {
+public class FicheAffectation extends JFrame {
 	/**
 	 *
 	 */
@@ -37,7 +39,7 @@ public class Fiche extends JFrame {
 	
 	ImageIcon i = new ImageIcon(
 			Toolkit.getDefaultToolkit().getImage(
-					Fiche.class.getResource("/images/Aerosoft-logo.PNG"))
+				FicheAffectation.class.getResource("/images/Aerosoft-logo.PNG"))
 					.getScaledInstance(160, 50, Image.SCALE_DEFAULT)
 				);
 	
@@ -57,7 +59,9 @@ public class Fiche extends JFrame {
 	private JTextField textField_3 = new JTextField();
 	private JTextField textField_4 = new JTextField();
 	private JTextField textField_5 = new JTextField();
-	private JTextField textField_6 = new JTextField();
+
+	//private DetailedComboBox jComboBoxList;
+	private JComboBox jComboBox;
 
 	private String oldValue_1;
 	private String oldValue_2;
@@ -69,15 +73,17 @@ public class Fiche extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Fiche(
+	public FicheAffectation(
 			String titre, 
 			Dao dao, 
 			Object transport,
 			String [] listLabels, 
 			String [] listTextFields,
 			String [] listTextBtns,
-			String[] listMethodeDoa
+			String [] listMethodeDoa,
+			String [] jComboBoxTitles
 	) {
+		//this.jComboBoxTitles = jComboBoxTitlesParam;
 
 		setTitle(titre);
 
@@ -165,12 +171,15 @@ public class Fiche extends JFrame {
 			lblNewLabel_6 = new JLabel(listLabels[5]);
 			lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
-			textField_6 = new JTextField();
+			/*textField_6 = new JTextField();
 			textField_6.setFont(new Font("Tahoma", Font.PLAIN, 15));
 			textField_6.setColumns(10);
-			textField_6.setText(listTextFields[5]);
+			textField_6.setText(listTextFields[5]);*/
 
 			oldValue_6 = listTextFields[5];
+
+			jComboBox = new JComboBox<String>(jComboBoxTitles);
+			jComboBox.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		}
 
 		JButton btn_2 = new JButton(listTextBtns[0]);
@@ -183,7 +192,7 @@ public class Fiche extends JFrame {
 						|| (oldValue_3 != null && !(oldValue_3.equals(textField_3.getText())))
 						|| (oldValue_4 != null && !(oldValue_4.equals(textField_4.getText())))
 						|| (oldValue_5 != null && !(oldValue_5.equals(textField_5.getText()))) 
-						|| (oldValue_6 != null && !(oldValue_6.equals(textField_6.getText())))) {
+						|| (oldValue_6 != null && !(oldValue_6.equals(jComboBox.getSelectedItem())))) {
 			
 					String[] params = new String[listTextFields.length];
 					System.out.println("listTextFields.length : "  + listTextFields.length);				
@@ -207,7 +216,7 @@ public class Fiche extends JFrame {
 					}
 					
 					if (listLabels.length >= 6) {
-						params[5] = textField_6.getText();						
+						params[5] = (String) jComboBox.getSelectedItem();						
 					}
 					
 					System.out.println("params.length : "  + params.length);				
@@ -269,7 +278,7 @@ public class Fiche extends JFrame {
 								.addComponent(textField_3)
 								.addComponent(textField_2)
 								.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
-								.addComponent(textField_6))))
+								.addComponent(jComboBox))))
 					.addGap(46))
 		);
 		gl_contentPane.setVerticalGroup(
@@ -303,7 +312,7 @@ public class Fiche extends JFrame {
 						.addComponent(textField_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField_6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(jComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblNewLabel_6))
 					.addPreferredGap(ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
@@ -339,9 +348,9 @@ public class Fiche extends JFrame {
 		}
 
 		if (listTextFields.length >= 6) {
-			textField_6.setVisible(true);
+			jComboBox.setVisible(true);
 		} else {
-			textField_6.setVisible(false);
+			jComboBox.setVisible(false);
 		}
 
 		final Toolkit toolkit = Toolkit.getDefaultToolkit();

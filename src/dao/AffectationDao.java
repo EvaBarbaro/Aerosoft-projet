@@ -172,10 +172,10 @@ public class AffectationDao implements Dao {
 		try {
 			conn = ConnectionBdd.getConnection();
 			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, params[0]);
-			stmt.setString(2, params[1]);
-			stmt.setString(3, params[2]);
-			stmt.setString(4, params[3]);
+			stmt.setString(1, params[1]);
+			stmt.setString(2, params[2]);
+			stmt.setString(3, params[3]);
+			stmt.setString(4, params[4]);
 			stmt.setString(5, affectation.getId());
 			stmt.executeUpdate();
 
