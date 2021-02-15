@@ -4,9 +4,11 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import connexion.ConnectionBdd;
+import interfaces.Dao;
 import models.*;
+import vues.SDialog;
 
-public class RoleDao {
+public class RoleDao implements Dao {
     public Object get(Object id) {
 		Role role = null;
         String idSearch = String.valueOf(id);
@@ -71,5 +73,45 @@ public class RoleDao {
 				System.out.println("Impossible d'afficher les roles");
 			}
 		return listeRole;
+	}
+
+	@Override
+	public void save(Object t, String[] params) {
+		Role role =(Role) t;
+
+		Connection conn = null;
+			PreparedStatement stmt = null;
+			String sql = "INSERT INTO `ROLES` (IdRole,RoleNom) VALUES (?,?)";
+
+		try {
+			conn = ConnectionBdd.getConnection();
+			stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			stmt.setString(1,params[0]);
+			stmt.setString(2,params[1]);
+			
+			stmt.execute();
+			
+			System.out.println(role.getIdRole() + " a bien été ajouté");
+			new SDialog("Ajout", "Ajouter reussie", "Valider", "").setVisible(true);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Impossible d'ajouter un pilote");
+			new SDialog("Echec", "L'ajout n'a pas reussie car " + e, "ok", "").setVisible(true);
+			throw new RuntimeException(e);
+		}
+
+	}
+
+	@Override
+	public void update(Object t, String[] params) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void delete(Object t) {
+		// TODO Auto-generated method stub
+
 	}
 }
