@@ -23,7 +23,7 @@ public class FicheDeleteUtilisateur extends JFrame {
 
 		String[] listLabels = { "Id de l'aeroport à supprimer"};
 		
-		String[] listTextFields = {""};
+		String[] listTextFields = {"" + utilisateur.getIdUtilisateur()};
 				
 		String[] listTextBtns = { "Valider","Annuler" };
 		String[] listMethodeDoa = { "delete","" };

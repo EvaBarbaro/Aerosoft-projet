@@ -64,9 +64,7 @@ public class MenuUtilisateur extends JMenu{
     {
     	public void actionPerformed(ActionEvent evt)
     	{
-    		Utilisateur utilisateur = new Utilisateur();
-			new FicheDeleteUtilisateur(utilisateur);
-            // new FicheListDeleteUtilisateur();
+            new FicheListDeleteUtilisateur();
     	}
     });
 
