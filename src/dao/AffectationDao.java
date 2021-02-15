@@ -131,7 +131,7 @@ public class AffectationDao implements Dao {
 	public void save(Object t, String[] params) {
 			Affectation affectation = (Affectation) t;
 
-			//Pilote pilote = new Pilote();
+			PiloteDao pda = new PiloteDao();
 
 			Connection conn = null;
 			PreparedStatement stmt = null;
@@ -144,7 +144,8 @@ public class AffectationDao implements Dao {
 			stmt.setDate(2,Date.valueOf(params[2]));
 			stmt.setBoolean(3, Boolean.parseBoolean(params[3]));
 			stmt.setInt(4, Integer.parseInt(params[4]));
-			stmt.setInt(5, Integer.parseInt(params[5]));
+			stmt.setInt(5, pda.getIdByName(params[5]));
+			System.out.println("params[5]) : " + params[5]);
 			stmt.execute();
 
 			stmt1 = conn.prepareStatement("UPDATE `AFFECTATION` SET IdAffectation=CONCAT(NumVol, DateVol)");

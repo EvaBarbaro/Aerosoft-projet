@@ -149,7 +149,7 @@ public class PiloteDao implements Dao {
 			stmt = conn.prepareStatement("DELETE FROM `PILOTE` WHERE `IdPilote`=?", Statement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1, pilote.getIdPilote());
 			stmt.execute();
-			
+
 			System.out.println(pilote.getMatricule() + " a bien été Supprimé");
 			new SDialog("Suppresssion", "Suppresssion reussie", "Valider", "").setVisible(true);
 
@@ -158,7 +158,7 @@ public class PiloteDao implements Dao {
 			new SDialog("Echec", "La suppresssion n'a pas reussie car " + e, "ok", "").setVisible(true);
 			throw new RuntimeException(e);
 		}
-		
+
 		try {
 			stmt.close();
 			conn.close();
@@ -167,6 +167,42 @@ public class PiloteDao implements Dao {
 			throw new RuntimeException(e);
 		}
 
+	}
+
+	public int getIdByName(String name) {
+
+		int IdPiloteToReturn=0;
+		
+		Connection conn = null;
+		PreparedStatement stmt = null;
+
+		String sql = "SELECT `IdPilote` FROM `pilote` WHERE `NomPilote` LIKE '?' ";
+
+		try {
+			conn = (Connection) ConnectionBdd.getConnection();
+			stmt = (PreparedStatement) conn.prepareStatement(sql);
+			ResultSet res = stmt.executeQuery(sql);
+			
+			IdPiloteToReturn = res.getInt("IdPilote");
+
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			new SDialog("Echec", "La suppresssion n'a pas reussie car " + e, "ok", "").setVisible(true);
+			throw new RuntimeException(e);
+		}
+
+		try {
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+		return IdPiloteToReturn;
+	}
+
+	public class getIdByName {
 	}
 
 }
