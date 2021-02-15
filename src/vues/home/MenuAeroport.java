@@ -17,7 +17,7 @@ public class MenuAeroport extends JMenu{
 	 */
     private static final long serialVersionUID = 1L;
     
-    private JMenuItem i1, i2, i3, i4;
+    private JMenuItem i1, i2, i3, i4, i5;
 
     private JMenu menu;
 
@@ -25,7 +25,7 @@ public class MenuAeroport extends JMenu{
         return this.menu;
     }
 
-    public MenuAeroport() {
+    public MenuAeroport(int droitId) {
 
         menu = new JMenu("Aeroport");
 
@@ -46,6 +46,14 @@ public class MenuAeroport extends JMenu{
                 String idAe = "CDG"; */
                 Aeroport ae = new Aeroport();
                 new FicheAjoutAeroport(ae);
+            }
+        });
+
+        i5 = new JMenuItem("Modifier un aeroport");
+        i5.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                //frame.setVisible(true);
+                new ListeModifAeroports();
             }
         });
 
@@ -70,6 +78,7 @@ public class MenuAeroport extends JMenu{
 
         menu.add(i1);
         menu.add(i2);
+        menu.add(i5);
         menu.add(i3);
         menu.add(i4);
     }     

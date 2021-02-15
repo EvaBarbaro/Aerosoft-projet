@@ -16,10 +16,6 @@ public class FicheModifUtilisateur extends JFrame {
 	
 	UtilisateurDao utilisateurDao;
 
-	RoleDao roleDao;
-
-	Role role = new Role();
-
 	/**
 	 * Create the frame.
 	 */
@@ -41,24 +37,6 @@ public class FicheModifUtilisateur extends JFrame {
 				listTextFields,
 				listTextBtns,
 				listMethodeDoa
-				);
-
-		String[] listLabelsRole = { "IdRole", "RoleNom" };
-
-		String[] listTextFieldsRole = {"", ""};
-				
-		String[] listTextBtnsRole = { "Valider","Annuler" };
-		String[] listMethodeDoaRole = { "save","" };
-		roleDao = new RoleDao();
-
-		new Fiche(
-				"Modification d'un role", 
-				roleDao, 
-				(Object)role, 
-				listLabelsRole, 
-				listTextFieldsRole,
-				listTextBtnsRole,
-				listMethodeDoaRole
 				);
 	}
 }

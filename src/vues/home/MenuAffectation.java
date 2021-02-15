@@ -18,7 +18,7 @@ public class MenuAffectation extends JMenu{
 	 */
     private static final long serialVersionUID = 1L;
     
-    private JMenuItem i1, i2, i3, i4;
+    private JMenuItem i1, i2, i3, i4, i5;
 
     private JMenu menu;
 
@@ -50,15 +50,22 @@ public class MenuAffectation extends JMenu{
             }
         });
 
+        i5 = new JMenuItem("Modifier les affectations");
+        i5.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+         
+                new ListeModifAffectations();
+            }
+        });
+
         i3 = new JMenuItem("Supprimer une affectation");
         i3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                         
                 new ListeDeleteAffectations();
             }
         });
 
-        i4 = new JMenuItem("Trouver une affectation");
+        i4 = new JMenuItem("Rechercher une affectation");
         i4.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
          
@@ -69,6 +76,7 @@ public class MenuAffectation extends JMenu{
 
         menu.add(i1);
         menu.add(i2);
+        menu.add(i5);
         menu.add(i3);
         menu.add(i4);
     }     
