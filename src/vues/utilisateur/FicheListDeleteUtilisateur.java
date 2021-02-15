@@ -31,7 +31,7 @@ public class FicheListDeleteUtilisateur extends JFrame implements ActionListener
 	
 	List<Utilisateur> list = new ArrayList<Utilisateur>();
 	 
-	String[] tblHead = { "IdUtilisateur", "Mail", "MotDePasse", "Statut", "IdRole" };
+	String[] tblHead = { "IdUtilisateur", "Mail", "Statut", "IdRole" };
 	 
 
 	public FicheListDeleteUtilisateur() {

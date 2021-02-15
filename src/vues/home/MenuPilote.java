@@ -18,7 +18,7 @@ public class MenuPilote extends JMenu{
 	 */
     private static final long serialVersionUID = 1L;
     
-    private JMenuItem itemReadPilote, itemAddPilote, itemListPilote, itemDeletePilote;
+    private JMenuItem itemReadPilote, itemAddPilote, itemListPilote, itemDeletePilote, itemSearchPilote;
 
     private JMenu menuPilote;
 
@@ -30,7 +30,7 @@ public class MenuPilote extends JMenu{
 
         menuPilote=new JMenu("Pilote"); 
 
-    itemReadPilote=new JMenuItem("Trouver un pilote");
+    itemReadPilote=new JMenuItem("Lister les pilotes");
     itemReadPilote.addActionListener(new ActionListener()
     {
     	public void actionPerformed(ActionEvent evt)
@@ -69,6 +69,15 @@ public class MenuPilote extends JMenu{
     	}
     });
 
-    menuPilote.add(itemReadPilote); menuPilote.add(itemAddPilote); menuPilote.add(itemListPilote); menuPilote.add(itemDeletePilote);
+    itemSearchPilote=new JMenuItem("Rechercher un pilote");
+    itemSearchPilote.addActionListener(new ActionListener()
+    {
+    	public void actionPerformed(ActionEvent evt)
+    	{
+			new FicheSearchPilote();
+    	}
+    });
+
+    menuPilote.add(itemReadPilote); menuPilote.add(itemAddPilote); menuPilote.add(itemListPilote); menuPilote.add(itemDeletePilote); menuPilote.add(itemSearchPilote);
     }     
 }

@@ -34,7 +34,7 @@ public class Home {
         System.out.println(idUser);
         Utilisateur u;
         UtilisateurDao daoU = new UtilisateurDao();
-        u = (Utilisateur) daoU.get(String.valueOf(idUser));
+        u = (Utilisateur) daoU.get(idUser);
         
         //Droit normal
         String getDroit = u.getIdRole();
@@ -46,7 +46,6 @@ public class Home {
             System.out.println(droit);
         }
         //convertion en int
-        droitInt = new int[droitArray.length];
         for (int i = 0; i < droitInt.length; i++){ 
             droitInt[i] = Integer.parseInt(droitArray[i]);  
         //Parses the integer for each string. 

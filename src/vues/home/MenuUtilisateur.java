@@ -19,7 +19,7 @@ public class MenuUtilisateur extends JMenu{
 	 */
     private static final long serialVersionUID = 1L;
     
-    private JMenuItem itemReadUtilisateur, itemAddUtilisateur, itemListUtilisateur, itemDeleteUtilisateur;
+    private JMenuItem itemReadUtilisateur, itemAddUtilisateur, itemListUtilisateur, itemDeleteUtilisateur, itemSearchUtilisateur;
 
     private JMenu menuUtilisateur;
 
@@ -31,7 +31,7 @@ public class MenuUtilisateur extends JMenu{
 
         menuUtilisateur=new JMenu("Utilisateur"); 
 
-    itemReadUtilisateur=new JMenuItem("Trouver un utilisateur");
+    itemReadUtilisateur=new JMenuItem("Lister les utilisateurs");
     itemReadUtilisateur.addActionListener(new ActionListener()
     {
     	public void actionPerformed(ActionEvent evt)
@@ -68,7 +68,16 @@ public class MenuUtilisateur extends JMenu{
     	}
     });
 
-    menuUtilisateur.add(itemReadUtilisateur); menuUtilisateur.add(itemAddUtilisateur); menuUtilisateur.add(itemListUtilisateur); menuUtilisateur.add(itemDeleteUtilisateur);
+    itemSearchUtilisateur=new JMenuItem("Rechercher un utilisateur");
+    itemSearchUtilisateur.addActionListener(new ActionListener()
+    {
+    	public void actionPerformed(ActionEvent evt)
+    	{
+            new FicheSearchUtilisateur();
+    	}
+    });
+
+    menuUtilisateur.add(itemReadUtilisateur); menuUtilisateur.add(itemAddUtilisateur); menuUtilisateur.add(itemListUtilisateur); menuUtilisateur.add(itemDeleteUtilisateur); menuUtilisateur.add(itemSearchUtilisateur);
     }
   
 }

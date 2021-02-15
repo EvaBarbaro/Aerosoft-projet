@@ -8,7 +8,6 @@ import models.Avion;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import vues.avion.FicheAjoutAvion;
 import vues.avion.*;
 
 public class MenuAvion extends JMenu {
@@ -18,7 +17,7 @@ public class MenuAvion extends JMenu {
      */
     private static final long serialVersionUID = 1L;
 
-    private JMenuItem i1, i2, i3, i4;
+    private JMenuItem i1, i2, i3, i4, i5;
 
     private JMenu menu;
 
@@ -50,16 +49,22 @@ public class MenuAvion extends JMenu {
             }
         });
 
-        i3 = new JMenuItem("Suprimer un avion");
-        i3.addActionListener(new ActionListener() {
+        i5 = new JMenuItem("Modifier les Avions");
+        i5.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 //frame.setVisible(true);
-                Avion av = new Avion();
-                new FicheSupprAvion(av);
+                new ListeModifAvion();
             }
         });
 
-        i4 = new JMenuItem("Trouver un avion");
+        i3 = new JMenuItem("Suprimer un avion");
+        i3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                new ListeSupprAvion();
+            }
+        });
+
+        i4 = new JMenuItem("Rechercher un avion");
         i4.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 //frame.setVisible(true);
@@ -70,6 +75,7 @@ public class MenuAvion extends JMenu {
 
         menu.add(i1);
         menu.add(i2);
+        menu.add(i5);
         menu.add(i3);
         menu.add(i4);
     }     

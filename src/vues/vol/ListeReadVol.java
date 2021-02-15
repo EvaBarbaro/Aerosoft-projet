@@ -1,10 +1,10 @@
-package vues.avion;
+package vues.vol;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-import dao.AvionDao;
-import models.Avion;
+import dao.VolDao;
+import models.Vol;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.ListIterator;
 
  
-public class ListeAvion extends JFrame implements ActionListener{
+public class ListeReadVol extends JFrame implements ActionListener{
 	
 	/**
 	 *
@@ -26,18 +26,18 @@ public class ListeAvion extends JFrame implements ActionListener{
 	DefaultTableModel tableModel;
 	JTable data;
 	
-	Avion av1;
-	AvionDao dao = new AvionDao();
+	Vol v1;
+	VolDao dao = new VolDao();
 	
-	List<Avion> list = new ArrayList<Avion>();
+	List<Vol> list = new ArrayList<Vol>();
 	 
-	String[] tblHead = { "Numéro avion", "Type avion", "Base aeroport" };
+	String[] tblHead = { "Id du vol", "Aeroport de depart", "Heure de depart", "Aeroport d'arrivé'", "Heure d'arrivé'" };
 	 
 
-	public ListeAvion() {
+	public ListeReadVol() {
 		
 		/* Label */
-		l1 = new JLabel("LISTE DES Avions");
+		l1 = new JLabel("LISTE DES VOLS");
 		l1.setForeground(Color.blue);
 		l1.setFont(new Font("Serif", Font.BOLD, 20));
 
@@ -66,7 +66,7 @@ public class ListeAvion extends JFrame implements ActionListener{
 		scrollPane.setLocation(50, 100);
 		getContentPane().add(scrollPane);
 
-		setTitle("LISTE DES Avions");
+		setTitle("LISTE DES AEROPORT");
 
 		setSize(639, 540);
 		getContentPane().setLayout(null);
@@ -82,24 +82,26 @@ public class ListeAvion extends JFrame implements ActionListener{
 		setVisible(true);
 	}
 
-	public void chargeData(AvionDao dao) {
+	public void chargeData(VolDao dao) {
 			
 			
-			list = (List<Avion>) dao.getAll();
+			list = (List<Vol>) dao.getAll();
 							
-			ListIterator<Avion> listIterator = ((java.util.List<Avion>) list).listIterator();
+			ListIterator<Vol> listIterator = ((java.util.List<Vol>) list).listIterator();
 			
 			tableModel.setRowCount(0);
 						
 			if (list != null) {
 
 				while(listIterator.hasNext()) {
-					av1 = listIterator.next();
+					v1 = listIterator.next();
 
 					Object[] donnees = { 
-						av1.getNumAvion(), 
-						av1.getTypeAvion(), 
-						av1.getBaseAeroport()
+						v1.getNumVol(), 
+						v1.getAeroportDepart(), 
+						v1.getHeureDepart(),
+						v1.getAeroportArrive(),
+						v1.getHeureArrive() 
 					};
 
 					tableModel.addRow(donnees);	

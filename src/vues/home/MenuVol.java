@@ -8,7 +8,6 @@ import models.Vol;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import vues.aeroport.FicheAjoutAeroport;
 import vues.vol.*;
 
 public class MenuVol extends JMenu {
@@ -18,7 +17,7 @@ public class MenuVol extends JMenu {
      */
     private static final long serialVersionUID = 1L;
 
-    private JMenuItem i1, i2, i3, i4;
+    private JMenuItem i1, i2, i3, i4, i5;
 
     private JMenu menu;
 
@@ -34,7 +33,7 @@ public class MenuVol extends JMenu {
         i1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 //frame.setVisible(true);
-                new ListeVol();
+                new ListeReadVol();
             }
         });
 
@@ -50,16 +49,21 @@ public class MenuVol extends JMenu {
             }
         });
 
-        i3 = new JMenuItem("Suprimer un vol");
-        i3.addActionListener(new ActionListener() {
+        i5 = new JMenuItem("Modifier un vol");
+        i5.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                //frame.setVisible(true);
-                Vol v = new Vol();
-                new FicheSupprVol(v);
+                new ListeVol();
             }
         });
 
-        i4 = new JMenuItem("Trouver un vol");
+        i3 = new JMenuItem("Suprimer un vol");
+        i3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                new ListeSupprVol();
+            }
+        });
+
+        i4 = new JMenuItem("Rechercher un vol");
         i4.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 //frame.setVisible(true);
@@ -70,6 +74,7 @@ public class MenuVol extends JMenu {
 
         menu.add(i1);
         menu.add(i2);
+        menu.add(i5);
         menu.add(i3);
         menu.add(i4);
     }     

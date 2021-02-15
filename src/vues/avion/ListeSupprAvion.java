@@ -1,10 +1,10 @@
-package vues.utilisateur;
+package vues.avion;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-import dao.*;
-import models.*;
+import dao.AvionDao;
+import models.Avion;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.ListIterator;
 
  
-public class FicheListUtilisateur extends JFrame implements ActionListener{
+public class ListeSupprAvion extends JFrame implements ActionListener{
 	
 	/**
 	 *
@@ -26,18 +26,18 @@ public class FicheListUtilisateur extends JFrame implements ActionListener{
 	DefaultTableModel tableModel;
 	JTable data;
 	
-	Utilisateur b1;
-	UtilisateurDao dao = new UtilisateurDao();
+	Avion av1;
+	AvionDao dao = new AvionDao();
 	
-	List<Utilisateur> list = new ArrayList<Utilisateur>();
+	List<Avion> list = new ArrayList<Avion>();
 	 
-	String[] tblHead = { "IdUtilisateur", "Mail", "Statut", "IdRole" };
+	String[] tblHead = { "Numéro avion", "Type avion", "Base aeroport" };
 	 
 
-	public FicheListUtilisateur() {
+	public ListeSupprAvion() {
 		
 		/* Label */
-		l1 = new JLabel("LISTE DES UTILISATEURS");
+		l1 = new JLabel("LISTE DES Avions");
 		l1.setForeground(Color.blue);
 		l1.setFont(new Font("Serif", Font.BOLD, 20));
 
@@ -75,14 +75,14 @@ public class FicheListUtilisateur extends JFrame implements ActionListener{
 		        	
 					int column = 0;
 					
-					// int id = Integer.parseInt(table.getModel().getValueAt(row, column).toString());
-					int id = (int) table.getModel().getValueAt(row, column);
+					//int id = Integer.parseInt(table.getModel().getValueAt(row, column).toString());
+					Object id = (Object) table.getModel().getValueAt(row, column).toString();
 										
-					b1 = (Utilisateur) dao.get(id);
+					av1 = (Avion) dao.get(id);
 
-					if (b1 != null) {
+					if (av1 != null) {
 						
-						FicheModifUtilisateur fm = new FicheModifUtilisateur(b1);
+						FicheSupprAvion fm = new FicheSupprAvion(av1);
 						
 						fm.addWindowListener(new WindowListener() {
 
@@ -140,7 +140,7 @@ public class FicheListUtilisateur extends JFrame implements ActionListener{
 		scrollPane.setLocation(50, 100);
 		getContentPane().add(scrollPane);
 
-		setTitle("LISTE DES UTILISATEURS");
+		setTitle("LISTE DES Avions");
 
 		setSize(639, 540);
 		getContentPane().setLayout(null);
@@ -156,25 +156,24 @@ public class FicheListUtilisateur extends JFrame implements ActionListener{
 		setVisible(true);
 	}
 
-	public void chargeData(UtilisateurDao dao) {
+	public void chargeData(AvionDao dao) {
 			
 			
-			list = (List<Utilisateur>) dao.getAll();
+			list = (List<Avion>) dao.getAll();
 							
-			ListIterator<Utilisateur> listIterator = ((java.util.List<Utilisateur>) list).listIterator();
+			ListIterator<Avion> listIterator = ((java.util.List<Avion>) list).listIterator();
 			
 			tableModel.setRowCount(0);
 						
 			if (list != null) {
 
 				while(listIterator.hasNext()) {
-					b1 = listIterator.next();
+					av1 = listIterator.next();
 
 					Object[] donnees = { 
-						b1.getIdUtilisateur(),
-						b1.getMail(),
-						b1.getStatut(),
-						b1.getIdRole()
+						av1.getNumAvion(), 
+						av1.getTypeAvion(), 
+						av1.getBaseAeroport()
 					};
 
 					tableModel.addRow(donnees);	
