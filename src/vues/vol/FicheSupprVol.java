@@ -23,7 +23,7 @@ public class FicheSupprVol extends JFrame {
 
 		String[] listLabels = { "Id du Vol à supprimer"};
 		
-		String[] listTextFields = {""};
+		String[] listTextFields = {"" + v.getNumVol()};
 				
 		String[] listTextBtns = { "Valider","Annuler" };
 		String[] listMethodeDoa = { "delete","" };

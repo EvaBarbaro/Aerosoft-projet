@@ -45,6 +45,7 @@ public class FicheReadPilote extends JFrame {
 		tableModel = new DefaultTableModel(tblHead, 0);
 		
 		data = new JTable(tableModel);
+		data.setEnabled(false);
 		
 		//javax.swing.JTable.setInner(5); 
 		

@@ -17,7 +17,9 @@ import javax.swing.*;
 
 
 public class Home {
+
     private int[] droitInt = new int [5];
+    private String getDroit;
 
     public int[] getDroitInt() {
         return this.droitInt;
@@ -27,30 +29,29 @@ public class Home {
         this.droitInt = droitInt;
     }
 
-
-
     public Home(int idUser) {
-		initialize();
         System.out.println(idUser);
         Utilisateur u;
         UtilisateurDao daoU = new UtilisateurDao();
         u = (Utilisateur) daoU.get(idUser);
         
         //Droit normal
-        String getDroit = u.getIdRole();
-        System.out.println(getDroit);
+        getDroit = u.getIdRole();
+        //System.out.println(getDroit);
 
         // droit en tableau
         String[] droitArray = getDroit.split("");
-        for(String droit : droitArray){
-            System.out.println(droit);
-        }
+        //for(String droit : droitArray){
+            //System.out.println(droit);
+        //}
         //convertion en int
+        this.droitInt = new int[droitArray.length];
         for (int i = 0; i < droitInt.length; i++){ 
-            droitInt[i] = Integer.parseInt(droitArray[i]);  
+            this.droitInt[i] = Integer.parseInt(droitArray[i]);
+            System.out.println(i + " : " + droitInt[0]); 
         //Parses the integer for each string. 
         }
-        System.out.println(droitInt[0]);
+        
         /*
         for(int droitI : droitInt){
             System.out.println(droitI);
@@ -65,9 +66,10 @@ public class Home {
         System.out.println(Arrays.toString(droits));
         //this.droitArray = tdroitArray;
         */
+        initialize(idUser);
 	}
     
-    public void initialize() {
+    public void initialize(int idUser) {
 
         /*Fenetre principal*/
         JFrame frame = new JFrame("Tableau de bord");
@@ -85,27 +87,44 @@ public class Home {
         mb.add(menu);
 
         /*MenuAeroport*/
-        int droit = this.droitInt[0];
-        System.out.println(droit);
+        //int droit = this.droitInt[0];
+       // System.out.println(droit);
 
-        
-        mb.add(new MenuAeroport().getMenu());
-     
+        for(int droit : droitInt){
+            System.out.println(droit);
+        }
 
-        /*MenuAffectation*/
-        mb.add(new MenuAffectation().getMenu());
+        if(this.droitInt[0] != 0){
+            mb.add(new MenuAeroport(this.droitInt[0]).getMenu());
+        }
 
         /*Menu vol*/
-        mb.add(new MenuVol().getMenu());
+        if(this.droitInt[1] != 0){
+            mb.add(new MenuVol().getMenu());
+        }
 
         /*Menu pilote*/
-        mb.add(new MenuPilote().getMenu());
+        if(this.droitInt[2] != 0){
+            mb.add(new MenuPilote().getMenu());
+        }
         
+        /*MenuAffectation*/
+        if(this.droitInt[3] != 0){
+            mb.add(new MenuAffectation().getMenu());
+        }
+
         /*Menu avion*/
-        mb.add(new MenuAvion().getMenu());
+        if(this.droitInt[4] != 0){
+            mb.add(new MenuAvion().getMenu());
+        }
 
         //MenuUtilisateur
-        mb.add(new MenuUtilisateur().getMenu());
+        if(this.getDroit.equals("55555")){
+            mb.add(new MenuUtilisateur().getMenu());
+        }
+
+        // Mon Compte
+        mb.add(new MenuMaFiche(idUser).getMenu());
 
         frame.setJMenuBar(mb);
         /*Ajout d'une image*/
@@ -127,5 +146,3 @@ public class Home {
     }    
 
 }
-
-

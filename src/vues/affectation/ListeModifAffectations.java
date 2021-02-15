@@ -1,10 +1,12 @@
-package vues.avion;
+package vues.affectation;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-import dao.AvionDao;
-import models.Avion;
+import dao.AeroportDao;
+import dao.AffectationDao;
+import models.Aeroport;
+import models.Affectation;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -14,7 +16,7 @@ import java.util.List;
 import java.util.ListIterator;
 
  
-public class ListeSupprAvion extends JFrame implements ActionListener{
+public class ListeModifAffectations extends JFrame implements ActionListener{
 	
 	/**
 	 *
@@ -26,18 +28,25 @@ public class ListeSupprAvion extends JFrame implements ActionListener{
 	DefaultTableModel tableModel;
 	JTable data;
 	
-	Avion av1;
-	AvionDao dao = new AvionDao();
+	Affectation b1;
+	AffectationDao dao = new AffectationDao();
 	
-	List<Avion> list = new ArrayList<Avion>();
+	List<Affectation> list = new ArrayList<Affectation>();
 	 
-	String[] tblHead = { "Numéro avion", "Type avion", "Base aeroport" };
+	String[] tblHead = { 
+			"IdAffectation", 
+			"NumVol", 
+			"DateVol",
+			"AffectationCode", 
+			"NumAvion", 
+			"IdPilote"  
+	};
 	 
 
-	public ListeSupprAvion() {
+	public ListeModifAffectations() {
 		
 		/* Label */
-		l1 = new JLabel("LISTE DES Avions");
+		l1 = new JLabel("LISTE DES AFFECTATIONS");
 		l1.setForeground(Color.blue);
 		l1.setFont(new Font("Serif", Font.BOLD, 20));
 
@@ -48,13 +57,9 @@ public class ListeSupprAvion extends JFrame implements ActionListener{
 
 		tableModel = new DefaultTableModel(tblHead, 0);
 		
-		data = new JTable(tableModel);
-		
-		//javax.swing.JTable.setInner(5); 
-		
+		data = new JTable(tableModel);		
 		data.setFont(new Font("Chandas", Font.BOLD, 15));
-		data.setRowHeight(25);
-		
+		data.setRowHeight(25);		
 		data.setBounds(100, 100, 450, 450);
 		
 		chargeData(dao);
@@ -78,12 +83,12 @@ public class ListeSupprAvion extends JFrame implements ActionListener{
 					//int id = Integer.parseInt(table.getModel().getValueAt(row, column).toString());
 					Object id = (Object) table.getModel().getValueAt(row, column).toString();
 										
-					av1 = (Avion) dao.get(id);
+					b1 = (Affectation) dao.get(id);
 
-					if (av1 != null) {
+					if (b1 != null) {
 						
-						FicheModifAvion fm = new FicheModifAvion(av1);
-						
+						FicheModifAffectation fm = new FicheModifAffectation(b1);
+
 						fm.addWindowListener(new WindowListener() {
 
 							@Override
@@ -93,7 +98,7 @@ public class ListeSupprAvion extends JFrame implements ActionListener{
 
 							@Override
 							public void windowClosing(WindowEvent e) {
-									
+								chargeData(dao);
 							}
 
 							@Override
@@ -140,7 +145,7 @@ public class ListeSupprAvion extends JFrame implements ActionListener{
 		scrollPane.setLocation(50, 100);
 		getContentPane().add(scrollPane);
 
-		setTitle("LISTE DES Avions");
+		setTitle("LISTE DES AFFECTATIONS");
 
 		setSize(639, 540);
 		getContentPane().setLayout(null);
@@ -156,24 +161,27 @@ public class ListeSupprAvion extends JFrame implements ActionListener{
 		setVisible(true);
 	}
 
-	public void chargeData(AvionDao dao) {
+	public void chargeData(AffectationDao dao) {
 			
 			
-			list = (List<Avion>) dao.getAll();
+			list = (List<Affectation>) dao.getAll();
 							
-			ListIterator<Avion> listIterator = ((java.util.List<Avion>) list).listIterator();
+			ListIterator<Affectation> listIterator = ((java.util.List<Affectation>) list).listIterator();
 			
 			tableModel.setRowCount(0);
 						
 			if (list != null) {
 
 				while(listIterator.hasNext()) {
-					av1 = listIterator.next();
+					b1 = listIterator.next();
 
 					Object[] donnees = { 
-						av1.getNumAvion(), 
-						av1.getTypeAvion(), 
-						av1.getBaseAeroport()
+						b1.getId(), 
+						b1.getNumVol(), 
+						b1.getDateVol(), 
+						b1.getAffectationCode(), 
+						b1.getNumAvion(), 
+						b1.getPilote().getNomPilote() 
 					};
 
 					tableModel.addRow(donnees);	
