@@ -25,7 +25,7 @@ public class FicheSupprAffectation extends JFrame {
 
 		String[] listLabels = { "Id de l'affectation à supprimer"};
 		
-		String[] listTextFields = {""};
+		String[] listTextFields = {"" + a.getId()};
 				
 		String[] listTextBtns = { "Valider","Annuler" };
 		String[] listMethodeDoa = { "delete","" };

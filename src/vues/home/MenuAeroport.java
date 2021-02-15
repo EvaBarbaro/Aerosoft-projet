@@ -17,7 +17,7 @@ public class MenuAeroport extends JMenu{
 	 */
     private static final long serialVersionUID = 1L;
     
-    private JMenuItem i1, i2, i3, i4;
+    private JMenuItem i1, i2, i3, i4, i5;
 
     private JMenu menu;
 
@@ -49,12 +49,18 @@ public class MenuAeroport extends JMenu{
             }
         });
 
+        i5 = new JMenuItem("Modifier un aeroport");
+        i5.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                //frame.setVisible(true);
+                new ListeModifAeroports();
+            }
+        });
+
         i3 = new JMenuItem("Suprimer un aeroport");
         i3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                //frame.setVisible(true);
-                Aeroport ae = new Aeroport();
-                new FicheSupprAeroport(ae);
+                new ListeSupprAeroports();
             }
         });
 
@@ -69,6 +75,7 @@ public class MenuAeroport extends JMenu{
 
         menu.add(i1);
         menu.add(i2);
+        menu.add(i5);
         menu.add(i3);
         menu.add(i4);
     }     

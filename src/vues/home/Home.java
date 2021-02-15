@@ -30,7 +30,7 @@ public class Home {
 
 
     public Home(int idUser) {
-		initialize();
+		initialize(idUser);
         System.out.println(idUser);
         Utilisateur u;
         UtilisateurDao daoU = new UtilisateurDao();
@@ -67,7 +67,7 @@ public class Home {
         */
 	}
     
-    public void initialize() {
+    public void initialize(int idUser) {
 
         /*Fenetre principal*/
         JFrame frame = new JFrame("Tableau de bord");
@@ -104,8 +104,11 @@ public class Home {
         /*Menu avion*/
         mb.add(new MenuAvion().getMenu());
 
-        //MenuUtilisateur
+        //Menu Utilisateur
         mb.add(new MenuUtilisateur().getMenu());
+
+        // Mon Compte
+        mb.add(new MenuMaFiche(idUser).getMenu());
 
         frame.setJMenuBar(mb);
         /*Ajout d'une image*/

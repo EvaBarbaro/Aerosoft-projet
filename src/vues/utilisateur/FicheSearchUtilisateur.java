@@ -62,6 +62,7 @@ public class FicheSearchUtilisateur extends JFrame implements ActionListener {
 		tableModel = new DefaultTableModel(tblHead, 0);
 
 		data = new JTable(tableModel);
+		data.setEnabled(false);
 
 		//javax.swing.JTable.setInner(5); 
 
