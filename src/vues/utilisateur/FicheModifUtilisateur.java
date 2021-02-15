@@ -34,7 +34,7 @@ public class FicheModifUtilisateur extends JFrame {
 
 		int i = 0;
 		for (Role r : listeRoles) {
-			jComboBoxTitles[i] = r.getRoleNom();
+			jComboBoxTitles[i] = r.getIdRole()/*+ " | " +  r.getRoleNom()*/;
 			i++;
 		}
 				

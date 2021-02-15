@@ -4,7 +4,7 @@ package vues.utilisateur;
 import java.awt.Component;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.swing.DefaultListCellRenderer;
@@ -12,14 +12,13 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.SwingUtilities;
 
 import dao.RoleDao;
 import models.Role;
 
 public class ComboRole {
 
-    private List<Role> countries;
+    private List<Role> Roles;
     private JComboBox cBox;
 
     RoleDao roleDao;
@@ -28,8 +27,8 @@ public class ComboRole {
 
         roleDao = new RoleDao();
 
-        countries = new RoleDao().getAll();
-        cBox = createComboBox(countries);
+        Roles = new RoleDao().getAll();
+        cBox = createComboBox(Roles);
 
         JFrame frame = new JFrame();
         frame.add(cBox);
