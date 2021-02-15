@@ -65,8 +65,6 @@ public class MenuPilote extends JMenu{
     {
     	public void actionPerformed(ActionEvent evt)
     	{
-            // Pilote pilote = new Pilote();
-			// new FicheDeletePilote(pilote);
 			new FicheListDeletePilot();
     	}
     });
