@@ -24,10 +24,11 @@ public class FicheDeletePilote extends JFrame {
 	 * Create the frame.
 	 */
 	public FicheDeletePilote(Pilote pilote) {
+		System.out.println(pilote);
 
 		String[] listLabels = { "Id de l'aeroport à supprimer"};
 		
-		String[] listTextFields = {String.valueOf(pilote.getIdPilote())};
+		String[] listTextFields = {"" + pilote.getIdPilote()};
 				
 		String[] listTextBtns = { "Valider","Annuler" };
 		String[] listMethodeDoa = { "delete","" };
@@ -45,7 +46,7 @@ public class FicheDeletePilote extends JFrame {
 		
 		String[] listLabelUser = { "Id de l'utilisateur à supprimer"};
 
-		String[] listTextFieldUser = {String.valueOf(pilote.getIdPilote())};
+		String[] listTextFieldUser = {"" + pilote.getIdPilote()};
 			
 		String[] listTextBtnUser = { "Valider","Annuler" };
 		String[] listMethodeDoaUser = { "delete","" };

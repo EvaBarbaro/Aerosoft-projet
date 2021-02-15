@@ -141,13 +141,15 @@ public class PiloteDao implements Dao {
 	@Override
 	public void delete(Object t) {
 		Pilote pilote = (Pilote) t;
-
+		System.out.println("dao delete pilote : " + pilote);
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		try {
 			conn = ConnectionBdd.getConnection();
 			stmt = conn.prepareStatement("DELETE FROM `PILOTE` WHERE `IdPilote`=?", Statement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1, pilote.getIdPilote());
+			System.out.println("dao delete stmt : " + stmt);		
+			
 			stmt.execute();
 			
 			System.out.println(pilote.getMatricule() + " a bien été Supprimé");
