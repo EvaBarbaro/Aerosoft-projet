@@ -178,11 +178,7 @@ public class Fiche extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 
-<<<<<<< HEAD
 				if (oldValue_1 != null
-=======
-				if ((oldValue_1 != null)
->>>>>>> 393d1ba397d31bb751249ec95924a808ab6cbc87
 						|| (oldValue_2 != null && !(oldValue_2.equals(textField_2.getText())))
 						|| (oldValue_3 != null && !(oldValue_3.equals(textField_3.getText())))
 						|| (oldValue_4 != null && !(oldValue_4.equals(textField_4.getText())))

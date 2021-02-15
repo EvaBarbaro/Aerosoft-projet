@@ -63,7 +63,7 @@ public class FicheAffectation extends JFrame {
 	
 	//private DetailedComboBox jComboBoxList;
 	private JComboBox jComboBox;
-	private JCheckBox AffectationCode = new JCheckBox();
+	private JCheckBox affectationCode = new JCheckBox();
 
 	private String oldValue_1;
 	private String oldValue_2;
@@ -153,7 +153,7 @@ public class FicheAffectation extends JFrame {
 			textField_4.setColumns(10);
 			textField_4.setText(listTextFields[3]);*/
 	
-			AffectationCode.setSelected(Boolean.parseBoolean(listTextFields[3]));
+			affectationCode.setSelected(Boolean.parseBoolean(listTextFields[3]));
 			oldValue_4 = listTextFields[3];
 		}
 
@@ -195,7 +195,7 @@ public class FicheAffectation extends JFrame {
 				if (!(oldValue_1.equals(textField_1.getText()))
 						|| (oldValue_2 != null && !(oldValue_2.equals(textField_2.getText())))
 						|| (oldValue_3 != null && !(oldValue_3.equals(textField_3.getText())))
-						|| (oldValue_4 != null && !(oldValue_4.equals(AffectationCode.getText())))
+						|| (oldValue_4 != null && !(oldValue_4.equals(affectationCode.getText())))
 						|| (oldValue_5 != null && !(oldValue_5.equals(textField_5.getText()))) 
 						|| (oldValue_6 != null && !(oldValue_6.equals(jComboBox.getSelectedItem())))) {
 			
@@ -213,7 +213,7 @@ public class FicheAffectation extends JFrame {
 					} 
 			
 					if (listLabels.length >= 4) {
-						params[3] = ""+ AffectationCode.isSelected();						
+						params[3] = ""+ affectationCode.isSelected();						
 					} 
 			
 					if (listLabels.length >= 5) {
@@ -279,7 +279,7 @@ public class FicheAffectation extends JFrame {
 							.addPreferredGap(ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
 								.addComponent(textField_5, Alignment.TRAILING)
-								.addComponent(AffectationCode, Alignment.TRAILING)
+								.addComponent(affectationCode, Alignment.TRAILING)
 								.addComponent(textField_3)
 								.addComponent(textField_2)
 								.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
@@ -309,7 +309,7 @@ public class FicheAffectation extends JFrame {
 							.addGap(18)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addComponent(lblNewLabel_4)
-								.addComponent(AffectationCode, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+								.addComponent(affectationCode, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 						.addComponent(lblNewID))
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -341,9 +341,9 @@ public class FicheAffectation extends JFrame {
 		}
 
 		if (listTextFields.length >= 4) {
-			AffectationCode.setVisible(true);
+			affectationCode.setVisible(true);
 		} else {
-			AffectationCode.setVisible(false);
+			affectationCode.setVisible(false);
 		}
 
 		if (listTextFields.length >= 5) {
