@@ -49,6 +49,9 @@ public class Home {
         /*MenuAffectation*/
         mb.add(new MenuPilote().getMenu()); 
 
+        //MenuUtilisateur
+        mb.add(new MenuUtilisateur().getMenu());
+
         frame.setJMenuBar(mb);
         /*Ajout d'une image*/
         ImageIcon icon = new ImageIcon(
