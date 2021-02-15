@@ -1,24 +1,20 @@
-package vues.avion;
+package vues.utilisateur;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-import dao.AvionDao;
-import models.Avion;
+import dao.*;
+import models.*;
 
 import java.awt.*;
-import java.awt.event.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
  
-public class ListeAvion extends JFrame implements ActionListener{
+public class FicheReadUtilisateur extends JFrame {
 	
-	/**
-	 *
-	 */
 	private static final long serialVersionUID = 1L;
 
 	JLabel l1;
@@ -26,18 +22,18 @@ public class ListeAvion extends JFrame implements ActionListener{
 	DefaultTableModel tableModel;
 	JTable data;
 	
-	Avion av1;
-	AvionDao dao = new AvionDao();
+	Utilisateur b1;
+	UtilisateurDao dao = new UtilisateurDao();
 	
-	List<Avion> list = new ArrayList<Avion>();
+	List<Utilisateur> list = new ArrayList<Utilisateur>();
 	 
-	String[] tblHead = { "Numéro avion", "Type avion", "Base aeroport" };
+	String[] tblHead = { "IdUtilisateur", "Mail" };
 	 
 
-	public ListeAvion() {
+	public FicheReadUtilisateur() {
 		
 		/* Label */
-		l1 = new JLabel("LISTE DES Avions");
+		l1 = new JLabel("LISTE DES UTILISATEURS");
 		l1.setForeground(Color.blue);
 		l1.setFont(new Font("Serif", Font.BOLD, 20));
 
@@ -66,7 +62,7 @@ public class ListeAvion extends JFrame implements ActionListener{
 		scrollPane.setLocation(50, 100);
 		getContentPane().add(scrollPane);
 
-		setTitle("LISTE DES Avions");
+		setTitle("LISTE DES PILOTES");
 
 		setSize(639, 540);
 		getContentPane().setLayout(null);
@@ -82,24 +78,23 @@ public class ListeAvion extends JFrame implements ActionListener{
 		setVisible(true);
 	}
 
-	public void chargeData(AvionDao dao) {
+	public void chargeData(UtilisateurDao dao) {
 			
 			
-			list = (List<Avion>) dao.getAll();
+			list = (List<Utilisateur>) dao.getAll();
 							
-			ListIterator<Avion> listIterator = ((java.util.List<Avion>) list).listIterator();
+			ListIterator<Utilisateur> listIterator = ((java.util.List<Utilisateur>) list).listIterator();
 			
 			tableModel.setRowCount(0);
 						
 			if (list != null) {
 
 				while(listIterator.hasNext()) {
-					av1 = listIterator.next();
+					b1 = listIterator.next();
 
 					Object[] donnees = { 
-						av1.getNumAvion(), 
-						av1.getTypeAvion(), 
-						av1.getBaseAeroport()
+						b1.getIdUtilisateur(), 
+						b1.getMail()
 					};
 
 					tableModel.addRow(donnees);	
@@ -110,11 +105,5 @@ public class ListeAvion extends JFrame implements ActionListener{
 				data.repaint();
 			}
 		}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 }

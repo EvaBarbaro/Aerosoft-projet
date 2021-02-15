@@ -16,7 +16,7 @@ public class UtilisateurDao implements Dao {
 
 	public Object get(Object idOjb) {
 
-		String id = (String) idOjb;
+		int id = (int) idOjb;
 		Utilisateur utilisateur = null;
 
 		Connection conn = null;
@@ -156,6 +156,7 @@ public class UtilisateurDao implements Dao {
 			conn = ConnectionBdd.getConnection();
 			stmt = conn.prepareStatement("DELETE FROM `UTILISATEUR` WHERE `IdUtilisateur`=?", Statement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1, utilisateur.getIdUtilisateur());
+			System.out.println(stmt);
 			stmt.execute();
 			
 			System.out.println(utilisateur.getIdUtilisateur() + " a bien été Supprimé");

@@ -17,12 +17,56 @@ import javax.swing.*;
 
 
 public class Home {
+    private int[] droitInt = new int [5];
+
+    public int[] getDroitInt() {
+        return this.droitInt;
+    }
+
+    public void setDroitInt(int[] droitInt) {
+        this.droitInt = droitInt;
+    }
+
+
 
     public Home(int idUser) {
 		initialize();
         System.out.println(idUser);
+        Utilisateur u;
+        UtilisateurDao daoU = new UtilisateurDao();
+        u = (Utilisateur) daoU.get(idUser);
+        
+        //Droit normal
+        String getDroit = u.getIdRole();
+        System.out.println(getDroit);
+
+        // droit en tableau
+        String[] droitArray = getDroit.split("");
+        for(String droit : droitArray){
+            System.out.println(droit);
+        }
+        //convertion en int
+        for (int i = 0; i < droitInt.length; i++){ 
+            droitInt[i] = Integer.parseInt(droitArray[i]);  
+        //Parses the integer for each string. 
+        }
+        System.out.println(droitInt[0]);
+        /*
+        for(int droitI : droitInt){
+            System.out.println(droitI);
+        }*/
+        /*
+        int i =0;
+        for (String droit : droitArray) {
+            System.out.println(droit);
+            droits[0] = Integer.parseInt(droitArray[i]);
+            i++;
+        }
+        System.out.println(Arrays.toString(droits));
+        //this.droitArray = tdroitArray;
+        */
 	}
-	
+    
     public void initialize() {
 
         /*Fenetre principal*/
@@ -40,14 +84,28 @@ public class Home {
 
         mb.add(menu);
 
-        /*MenuAeroport*/                  
+        /*MenuAeroport*/
+        int droit = this.droitInt[0];
+        System.out.println(droit);
+
+        
         mb.add(new MenuAeroport().getMenu());
+     
 
         /*MenuAffectation*/
         mb.add(new MenuAffectation().getMenu());
 
-        /*MenuAffectation*/
-        mb.add(new MenuPilote().getMenu()); 
+        /*Menu vol*/
+        mb.add(new MenuVol().getMenu());
+
+        /*Menu pilote*/
+        mb.add(new MenuPilote().getMenu());
+        
+        /*Menu avion*/
+        mb.add(new MenuAvion().getMenu());
+
+        //MenuUtilisateur
+        mb.add(new MenuUtilisateur().getMenu());
 
         frame.setJMenuBar(mb);
         /*Ajout d'une image*/
