@@ -140,7 +140,7 @@ public class FicheListUtilisateur extends JFrame implements ActionListener{
 		scrollPane.setLocation(50, 100);
 		getContentPane().add(scrollPane);
 
-		setTitle("LISTE DES PILOTES");
+		setTitle("LISTE DES UTILISATEURS");
 
 		setSize(639, 540);
 		getContentPane().setLayout(null);

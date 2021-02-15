@@ -64,11 +64,13 @@ public class MenuUtilisateur extends JMenu{
     {
     	public void actionPerformed(ActionEvent evt)
     	{
-    		
-			new FicheListDeleteUtilisateur();
+    		Utilisateur utilisateur = new Utilisateur();
+			new FicheDeleteUtilisateur(utilisateur);
+            // new FicheListDeleteUtilisateur();
     	}
     });
 
     menuUtilisateur.add(itemReadUtilisateur); menuUtilisateur.add(itemAddUtilisateur); menuUtilisateur.add(itemListUtilisateur); menuUtilisateur.add(itemDeleteUtilisateur);
-    }     
+    }
+  
 }

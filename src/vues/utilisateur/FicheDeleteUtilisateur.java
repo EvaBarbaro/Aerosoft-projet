@@ -14,9 +14,7 @@ public class FicheDeleteUtilisateur extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	UtilisateurDao utilisateurDao;
-
-    Utilisateur utilisateur = new Utilisateur();
+	UtilisateurDao utilisateurDao = new UtilisateurDao();
 
 	/**
 	 * Create the frame.
@@ -25,7 +23,7 @@ public class FicheDeleteUtilisateur extends JFrame {
 
 		String[] listLabels = { "Id de l'aeroport à supprimer"};
 		
-		String[] listTextFields = {String.valueOf(utilisateur.getIdUtilisateur())};
+		String[] listTextFields = {""};
 				
 		String[] listTextBtns = { "Valider","Annuler" };
 		String[] listMethodeDoa = { "delete","" };
