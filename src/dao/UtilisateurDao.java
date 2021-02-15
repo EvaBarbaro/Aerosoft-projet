@@ -16,7 +16,7 @@ public class UtilisateurDao implements Dao {
 
 	public Object get(Object idOjb) {
 
-		String id = (String) idOjb;
+		int id = (int) idOjb;
 		Utilisateur utilisateur = null;
 
 		Connection conn = null;
