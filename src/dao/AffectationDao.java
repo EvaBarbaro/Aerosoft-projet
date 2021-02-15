@@ -56,11 +56,10 @@ public class AffectationDao implements Dao {
 				pilote.setIdPilote(res.getInt(6));
 				pilote.setPrenomPilote(res.getString(7));
 				pilote.setNomPilote(res.getString(8));
-			
 
 				affectation.setPilote(pilote);
 			}
-			
+		
 			res.close();
 			conn.close();
 
@@ -135,24 +134,25 @@ public class AffectationDao implements Dao {
 
 			Connection conn = null;
 			PreparedStatement stmt = null;
-			PreparedStatement stmt1 = null;
-			String sql = "INSERT INTO `AFFECTATION` (NumVol,DateVol,AffectationCode,NumAvion,IdPilote) VALUES (?,?,?,?,?)";
+
+			String sql = "INSERT INTO `AFFECTATION` (IdAffectation,NumVol,DateVol,AffectationCode,NumAvion,IdPilote) VALUES (?,?,?,?,?,?)";
 		try {
 			conn = ConnectionBdd.getConnection();
 			stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			stmt.setString(1,params[0]);
-			stmt.setDate(2,Date.valueOf(params[2]));
-			stmt.setBoolean(3, Boolean.parseBoolean(params[3]));
-			stmt.setInt(4, Integer.parseInt(params[4]));
-			stmt.setInt(5, pda.getIdByName(params[5]));
-			System.out.println("params[5]) : " + params[5]);
+			stmt.setString(1, params[1] + params[2]);
+			stmt.setString(2, params[1]);
+			stmt.setDate(3, Date.valueOf(params[2]));
+			stmt.setBoolean(4, Boolean.parseBoolean(params[3]));
+			stmt.setInt(5, Integer.parseInt(params[4]));
+			stmt.setInt(6, pda.getIdByName(params[5]));
+
 			stmt.execute();
 
-			stmt1 = conn.prepareStatement("UPDATE `AFFECTATION` SET IdAffectation=CONCAT(NumVol, DateVol)");
-			stmt1.executeUpdate();
+			/*stmt1 = conn.prepareStatement("UPDATE `AFFECTATION` SET IdAffectation=CONCAT(NumVol, DateVol)");
+			stmt1.executeUpdate();*/
 			
-			System.out.println(affectation.getNumVol()+ " a bien été ajouté");
-			new SDialog("Ajout", "Ajouter reussie", "Valider", "").setVisible(true);
+			System.out.println("L'affectation à bien été ajouté");
+			new SDialog("Ajout", "L'ajout de l'affectation à reussie", "Valider", "").setVisible(true);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -167,17 +167,22 @@ public class AffectationDao implements Dao {
 		
 		Affectation affectation = (Affectation) t;
 
+		PiloteDao pda = new PiloteDao();
+
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		String sql = "UPDATE `AFFECTATION` SET NumVol=?, DateVol=?, NumAvion=?, IdPilote=? WHERE IdAffectation=?";
+		String sql = "UPDATE `AFFECTATION` SET NumVol=?, DateVol=?,AffectationCode=? , NumAvion=?, IdPilote=? WHERE IdAffectation=?";
 		try {
 			conn = ConnectionBdd.getConnection();
 			stmt = conn.prepareStatement(sql);
+
 			stmt.setString(1, params[1]);
-			stmt.setString(2, params[2]);
-			stmt.setString(3, params[3]);
-			stmt.setString(4, params[4]);
-			stmt.setString(5, affectation.getId());
+			stmt.setDate(2, Date.valueOf(params[2]));
+			stmt.setBoolean(3, Boolean.parseBoolean(params[3]));
+			stmt.setInt(4, Integer.parseInt(params[4]));
+			stmt.setInt(5, pda.getIdByName(params[5]));
+			stmt.setString(6, params[0]);
+
 			stmt.executeUpdate();
 
 			new SDialog("Modification", "Modification reussie", "Valider", "").setVisible(true);

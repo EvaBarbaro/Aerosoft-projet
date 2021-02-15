@@ -178,7 +178,7 @@ public class Fiche extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 
-				if (!(oldValue_1.equals(textField_1.getText()))
+				if (oldValue_1 != null
 						|| (oldValue_2 != null && !(oldValue_2.equals(textField_2.getText())))
 						|| (oldValue_3 != null && !(oldValue_3.equals(textField_3.getText())))
 						|| (oldValue_4 != null && !(oldValue_4.equals(textField_4.getText())))
@@ -370,6 +370,7 @@ public class Fiche extends JFrame {
 				break;
 
 			case "delete":
+
 				dao.delete(transport);
 				break;
 

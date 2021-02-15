@@ -53,8 +53,9 @@ public class MenuAeroport extends JMenu{
         i3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 //frame.setVisible(true);
-                Aeroport ae = new Aeroport();
-                new FicheSupprAeroport(ae);
+                //Aeroport ae = new Aeroport();
+                
+                new ListeDeleteAeroports();
             }
         });
 

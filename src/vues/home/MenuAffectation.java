@@ -53,9 +53,8 @@ public class MenuAffectation extends JMenu{
         i3 = new JMenuItem("Supprimer une affectation");
         i3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-         
-                Affectation ae = new Affectation();
-                new FicheSupprAffectation(ae);
+                         
+                new ListeDeleteAffectations();
             }
         });
 

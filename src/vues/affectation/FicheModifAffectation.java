@@ -4,13 +4,12 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
-import dao.AeroportDao;
 import dao.AffectationDao;
 import dao.PiloteDao;
-import models.Aeroport;
+
 import models.Affectation;
 import models.Pilote;
-import vues.Fiche;
+
 import vues.FicheAffectation;
 
 
@@ -35,7 +34,7 @@ public class FicheModifAffectation extends JFrame {
 				a.getNumVol(), 
 				a.getDateVol().toString(),
 				a.getAffectationCode().toString(), 
-				"" + a.getNumAvion(), 
+				"" + a.getNumAvion(),
 				a.getPilote().getNomPilote() 
 		};
 				
@@ -45,10 +44,16 @@ public class FicheModifAffectation extends JFrame {
 
 		ArrayList<Pilote> listePilotes = new PiloteDao().getAll();
 
-		String [] jComboBoxTitles =(String []) listePilotes.toArray();
+				String[] jComboBoxTitles = new String[listePilotes.size()];
+
+		int i = 0;
+		for (Pilote p : listePilotes) {
+			jComboBoxTitles[i] = p.getNomPilote();
+			i++;
+		}
 
 		new FicheAffectation(
-				"Ajout d'une affectation", 
+				"Modification d'une affectation", 
 				bdao, 
 				(Object)a, 
 				listLabels, 

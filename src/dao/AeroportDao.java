@@ -133,8 +133,9 @@ public class AeroportDao implements Dao{
 	}
 
 	@Override
-	public void delete(Object t) {
+	public void delete(Object t) {	
 		Aeroport aeroport = (Aeroport) t;
+		System.out.println("delete aeroport : " + aeroport.getNomAeroport());
 
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -143,6 +144,7 @@ public class AeroportDao implements Dao{
 			conn = ConnectionBdd.getConnection();
 			stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, aeroport.getIdAeroport());
+			System.out.println("delete stmt : " + stmt);
 			stmt.execute();
 			
 			System.out.println(aeroport.getIdAeroport() + " a bien �t� supprim�");

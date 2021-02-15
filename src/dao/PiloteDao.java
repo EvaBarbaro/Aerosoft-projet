@@ -11,7 +11,7 @@ import interfaces.*;
 public class PiloteDao implements Dao {
 
 	public PiloteDao() {
-	};
+	}
 
 	@Override
 	public Object get(Object idObj) {
@@ -170,25 +170,28 @@ public class PiloteDao implements Dao {
 	}
 
 	public int getIdByName(String name) {
+		System.out.println("getIdByName name : " + name);
 
 		int IdPiloteToReturn=0;
 		
 		Connection conn = null;
 		PreparedStatement stmt = null;
 
-		String sql = "SELECT `IdPilote` FROM `pilote` WHERE `NomPilote` LIKE '?' ";
+		String sql = "SELECT `IdPilote` FROM `PILOTE` WHERE `NomPilote` LIKE '" + name + "'";
 
 		try {
 			conn = (Connection) ConnectionBdd.getConnection();
 			stmt = (PreparedStatement) conn.prepareStatement(sql);
-			ResultSet res = stmt.executeQuery(sql);
+			System.out.println("getIdByName stmt : " + stmt);
+			ResultSet res = stmt.executeQuery();
 			
-			IdPiloteToReturn = res.getInt("IdPilote");
-
+			while (res.next()) {
+				IdPiloteToReturn = res.getInt("IdPilote");
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			new SDialog("Echec", "La suppresssion n'a pas reussie car " + e, "ok", "").setVisible(true);
+			new SDialog("Echec", "La selection du pilote n'a pas reussie car " + e, "ok", "").setVisible(true);
 			throw new RuntimeException(e);
 		}
 
@@ -200,9 +203,6 @@ public class PiloteDao implements Dao {
 			throw new RuntimeException(e);
 		}
 		return IdPiloteToReturn;
-	}
-
-	public class getIdByName {
 	}
 
 }
