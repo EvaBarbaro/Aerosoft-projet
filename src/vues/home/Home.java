@@ -17,14 +17,17 @@ import javax.swing.*;
 
 
 public class Home {
-
+    //Creer le tableau qui va recevoir les elements convertis
     private int[] droitInt = new int [5];
+
+    //Creer la variable qui va recevoir le droit depuis la fonction get()
     private String getDroit;
 
+    // getter
     public int[] getDroitInt() {
         return this.droitInt;
     }
-
+    //setter
     public void setDroitInt(int[] droitInt) {
         this.droitInt = droitInt;
     }
@@ -35,23 +38,22 @@ public class Home {
         UtilisateurDao daoU = new UtilisateurDao();
         u = (Utilisateur) daoU.get(idUser);
         
-        //Droit normal
+        //Recuperation du droit depuis la base via la fonction get() : "55555"
         getDroit = u.getIdRole();
         //System.out.println(getDroit);
 
-        // droit en tableau
+        //Split le droit en un tableau : String{"5","5","5","5","5"}
         String[] droitArray = getDroit.split("");
         //for(String droit : droitArray){
             //System.out.println(droit);
         //}
 
-        //convertion en int
+        //Conversion des elements du tableau en int en les ajoutant à un nouveau tableau : int{5,5,5,5,5}
         this.droitInt = new int[droitArray.length];
         for (int i = 0; i < droitInt.length; i++){ 
             this.droitInt[i] = Integer.parseInt(droitArray[i]);
             //System.out.println(i + " : " + droitInt[0]); 
         }
-        //this.droitArray = tdroitArray;
         initialize(idUser);
 	}
     
@@ -72,9 +74,14 @@ public class Home {
 
         mb.add(menu);
 
+        /*
+        On autorise les utilisateurs à acceder aux elements du menu par rapport a leurs droits.
+        Chaque indice du tableau droitInt correspond à un module 0 = pas d'acces
+        */
+
         /*MenuAeroport*/
-        
         if(this.droitInt[0] != 0){
+            //On passe en paramètre le droit à lindice du module pour afficher les composant du menu ou pas  
             mb.add(new MenuAeroport(this.droitInt[0]).getMenu());
         }
 

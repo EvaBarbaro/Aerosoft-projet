@@ -3,7 +3,6 @@ package vues.home;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
-
 import models.Pilote;
 
 import java.awt.event.ActionEvent;
@@ -18,6 +17,7 @@ public class MenuPilote extends JMenu{
 	 */
     private static final long serialVersionUID = 1L;
 
+    //Creation de la variable droit qui va recevoir le code droits du module actuel
     private int droit = 0;
     
     private JMenuItem itemReadPilote, itemAddPilote, itemModifPilote, itemDeletePilote, itemSearchPilote;
@@ -29,10 +29,11 @@ public class MenuPilote extends JMenu{
     }
 
     public MenuPilote(int droitInt) {
+        //Affectation du droit recuperer en paramètre dans la variable droit
         this.droit = droitInt;
 
         menuPilote=new JMenu("Pilote"); 
-
+        //Selon le niveau de droits les modules s'affichent
         if(droit >=1){
             itemReadPilote=new JMenuItem("Lister les pilotes");
             itemReadPilote.addActionListener(new ActionListener()
