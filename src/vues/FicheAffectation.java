@@ -25,8 +25,6 @@ import javax.swing.JComboBox;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
-
-//import java.util.concurrent.Callable;
 import java.awt.event.ActionEvent;
 
 public class FicheAffectation extends JFrame {

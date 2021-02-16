@@ -61,49 +61,21 @@ public class TableRole extends JFrame implements TableModelListener{
         });
                 
         DefaultCellEditor dce1 = new DefaultCellEditor(comboBox1);
-        
-        /*comboBox1.addActionListener(new ActionListener() {
-	
-		  @Override
-		  public void actionPerformed(ActionEvent e) {
-				String idRole = (String) comboBox1.getSelectedItem();
-				valeurRetourjComboBox = map.get(idRole);				
-		  }
-		});*/
-     
-        /*String[] items2 = { "Circle", "Square", "Triangle" };
-        JComboBox comboBox2 = new JComboBox( items2 );
-        DefaultCellEditor dce2 = new DefaultCellEditor( comboBox2 );
-        editors.add( dce2 );
- 
-        String[] items3 = { "Apple", "Orange", "Banana" };
-        JComboBox comboBox3 = new JComboBox( items3 );
-        DefaultCellEditor dce3 = new DefaultCellEditor( comboBox3 );
-        editors.add( dce3 );*/
- 
-        //  Create the table with default data
-        
-        
-
+          
         int i = 0;
         Object[][] data = new Object[listeRoles.size()][6];
         for (Role r : listeRoles) {
             editors.add(dce1);
             data[i][0] = r.getRoleNom();
-            for(int j=0; j <5 ; j++)        {
-            //La méthode charAt trouve la position et convert en char.
-            char charVar = r.getIdRole().charAt(j);
-            data[i][j + 1] = charVar;
+            for (int j = 0; j < 5; j++) {
+                //La méthode charAt trouve la position et convert en char.
+                char charVar = r.getIdRole().charAt(j);
+                data[i][j + 1] = charVar;
 
             }
-            i++;                 
+            i++;
         }
-        /*{
-            {"Color", "Red"},
-            {"Shape", "Square"},
-            {"Fruit", "Banana"},
-            {"Plain", "Text"}
-        };*/
+        
         String[] columnNames = {"Role","read","update","Create","Delete","all"};
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
 
@@ -147,17 +119,13 @@ public class TableRole extends JFrame implements TableModelListener{
 		        if (table.getSelectedRow() != -1) {
 		        	
 					int column = 0;
-					
-					//int id = Integer.parseInt(table.getModel().getValueAt(row, column).toString());
-                    			
-					
 		        }
 		    }
 		});
 
         JScrollPane scrollPane = new JScrollPane(table);        
         getContentPane().add( scrollPane );
-//      table.getColumnModel().getColumn(1).setCellRenderer(new ComboBoxRenderer() );
+
     }
   
     class ComboBoxRenderer extends JComboBox implements TableCellRenderer {
@@ -169,7 +137,7 @@ public class TableRole extends JFrame implements TableModelListener{
 
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
                 int row, int column) {
-            //          setFocusable(false);
+
             removeAllItems();
             addItem(value);
             return this;
@@ -190,16 +158,14 @@ public class TableRole extends JFrame implements TableModelListener{
         System.out.println("Role r :" + r.getRoleNom());
         System.out.println("Role r :" + r.getRoleNom());
 
-        String newIdRole = (String) getCellEditorValue(row);/* +
+        String newIdRole =  table.getModel().getValueAt(row, 1).toString()+
                             table.getModel().getValueAt(row, 2).toString() +
                             table.getModel().getValueAt(row, 3).toString() +
                             table.getModel().getValueAt(row, 4).toString() +
-                            table.getModel().getValueAt(row, 5).toString()*/; 
+                            table.getModel().getValueAt(row, 5).toString(); 
         System.out.println("newIdRole :" + newIdRole);
         if (r != null) {
-            
-            //Role r = (Role) rd.get(id);			
-
+    
         }	
 		
 	}  

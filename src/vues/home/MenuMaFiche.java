@@ -3,11 +3,8 @@ package vues.home;
 import javax.swing.*;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.event.*;
 import java.awt.Font;
 import java.awt.Color;
-import java.sql.*;
-import java.util.*;
 
 import dao.PiloteDao;
 import dao.UtilisateurDao;
