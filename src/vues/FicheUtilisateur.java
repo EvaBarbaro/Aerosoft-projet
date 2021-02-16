@@ -8,15 +8,11 @@ import javax.swing.border.EmptyBorder;
 
 import dao.RoleDao;
 import interfaces.Dao;
-import models.Role;
-import vues.utilisateur.TableRole;
 
-import javax.swing.DefaultListCellRenderer;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
-import javax.swing.JList;
 
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -31,7 +27,6 @@ import javax.swing.JComboBox;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemListener;
 import java.util.Map;
 //import java.util.concurrent.Callable;
 import java.awt.event.ActionEvent;
