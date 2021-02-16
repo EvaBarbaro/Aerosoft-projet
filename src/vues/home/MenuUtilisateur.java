@@ -91,7 +91,7 @@ public class MenuUtilisateur extends JMenu{
     	}
     });
 
-    menuUtilisateur.add(itemReadUtilisateur); menuUtilisateur.add(itemAddUtilisateur); menuUtilisateur.add(itemListUtilisateur); menuUtilisateur.add(itemDeleteUtilisateur); menuUtilisateur.add(itemSearchUtilisateur);menuUtilisateur.add(itemAddRole);
+    menuUtilisateur.add(itemAddRole);
     }
   
 }

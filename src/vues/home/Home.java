@@ -68,18 +68,12 @@ public class Home {
 
         JMenuBar mb = new JMenuBar();
         /* Menu 1*/
-        menu = new JMenu("Accueil");
+        menu = new JMenu("Aerosoft");
 
         mb.add(menu);
 
         /*MenuAeroport*/
-        //int droit = this.droitInt[0];
-       // System.out.println(droit);
-        /*
-        for(int droitListe : droitInt){
-            System.out.println(droitListe);
-        }
-        */
+        
         if(this.droitInt[0] != 0){
             mb.add(new MenuAeroport(this.droitInt[0]).getMenu());
         }
