@@ -151,7 +151,7 @@ public class AffectationDao implements Dao {
 			/*stmt1 = conn.prepareStatement("UPDATE `AFFECTATION` SET IdAffectation=CONCAT(NumVol, DateVol)");
 			stmt1.executeUpdate();*/
 			
-			System.out.println("L'affectation à bien été ajouté");
+			System.out.println(affectation.getId() + "L'affectation à bien été ajouté");
 			new SDialog("Ajout", "L'ajout de l'affectation à reussie", "Valider", "").setVisible(true);
 			
 		} catch (SQLException e) {

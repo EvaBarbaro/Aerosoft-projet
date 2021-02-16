@@ -3,9 +3,7 @@ package vues.affectation;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-import dao.AeroportDao;
 import dao.AffectationDao;
-import models.Aeroport;
 import models.Affectation;
 
 import java.awt.*;
