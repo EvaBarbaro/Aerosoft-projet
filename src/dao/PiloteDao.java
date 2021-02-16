@@ -83,7 +83,7 @@ public class PiloteDao implements Dao {
 
 	@Override
 	public void save(Object t, String[] params) {
-			Pilote pilote = (Pilote) t;
+			//Pilote pilote = (Pilote) t;
 
 			Connection conn = null;
 			PreparedStatement stmt = null;

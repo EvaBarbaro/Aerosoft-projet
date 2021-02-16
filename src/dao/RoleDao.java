@@ -105,7 +105,28 @@ public class RoleDao implements Dao {
 
 	@Override
 	public void update(Object t, String[] params) {
-		// TODO Auto-generated method stub
+		Role role =(Role) t;
+
+		Connection conn = null;
+			PreparedStatement stmt = null;
+			String sql = "UPDATE `ROLES` SET IdRole='" + params[0] + "',RoleNom='" + params[1] + "' WHERE RoleNom LIKE '" + params[1] + "'";
+
+		try {
+			conn = ConnectionBdd.getConnection();
+			stmt = conn.prepareStatement(sql);
+
+			System.out.println("update role stmt :" + stmt);
+			stmt.executeUpdate(sql);
+			
+			System.out.println(role.getIdRole() + " a bien été ajouté");
+			new SDialog("update", "update reussie", "Valider", "").setVisible(true);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Impossible d'ajouter un pilote");
+			new SDialog("Echec", "L'update n'a pas reussie car " + e, "ok", "").setVisible(true);
+			throw new RuntimeException(e);
+		}
 
 	}
 

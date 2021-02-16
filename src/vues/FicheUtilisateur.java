@@ -28,13 +28,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.util.Map;
-//import java.util.concurrent.Callable;
+
 import java.awt.event.ActionEvent;
 
 public class FicheUtilisateur extends JFrame {
-	/**
-	 *
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	
@@ -60,8 +58,7 @@ public class FicheUtilisateur extends JFrame {
 	private JTextField textField_1;
 	private JTextField textField_2 = new JTextField();
 	private JTextField textField_3 = new JTextField();
-	/*private JTextField utilisateurStatut = new JTextField();*/
-	/*private JTextField textField_5 = new JTextField();*/
+
 	private JTextField textField_6 = new JTextField();
 	
 	private JComboBox jComboBox;
@@ -150,11 +147,6 @@ public class FicheUtilisateur extends JFrame {
 
 			lblNewLabel_4 = new JLabel(listLabels[3]);
 			lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
-
-			/*utilisateurStatut = new JTextField();
-			utilisateurStatut.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			utilisateurStatut.setColumns(10);
-			utilisateurStatut.setText(listTextFields[3]);*/
 			utilisateurStatut.setSelected(Boolean.parseBoolean(listTextFields[3]));
 
 			oldValue_4 = listTextFields[3];
@@ -165,14 +157,6 @@ public class FicheUtilisateur extends JFrame {
 			lblNewLabel_5 = new JLabel(listLabels[4]);
 			lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
-			/*textField_5 = new JTextField();
-			textField_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			textField_5.setColumns(10);
-			textField_5.setText(listTextFields[4]);*/
-
-			//jComboBox = new JComboBox<Role>(jComboBoxTitles);
-
-			
 			jComboBox = createComboBox(jComboBoxTitles);
 
 			jComboBox.setFont(new Font("Tahoma", Font.PLAIN, 15));

@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 
 import dao.*;
 import models.*;
+import vues.Fiche;
 import vues.FicheUtilisateur;
 
 
