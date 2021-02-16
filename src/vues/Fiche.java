@@ -76,8 +76,8 @@ public class Fiche extends JFrame {
 			String [] listLabels, 
 			String [] listTextFields,
 			String [] listTextBtns,
-			String[] listMethodeDoa
-	) {
+			String[] listMethodeDoa,
+			Boolean... booleanForSetEnabledFalse){
 
 		setTitle(titre);
 
@@ -104,7 +104,11 @@ public class Fiche extends JFrame {
 		textField_1 = new JTextField();
 		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textField_1.setColumns(10);
-		textField_1.setText(listTextFields[0]);	
+		textField_1.setText(listTextFields[0]);
+
+		if(booleanForSetEnabledFalse != null){
+			textField_1.setEnabled(false);
+		}
 
 		oldValue_1 = listTextFields[0];
 

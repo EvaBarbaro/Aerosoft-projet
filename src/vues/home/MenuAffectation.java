@@ -7,6 +7,7 @@ import models.Affectation;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.Font;
 
 import vues.affectation.*;
 
@@ -32,7 +33,9 @@ public class MenuAffectation extends JMenu{
         //Affectation du droit recuperer en paramètre dans la variable droit
         this.droit = droitInt;
 
-        menu = new JMenu("Affectation");
+        menu = new JMenu("Affectations");
+        Font font = new Font("Serial", Font.BOLD, 16);
+        menu.setFont(font);
 
         //Selon le niveau de droits les modules s'affichent
         if(droit >=1){

@@ -7,6 +7,7 @@ import models.Pilote;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.Font;
 
 import vues.pilote.*;
 
@@ -36,7 +37,10 @@ public class MenuPilote extends JMenu{
         //Affectation du droit recuperer en paramètre dans la variable droit
         this.droit = droitInt;
 
-        menuPilote=new JMenu("Pilote"); 
+        menuPilote = new JMenu("Pilote");
+        Font font = new Font("Serial", Font.BOLD, 16);
+        menuPilote.setFont(font);
+
         //Selon le niveau de droits les modules s'affichent
         if(droit >=1){
             itemReadPilote=new JMenuItem("Lister les pilotes");

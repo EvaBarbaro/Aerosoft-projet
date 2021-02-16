@@ -7,14 +7,12 @@ import models.Aeroport;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.Font;
 
 import vues.aeroport.*;
 
 public class MenuAeroport extends JMenu{
-    
-    /**
-	 *
-	 */
+
     private static final long serialVersionUID = 1L;
 
     //Creation de la variable droit qui va recevoir le code droits du module actuel
@@ -32,15 +30,14 @@ public class MenuAeroport extends JMenu{
         //Affectation du droit recuperer en paramètre dans la variable droit 
         this.droit = droitInt;
 
-        menu = new JMenu("Aeroport");
+        menu = new JMenu("Aeroports");
+        Font font = new Font("Serial", Font.BOLD, 16);
+        menu.setFont(font);
 
-        //System.out.println(droitInt);
-        //System.out.println(droit);
-        
         //Selon le niveau de droits les modules s'affichent
         if(droit >=1){
 
-            i1 = new JMenuItem("Lister les aeroport");
+            i1 = new JMenuItem("Lister les aeroports");
             i1.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
                     //frame.setVisible(true);

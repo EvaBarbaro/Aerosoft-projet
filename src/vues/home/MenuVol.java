@@ -7,6 +7,7 @@ import models.Vol;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.Font;
 
 import vues.vol.*;
 
@@ -37,6 +38,8 @@ public class MenuVol extends JMenu {
         this.droit = droitInt;
 
         menu = new JMenu("Vols");
+        Font font = new Font("Serial", Font.BOLD, 16);
+        menu.setFont(font);
         //Selon le niveau de droits les modules s'affichent
         if(droit >=1){
 

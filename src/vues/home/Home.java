@@ -9,9 +9,10 @@ import models.*;
 import vues.Fiche;
 
 import javax.swing.*;
-
+import java.awt.Image;
 
 public class Home {
+
     //Creer le tableau qui va recevoir les elements convertis
     private int[] droitInt = new int [5];
 
@@ -22,11 +23,15 @@ public class Home {
     public int[] getDroitInt() {
         return this.droitInt;
     }
+
     //setter
     public void setDroitInt(int[] droitInt) {
         this.droitInt = droitInt;
     }
+    //marge à droite
+    private JPanel pan;
 
+    //constructeur
     public Home(int idUser) {
         System.out.println(idUser);
         Utilisateur u;
@@ -39,15 +44,13 @@ public class Home {
 
         //Split le droit en un tableau : String{"5","5","5","5","5"}
         String[] droitArray = getDroit.split("");
-        //for(String droit : droitArray){
-            //System.out.println(droit);
-        //}
 
         //Conversion des elements du tableau en int en les ajoutant à un nouveau tableau : int{5,5,5,5,5}
         this.droitInt = new int[droitArray.length];
+
         for (int i = 0; i < droitInt.length; i++){ 
             this.droitInt[i] = Integer.parseInt(droitArray[i]);
-            //System.out.println(i + " : " + droitInt[0]); 
+
         }
         initialize(idUser);
 	}
@@ -56,19 +59,23 @@ public class Home {
 
         /*Fenetre principal*/
         JFrame frame = new JFrame("Tableau de bord");
+
         /*Jpanel*/
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
-        /* Mise en place du menu  */
-        JMenu menu;
-        //submenu;  
 
         JMenuBar mb = new JMenuBar();
-        /* Menu 1*/
-        menu = new JMenu("Aerosoft");
 
-        mb.add(menu);
-
+        /* Mise en place du logo  */
+        ImageIcon icon = new ImageIcon(
+			Toolkit.getDefaultToolkit().getImage(
+					Home.class.getResource("/images/Aerosoft-logo.PNG"))
+					.getScaledInstance(160, 50, Image.SCALE_DEFAULT)
+        );
+        
+        JMenuItem item = new JMenuItem(icon);
+        mb.add(item);
+  
         /*
         On autorise les utilisateurs à acceder aux elements du menu par rapport a leurs droits.
         Chaque indice du tableau droitInt correspond à un module 0 = pas d'acces
@@ -108,16 +115,21 @@ public class Home {
         // Mon Compte
         mb.add(new MenuMaFiche(idUser, frame).getMenu());
 
+        pan =new JPanel();
+        pan.setLayout(null);
+
+        mb.add(pan);
+
         frame.setJMenuBar(mb);
         /*Ajout d'une image*/
-        ImageIcon icon = new ImageIcon(
+        ImageIcon background = new ImageIcon(
                 Toolkit.getDefaultToolkit().getImage(Fiche.class.getResource("/images/Banniere_aerosoft.jpg"))
         /*.getScaledInstance(160, 50, Image.SCALE_DEFAULT)*/
         );
 
         /*label pour afficher l'image*/
         JLabel labelimage = new JLabel();
-        labelimage.setIcon(icon);
+        labelimage.setIcon(background);
         panel.add(labelimage);
 
         frame.add(panel);

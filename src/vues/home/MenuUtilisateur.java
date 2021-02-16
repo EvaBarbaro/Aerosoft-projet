@@ -8,6 +8,7 @@ import vues.utilisateur.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.Font;
 
 // import vues.utilisateur.*;
 
@@ -38,9 +39,11 @@ public class MenuUtilisateur extends JMenu{
 
     public MenuUtilisateur() {
 
-    menuUtilisateur=new JMenu("Utilisateur"); 
+            menuUtilisateur = new JMenu("Utilisateur");
+            Font font = new Font("Serial", Font.BOLD, 16);
+            menuUtilisateur.setFont(font);
 
-    itemReadUtilisateur=new JMenuItem("Lister les utilisateurs");
+    itemReadUtilisateur = new JMenuItem("Lister les utilisateurs");
     itemReadUtilisateur.addActionListener(new ActionListener()
     {
     	public void actionPerformed(ActionEvent evt)
@@ -97,8 +100,6 @@ public class MenuUtilisateur extends JMenu{
     {
     	public void actionPerformed(ActionEvent evt)
     	{
-            Role role = new Role();
-            //FicheAjoutRole(role);
             new TableRole();
     	}
     });

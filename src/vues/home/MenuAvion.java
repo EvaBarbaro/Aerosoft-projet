@@ -7,6 +7,7 @@ import models.Avion;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.Font;
 
 import vues.avion.*;
 
@@ -36,7 +37,10 @@ public class MenuAvion extends JMenu {
         //Affectation du droit recuperer en paramètre dans la variable droit
         this.droit = droitInt;
 
-        menu = new JMenu("Avion");
+        menu = new JMenu("Avions");
+        Font font = new Font("Serial", Font.BOLD, 16);
+        menu.setFont(font);
+        
         //Selon le niveau de droits les modules s'affichent
         if(droit >= 1){
             i1 = new JMenuItem("Lister les Avions");
