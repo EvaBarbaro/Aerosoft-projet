@@ -2,9 +2,7 @@ package vues.affectation;
 
 import javax.swing.JFrame;
 
-import dao.AeroportDao;
 import dao.AffectationDao;
-import models.Aeroport;
 import models.Affectation;
 import vues.Fiche;
 

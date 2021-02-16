@@ -1,8 +1,5 @@
 package vues;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-
 import javax.swing.JFrame;
 
 

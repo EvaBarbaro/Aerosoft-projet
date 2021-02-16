@@ -178,6 +178,7 @@ String passwordString = new String(pass);
                         JLabel nomPiloteLabel, prenomPiloteLabel, matriculeLabel;
                         JTextField nomPiloteField, prenomPiloteField, matriculeField;
                         JButton btnValidatePilote;
+                        UtilisateurDao utilisateurDao = new UtilisateurDao();
 
                         roleDao.get(stringBox);
 
@@ -226,22 +227,48 @@ String passwordString = new String(pass);
                         matriculeField.setBounds(300, 180, 200, 30);
                         matriculeField.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
-                        btnValider.setVisible(false);
-                        btnInscription.setVisible(false);
+                        ArrayList<Utilisateur> userAll = utilisateurDao.getAll();
 
-                        framePilote.add(nomPiloteLabel);
-                        framePilote.add(nomPiloteField);
-                        framePilote.add(prenomPiloteLabel);
-                        framePilote.add(prenomPiloteField);
-                        framePilote.add(matriculeLabel);
-                        framePilote.add(matriculeField);
-                        framePilote.add(btnValidatePilote);
-
-                        framePilote.setTitle("Aerosoft");
-                        framePilote.setSize(650, 350);
-                        framePilote.setLayout(null);
-                        framePilote.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-                        framePilote.setVisible(true);
+                        Boolean duplicate[] = new Boolean[userAll.size()];
+        
+                        int i = 0;
+                
+                        for (Utilisateur user : userAll) {
+                            if (user.getMail().equals(textFieldLogin.getText())) {
+                                duplicate[i] = true;
+                            }
+                            else {
+                                duplicate[i] = false;
+                            }
+                            i++;
+                        }
+        
+                        if (Arrays.asList(duplicate).contains(true)) {
+                            JLabel labelError = new JLabel("Cette adresse mail existe déjà.");
+                            labelError.setBounds(300, 230, 250, 30);
+                            labelError.setFont(new Font("Tahoma", Font.PLAIN, 15));
+                            labelError.setForeground(Color.RED);
+                            add(labelError);
+                            revalidate();
+                            repaint();
+                        } else {
+                            btnValider.setVisible(false);
+                            btnInscription.setVisible(false);
+    
+                            framePilote.add(nomPiloteLabel);
+                            framePilote.add(nomPiloteField);
+                            framePilote.add(prenomPiloteLabel);
+                            framePilote.add(prenomPiloteField);
+                            framePilote.add(matriculeLabel);
+                            framePilote.add(matriculeField);
+                            framePilote.add(btnValidatePilote);
+    
+                            framePilote.setTitle("Aerosoft");
+                            framePilote.setSize(650, 350);
+                            framePilote.setLayout(null);
+                            framePilote.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+                            framePilote.setVisible(true);
+                        }
 
                         roleField = new JTextField(roleAtt.getIdRole());
                         roleField.setVisible(false);
@@ -289,10 +316,32 @@ String passwordString = new String(pass);
                         add(roleField);
                         break;
                     case "Administrateur":
-                        roleDao.get(stringBox);
-                        roleField = new JTextField(roleAtt.getIdRole());
-                        roleField.setVisible(false);
-                        add(roleField);
+                        UtilisateurDao utilisateurDaoAdmin = new UtilisateurDao();
+                        ArrayList<Utilisateur> userAdmin = utilisateurDaoAdmin.getAll();
+        
+                        int adminCount = 0;
+                
+                        for (Utilisateur users : userAdmin) {
+                            System.out.println(users.getIdRole());
+                            if (users.getIdRole().equals("55555")){
+                                adminCount++;
+                            }
+                        }
+        
+                        if (adminCount == 2) {
+                            JLabel labelErrorAdmin = new JLabel("Le nombre maximal de compte admin a été atteint.");
+                            labelErrorAdmin.setBounds(270, 230, 340, 30);
+                            labelErrorAdmin.setFont(new Font("Tahoma", Font.PLAIN, 15));
+                            labelErrorAdmin.setForeground(Color.RED);
+                            add(labelErrorAdmin);
+                            revalidate();
+                            repaint();
+                        } else {
+                            roleDao.get(stringBox);
+                            roleField = new JTextField(roleAtt.getIdRole());
+                            roleField.setVisible(false);
+                            add(roleField);
+                        }
                         break;
                 }
             }
@@ -307,7 +356,7 @@ String passwordString = new String(pass);
     }
     
     private void testUtilisateur() {
-        UtilisateurDao utilisateurDao = new UtilisateurDao();
+                UtilisateurDao utilisateurDao = new UtilisateurDao();
                 Utilisateur utilisateur = new Utilisateur();
                 int uniqueID = UUID.randomUUID().hashCode();
 
