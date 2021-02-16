@@ -18,7 +18,13 @@ public class MenuUtilisateur extends JMenu{
 	 */
     private static final long serialVersionUID = 1L;
     
-    private JMenuItem itemReadUtilisateur, itemAddUtilisateur, itemListUtilisateur, itemDeleteUtilisateur, itemSearchUtilisateur, itemAddRole;
+    private JMenuItem itemReadUtilisateur,
+                        itemAddUtilisateur, 
+                        itemListUtilisateur, 
+                        itemDeleteUtilisateur, 
+                        itemSearchUtilisateur, 
+                        itemAddRole,
+                        itemAddTableRole;
 
     private JMenu menuUtilisateur;
 
@@ -86,7 +92,26 @@ public class MenuUtilisateur extends JMenu{
     	}
     });
 
-    menuUtilisateur.add(itemReadUtilisateur); menuUtilisateur.add(itemAddUtilisateur); menuUtilisateur.add(itemListUtilisateur); menuUtilisateur.add(itemDeleteUtilisateur); menuUtilisateur.add(itemSearchUtilisateur);menuUtilisateur.add(itemAddRole);
+        itemAddTableRole=new JMenuItem("Table des rôles");
+    itemAddTableRole.addActionListener(new ActionListener()
+    {
+    	public void actionPerformed(ActionEvent evt)
+    	{
+            Role role = new Role();
+                    //new FicheAjoutRole(role);
+            new TableRole();
+    	}
+    });
+
+    
+
+        menuUtilisateur.add(itemReadUtilisateur);
+        menuUtilisateur.add(itemAddUtilisateur);
+        menuUtilisateur.add(itemListUtilisateur);
+        menuUtilisateur.add(itemDeleteUtilisateur);
+        menuUtilisateur.add(itemSearchUtilisateur);
+        menuUtilisateur.add(itemAddRole);
+        menuUtilisateur.add(itemAddTableRole);
     }
   
 }

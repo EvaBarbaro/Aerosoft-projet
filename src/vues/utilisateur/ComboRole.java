@@ -32,10 +32,16 @@ public class ComboRole {
 
         JFrame frame = new JFrame();
         frame.add(cBox);
+
+        TableRole tr = new TableRole();
+        frame.add(tr);
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+
+
     }
 
     private JComboBox createComboBox(List<Role> roles) {
@@ -63,6 +69,5 @@ public class ComboRole {
             label.setText(role.getRoleNom());
             return label;
         }
-    }
-
+    }    
 }

@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import dao.RoleDao;
 import interfaces.Dao;
 import models.Role;
+import vues.utilisateur.TableRole;
 
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.GroupLayout;

@@ -2,10 +2,12 @@ package main;
 
 import vues.*;
 import vues.home.*;
-
+import vues.utilisateur.TableRole;
 import dao.*;
 import models.*;
 import java.util.*;
+
+import javax.swing.JFrame;
 
 public class Main {
 
@@ -32,6 +34,9 @@ public class Main {
 		//ad.delete(a);
 
 		new Login();
-		//new Home(0);
+		        TableRole frame = new TableRole();
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
 	}
 }
