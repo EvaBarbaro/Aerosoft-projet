@@ -68,10 +68,10 @@ INSERT INTO ROLES VALUES
 ;
 
 INSERT INTO UTILISATEUR VALUES 
-(1,'clientele@aerosoft.com', 'pass123', TRUE, '01011'),
-(2,'technique@aerosoft.com', 'pass123', TRUE, '44444'),
-(3,'admin@aerosoft.com', 'pass123', TRUE, '55555'),
-(4,'pilote@aerosoft.com', 'pass123', TRUE, '11111')
+(14562148,'clientele@aerosoft.com', 'pass123', TRUE, '01011'),
+(27895410,'technique@aerosoft.com', 'pass123', TRUE, '44444'),
+(37845651,'admin@aerosoft.com', 'pass123', TRUE, '55555'),
+(47894512,'pilote@aerosoft.com', 'pass123', TRUE, '11111')
 ;
 
 INSERT INTO CONSTRUCTEUR VALUES 
