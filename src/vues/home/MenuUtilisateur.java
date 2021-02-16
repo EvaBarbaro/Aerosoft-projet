@@ -29,7 +29,7 @@ public class MenuUtilisateur extends JMenu{
 
     public MenuUtilisateur() {
 
-        menuUtilisateur=new JMenu("Utilisateur"); 
+    menuUtilisateur=new JMenu("Utilisateur"); 
 
     itemReadUtilisateur=new JMenuItem("Lister les utilisateurs");
     itemReadUtilisateur.addActionListener(new ActionListener()
@@ -40,33 +40,7 @@ public class MenuUtilisateur extends JMenu{
             new FicheReadUtilisateur();
     	}
     });
-
-    itemAddUtilisateur=new JMenuItem("Ajouter un utilisateur");
-    itemAddUtilisateur.addActionListener(new ActionListener()
-    {
-    	public void actionPerformed(ActionEvent evt)
-    	{
-			new FicheAjoutUtilisateur();
-    	}
-    });
-
-    itemListUtilisateur=new JMenuItem("Modifier les utilisateurs");
-    itemListUtilisateur.addActionListener(new ActionListener()
-    {
-    	public void actionPerformed(ActionEvent evt)
-    	{
-    		new FicheListUtilisateur();
-    	}
-    });
-
-    itemDeleteUtilisateur=new JMenuItem("Supprimer un utilisateur");
-    itemDeleteUtilisateur.addActionListener(new ActionListener()
-    {
-    	public void actionPerformed(ActionEvent evt)
-    	{
-            new FicheListDeleteUtilisateur();
-    	}
-    });
+    menuUtilisateur.add(itemReadUtilisateur);
 
     itemSearchUtilisateur=new JMenuItem("Rechercher un utilisateur");
     itemSearchUtilisateur.addActionListener(new ActionListener()
@@ -76,8 +50,37 @@ public class MenuUtilisateur extends JMenu{
             new FicheSearchUtilisateur();
     	}
     });
+    menuUtilisateur.add(itemSearchUtilisateur);
 
-    menuUtilisateur.add(itemReadUtilisateur); menuUtilisateur.add(itemAddUtilisateur); menuUtilisateur.add(itemListUtilisateur); menuUtilisateur.add(itemDeleteUtilisateur); menuUtilisateur.add(itemSearchUtilisateur);
+    itemListUtilisateur=new JMenuItem("Modifier les utilisateurs");
+    itemListUtilisateur.addActionListener(new ActionListener()
+    {
+    	public void actionPerformed(ActionEvent evt)
+    	{
+    		new FicheListUtilisateur();
+    	}
+    });
+    menuUtilisateur.add(itemListUtilisateur);
+
+    itemAddUtilisateur=new JMenuItem("Ajouter un utilisateur");
+    itemAddUtilisateur.addActionListener(new ActionListener()
+    {
+    	public void actionPerformed(ActionEvent evt)
+    	{
+			new FicheAjoutUtilisateur();
+    	}
+    });
+    menuUtilisateur.add(itemAddUtilisateur);
+
+    itemDeleteUtilisateur=new JMenuItem("Supprimer un utilisateur");
+    itemDeleteUtilisateur.addActionListener(new ActionListener()
+    {
+    	public void actionPerformed(ActionEvent evt)
+    	{
+            new FicheListDeleteUtilisateur();
+    	}
+    });
+    menuUtilisateur.add(itemDeleteUtilisateur);
     }
   
 }
