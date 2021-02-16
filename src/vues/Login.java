@@ -43,7 +43,7 @@ public class Login extends JFrame implements ActionListener, KeyListener{
     labelPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
     labelPassword.setBounds(80, 130, 200, 30);     
 
-    textFieldLogin = new JTextField("admin@aerosoft.com");
+    textFieldLogin = new JTextField("");
     textFieldLogin.setFont(new Font("Tahoma", Font.PLAIN, 15));
     textFieldLogin.setBounds(300, 90, 200, 30);
     
@@ -107,7 +107,7 @@ String passwordString = new String(pass);
             ps.setString(2, passwordString);
             System.out.println("sql : " + ps);
             ResultSet rs = ps.executeQuery();
-
+            
             if (rs.next()) {
                 this.setVisible(false);
                 new Home(rs.getInt("IdUtilisateur"));
