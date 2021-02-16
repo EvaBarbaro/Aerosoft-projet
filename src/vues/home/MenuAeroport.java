@@ -17,6 +17,7 @@ public class MenuAeroport extends JMenu{
 	 */
     private static final long serialVersionUID = 1L;
 
+    //Creation de la variable droit qui va recevoir le code droits du module actuel
     private int droit = 0;
     
     private JMenuItem i1, i2, i3, i4, i5;
@@ -28,14 +29,15 @@ public class MenuAeroport extends JMenu{
     }
 
     public MenuAeroport(int droitInt) {
-
+        //Affectation du droit recuperer en paramètre dans la variable droit 
         this.droit = droitInt;
 
         menu = new JMenu("Aeroport");
 
-        System.out.println(droitInt);
-        System.out.println(droit);
+        //System.out.println(droitInt);
+        //System.out.println(droit);
         
+        //Selon le niveau de droits les modules s'affichent
         if(droit >=1){
 
             i1 = new JMenuItem("Lister les aeroport");
@@ -51,7 +53,6 @@ public class MenuAeroport extends JMenu{
             i2.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
                     //frame.setVisible(true);
-                    //new searchLivre();
                     new RechercherAeroport();
                 }
             });
