@@ -114,4 +114,32 @@ public class RoleDao implements Dao {
 		// TODO Auto-generated method stub
 
 	}
+
+	public String getRoleNomByIdRole(String idSearch) {
+		
+		String nom = ""
+		;		
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		String sql = "SELECT RoleNom FROM `ROLES` WHERE IdRole=?";
+
+		try {
+			conn = ConnectionBdd.getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, idSearch);
+
+			System.out.println("Voici les informations du role " + idSearch);
+			ResultSet res = stmt.executeQuery();
+
+			while(res.next()){
+				nom = res.getString("RoleNom");
+		      }
+			res.close();
+			conn.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return nom;
+	}
 }

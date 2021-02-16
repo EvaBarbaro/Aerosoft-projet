@@ -1,6 +1,8 @@
 package vues.utilisateur;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JFrame;
 
@@ -30,13 +32,13 @@ public class FicheModifUtilisateur extends JFrame {
 		
 		ArrayList<Role> listeRoles = new RoleDao().getAll();
 
-		String[] jComboBoxTitles = new String[listeRoles.size()];
+		Map<String, String> jComboBoxTitles = new HashMap<>();
 
-		int i = 0;
 		for (Role r : listeRoles) {
-			jComboBoxTitles[i] = r.getIdRole()/*+ " | " +  r.getRoleNom()*/;
-			i++;
+			jComboBoxTitles.put(r.getRoleNom(), r.getIdRole());
 		}
+
+		/*Role[] jComboBoxTitles = (Role) listeRoles.toArray();*/
 				
 		String[] listTextBtns = { "Valider","Annuler" };
 		String[] listMethodeDoa = { "update","" };

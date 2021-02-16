@@ -6,12 +6,17 @@ import javax.swing.JPanel;
 
 import javax.swing.border.EmptyBorder;
 
+import dao.RoleDao;
 import interfaces.Dao;
+import models.Role;
 
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import javax.swing.JList;
+
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.Image;
@@ -25,7 +30,8 @@ import javax.swing.JComboBox;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
-
+import java.awt.event.ItemListener;
+import java.util.Map;
 //import java.util.concurrent.Callable;
 import java.awt.event.ActionEvent;
 
@@ -63,6 +69,7 @@ public class FicheUtilisateur extends JFrame {
 	private JTextField textField_6 = new JTextField();
 	
 	private JComboBox jComboBox;
+	private String valeurRetourjComboBox;
 	private JCheckBox utilisateurStatut = new JCheckBox();
 
 	private String oldValue_1;
@@ -71,7 +78,8 @@ public class FicheUtilisateur extends JFrame {
 	private String oldValue_4;
 	private String oldValue_5;
 	private String oldValue_6;
-
+	
+	private RoleDao rd;
 	/**
 	 * Create the frame.
 	 */
@@ -82,8 +90,8 @@ public class FicheUtilisateur extends JFrame {
 			String [] listLabels, 
 			String [] listTextFields,
 			String [] listTextBtns,
-			String[] listMethodeDoa,
-			String [] jComboBoxTitles
+			String [] listMethodeDoa,
+			Map<String, String> jComboBoxTitles
 	) {
 
 		setTitle(titre);
@@ -166,9 +174,15 @@ public class FicheUtilisateur extends JFrame {
 			textField_5.setColumns(10);
 			textField_5.setText(listTextFields[4]);*/
 
-			jComboBox = new JComboBox<String>(jComboBoxTitles);
+			//jComboBox = new JComboBox<Role>(jComboBoxTitles);
+
+			
+			jComboBox = createComboBox(jComboBoxTitles);
+
 			jComboBox.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			jComboBox.setSelectedItem(listTextFields[4]);
+
+			rd = new RoleDao();
+			jComboBox.setSelectedItem(rd.getRoleNomByIdRole(listTextFields[4]));
 
 			oldValue_5 = listTextFields[4];
 		}
@@ -216,7 +230,7 @@ public class FicheUtilisateur extends JFrame {
 					} 
 			
 					if (listLabels.length >= 5) {
-						params[4] =  (String) jComboBox.getSelectedItem();
+						params[4] =  valeurRetourjComboBox;
 					}
 					
 					if (listLabels.length >= 6) {
@@ -391,14 +405,23 @@ public class FicheUtilisateur extends JFrame {
                 ; 
 		}
 	}
-	/*private Image getScaledImage(Image srcImg, int w, int h){
-		BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-		Graphics2D g2 = resizedImg.createGraphics();
+	private JComboBox createComboBox(final Map<String, String> map) {
+		final JComboBox cbox = new JComboBox();
+
+		for (String r : map.keySet()) {
+		  cbox.addItem(r);
+		}
 	
-		g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-		g2.drawImage(srcImg, 0, 0, w, h, null);
-		g2.dispose();
+		cbox.addActionListener(new ActionListener() {
 	
-		return resizedImg;
-	}	*/
+		  @Override
+		  public void actionPerformed(ActionEvent e) {
+				String idRole = (String) cbox.getSelectedItem();
+				valeurRetourjComboBox = map.get(idRole);				
+		  }
+		});
+	
+		return cbox;
+	  }
+	
 }
