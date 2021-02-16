@@ -165,7 +165,7 @@ public class AffectationDao implements Dao {
 	@Override
 	public void update(Object t, String[] params) {
 		
-		Affectation affectation = (Affectation) t;
+		//Affectation affectation = (Affectation) t;
 
 		PiloteDao pda = new PiloteDao();
 
