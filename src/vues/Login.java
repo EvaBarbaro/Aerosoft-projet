@@ -318,11 +318,30 @@ String passwordString = new String(pass);
                 userPiloteString[3] = "false";
                 userPiloteString[4] = roleField.getText();
 
-                utilisateurDao.save(utilisateur, userPiloteString);
+                ArrayList<Utilisateur> userAll = utilisateurDao.getAll();
+                String userTab[] = new String[userAll.size()+1];
+                int i = 1;
+        
+                for (Utilisateur user : userAll) {
+                    userTab[i] = user.getMail();
+                    if (userPiloteString[1] == userTab[i]) {
 
-                dispose();
+                        JLabel labelError = new JLabel("Cette adresse mail existe déjà.");
+                        labelError.setBounds(270, 220, 200, 30);
+                        labelError.setFont(new Font("Tahoma", Font.PLAIN, 15));
+                        labelError.setForeground(Color.RED);
+                        System.out.println(userTab[i]);
+                    }else {
 
-                new Login();
+                        utilisateurDao.save(utilisateur, userPiloteString);
+
+                        dispose();
+        
+                        new Login();
+                    }
+                    i++;
+                }
+
     }
 
     public void actionPerformed(ActionEvent btnEvent) {
