@@ -330,7 +330,7 @@ String passwordString = new String(pass);
         
                         if (adminCount == 2) {
                             JLabel labelErrorAdmin = new JLabel("Le nombre maximal de compte admin a été atteint.");
-                            labelErrorAdmin.setBounds(270, 230, 340, 30);
+                            labelErrorAdmin.setBounds(270, 270, 340, 30);
                             labelErrorAdmin.setFont(new Font("Tahoma", Font.PLAIN, 15));
                             labelErrorAdmin.setForeground(Color.RED);
                             add(labelErrorAdmin);
