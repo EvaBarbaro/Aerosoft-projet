@@ -23,8 +23,7 @@ public class MenuUtilisateur extends JMenu{
                         itemListUtilisateur, 
                         itemDeleteUtilisateur, 
                         itemSearchUtilisateur, 
-                        itemAddRole,
-                        itemAddTableRole;
+                        itemAddRole;
 
     private JMenu menuUtilisateur;
 
@@ -103,10 +102,10 @@ public class MenuUtilisateur extends JMenu{
     	}
     });
         menuUtilisateur.add(itemReadUtilisateur);
-        menuUtilisateur.add(itemAddUtilisateur);
-        menuUtilisateur.add(itemListUtilisateur);
-        menuUtilisateur.add(itemDeleteUtilisateur);
         menuUtilisateur.add(itemSearchUtilisateur);
+        menuUtilisateur.add(itemListUtilisateur);
+        menuUtilisateur.add(itemAddUtilisateur);
+        menuUtilisateur.add(itemDeleteUtilisateur);
         menuUtilisateur.add(itemAddRole);
     }
   
