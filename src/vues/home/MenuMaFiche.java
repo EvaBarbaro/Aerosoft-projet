@@ -126,7 +126,6 @@ public class MenuMaFiche extends JMenu{
 
     pilote = (Pilote) piloteDao.get(idUser);
 
-    if (pilote != null) {
         itemMePilote=new JMenuItem("Mes informations pilotes");
         itemMePilote.addActionListener(new ActionListener()
         {
@@ -203,9 +202,11 @@ public class MenuMaFiche extends JMenu{
                 meFramePilote.setVisible(true);
             }
         });
-    }
 
     menuMaFiche.add(itemMe);
-    menuMaFiche.add(itemMePilote);
+    
+        if (pilote != null) {
+            menuMaFiche.add(itemMePilote);   
+        }
     }     
 }
