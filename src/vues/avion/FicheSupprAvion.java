@@ -23,7 +23,7 @@ public class FicheSupprAvion extends JFrame {
 
 		String[] listLabels = { "Id de l'avion à supprimer"};
 		
-		String[] listTextFields = {""};
+		String[] listTextFields = {"" + av.getNumAvion()};
 				
 		String[] listTextBtns = { "Valider","Annuler" };
 		String[] listMethodeDoa = { "delete","" };

@@ -51,10 +51,11 @@ public class Home {
             this.droitInt[i] = Integer.parseInt(droitArray[i]);
             //System.out.println(i + " : " + droitInt[0]); 
         }
-        initialize();
+        //this.droitArray = tdroitArray;
+        initialize(idUser);
 	}
     
-    public void initialize() {
+    public void initialize(int idUser) {
 
         /*Fenetre principal*/
         JFrame frame = new JFrame("Tableau de bord");
@@ -107,6 +108,9 @@ public class Home {
         if(this.getDroit.equals("55555")){
             mb.add(new MenuUtilisateur().getMenu());
         }
+
+        // Mon Compte
+        mb.add(new MenuMaFiche(idUser).getMenu());
 
         frame.setJMenuBar(mb);
         /*Ajout d'une image*/

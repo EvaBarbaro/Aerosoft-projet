@@ -37,35 +37,45 @@ public class Login extends JFrame implements ActionListener, KeyListener{
 
     labelEmail = new JLabel("Votre Email:");
     labelEmail.setFont(new Font("Tahoma", Font.PLAIN, 15));
+    labelEmail.setBounds(80, 90, 200, 30);
+
     labelPassword = new JLabel("Votre Mot de passe:");
     labelPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
+    labelPassword.setBounds(80, 130, 200, 30);     
+
     textFieldLogin = new JTextField("");
     textFieldLogin.setFont(new Font("Tahoma", Font.PLAIN, 15));
+    textFieldLogin.setBounds(300, 90, 200, 30);
+    
     /* Mot de passe*/
     passwordField = new JPasswordField();
     passwordField.setFont(new Font("Tahoma", Font.PLAIN, 15));
-    /*Bouton */
-    btnValider = new JButton("Valider");
-    btnInscription = new JButton("Inscrivez-vous");
-    /*Placement */
-    // labelTitle.setBounds(80, 10, 400, 30);
-    labelEmail.setBounds(80, 90, 200, 30);
-    labelPassword.setBounds(80, 130, 200, 30);     
-
-    textFieldLogin.setBounds(300, 90, 200, 30);
-
     passwordField.setBounds(300, 130, 200, 30);
-    passwordField.setFont(new Font("Tahoma", Font.PLAIN, 15));
+    passwordField.addKeyListener(new KeyAdapter() {
+        @Override
+        public void keyPressed(KeyEvent e) {
+            if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+                getLogged();
+               }
+        }
+    });
+
+    /*Bouton */   
+    
+    btnValider = new JButton("Valider");
     btnValider.setBounds(270, 170, 100, 30);
     btnValider.setFont(new Font("Tahoma", Font.BOLD, 15));
     btnValider.setBackground(new Color(1, 175, 228));
     btnValider.setForeground(Color.WHITE);
+    btnValider.addActionListener(this);
+    
+    btnInscription = new JButton("Inscrivez-vous");
     btnInscription.setBounds(380, 170, 150, 30);
     btnInscription.setFont(new Font("Tahoma", Font.BOLD, 15));
     btnInscription.setBackground(new Color(22, 219, 170));
     btnInscription.setForeground(Color.WHITE);
-    btnValider.addActionListener(this);
     btnInscription.addActionListener(this);
+
     // add(labelTitle);
     add(labelEmail);add(textFieldLogin); add(labelPassword);add(passwordField);add(btnValider);add(btnInscription);
 
@@ -183,10 +193,13 @@ String passwordString = new String(pass);
 
                         nomPiloteLabel = new JLabel("Votre nom");
                         nomPiloteLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+
                         nomPiloteField = new JTextField("");
                         nomPiloteField.setFont(new Font("Tahoma", Font.PLAIN, 15));
+
                         prenomPiloteLabel = new JLabel("Votre prénom");
                         prenomPiloteField = new JTextField("");
+
                         matriculeLabel = new JLabel("Votre matricule");
                         matriculeLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
                         matriculeField = new JTextField("");
@@ -202,14 +215,17 @@ String passwordString = new String(pass);
                         nomPiloteLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
                         nomPiloteField.setBounds(300, 100, 200, 30);
                         nomPiloteField.setFont(new Font("Tahoma", Font.PLAIN, 15));
+
                         prenomPiloteLabel.setBounds(80, 140, 200, 30);
                         prenomPiloteLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
                         prenomPiloteField.setBounds(300, 140, 200, 30);
                         prenomPiloteField.setFont(new Font("Tahoma", Font.PLAIN, 15));
+
                         matriculeLabel.setBounds(80, 180, 200, 30);
                         matriculeLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
                         matriculeField.setBounds(300, 180, 200, 30);
                         matriculeField.setFont(new Font("Tahoma", Font.PLAIN, 15));
+
                         btnValider.setVisible(false);
                         btnInscription.setVisible(false);
 

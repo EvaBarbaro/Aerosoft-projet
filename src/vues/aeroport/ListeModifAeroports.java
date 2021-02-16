@@ -1,10 +1,10 @@
-package vues.avion;
+package vues.aeroport;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-import dao.AvionDao;
-import models.Avion;
+import dao.AeroportDao;
+import models.Aeroport;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.ListIterator;
 
  
-public class ListeSupprAvion extends JFrame implements ActionListener{
+public class ListeModifAeroports extends JFrame implements ActionListener{
 	
 	/**
 	 *
@@ -26,18 +26,18 @@ public class ListeSupprAvion extends JFrame implements ActionListener{
 	DefaultTableModel tableModel;
 	JTable data;
 	
-	Avion av1;
-	AvionDao dao = new AvionDao();
+	Aeroport b1;
+	AeroportDao dao = new AeroportDao();
 	
-	List<Avion> list = new ArrayList<Avion>();
+	List<Aeroport> list = new ArrayList<Aeroport>();
 	 
-	String[] tblHead = { "Numéro avion", "Type avion", "Base aeroport" };
+	String[] tblHead = { "IdAeroport", "NomAeroport", "NomVilleDesservie" };
 	 
 
-	public ListeSupprAvion() {
+	public ListeModifAeroports() {
 		
 		/* Label */
-		l1 = new JLabel("LISTE DES Avions");
+		l1 = new JLabel("LISTE DES AEROPORTS");
 		l1.setForeground(Color.blue);
 		l1.setFont(new Font("Serif", Font.BOLD, 20));
 
@@ -78,12 +78,12 @@ public class ListeSupprAvion extends JFrame implements ActionListener{
 					//int id = Integer.parseInt(table.getModel().getValueAt(row, column).toString());
 					Object id = (Object) table.getModel().getValueAt(row, column).toString();
 										
-					av1 = (Avion) dao.get(id);
+					b1 = (Aeroport) dao.get(id);
 
-					if (av1 != null) {
+					if (b1 != null) {
 						
-						FicheModifAvion fm = new FicheModifAvion(av1);
-						
+						FicheModifAeroport fm = new FicheModifAeroport(b1);
+
 						fm.addWindowListener(new WindowListener() {
 
 							@Override
@@ -93,7 +93,7 @@ public class ListeSupprAvion extends JFrame implements ActionListener{
 
 							@Override
 							public void windowClosing(WindowEvent e) {
-									
+								chargeData(dao);
 							}
 
 							@Override
@@ -140,7 +140,7 @@ public class ListeSupprAvion extends JFrame implements ActionListener{
 		scrollPane.setLocation(50, 100);
 		getContentPane().add(scrollPane);
 
-		setTitle("LISTE DES Avions");
+		setTitle("LISTE DES AEROPORT");
 
 		setSize(639, 540);
 		getContentPane().setLayout(null);
@@ -156,24 +156,24 @@ public class ListeSupprAvion extends JFrame implements ActionListener{
 		setVisible(true);
 	}
 
-	public void chargeData(AvionDao dao) {
+	public void chargeData(AeroportDao dao) {
 			
 			
-			list = (List<Avion>) dao.getAll();
+			list = (List<Aeroport>) dao.getAll();
 							
-			ListIterator<Avion> listIterator = ((java.util.List<Avion>) list).listIterator();
+			ListIterator<Aeroport> listIterator = ((java.util.List<Aeroport>) list).listIterator();
 			
 			tableModel.setRowCount(0);
 						
 			if (list != null) {
 
 				while(listIterator.hasNext()) {
-					av1 = listIterator.next();
+					b1 = listIterator.next();
 
 					Object[] donnees = { 
-						av1.getNumAvion(), 
-						av1.getTypeAvion(), 
-						av1.getBaseAeroport()
+						b1.getIdAeroport(), 
+						b1.getNomAeroport(), 
+						b1.getNomVille() 
 					};
 
 					tableModel.addRow(donnees);	

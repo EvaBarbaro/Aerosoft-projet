@@ -29,7 +29,7 @@ public class FicheAjoutAffectation extends JFrame {
 
 		String[] listLabels = { "Id de l'affectation", "Numéro du vol", "Dat du vol", "Code de l'affectation","Numéro de l'avion","Pilote"};
 		
-		String[] listTextFields = {"","IT111","2001-05-08","1","109",""};
+		String[] listTextFields = {"","","","","",""};
 			
 		String[] listTextBtns = { "Valider","Annuler" };
 		String[] listMethodeDoa = { "save", "" };

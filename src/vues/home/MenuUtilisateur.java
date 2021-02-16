@@ -3,8 +3,7 @@ package vues.home;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
-
-import models.Utilisateur;
+import models.Role;
 import vues.utilisateur.*;
 
 import java.awt.event.ActionEvent;
@@ -19,7 +18,7 @@ public class MenuUtilisateur extends JMenu{
 	 */
     private static final long serialVersionUID = 1L;
     
-    private JMenuItem itemReadUtilisateur, itemAddUtilisateur, itemListUtilisateur, itemDeleteUtilisateur, itemSearchUtilisateur;
+    private JMenuItem itemReadUtilisateur, itemAddUtilisateur, itemListUtilisateur, itemDeleteUtilisateur, itemSearchUtilisateur, itemAddRole;
 
     private JMenu menuUtilisateur;
 
@@ -80,7 +79,22 @@ public class MenuUtilisateur extends JMenu{
             new FicheListDeleteUtilisateur();
     	}
     });
+<<<<<<< HEAD
     menuUtilisateur.add(itemDeleteUtilisateur);
+=======
+
+    itemAddRole=new JMenuItem("Créer un rôle");
+    itemAddRole.addActionListener(new ActionListener()
+    {
+    	public void actionPerformed(ActionEvent evt)
+    	{
+            Role role = new Role();
+            new FicheAjoutRole(role);
+    	}
+    });
+
+    menuUtilisateur.add(itemReadUtilisateur); menuUtilisateur.add(itemAddUtilisateur); menuUtilisateur.add(itemListUtilisateur); menuUtilisateur.add(itemDeleteUtilisateur); menuUtilisateur.add(itemSearchUtilisateur);menuUtilisateur.add(itemAddRole);
+>>>>>>> 483ff0701701554a31f1fe2a9d45c5c8451f77b4
     }
   
 }
