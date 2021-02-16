@@ -13,6 +13,10 @@ public class AeroportDao implements Dao{
 	public AeroportDao() {
 	}
 
+	
+	/** 
+	 * @return ArrayList<Aeroport>
+	 */
 	@Override
 	public ArrayList<Aeroport> getAll() {
 		
@@ -49,6 +53,11 @@ public class AeroportDao implements Dao{
 		return listeAeroports;
 	}
 
+	
+	/** 
+	 * @param id
+	 * @return Object
+	 */
 	@Override
 	public Object get(Object id) {
 			Aeroport aeroport = null;
@@ -81,6 +90,11 @@ public class AeroportDao implements Dao{
 			return aeroport;
 	}
 
+	
+	/** 
+	 * @param t
+	 * @param params
+	 */
 	@Override
 	public void save(Object t, String[] params) {
 		Aeroport aeroport = (Aeroport) t;
@@ -106,6 +120,11 @@ public class AeroportDao implements Dao{
 	}
 	}
 
+	
+	/** 
+	 * @param t
+	 * @param params
+	 */
 	@Override
 	public void update(Object t, String[] params) {
 		
@@ -132,6 +151,10 @@ public class AeroportDao implements Dao{
 		
 	}
 
+	
+	/** 
+	 * @param t
+	 */
 	@Override
 	public void delete(Object t) {	
 		Aeroport aeroport = (Aeroport) t;

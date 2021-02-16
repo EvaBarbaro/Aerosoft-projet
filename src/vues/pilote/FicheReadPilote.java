@@ -79,6 +79,10 @@ public class FicheReadPilote extends JFrame {
 		setVisible(true);
 	}
 
+	
+	/** 
+	 * @param dao
+	 */
 	public void chargeData(PiloteDao dao) {
 			
 			

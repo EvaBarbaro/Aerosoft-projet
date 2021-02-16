@@ -24,6 +24,10 @@ public class MenuPilote extends JMenu{
 
     private JMenu menuPilote;
 
+    
+    /** 
+     * @return JMenu
+     */
     public JMenu getMenu() {
         return this.menuPilote;
     }

@@ -28,7 +28,11 @@ public class SDialog extends JDialog {
 	
     private Boolean validation; 
     
-    public Boolean getValidation() {
+    
+	/** 
+	 * @return Boolean
+	 */
+	public Boolean getValidation() {
 		return validation;
 	}
     
@@ -103,6 +107,10 @@ public class SDialog extends JDialog {
 		
 	}
 
+	
+	/** 
+	 * @param b
+	 */
 	protected void getResponse(boolean b) {
 		// TODO Auto-generated method stub
 		

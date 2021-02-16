@@ -161,6 +161,10 @@ public class ListeDeleteAffectations extends JFrame implements ActionListener{
 		setVisible(true);
 	}
 
+	
+	/** 
+	 * @param dao
+	 */
 	public void chargeData(AffectationDao dao) {
 			
 			
@@ -193,6 +197,10 @@ public class ListeDeleteAffectations extends JFrame implements ActionListener{
 			}
 		}
 
+	
+	/** 
+	 * @param e
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

@@ -79,6 +79,10 @@ public class FicheReadUtilisateur extends JFrame {
 		setVisible(true);
 	}
 
+	
+	/** 
+	 * @param dao
+	 */
 	public void chargeData(UtilisateurDao dao) {
 			
 			

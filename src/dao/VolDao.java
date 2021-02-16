@@ -13,6 +13,11 @@ public class VolDao implements Dao{
 	public VolDao() {
 	};
 
+	
+	/** 
+	 * @param id
+	 * @return Object
+	 */
 	@Override
 	public Object get(Object id) {
 		Vol vol = null;
@@ -54,6 +59,10 @@ public class VolDao implements Dao{
 		return vol;
 	}
 
+	
+	/** 
+	 * @return ArrayList<Vol>
+	 */
 	@Override
 	public ArrayList<Vol> getAll() {
 		Connection conn = null;
@@ -87,6 +96,11 @@ public class VolDao implements Dao{
 			return listeVols;
 	}
 
+	
+	/** 
+	 * @param t
+	 * @param params
+	 */
 	@Override
 	public void save(Object t, String[] params) {
 			Vol vol = (Vol) t;
@@ -116,6 +130,11 @@ public class VolDao implements Dao{
 		
 	}
 
+	
+	/** 
+	 * @param t
+	 * @param params
+	 */
 	@Override
 	public void update(Object t, String[] params) {
 		
@@ -143,6 +162,10 @@ public class VolDao implements Dao{
 		
 	}
 
+	
+	/** 
+	 * @param t
+	 */
 	@Override
 	public void delete(Object t) {
 		Vol vol = (Vol) t;

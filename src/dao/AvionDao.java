@@ -13,6 +13,10 @@ public class AvionDao implements Dao{
 	public AvionDao() {
 	}
 
+	
+	/** 
+	 * @return ArrayList<Avion>
+	 */
 	@Override
 	public ArrayList<Avion> getAll() {
 		Connection conn = null;
@@ -46,6 +50,11 @@ public class AvionDao implements Dao{
 		}
 		return listeAvions;
 	}
+	
+	/** 
+	 * @param id
+	 * @return Object
+	 */
 	@Override
 	public Object get(Object id) {
 		Avion avion = null;
@@ -83,6 +92,11 @@ public class AvionDao implements Dao{
 		return avion;
 	}
 
+	
+	/** 
+	 * @param t
+	 * @param params
+	 */
 	@Override
 	public void save(Object t, String[] params) {
 		Avion avion = (Avion) t;
@@ -111,6 +125,11 @@ public class AvionDao implements Dao{
 		
 	}
 
+	
+	/** 
+	 * @param t
+	 * @param params
+	 */
 	@Override
 	public void update(Object t, String[] params) {
 		
@@ -147,6 +166,10 @@ public class AvionDao implements Dao{
 		
 	}
 
+	
+	/** 
+	 * @param t
+	 */
 	@Override
 	public void delete(Object t) {
 		Avion avion = (Avion) t;

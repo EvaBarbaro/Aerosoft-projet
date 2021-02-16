@@ -9,7 +9,12 @@ import models.*;
 import vues.SDialog;
 
 public class RoleDao implements Dao {
-    public Object get(Object id) {
+    
+	/** 
+	 * @param id
+	 * @return Object
+	 */
+	public Object get(Object id) {
 		Role role = null;
         String idSearch = String.valueOf(id);
 
@@ -43,7 +48,11 @@ public class RoleDao implements Dao {
 		return role;
 	}
 
-    public ArrayList<Role> getAll() {
+    
+	/** 
+	 * @return ArrayList<Role>
+	 */
+	public ArrayList<Role> getAll() {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		String sql = "SELECT * FROM `ROLES`";
@@ -75,6 +84,11 @@ public class RoleDao implements Dao {
 		return listeRole;
 	}
 
+	
+	/** 
+	 * @param t
+	 * @param params
+	 */
 	@Override
 	public void save(Object t, String[] params) {
 		Role role =(Role) t;
@@ -103,6 +117,11 @@ public class RoleDao implements Dao {
 
 	}
 
+	
+	/** 
+	 * @param t
+	 * @param params
+	 */
 	@Override
 	public void update(Object t, String[] params) {
 		/*Role role =(Role) t;
@@ -130,12 +149,21 @@ public class RoleDao implements Dao {
 */
 	}
 
+	
+	/** 
+	 * @param t
+	 */
 	@Override
 	public void delete(Object t) {
 		// TODO Auto-generated method stub
 
 	}
 
+	
+	/** 
+	 * @param idSearch
+	 * @return String
+	 */
 	public String getRoleNomByIdRole(String idSearch) {
 		
 		String nom = ""

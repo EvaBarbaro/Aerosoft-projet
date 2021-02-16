@@ -8,6 +8,10 @@ public class ConnectionBdd {
 	private static final String username = "root";
 	private static final String password = "";
 	
+	
+	/** 
+	 * @return Connection
+	 */
 	// -----------------Autre methode ajouter une variable conn---------------------
 	// private static Connection conn;
 	/*
@@ -37,6 +41,10 @@ public class ConnectionBdd {
 		}
 	}
 
+	
+	/** 
+	 * @param stmt
+	 */
 	@SuppressWarnings("unused")
 	private static void close(PreparedStatement stmt) {
 		if (stmt != null) {

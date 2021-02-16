@@ -13,19 +13,35 @@ public class Role {
         this.setIdRole(idRole);
         this.setRoleNom(roleNom);
 	}
-	//Creation des getter et setter
+	
+    /** 
+     * @return String
+     */
+    //Creation des getter et setter
     public String getIdRole() {
         return this.idRole;
     }
 
+    
+    /** 
+     * @param idRole
+     */
     public void setIdRole(String idRole) {
         this.idRole = idRole;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getRoleNom() {
         return this.roleNom;
     }
 
+    
+    /** 
+     * @param roleNom
+     */
     public void setRoleNom(String roleNom) {
         this.roleNom = roleNom;
     }

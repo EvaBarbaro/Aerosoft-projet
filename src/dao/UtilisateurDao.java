@@ -14,6 +14,11 @@ public class UtilisateurDao implements Dao {
 	public UtilisateurDao() {
 	}
 
+	
+	/** 
+	 * @param idOjb
+	 * @return Object
+	 */
 	public Object get(Object idOjb) {
 
 		int id = (int) idOjb;
@@ -54,6 +59,10 @@ public class UtilisateurDao implements Dao {
 		return utilisateur;
 	}
 
+	
+	/** 
+	 * @return ArrayList<Utilisateur>
+	 */
 	public ArrayList<Utilisateur> getAll() {
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -91,6 +100,11 @@ public class UtilisateurDao implements Dao {
 		return listeUtilisateurs;
 	}
 
+	
+	/** 
+	 * @param t
+	 * @param params
+	 */
 	public void save(Object t, String[] params) {
 		Utilisateur utilisateur =(Utilisateur) t;
 
@@ -120,6 +134,11 @@ public class UtilisateurDao implements Dao {
 		}
 	}
 
+	
+	/** 
+	 * @param t
+	 * @param params
+	 */
 	public void update(Object t, String[] params) {		
 		Utilisateur utilisateur = (Utilisateur) t;
 		
@@ -147,6 +166,10 @@ public class UtilisateurDao implements Dao {
 		}
 	}
 
+	
+	/** 
+	 * @param t
+	 */
 	public void delete(Object t) {
 		Utilisateur utilisateur = (Utilisateur) t;
 		

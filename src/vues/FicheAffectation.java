@@ -365,6 +365,13 @@ public class FicheAffectation extends JFrame {
 		setVisible(true);
 	}
 
+	
+	/** 
+	 * @param methodeDao
+	 * @param dao
+	 * @param transport
+	 * @param params
+	 */
 	private void executeDoa(String methodeDao, Dao dao, Object transport, String[] params) {
 		
 		System.out.println("methodeDao: "  + methodeDao);

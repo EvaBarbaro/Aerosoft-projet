@@ -13,6 +13,11 @@ public class AffectationDao implements Dao {
 	public AffectationDao() {
 	};
 
+	
+	/** 
+	 * @param id
+	 * @return Object
+	 */
 	@Override
 	public Object get(Object id) {
 		Affectation affectation = new Affectation();
@@ -71,6 +76,10 @@ public class AffectationDao implements Dao {
 		return affectation;
 	}
 
+	
+	/** 
+	 * @return ArrayList<Affectation>
+	 */
 	@Override
 	public ArrayList<Affectation> getAll() {
 		Connection conn = null;
@@ -126,6 +135,11 @@ public class AffectationDao implements Dao {
 			return listeAffectations;
 	}
 
+	
+	/** 
+	 * @param t
+	 * @param params
+	 */
 	@Override
 	public void save(Object t, String[] params) {
 			Affectation affectation = (Affectation) t;
@@ -162,6 +176,11 @@ public class AffectationDao implements Dao {
 		}
 	}
 
+	
+	/** 
+	 * @param t
+	 * @param params
+	 */
 	@Override
 	public void update(Object t, String[] params) {
 		
@@ -202,6 +221,10 @@ public class AffectationDao implements Dao {
 		}
 	}
 
+	
+	/** 
+	 * @param t
+	 */
 	@Override
 	public void delete(Object t) {
 		Affectation affectation = (Affectation) t;

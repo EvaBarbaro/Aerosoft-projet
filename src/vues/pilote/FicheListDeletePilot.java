@@ -156,6 +156,10 @@ public class FicheListDeletePilot extends JFrame implements ActionListener{
 		setVisible(true);
 	}
 
+	
+	/** 
+	 * @param dao
+	 */
 	public void chargeData(PiloteDao dao) {
 			
 			
@@ -186,6 +190,10 @@ public class FicheListDeletePilot extends JFrame implements ActionListener{
 			}
 		}
 
+	
+	/** 
+	 * @param e
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

@@ -156,6 +156,10 @@ public class ListeSupprAvion extends JFrame implements ActionListener{
 		setVisible(true);
 	}
 
+	
+	/** 
+	 * @param dao
+	 */
 	public void chargeData(AvionDao dao) {
 			
 			
@@ -185,6 +189,10 @@ public class ListeSupprAvion extends JFrame implements ActionListener{
 			}
 		}
 
+	
+	/** 
+	 * @param e
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

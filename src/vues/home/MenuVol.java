@@ -24,6 +24,10 @@ public class MenuVol extends JMenu {
 
     private JMenu menu;
 
+    
+    /** 
+     * @return JMenu
+     */
     public JMenu getMenu() {
         return this.menu;
     }

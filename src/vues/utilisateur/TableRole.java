@@ -24,7 +24,8 @@ public class TableRole extends JFrame implements TableModelListener{
 
     private JComboBox comboBox1;
     private int row;
-     
+
+    
     public TableRole() {
         RoleDao rd = new RoleDao();
 
@@ -156,11 +157,20 @@ public class TableRole extends JFrame implements TableModelListener{
         }
     }
 
+    
+    /** 
+     * @param row
+     * @return Object
+     */
     public Object getCellEditorValue(int row) {
         return comboBox1.getSelectedItem();
     }
 
-	@Override
+	
+    /** 
+     * @param e
+     */
+    @Override
     public void tableChanged(TableModelEvent e) {
 
 		Object id = (Object) table.getModel().getValueAt(row, e.getColumn()).toString();

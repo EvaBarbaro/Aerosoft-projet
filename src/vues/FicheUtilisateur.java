@@ -360,6 +360,13 @@ public class FicheUtilisateur extends JFrame {
 		setVisible(true);
 	}
 
+	
+	/** 
+	 * @param methodeDao
+	 * @param dao
+	 * @param transport
+	 * @param params
+	 */
 	private void executeDoa(String methodeDao, Dao dao, Object transport, String[] params) {
 		
 		System.out.println("methodeDao: "  + methodeDao);
@@ -385,6 +392,11 @@ public class FicheUtilisateur extends JFrame {
                 ; 
 		}
 	}
+	
+	/** 
+	 * @param map
+	 * @return JComboBox
+	 */
 	private JComboBox createComboBox(final Map<String, String> map) {
 		final JComboBox cbox = new JComboBox();
 

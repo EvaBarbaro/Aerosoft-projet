@@ -28,6 +28,10 @@ public class MenuUtilisateur extends JMenu{
 
     private JMenu menuUtilisateur;
 
+    
+    /** 
+     * @return JMenu
+     */
     public JMenu getMenu() {
         return this.menuUtilisateur;
     }

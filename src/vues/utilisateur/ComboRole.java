@@ -44,6 +44,11 @@ public class ComboRole {
 
     }
 
+    
+    /** 
+     * @param roles
+     * @return JComboBox
+     */
     private JComboBox createComboBox(List<Role> roles) {
         final JComboBox comboBox = new JComboBox(roles.toArray());
         comboBox.setRenderer(new ComboBoxRenderer());

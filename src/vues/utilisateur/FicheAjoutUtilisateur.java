@@ -338,6 +338,10 @@ public class FicheAjoutUtilisateur extends JFrame implements ActionListener, Key
 
     }
 
+    
+    /** 
+     * @param btnEvent
+     */
     public void actionPerformed(ActionEvent btnEvent) {
 
         if (btnEvent.getSource() == btnInscription) {
@@ -345,19 +349,31 @@ public class FicheAjoutUtilisateur extends JFrame implements ActionListener, Key
         }
     }
     
+    
+    /** 
+     * @param e
+     */
     public void keyPressed(KeyEvent e) {
 		
 		
 	}
 
-	@Override
+	
+    /** 
+     * @param e
+     */
+    @Override
 	public void keyTyped(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			testUtilisateur();
 		}
 	}
 
-	@Override
+	
+    /** 
+     * @param e
+     */
+    @Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		

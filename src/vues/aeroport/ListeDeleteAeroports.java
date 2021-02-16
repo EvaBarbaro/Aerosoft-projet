@@ -156,6 +156,10 @@ public class ListeDeleteAeroports extends JFrame implements ActionListener{
 		setVisible(true);
 	}
 
+	
+	/** 
+	 * @param dao
+	 */
 	public void chargeData(AeroportDao dao) {
 			
 			
@@ -185,6 +189,10 @@ public class ListeDeleteAeroports extends JFrame implements ActionListener{
 			}
 		}
 
+	
+	/** 
+	 * @param e
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

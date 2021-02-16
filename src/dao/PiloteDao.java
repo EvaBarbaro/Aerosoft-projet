@@ -13,6 +13,11 @@ public class PiloteDao implements Dao {
 	public PiloteDao() {
 	}
 
+	
+	/** 
+	 * @param idObj
+	 * @return Object
+	 */
 	@Override
 	public Object get(Object idObj) {
 		int id = (int) idObj;
@@ -46,6 +51,10 @@ public class PiloteDao implements Dao {
 		return pilote;
 	}
 
+	
+	/** 
+	 * @return ArrayList<Pilote>
+	 */
 	@Override
 	public ArrayList<Pilote> getAll() {
 		Connection conn = null;
@@ -81,6 +90,11 @@ public class PiloteDao implements Dao {
 		return listePilotes;
 	}
 
+	
+	/** 
+	 * @param t
+	 * @param params
+	 */
 	@Override
 	public void save(Object t, String[] params) {
 			//Pilote pilote = (Pilote) t;
@@ -110,6 +124,11 @@ public class PiloteDao implements Dao {
 
 	}
 
+	
+	/** 
+	 * @param t
+	 * @param params
+	 */
 	@Override
 	public void update(Object t, String[] params) {
 		
@@ -138,6 +157,10 @@ public class PiloteDao implements Dao {
 
 	}
 
+	
+	/** 
+	 * @param t
+	 */
 	@Override
 	public void delete(Object t) {
 		Pilote pilote = (Pilote) t;
@@ -168,6 +191,11 @@ public class PiloteDao implements Dao {
 
 	}
 
+	
+	/** 
+	 * @param name
+	 * @return int
+	 */
 	public int getIdByName(String name) {
 		System.out.println("getIdByName name : " + name);
 

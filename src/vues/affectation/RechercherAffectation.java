@@ -120,6 +120,10 @@ public class RechercherAffectation extends JFrame implements ActionListener {
 		data.setModel(tableModel);
 	}
 
+	
+	/** 
+	 * @param e
+	 */
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btn1) {
 
