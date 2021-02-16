@@ -17,8 +17,10 @@ public class MenuPilote extends JMenu{
 	 *
 	 */
     private static final long serialVersionUID = 1L;
+
+    private int droit = 0;
     
-    private JMenuItem itemReadPilote, itemAddPilote, itemListPilote, itemDeletePilote, itemSearchPilote;
+    private JMenuItem itemReadPilote, itemAddPilote, itemModifPilote, itemDeletePilote, itemSearchPilote;
 
     private JMenu menuPilote;
 
@@ -26,58 +28,70 @@ public class MenuPilote extends JMenu{
         return this.menuPilote;
     }
 
-    public MenuPilote() {
+    public MenuPilote(int droitInt) {
+        this.droit = droitInt;
 
         menuPilote=new JMenu("Pilote"); 
 
-    itemReadPilote=new JMenuItem("Lister les pilotes");
-    itemReadPilote.addActionListener(new ActionListener()
-    {
-    	public void actionPerformed(ActionEvent evt)
-    	{
-    		
-            new FicheReadPilote();
-    	}
-    });
+        if(droit >=1){
+            itemReadPilote=new JMenuItem("Lister les pilotes");
+            itemReadPilote.addActionListener(new ActionListener()
+            {
+                public void actionPerformed(ActionEvent evt)
+                {
+                    new FicheReadPilote();
+                }
+            });
+            menuPilote.add(itemReadPilote);
 
-    itemAddPilote=new JMenuItem("Ajouter un pilote");
-    itemAddPilote.addActionListener(new ActionListener()
-    {
-    	public void actionPerformed(ActionEvent evt)
-    	{
-    		  
-			Pilote pilote = new Pilote();
-			new FicheAjoutPilote(pilote);
-    	}
-    });
+            itemSearchPilote=new JMenuItem("Rechercher un pilote");
+            itemSearchPilote.addActionListener(new ActionListener()
+            {
+                public void actionPerformed(ActionEvent evt)
+                {
+                    new FicheSearchPilote();
+                }
+            });
+            menuPilote.add(itemSearchPilote);
+        }
 
-    itemListPilote=new JMenuItem("Modifier les pilotes");
-    itemListPilote.addActionListener(new ActionListener()
-    {
-    	public void actionPerformed(ActionEvent evt)
-    	{
-    		new FicheListPilote();
-    	}
-    });
+        if(droit >=2){
+            itemModifPilote=new JMenuItem("Modifier les pilotes");
+            itemModifPilote.addActionListener(new ActionListener()
+            {
+                public void actionPerformed(ActionEvent evt)
+                {
+                    new FicheListPilote();
+                }
+            });
+            menuPilote.add(itemModifPilote);
+        }
 
-    itemDeletePilote=new JMenuItem("Supprimer un pilote");
-    itemDeletePilote.addActionListener(new ActionListener()
-    {
-    	public void actionPerformed(ActionEvent evt)
-    	{
-			new FicheListDeletePilot();
-    	}
-    });
+        if(droit >=3){
+            itemAddPilote=new JMenuItem("Ajouter un pilote");
+            itemAddPilote.addActionListener(new ActionListener()
+            {
+                public void actionPerformed(ActionEvent evt)
+                {
+                    
+                    Pilote pilote = new Pilote();
+                    new FicheAjoutPilote(pilote);
+                }
+            });
+            menuPilote.add(itemAddPilote);
+        }
 
-    itemSearchPilote=new JMenuItem("Rechercher un pilote");
-    itemSearchPilote.addActionListener(new ActionListener()
-    {
-    	public void actionPerformed(ActionEvent evt)
-    	{
-			new FicheSearchPilote();
-    	}
-    });
+        if(droit >=3){
 
-    menuPilote.add(itemReadPilote); menuPilote.add(itemAddPilote); menuPilote.add(itemListPilote); menuPilote.add(itemDeletePilote); menuPilote.add(itemSearchPilote);
-    }     
+            itemDeletePilote=new JMenuItem("Supprimer un pilote");
+            itemDeletePilote.addActionListener(new ActionListener()
+            {
+                public void actionPerformed(ActionEvent evt)
+                {
+                    new FicheListDeletePilot();
+                }
+            });
+            menuPilote.add(itemDeletePilote);
+        }     
+    }
 }

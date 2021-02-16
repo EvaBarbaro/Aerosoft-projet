@@ -17,6 +17,8 @@ public class MenuAffectation extends JMenu{
 	 *
 	 */
     private static final long serialVersionUID = 1L;
+
+    private int droit = 0;
     
     private JMenuItem i1, i2, i3, i4, i5;
 
@@ -26,58 +28,70 @@ public class MenuAffectation extends JMenu{
         return this.menu;
     }
 
-    public MenuAffectation() {
+    public MenuAffectation(int droitInt) {
+
+        this.droit = droitInt;
 
         menu = new JMenu("Affectation");
 
-        i1 = new JMenuItem("Lister les affectations");
-        i1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-         
-                new ListeAffectations();
-            }
-        });
+        if(droit >=1){
+            
+            i1 = new JMenuItem("Lister les affectations");
+            i1.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent evt) {
+            
+                    new ListeAffectations();
+                }
+            });
+            menu.add(i1);
 
-        i2 = new JMenuItem("Ajouter une affectation");
-        i2.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-         
+            i2 = new JMenuItem("Trouver une affectation");
+            i2.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent evt) {
+            
+                    //new searchLivre();
+                    new RechercherAffectation();
+                }
+            });
+            menu.add(i2);
+        }
 
-                /*AffectationDao afDao = new AffectationDao();
-                String idAe = "IT1002001-04-06"; */
-                Affectation ae = new Affectation();
-                new FicheAjoutAffectation(ae);
-            }
-        });
+        if(droit >=2){
 
-        i5 = new JMenuItem("Modifier les affectations");
-        i5.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-         
-                new ListeModifAffectations();
-            }
-        });
+            i3 = new JMenuItem("Modifier une affectation");
+            i3.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent evt) {
 
-        i3 = new JMenuItem("Supprimer une affectation");
-        i3.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                new ListeDeleteAffectations();
-            }
-        });
+                    new ListeAffectations();
 
-        i4 = new JMenuItem("Rechercher une affectation");
-        i4.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-         
-                //new searchLivre();
-                new RechercherAffectation();
-            }
-        });
+                }
+            });
+            menu.add(i3);
+        }
 
-        menu.add(i1);
-        menu.add(i2);
-        menu.add(i5);
-        menu.add(i3);
-        menu.add(i4);
-    }     
+        if(droit >=3){
+
+            i4 = new JMenuItem("Ajouter une affectation");
+            i4.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent evt) {
+            
+                    Affectation ae = new Affectation();
+                    new FicheAjoutAffectation(ae);
+                }
+            });
+            menu.add(i4);
+        }
+
+        if(droit >=4){
+
+            i5 = new JMenuItem("Supprimer une affectation");
+            i5.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent evt) {
+                            
+                    new ListeDeleteAffectations();
+                }
+            });
+            menu.add(i5);
+        }
+    }
 }

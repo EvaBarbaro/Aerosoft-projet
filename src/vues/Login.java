@@ -43,7 +43,7 @@ public class Login extends JFrame implements ActionListener, KeyListener{
     labelPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
     labelPassword.setBounds(80, 130, 200, 30);     
 
-    textFieldLogin = new JTextField("admin@aerosoft.com"); //admin@aerosoft.com
+    textFieldLogin = new JTextField("admin@aerosoft.com");
     textFieldLogin.setFont(new Font("Tahoma", Font.PLAIN, 15));
     textFieldLogin.setBounds(300, 90, 200, 30);
     
@@ -129,7 +129,7 @@ String passwordString = new String(pass);
     public void register() {
         RoleDao roleDao = new RoleDao();
         ArrayList<Role> roles = roleDao.getAll();
-        String roleTab[] = new String[5];
+        String roleTab[] = new String[roles.size()+1];
         roleTab[0] = "Selectionner votre rôle";
         int i = 1;
 

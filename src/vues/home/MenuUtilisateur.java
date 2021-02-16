@@ -34,7 +34,7 @@ public class MenuUtilisateur extends JMenu{
 
     public MenuUtilisateur() {
 
-        menuUtilisateur=new JMenu("Utilisateur"); 
+    menuUtilisateur=new JMenu("Utilisateur"); 
 
     itemReadUtilisateur=new JMenuItem("Lister les utilisateurs");
     itemReadUtilisateur.addActionListener(new ActionListener()
@@ -45,33 +45,7 @@ public class MenuUtilisateur extends JMenu{
             new FicheReadUtilisateur();
     	}
     });
-
-    itemAddUtilisateur=new JMenuItem("Ajouter un utilisateur");
-    itemAddUtilisateur.addActionListener(new ActionListener()
-    {
-    	public void actionPerformed(ActionEvent evt)
-    	{
-			new FicheAjoutUtilisateur();
-    	}
-    });
-
-    itemListUtilisateur=new JMenuItem("Modifier les utilisateurs");
-    itemListUtilisateur.addActionListener(new ActionListener()
-    {
-    	public void actionPerformed(ActionEvent evt)
-    	{
-    		new FicheListUtilisateur();
-    	}
-    });
-
-    itemDeleteUtilisateur=new JMenuItem("Supprimer un utilisateur");
-    itemDeleteUtilisateur.addActionListener(new ActionListener()
-    {
-    	public void actionPerformed(ActionEvent evt)
-    	{
-            new FicheListDeleteUtilisateur();
-    	}
-    });
+    menuUtilisateur.add(itemReadUtilisateur);
 
     itemSearchUtilisateur=new JMenuItem("Rechercher un utilisateur");
     itemSearchUtilisateur.addActionListener(new ActionListener()
@@ -81,6 +55,38 @@ public class MenuUtilisateur extends JMenu{
             new FicheSearchUtilisateur();
     	}
     });
+    menuUtilisateur.add(itemSearchUtilisateur);
+
+    itemListUtilisateur=new JMenuItem("Modifier les utilisateurs");
+    itemListUtilisateur.addActionListener(new ActionListener()
+    {
+    	public void actionPerformed(ActionEvent evt)
+    	{
+    		new FicheListUtilisateur();
+    	}
+    });
+    menuUtilisateur.add(itemListUtilisateur);
+
+    itemAddUtilisateur=new JMenuItem("Ajouter un utilisateur");
+    itemAddUtilisateur.addActionListener(new ActionListener()
+    {
+    	public void actionPerformed(ActionEvent evt)
+    	{
+			new FicheAjoutUtilisateur();
+			
+    	}
+    });
+    menuUtilisateur.add(itemAddUtilisateur);
+
+    itemDeleteUtilisateur=new JMenuItem("Supprimer un utilisateur");
+    itemDeleteUtilisateur.addActionListener(new ActionListener()
+    {
+    	public void actionPerformed(ActionEvent evt)
+    	{
+            new FicheListDeleteUtilisateur();
+    	}
+    });
+    menuUtilisateur.add(itemDeleteUtilisateur);
 
     itemAddRole=new JMenuItem("Créer un rôle");
     itemAddRole.addActionListener(new ActionListener()
@@ -88,23 +94,10 @@ public class MenuUtilisateur extends JMenu{
     	public void actionPerformed(ActionEvent evt)
     	{
             Role role = new Role();
-            new FicheAjoutRole(role);
-    	}
-    });
-
-        itemAddTableRole=new JMenuItem("Table des rôles");
-    itemAddTableRole.addActionListener(new ActionListener()
-    {
-    	public void actionPerformed(ActionEvent evt)
-    	{
-            Role role = new Role();
-                    //new FicheAjoutRole(role);
+                //new FicheAjoutRole(role);
             new TableRole();
     	}
     });
-
-    
-
         menuUtilisateur.add(itemReadUtilisateur);
         menuUtilisateur.add(itemAddUtilisateur);
         menuUtilisateur.add(itemListUtilisateur);

@@ -44,28 +44,14 @@ public class Home {
         //for(String droit : droitArray){
             //System.out.println(droit);
         //}
+
         //convertion en int
         this.droitInt = new int[droitArray.length];
         for (int i = 0; i < droitInt.length; i++){ 
             this.droitInt[i] = Integer.parseInt(droitArray[i]);
-            System.out.println(i + " : " + droitInt[0]); 
-        //Parses the integer for each string. 
+            //System.out.println(i + " : " + droitInt[0]); 
         }
-        
-        /*
-        for(int droitI : droitInt){
-            System.out.println(droitI);
-        }*/
-        /*
-        int i =0;
-        for (String droit : droitArray) {
-            System.out.println(droit);
-            droits[0] = Integer.parseInt(droitArray[i]);
-            i++;
-        }
-        System.out.println(Arrays.toString(droits));
         //this.droitArray = tdroitArray;
-        */
         initialize(idUser);
 	}
     
@@ -82,40 +68,34 @@ public class Home {
 
         JMenuBar mb = new JMenuBar();
         /* Menu 1*/
-        menu = new JMenu("Accueil");
+        menu = new JMenu("Aerosoft");
 
         mb.add(menu);
 
         /*MenuAeroport*/
-        //int droit = this.droitInt[0];
-       // System.out.println(droit);
-
-        for(int droit : droitInt){
-            System.out.println(droit);
-        }
-
+        
         if(this.droitInt[0] != 0){
             mb.add(new MenuAeroport(this.droitInt[0]).getMenu());
         }
 
         /*Menu vol*/
         if(this.droitInt[1] != 0){
-            mb.add(new MenuVol().getMenu());
+            mb.add(new MenuVol(this.droitInt[1]).getMenu());
         }
 
         /*Menu pilote*/
         if(this.droitInt[2] != 0){
-            mb.add(new MenuPilote().getMenu());
+            mb.add(new MenuPilote(this.droitInt[2]).getMenu());
         }
         
         /*MenuAffectation*/
         if(this.droitInt[3] != 0){
-            mb.add(new MenuAffectation().getMenu());
+            mb.add(new MenuAffectation(this.droitInt[3]).getMenu());
         }
 
         /*Menu avion*/
         if(this.droitInt[4] != 0){
-            mb.add(new MenuAvion().getMenu());
+            mb.add(new MenuAvion(this.droitInt[4]).getMenu());
         }
 
         //MenuUtilisateur
