@@ -66,7 +66,7 @@ public class MenuAeroport extends JMenu{
             i3.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
                     //frame.setVisible(true);
-                    new ListeAeroports();
+                    new ListeModifAeroports();
                 }
             });
             menu.add(i3);

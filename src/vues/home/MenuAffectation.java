@@ -63,7 +63,7 @@ public class MenuAffectation extends JMenu{
             i3.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
 
-                    new ListeAffectations();
+                    new ListeModifAffectations();
 
                 }
             });
