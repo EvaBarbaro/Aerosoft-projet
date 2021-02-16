@@ -106,7 +106,8 @@ public class Fiche extends JFrame {
 		textField_1.setColumns(10);
 		textField_1.setText(listTextFields[0]);
 
-		if(booleanForSetEnabledFalse != null){
+		System.out.println("booleanForSetEnabledFalse :" + booleanForSetEnabledFalse);
+		if(booleanForSetEnabledFalse.length > 0 ){
 			textField_1.setEnabled(false);
 		}
 
