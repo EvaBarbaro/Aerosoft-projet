@@ -129,7 +129,7 @@ String passwordString = new String(pass);
     public void register() {
         RoleDao roleDao = new RoleDao();
         ArrayList<Role> roles = roleDao.getAll();
-        String roleTab[] = new String[5];
+        String roleTab[] = new String[roles.size()+1];
         roleTab[0] = "Selectionner votre rôle";
         int i = 1;
 
