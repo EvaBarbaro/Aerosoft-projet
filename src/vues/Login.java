@@ -319,33 +319,36 @@ String passwordString = new String(pass);
                 userPiloteString[4] = roleField.getText();
 
                 ArrayList<Utilisateur> userAll = utilisateurDao.getAll();
-                String userTab[] = new String[userAll.size()+1];
+
+                Boolean duplicate[] = new Boolean[userAll.size()];
+
                 int i = 0;
         
                 for (Utilisateur user : userAll) {
-                    userTab[i] = user.getMail();
-                    if (userPiloteString[1] == userTab[i]) {
-
-                        JLabel labelError = new JLabel("Cette adresse mail existe déjà.");
-                        labelError.setBounds(300, 230, 250, 30);
-                        labelError.setFont(new Font("Tahoma", Font.PLAIN, 15));
-                        labelError.setForeground(Color.RED);
-                        add(labelError);
-                        revalidate();
-                        repaint();
-                        System.out.println("Tab " + userTab[i]);
-                        System.out.println("String " + userPiloteString[1]);
-                    }else {
-                        System.out.println("Nope Tab " + userTab[i]);
-                        System.out.println("Nope String " + userPiloteString[1]);
-                        // utilisateurDao.save(utilisateur, userPiloteString);
-
-                        // dispose();
-        
-                        // new Login();
+                    if (user.getMail().equals(userPiloteString[1])) {
+                        duplicate[i] = true;
                     }
+                    else {
+                        duplicate[i] = false;
+                    }
+                    i++;
                 }
-                i++;
+
+                if (Arrays.asList(duplicate).contains(true)) {
+                    JLabel labelError = new JLabel("Cette adresse mail existe déjà.");
+                    labelError.setBounds(300, 230, 250, 30);
+                    labelError.setFont(new Font("Tahoma", Font.PLAIN, 15));
+                    labelError.setForeground(Color.RED);
+                    add(labelError);
+                    revalidate();
+                    repaint();
+                } else {
+                    utilisateurDao.save(utilisateur, userPiloteString);
+
+                    dispose();
+        
+                    new Login();
+                }
 
     }
 
