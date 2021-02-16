@@ -79,9 +79,7 @@ public class MenuUtilisateur extends JMenu{
             new FicheListDeleteUtilisateur();
     	}
     });
-<<<<<<< HEAD
     menuUtilisateur.add(itemDeleteUtilisateur);
-=======
 
     itemAddRole=new JMenuItem("Créer un rôle");
     itemAddRole.addActionListener(new ActionListener()
@@ -94,7 +92,6 @@ public class MenuUtilisateur extends JMenu{
     });
 
     menuUtilisateur.add(itemReadUtilisateur); menuUtilisateur.add(itemAddUtilisateur); menuUtilisateur.add(itemListUtilisateur); menuUtilisateur.add(itemDeleteUtilisateur); menuUtilisateur.add(itemSearchUtilisateur);menuUtilisateur.add(itemAddRole);
->>>>>>> 483ff0701701554a31f1fe2a9d45c5c8451f77b4
     }
   
 }
