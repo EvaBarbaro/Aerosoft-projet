@@ -105,7 +105,7 @@ public class RoleDao implements Dao {
 
 	@Override
 	public void update(Object t, String[] params) {
-		Role role =(Role) t;
+		/*Role role =(Role) t;
 
 		Connection conn = null;
 			PreparedStatement stmt = null;
@@ -127,7 +127,7 @@ public class RoleDao implements Dao {
 			new SDialog("Echec", "L'update n'a pas reussie car " + e, "ok", "").setVisible(true);
 			throw new RuntimeException(e);
 		}
-
+*/
 	}
 
 	@Override

@@ -76,7 +76,7 @@ public class TableRole extends JFrame implements TableModelListener{
             i++;
         }
         
-        String[] columnNames = {"Role","read","update","Create","Delete","all"};
+        String[] columnNames = {"Role","Aeroport","Vols","Pilotes","Affectation","Avion"};
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
 
         table = new JTable(model){
@@ -124,7 +124,19 @@ public class TableRole extends JFrame implements TableModelListener{
 		});
 
         JScrollPane scrollPane = new JScrollPane(table);        
-        getContentPane().add( scrollPane );
+        getContentPane().add(scrollPane);
+
+        setFont(new Font("Dialog", Font.PLAIN, 15));
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 600, 200);
+        
+        final Toolkit toolkit = Toolkit.getDefaultToolkit();
+		final Dimension screenSize = toolkit.getScreenSize();
+		final int x = (screenSize.width - this.getWidth()) / 2;
+		final int y = (screenSize.height - this.getHeight()) / 2;
+		setLocation(x, y);
+		setLocationRelativeTo(null);
+		setVisible(true);
 
     }
   

@@ -94,7 +94,7 @@ public class MenuUtilisateur extends JMenu{
     	public void actionPerformed(ActionEvent evt)
     	{
             Role role = new Role();
-                //new FicheAjoutRole(role);
+            //FicheAjoutRole(role);
             new TableRole();
     	}
     });
@@ -104,7 +104,6 @@ public class MenuUtilisateur extends JMenu{
         menuUtilisateur.add(itemDeleteUtilisateur);
         menuUtilisateur.add(itemSearchUtilisateur);
         menuUtilisateur.add(itemAddRole);
-        menuUtilisateur.add(itemAddTableRole);
     }
   
 }

@@ -102,7 +102,7 @@ public class Home {
 
         //MenuUtilisateur
         if(this.getDroit.equals("55555")){
-            //mb.add(new MenuUtilisateur().getMenu());
+            mb.add(new MenuUtilisateur().getMenu());
         }
 
         // Mon Compte
