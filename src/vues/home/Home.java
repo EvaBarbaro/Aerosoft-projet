@@ -106,7 +106,7 @@ public class Home {
         }
 
         // Mon Compte
-        mb.add(new MenuMaFiche(idUser).getMenu());
+        mb.add(new MenuMaFiche(idUser, frame).getMenu());
 
         frame.setJMenuBar(mb);
         /*Ajout d'une image*/

@@ -11,6 +11,7 @@ import dao.UtilisateurDao;
 import models.Pilote;
 import models.Utilisateur;
 import vues.Fiche;
+import vues.Login;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,7 +23,7 @@ public class MenuMaFiche extends JMenu{
 	 */
     private static final long serialVersionUID = 1L;
     
-    private JMenuItem itemMe, itemMePilote;
+    private JMenuItem itemMe, itemMePilote, itemLogOut;
 
     private JMenu menuMaFiche;
 
@@ -34,7 +35,7 @@ public class MenuMaFiche extends JMenu{
         return this.menuMaFiche;
     }
 
-    public MenuMaFiche(int idUser) {
+    public MenuMaFiche(int idUser, JFrame frame) {
 
     menuMaFiche=new JMenu("Ma Fiche"); 
 
@@ -200,10 +201,20 @@ public class MenuMaFiche extends JMenu{
             }
         });
 
-    menuMaFiche.add(itemMe);
-    
+        itemLogOut=new JMenuItem("Déconnexion");
+        itemLogOut.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent evt)
+            {
+                frame.dispose();
+                new Login();
+            }
+        });
+
+    menuMaFiche.add(itemMe);  
         if (pilote != null) {
             menuMaFiche.add(itemMePilote);   
         }
+    menuMaFiche.add(itemLogOut);
     }     
 }
