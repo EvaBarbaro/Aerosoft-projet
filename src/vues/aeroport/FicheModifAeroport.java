@@ -4,6 +4,7 @@ import dao.AeroportDao;
 import javax.swing.JFrame;
 import models.Aeroport;
 import vues.Fiche;
+import vues.FicheFirstFieldFalse;
 
 public class FicheModifAeroport extends JFrame {
   /**
@@ -27,7 +28,7 @@ public class FicheModifAeroport extends JFrame {
 
     	bdao = new AeroportDao();
 
-    	new Fiche(
+    	new FicheFirstFieldFalse(
       		"Modification d'un aeroport",
       		bdao,
 			(Object) a,
