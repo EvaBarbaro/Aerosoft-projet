@@ -3,7 +3,10 @@ package vues.vol;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+// import de VolDao
 import dao.VolDao;
+
+// import du model Vol
 import models.Vol;
 
 import java.awt.*;
@@ -33,7 +36,9 @@ public class ListeReadVol extends JFrame implements ActionListener{
 	 
 	String[] tblHead = { "Id du vol", "Aeroport de depart", "Heure de depart", "Aeroport d'arrivé", "Heure d'arrivé" };
 	 
-
+	/**
+	 * Création de la frame du tableau des vols
+	 */
 	public ListeReadVol() {
 		
 		/* Label */
@@ -86,6 +91,7 @@ public class ListeReadVol extends JFrame implements ActionListener{
 	
 	/** 
 	 * @param dao
+	 * Récupération des données pour tous les vols
 	 */
 	public void chargeData(VolDao dao) {
 			

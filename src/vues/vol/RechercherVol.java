@@ -6,7 +6,10 @@ import java.awt.Dimension;
 import java.awt.*;
 import java.awt.event.*;
 
+// import des daos
 import dao.*;
+
+// import des models
 import models.*;
 
 import javax.swing.*;
@@ -30,6 +33,9 @@ public class RechercherVol extends JFrame implements ActionListener {
 
 	String[] tblHead = { "Id du vol", "Aeroport de depart", "Heure de depart", "Aeroport d'arrivé", "Heure d'arrivé" };
 
+	/**
+	 * Création de la frame de Recherche d'un vol
+	 */
 	public RechercherVol() {
 		/* Label 1 */
 		l1 = new JLabel("RECHERCHER UN Vol");
@@ -44,6 +50,8 @@ public class RechercherVol extends JFrame implements ActionListener {
 		/* JTextField recherche */
 		tf1 = new JTextField();
 		tf1.setBounds(180, 70, 200, 30);
+
+		// Evenement du bouton Entrée sur le textField
 		tf1.addKeyListener(new KeyAdapter() {
 
 			@Override
@@ -100,6 +108,9 @@ public class RechercherVol extends JFrame implements ActionListener {
 		setVisible(true);
 	}
 	
+	/**
+	 * Récupération du vol recherchée
+	 */
 	public void chargeData(){
 		Object[] donnees = { 
 			v1.getNumVol(), 
@@ -118,6 +129,7 @@ public class RechercherVol extends JFrame implements ActionListener {
 	
 	/** 
 	 * @param e
+	 * Evenement du bouton rechercher
 	 */
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btn1) {
@@ -125,16 +137,21 @@ public class RechercherVol extends JFrame implements ActionListener {
 		}
 	}
 
+	/**
+	 * Création de l'élément du vol rechercher
+	 */
 	private void rechercherVol() {		
 
 		Object id = (Object) tf1.getText();
-							
+		
+		// récupération du vol
 		v1 = (Vol) dao.get(id);
 
 		if (v1 != null) {
 			
 			chargeData();	
 
+			// Evenement clic
 			data.addMouseListener(new MouseAdapter() {
 		
 				public void mousePressed(MouseEvent mouseEvent) {
@@ -145,16 +162,19 @@ public class RechercherVol extends JFrame implements ActionListener {
 					
 					int row = table.rowAtPoint(point);
 					
+					// Evenement double clic
 					if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
 						
 						int column = 0;
 						
+						// récupération du vol sélectionné
 						Object id = (Object) table.getModel().getValueAt(row, column).toString();
 											
 						v1 = (Vol) dao.get(id);
 	
 						if (v1 != null) {
 							
+							// Appel de la fiche de modification du vol
 							FicheModifVol fm = new FicheModifVol(v1);
 							
 							fm.addWindowListener(new WindowListener() {
