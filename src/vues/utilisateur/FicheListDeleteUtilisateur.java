@@ -3,7 +3,10 @@ package vues.utilisateur;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+// import des daos
 import dao.*;
+
+// import des models
 import models.*;
 
 import java.awt.*;
@@ -31,6 +34,9 @@ public class FicheListDeleteUtilisateur extends JFrame implements ActionListener
 	String[] tblHead = { "IdUtilisateur", "Mail", "Statut", "IdRole" };
 	 
 
+	/**
+	 * Création de la frame de la liste des utilisateurs pour suppression
+	 */
 	public FicheListDeleteUtilisateur() {
 		
 		/* Label */
@@ -56,6 +62,7 @@ public class FicheListDeleteUtilisateur extends JFrame implements ActionListener
 		
 		data.setDefaultEditor(Object.class, null);
 		
+		// Evenement du clic
 		data.addMouseListener(new MouseAdapter() {
 		    
 			public void mousePressed(MouseEvent mouseEvent) {
@@ -66,17 +73,20 @@ public class FicheListDeleteUtilisateur extends JFrame implements ActionListener
 		        
 		        int row = table.rowAtPoint(point);
 		        
+				// Evenement sur le double clic
 		        if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
 		        	
 					int column = 0;
 					
 					//int id = Integer.parseInt(table.getModel().getValueAt(row, column).toString());
 					int id = (int) table.getModel().getValueAt(row, column);
-										
+					
+					// Récupération de l'utilisateur selon l'ID de l'item sélectionné dans la liste
 					b1 = (Utilisateur) dao.get(id);
 
 					if (b1 != null) {
 						
+						// Appel de la fiche de suppression d'un utilisateur
 						FicheDeleteUtilisateur fm = new FicheDeleteUtilisateur(b1);
 						
 						fm.addWindowListener(new WindowListener() {
@@ -154,6 +164,7 @@ public class FicheListDeleteUtilisateur extends JFrame implements ActionListener
 	
 	/** 
 	 * @param dao
+	 * Récupération de tous les utilisateurs pour la liste
 	 */
 	public void chargeData(UtilisateurDao dao) {
 			

@@ -87,12 +87,14 @@ public class FicheReadPilote extends JFrame {
 	
 	/** 
 	 * @param dao
+	 * Récupération de la liste des pilotes
 	 */
 	public void chargeData(PiloteDao dao) {
 			
 			
 			list = (List<Pilote>) dao.getAll();
 							
+			// Itération des pilotes
 			ListIterator<Pilote> listIterator = ((java.util.List<Pilote>) list).listIterator();
 			
 			tableModel.setRowCount(0);

@@ -3,7 +3,10 @@ package vues.vol;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+// import de volDao
 import dao.VolDao;
+
+// import du model vol
 import models.Vol;
 
 import java.awt.*;
@@ -33,7 +36,9 @@ public class ListeVol extends JFrame implements ActionListener{
 	 
 	String[] tblHead = { "Id du vol", "Aeroport de depart", "Heure de depart", "Aeroport d'arrivé", "Heure d'arrivé" };
 	 
-
+	/**
+	 * Création de la frame pour la liste des vols pour modification
+	 */
 	public ListeVol() {
 		
 		/* Label */
@@ -61,6 +66,7 @@ public class ListeVol extends JFrame implements ActionListener{
 		
 		data.setDefaultEditor(Object.class, null);
 		
+		// Evènement du clic
 		data.addMouseListener(new MouseAdapter() {
 		    
 			public void mousePressed(MouseEvent mouseEvent) {
@@ -71,17 +77,20 @@ public class ListeVol extends JFrame implements ActionListener{
 		        
 		        int row = table.rowAtPoint(point);
 		        
+				// Evenement du double clic
 		        if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
 		        	
 					int column = 0;
 					
 					//int id = Integer.parseInt(table.getModel().getValueAt(row, column).toString());
 					Object id = (Object) table.getModel().getValueAt(row, column).toString();
-										
+					
+					// récupération du vol sélectionné
 					v1 = (Vol) dao.get(id);
 
 					if (v1 != null) {
 						
+						// Appel de la fiche de modification du vol
 						FicheModifVol fm = new FicheModifVol(v1);
 						
 						fm.addWindowListener(new WindowListener() {
@@ -162,6 +171,7 @@ public class ListeVol extends JFrame implements ActionListener{
 	
 	/** 
 	 * @param dao
+	 * Récupération de tous les vols pour la liste
 	 */
 	public void chargeData(VolDao dao) {
 			

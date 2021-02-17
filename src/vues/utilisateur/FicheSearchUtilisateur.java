@@ -6,7 +6,10 @@ import java.awt.Dimension;
 import java.awt.*;
 import java.awt.event.*;
 
+// import des daos
 import dao.*;
+
+// import des models
 import models.*;
 
 import javax.swing.*;
@@ -30,6 +33,9 @@ public class FicheSearchUtilisateur extends JFrame implements ActionListener {
 
 	String[] tblHead = { "Id Utilisateur", "Mail", "Statut"};
 
+	/**
+	 * Création de la frame de recherche d'un utilisateur
+	 */
 	public FicheSearchUtilisateur() {
 		/* Label */
 		l1 = new JLabel("RECHERCHER UN UTILISATEUR");
@@ -91,6 +97,9 @@ public class FicheSearchUtilisateur extends JFrame implements ActionListener {
 		setVisible(true);
 	}
 	
+	/**
+	 * récupération des données d'un utilisateur
+	 */
 	public void chargeData(){
 		Object[] donnees = { 
 			utilisateur.getIdUtilisateur(), 
@@ -107,6 +116,7 @@ public class FicheSearchUtilisateur extends JFrame implements ActionListener {
 	
 	/** 
 	 * @param e
+	 * Evenement de recherche
 	 */
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btn1) {
@@ -123,6 +133,7 @@ public class FicheSearchUtilisateur extends JFrame implements ActionListener {
 				
 				chargeData();	
 
+				// Evenement de clic
 				data.addMouseListener(new MouseAdapter() {
 		    
 					public void mousePressed(MouseEvent mouseEvent) {
@@ -133,6 +144,7 @@ public class FicheSearchUtilisateur extends JFrame implements ActionListener {
 						
 						int row = table.rowAtPoint(point);
 						
+						// Evenement de double clic
 						if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
 							
 							int column = 0;
@@ -144,6 +156,7 @@ public class FicheSearchUtilisateur extends JFrame implements ActionListener {
 		
 							if (utilisateur != null) {
 								
+								// Appel de la fiche de modification d'un pilote
 								FicheModifUtilisateur fm = new FicheModifUtilisateur(utilisateur);
 								
 								fm.addWindowListener(new WindowListener() {

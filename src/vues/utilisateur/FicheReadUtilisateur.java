@@ -3,7 +3,10 @@ package vues.utilisateur;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+// import des daos
 import dao.*;
+
+// import des models
 import models.*;
 
 import java.awt.*;
@@ -79,6 +82,7 @@ public class FicheReadUtilisateur extends JFrame {
 	
 	/** 
 	 * @param dao
+	 * Récupération de tous les utilisateurs à afficher dans le tableau
 	 */
 	public void chargeData(UtilisateurDao dao) {
 			

@@ -10,10 +10,16 @@ import java.awt.Dimension;
 import java.sql.*;
 import java.util.*;
 
+// import connexion
 import connexion.ConnectionBdd;
+
+// import vues Home
 import vues.home.Home;
 
+// import des models
 import models.*;
+
+// import des daos
 import dao.*;
 
 public class Login extends JFrame implements ActionListener, KeyListener{
@@ -24,8 +30,12 @@ public class Login extends JFrame implements ActionListener, KeyListener{
     JButton btnValider, btnInscription;
     JPasswordField passwordField;
 
+    /**
+     * Création de la frame login
+     */
     public Login() {
 
+    // Logo
     JLabel labelimage = new JLabel();
         ImageIcon img = new ImageIcon(
             Toolkit.getDefaultToolkit().getImage(
@@ -36,6 +46,7 @@ public class Login extends JFrame implements ActionListener, KeyListener{
         labelimage.setIcon(img);
         add(labelimage);
 
+    // Label
     labelEmail = new JLabel("Votre Email:");
     labelEmail.setFont(new Font("Tahoma", Font.PLAIN, 15));
     labelEmail.setBounds(80, 90, 200, 30);
@@ -44,6 +55,7 @@ public class Login extends JFrame implements ActionListener, KeyListener{
     labelPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
     labelPassword.setBounds(80, 130, 200, 30);     
 
+    // TextField
     textFieldLogin = new JTextField("");
     textFieldLogin.setFont(new Font("Tahoma", Font.PLAIN, 15));
     textFieldLogin.setBounds(300, 90, 200, 30);
@@ -97,6 +109,9 @@ public class Login extends JFrame implements ActionListener, KeyListener{
     setVisible(true);
 }
 
+/**
+ * Fonction de connexion utilisateur
+ */
 public void getLogged() {
 
 String loginString = textFieldLogin.getText();
@@ -136,6 +151,9 @@ String passwordString = new String(pass);
 
     }
 
+    /**
+     * Fonction d'inscription
+     */
     public void register() {
         RoleDao roleDao = new RoleDao();
         ArrayList<Role> roles = roleDao.getAll();
@@ -148,9 +166,11 @@ String passwordString = new String(pass);
             i++;
         }
 
+        // ComboBox
         JComboBox<String> comboBoxRole = new JComboBox<String>(roleTab);
         comboBoxRole.setBounds(310, 170, 180, 20);
 
+        // Bouton
         JButton btnValidateReg;
 
         btnValidateReg = new JButton("Valider votre inscription");
@@ -169,6 +189,7 @@ String passwordString = new String(pass);
         this.validate();
         this.repaint();
 
+        // Evenement de la comboBox
         comboBoxRole.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent eventComboBox) {
                 String stringBox = (String) comboBoxRole.getSelectedItem();

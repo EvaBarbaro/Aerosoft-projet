@@ -3,7 +3,10 @@ package vues.pilote;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+// import des daos
 import dao.*;
+
+// import des models
 import models.*;
 
 import java.awt.*;
@@ -33,7 +36,9 @@ public class FicheListDeletePilot extends JFrame implements ActionListener{
 	 
 	String[] tblHead = { "IdPilote", "NomPilote", "PrenomPilote", "Matricule" };
 	 
-
+	/**
+	 * Crée la frame de la liste des pilotes pour suppression
+	 */
 	public FicheListDeletePilot() {
 		
 		/* Label */
@@ -61,6 +66,7 @@ public class FicheListDeletePilot extends JFrame implements ActionListener{
 		
 		data.setDefaultEditor(Object.class, null);
 		
+		//Crée un évènement de clique		
 		data.addMouseListener(new MouseAdapter() {
 		    
 			public void mousePressed(MouseEvent mouseEvent) {
@@ -71,17 +77,19 @@ public class FicheListDeletePilot extends JFrame implements ActionListener{
 		        
 		        int row = table.rowAtPoint(point);
 		        
+				// Set l'évènement lors d'un double clic
 		        if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
 		        	
 					int column = 0;
 					
 					//int id = Integer.parseInt(table.getModel().getValueAt(row, column).toString());
 					int id = (int) table.getModel().getValueAt(row, column);
-										
+					
+					// Récupération du pilote de la liste ayant été cliqué
 					b1 = (Pilote) dao.get(id);
 
 					if (b1 != null) {
-						
+						// Appel de la frame de suppression du pilote				
 						FicheDeletePilote fm = new FicheDeletePilote(b1);
 						
 						fm.addWindowListener(new WindowListener() {
@@ -159,12 +167,14 @@ public class FicheListDeletePilot extends JFrame implements ActionListener{
 	
 	/** 
 	 * @param dao
+	 * Récupère tout les pilotes en BDD pour les ajouter au tableau
 	 */
 	public void chargeData(PiloteDao dao) {
 			
 			
 			list = (List<Pilote>) dao.getAll();
-							
+		
+			// Itération de la liste de pilote
 			ListIterator<Pilote> listIterator = ((java.util.List<Pilote>) list).listIterator();
 			
 			tableModel.setRowCount(0);
