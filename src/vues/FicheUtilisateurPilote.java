@@ -31,7 +31,7 @@ import java.util.Map;
 
 import java.awt.event.ActionEvent;
 
-public class FicheUtilisateur extends JFrame {
+public class FicheUtilisateurPilote extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
@@ -76,7 +76,7 @@ public class FicheUtilisateur extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FicheUtilisateur(
+	public FicheUtilisateurPilote(
 			String titre, 
 			Dao dao, 
 			Object transport,
@@ -148,6 +148,7 @@ public class FicheUtilisateur extends JFrame {
 			lblNewLabel_4 = new JLabel(listLabels[3]);
 			lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
 			utilisateurStatut.setSelected(Boolean.parseBoolean(listTextFields[3]));
+			utilisateurStatut.setEnabled(false);
 
 			oldValue_4 = listTextFields[3];
 		}
@@ -409,7 +410,8 @@ public class FicheUtilisateur extends JFrame {
 		  @Override
 		  public void actionPerformed(ActionEvent e) {
 				String idRole = (String) cbox.getSelectedItem();
-				valeurRetourjComboBox = map.get(idRole);		
+				valeurRetourjComboBox = map.get(idRole);
+				cbox.setEnabled(false);		
 		  }
 		});
 	

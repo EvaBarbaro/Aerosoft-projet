@@ -6,14 +6,12 @@ import javax.swing.JPanel;
 
 import javax.swing.border.EmptyBorder;
 
-import dao.RoleDao;
 import interfaces.Dao;
 
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
-
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.Image;
@@ -21,18 +19,17 @@ import java.awt.Image;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
-import java.util.Map;
 
+//import java.util.concurrent.Callable;
 import java.awt.event.ActionEvent;
 
-public class FicheUtilisateur extends JFrame {
-
+public class FicheFirstFieldFalse extends JFrame {
+	/**
+	 *
+	 */
 	private static final long serialVersionUID = 1L;
 
 	
@@ -58,12 +55,9 @@ public class FicheUtilisateur extends JFrame {
 	private JTextField textField_1;
 	private JTextField textField_2 = new JTextField();
 	private JTextField textField_3 = new JTextField();
-
+	private JTextField textField_4 = new JTextField();
+	private JTextField textField_5 = new JTextField();
 	private JTextField textField_6 = new JTextField();
-	
-	private JComboBox jComboBox;
-	private String valeurRetourjComboBox;
-	private JCheckBox utilisateurStatut = new JCheckBox();
 
 	private String oldValue_1;
 	private String oldValue_2;
@@ -71,21 +65,19 @@ public class FicheUtilisateur extends JFrame {
 	private String oldValue_4;
 	private String oldValue_5;
 	private String oldValue_6;
-	
-	private RoleDao rd;
+
 	/**
 	 * Create the frame.
 	 */
-	public FicheUtilisateur(
+	public FicheFirstFieldFalse(
 			String titre, 
 			Dao dao, 
 			Object transport,
 			String [] listLabels, 
 			String [] listTextFields,
 			String [] listTextBtns,
-			String [] listMethodeDoa,
-			Map<String, String> jComboBoxTitles
-	) {
+			String[] listMethodeDoa,
+			Boolean... booleanForSetEnabledFalse){
 
 		setTitle(titre);
 
@@ -113,7 +105,7 @@ public class FicheUtilisateur extends JFrame {
 		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textField_1.setColumns(10);
 		textField_1.setText(listTextFields[0]);
-		textField_1.setEnabled(false);
+        textField_1.setEnabled(false);
 
 		oldValue_1 = listTextFields[0];
 
@@ -147,7 +139,11 @@ public class FicheUtilisateur extends JFrame {
 
 			lblNewLabel_4 = new JLabel(listLabels[3]);
 			lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			utilisateurStatut.setSelected(Boolean.parseBoolean(listTextFields[3]));
+
+			textField_4 = new JTextField();
+			textField_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			textField_4.setColumns(10);
+			textField_4.setText(listTextFields[3]);
 
 			oldValue_4 = listTextFields[3];
 		}
@@ -157,12 +153,10 @@ public class FicheUtilisateur extends JFrame {
 			lblNewLabel_5 = new JLabel(listLabels[4]);
 			lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
-			jComboBox = createComboBox(jComboBoxTitles);
-
-			jComboBox.setFont(new Font("Tahoma", Font.PLAIN, 15));
-
-			rd = new RoleDao();
-			jComboBox.setSelectedItem(rd.getRoleNomByIdRole(listTextFields[4]));
+			textField_5 = new JTextField();
+			textField_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			textField_5.setColumns(10);
+			textField_5.setText(listTextFields[4]);
 
 			oldValue_5 = listTextFields[4];
 		}
@@ -188,8 +182,8 @@ public class FicheUtilisateur extends JFrame {
 				if (oldValue_1 != null
 						|| (oldValue_2 != null && !(oldValue_2.equals(textField_2.getText())))
 						|| (oldValue_3 != null && !(oldValue_3.equals(textField_3.getText())))
-						|| (oldValue_4 != null && !(oldValue_4.equals(utilisateurStatut.getText())))
-						|| (oldValue_5 != null && !(oldValue_5.equals(jComboBox.getSelectedItem()))) 
+						|| (oldValue_4 != null && !(oldValue_4.equals(textField_4.getText())))
+						|| (oldValue_5 != null && !(oldValue_5.equals(textField_5.getText()))) 
 						|| (oldValue_6 != null && !(oldValue_6.equals(textField_6.getText())))) {
 			
 					String[] params = new String[listTextFields.length];
@@ -206,11 +200,11 @@ public class FicheUtilisateur extends JFrame {
 					} 
 			
 					if (listLabels.length >= 4) {
-						params[3] = "" + utilisateurStatut.isSelected();						
+						params[3] = textField_4.getText();						
 					} 
 			
 					if (listLabels.length >= 5) {
-						params[4] =  valeurRetourjComboBox;
+						params[4] = textField_5.getText();
 					}
 					
 					if (listLabels.length >= 6) {
@@ -271,8 +265,8 @@ public class FicheUtilisateur extends JFrame {
 								.addComponent(lblNewLabel_6))
 							.addPreferredGap(ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(jComboBox, Alignment.TRAILING)
-								.addComponent(utilisateurStatut, Alignment.TRAILING)
+								.addComponent(textField_5, Alignment.TRAILING)
+								.addComponent(textField_4, Alignment.TRAILING)
 								.addComponent(textField_3)
 								.addComponent(textField_2)
 								.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
@@ -302,22 +296,22 @@ public class FicheUtilisateur extends JFrame {
 							.addGap(18)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addComponent(lblNewLabel_4)
-								.addComponent(utilisateurStatut, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+								.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 						.addComponent(lblNewID))
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblNewLabel_5)
-						.addComponent(jComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addComponent(lblNewLabel_5)
+					.addComponent(textField_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField_6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel_6))
+					.addComponent(textField_6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addComponent(lblNewLabel_6))
 					.addPreferredGap(ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btn_2)
-						.addComponent(btn_1))
+					.addComponent(btn_2)
+					.addComponent(btn_1))
 					.addGap(32))
-		);
+					);
 		contentPane.setLayout(gl_contentPane);
 		lblNewID.setVisible(false);
 
@@ -334,15 +328,15 @@ public class FicheUtilisateur extends JFrame {
 		}
 
 		if (listTextFields.length >= 4) {
-			utilisateurStatut.setVisible(true);
+			textField_4.setVisible(true);
 		} else {
-			utilisateurStatut.setVisible(false);
+			textField_4.setVisible(false);
 		}
 
 		if (listTextFields.length >= 5) {
-			jComboBox.setVisible(true);
+			textField_5.setVisible(true);
 		} else {
-			jComboBox.setVisible(false);
+			textField_5.setVisible(false);
 		}
 
 		if (listTextFields.length >= 6) {
@@ -392,28 +386,14 @@ public class FicheUtilisateur extends JFrame {
                 ; 
 		}
 	}
+	/*private Image getScaledImage(Image srcImg, int w, int h){
+		BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2 = resizedImg.createGraphics();
 	
-	/** 
-	 * @param map
-	 * @return JComboBox
-	 */
-	private JComboBox createComboBox(final Map<String, String> map) {
-		final JComboBox cbox = new JComboBox();
-
-		for (String r : map.keySet()) {
-		  cbox.addItem(r);
-		}
+		g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+		g2.drawImage(srcImg, 0, 0, w, h, null);
+		g2.dispose();
 	
-		cbox.addActionListener(new ActionListener() {
-	
-		  @Override
-		  public void actionPerformed(ActionEvent e) {
-				String idRole = (String) cbox.getSelectedItem();
-				valeurRetourjComboBox = map.get(idRole);		
-		  }
-		});
-	
-		return cbox;
-	  }
-	
+		return resizedImg;
+	}	*/
 }

@@ -3,7 +3,10 @@ package vues.pilote;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+// import des daos
 import dao.*;
+
+// import des models
 import models.*;
 
 import java.awt.*;
@@ -29,7 +32,9 @@ public class FicheReadPilote extends JFrame {
 	 
 	String[] tblHead = { "IdPilote", "NomPilote", "PrenomPilote", "Matricule" };
 	 
-
+	/** 
+	 * Crée l'affichage des pilotes dans un tableau
+	 */
 	public FicheReadPilote() {
 		
 		/* Label */

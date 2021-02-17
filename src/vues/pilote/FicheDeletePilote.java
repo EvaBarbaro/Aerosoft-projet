@@ -2,9 +2,14 @@ package vues.pilote;
 
 import javax.swing.JFrame;
 
+// import des daos
 import dao.*;
+
+// import des models
 import models.*;
-import vues.Fiche;
+
+// import de la fiche avec le premier text field non-modifiable
+import vues.FicheFirstFieldFalse;
 
 
 public class FicheDeletePilote extends JFrame {
@@ -21,20 +26,24 @@ public class FicheDeletePilote extends JFrame {
     Utilisateur utilisateur = new Utilisateur();
 
 	/**
-	 * Create the frame.
+	 * Crée la Frame de suppression d'un pilote.
 	 */
 	public FicheDeletePilote(Pilote pilote) {
-		System.out.println(pilote);
 
+		// Tableau des labels
 		String[] listLabels = { "Id de l'aeroport à supprimer"};
-		
+
+		// Tableau des champs de textes
 		String[] listTextFields = {"" + pilote.getIdPilote()};
 				
+		// Tableau des boutons
 		String[] listTextBtns = { "Valider","Annuler" };
+
+		// Tableau des méthodes
 		String[] listMethodeDoa = { "delete","" };
 		piloteDao = new PiloteDao();
 
-		new Fiche(
+		new FicheFirstFieldFalse(
 				"Suppression d'un Pilote", 
 				piloteDao, 
 				(Object)pilote, 
@@ -43,16 +52,25 @@ public class FicheDeletePilote extends JFrame {
 				listTextBtns,
 				listMethodeDoa
 				);
-		
+
+		/**
+		 * Crée une frame de suppression pour le compte utilisateur associé.
+		 */
+
+		// Tableau des labels
 		String[] listLabelUser = { "Id de l'utilisateur à supprimer"};
 
+		// Tableau des champs de textes
 		String[] listTextFieldUser = {"" + pilote.getIdPilote()};
 			
+		// Tableau des boutons
 		String[] listTextBtnUser = { "Valider","Annuler" };
+
+		// Tableau des méthodes
 		String[] listMethodeDoaUser = { "delete","" };
 		utilisateurDao = new UtilisateurDao();
 
-		new Fiche(
+		new FicheFirstFieldFalse(
 				"Supression d'un utilisateur pilote", 
 				utilisateurDao, 
 				(Object)utilisateur, 

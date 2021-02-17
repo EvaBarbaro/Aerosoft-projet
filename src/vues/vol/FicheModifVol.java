@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 
 import dao.VolDao;
 import models.Vol;
-import vues.Fiche;
+import vues.FicheFirstFieldFalse;
 
 
 public class FicheModifVol extends JFrame {
@@ -29,7 +29,7 @@ public class FicheModifVol extends JFrame {
 		String[] listMethodeDoa = { "update","" };
 		bdao = new VolDao();
 
-		new Fiche(
+		new FicheFirstFieldFalse(
 				"Modification d'un vol", 
 				bdao, 
 				(Object)v, 

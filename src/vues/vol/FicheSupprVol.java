@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 
 import dao.VolDao;
 import models.Vol;
-import vues.Fiche;
+import vues.FicheFirstFieldFalse;
 
 
 public class FicheSupprVol extends JFrame {
@@ -29,7 +29,7 @@ public class FicheSupprVol extends JFrame {
 		String[] listMethodeDoa = { "delete","" };
 		bdao = new VolDao();
 
-		new Fiche(
+		new FicheFirstFieldFalse(
 				"Suppression d'un Vol", 
 				bdao, 
 				(Object)v, 
