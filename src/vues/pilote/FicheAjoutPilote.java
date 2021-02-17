@@ -12,9 +12,6 @@ import vues.FicheUtilisateur;
 
 public class FicheAjoutPilote extends JFrame {
 
-	/**
-	 *
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	PiloteDao piloteDao;
@@ -23,10 +20,11 @@ public class FicheAjoutPilote extends JFrame {
 
     Utilisateur utilisateur = new Utilisateur();
 
+	// Créer un ID unique
     int uniqueID = UUID.randomUUID().hashCode();
 
 	/**
-	 * Create the frame.
+	 * Crée une frame d'ajout pilote.
 	 */
 	public FicheAjoutPilote(Pilote pilote) {
 
@@ -48,6 +46,9 @@ public class FicheAjoutPilote extends JFrame {
 				listMethodeDoa
 				);
 
+		/**
+		 * Crée une frame d'ajout utilisateur pilote.
+		 */
         String[] listLabelUser = { "Id de l'utilisateur", "Mail", "Mot de passe", "satut", "role"};
 		
 		String[] listTextFieldUser = {String.valueOf(uniqueID),"","", "false", String.valueOf(11111)};
