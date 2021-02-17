@@ -39,7 +39,7 @@ public class MenuMaFiche extends JMenu{
     itemMe.addActionListener(new ActionListener()
     {
     	public void actionPerformed(ActionEvent evt){
-            new MaFiche();
+            new MaFiche(idUser);
 
     	}
     });

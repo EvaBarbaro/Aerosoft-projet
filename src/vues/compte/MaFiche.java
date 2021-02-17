@@ -1,24 +1,21 @@
 package vues.compte;
 
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
 import javax.swing.*;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.Font;
 import java.awt.Color;
 
-import dao.PiloteDao;
 import dao.UtilisateurDao;
-import models.Pilote;
 import models.Utilisateur;
 import vues.Fiche;
-import vues.Login;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MaFiche {
+
+    public MaFiche(int idUser) {
     JFrame meFrame = new JFrame();
     JLabel labelEmail, labelPassword;
     JTextField textFieldId, textFieldLogin, textFieldStatut, textFieldRole;
@@ -94,4 +91,5 @@ public class MaFiche {
     meFrame.setLayout(null);
     meFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
     meFrame.setVisible(true);
+    }
 }
