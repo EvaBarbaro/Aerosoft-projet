@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.synth.SynthLookAndFeel;
 
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
@@ -13,6 +14,7 @@ import org.jdatepicker.impl.UtilDateModel;
 
 import interfaces.Dao;
 
+import javax.security.auth.callback.Callback;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
@@ -30,6 +32,7 @@ import javax.swing.JComboBox;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
+import java.net.Socket;
 import java.sql.Date;
 import java.time.format.DateTimeFormatter;
 import java.awt.event.ActionEvent;
@@ -148,14 +151,12 @@ public class FicheAffectation extends JFrame {
 			lblNewLabel_3 = new JLabel(listLabels[2]);
 			lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
-			/*textField_3 = new JTextField();
-			textField_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			textField_3.setColumns(10);
-			textField_3.setText(listTextFields[2]);*/
-
-			SqlDateModel model = new SqlDateModel();
-
-			//model.setDate(year, month, day);
+			UtilDateModel model = new UtilDateModel();
+			
+			String[] parts = listTextFields[2].split("-");
+			
+			model.setDate(Integer.parseInt(parts[0]), (Integer.parseInt(parts[1])-1), Integer.parseInt(parts[2]));
+			model.setSelected(true);
 
 			Properties p = new Properties();
 			p.put("text.today", "Today");
@@ -164,8 +165,6 @@ public class FicheAffectation extends JFrame {
 
 			JDatePanelImpl datePanel = new JDatePanelImpl(model,p);
 			datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
-			//this.add(datePicker);
-
 			oldValue_3 = listTextFields[2];
 		}
 

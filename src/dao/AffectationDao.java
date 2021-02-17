@@ -21,12 +21,12 @@ public class AffectationDao implements Dao {
 	@Override
 	public Object get(Object id) {
 		Affectation affectation = new Affectation();
+
 		//Transformer l'object 'id' en String pour l'envoyer dans la requete 
 		String idSearch = String.valueOf(id);
+
 		Connection conn = null;
 		PreparedStatement stmt = null;
-
-		//String sql = "SELECT * FROM affectation WHERE IdAffectation=?";
 		
 		String sql = "SELECT "
 		+ "affectation.IdAffectation,"
@@ -45,11 +45,11 @@ public class AffectationDao implements Dao {
 			System.out.println("get stmt " + stmt);
 
 			stmt.setString(1, idSearch);
-			System.out.println("Voici les informations de l'affectation " + id);
 				
 			ResultSet res = stmt.executeQuery();
 			
 			while (res.next()) {
+
 				affectation.setId(res.getString(1));
 				affectation.setNumVol(res.getString(2));
 				affectation.setDateVol(res.getDate(3));
@@ -82,8 +82,10 @@ public class AffectationDao implements Dao {
 	 */
 	@Override
 	public ArrayList<Affectation> getAll() {
+
 		Connection conn = null;
 		PreparedStatement stmt = null;
+
 		String sql = "SELECT "
 				+ "affectation.IdAffectation,"
 				+ "affectation.NumVol,"
@@ -100,7 +102,7 @@ public class AffectationDao implements Dao {
 		try {
 			conn = ConnectionBdd.getConnection();
 			stmt = conn.prepareStatement(sql);
-			System.out.println("getAll stmt " + stmt);
+
 			ResultSet rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
@@ -142,6 +144,7 @@ public class AffectationDao implements Dao {
 	 */
 	@Override
 	public void save(Object t, String[] params) {
+
 			Affectation affectation = (Affectation) t;
 
 			PiloteDao pda = new PiloteDao();
@@ -150,9 +153,13 @@ public class AffectationDao implements Dao {
 			PreparedStatement stmt = null;
 
 			String sql = "INSERT INTO `AFFECTATION` (IdAffectation,NumVol,DateVol,AffectationCode,NumAvion,IdPilote) VALUES (?,?,?,?,?,?)";
+
 		try {
+			
 			conn = ConnectionBdd.getConnection();
+
 			stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
 			stmt.setString(1, params[1] + params[2]);
 			stmt.setString(2, params[1]);
 			stmt.setDate(3, Date.valueOf(params[2]));
@@ -161,9 +168,6 @@ public class AffectationDao implements Dao {
 			stmt.setInt(6, pda.getIdByName(params[5]));
 
 			stmt.execute();
-
-			/*stmt1 = conn.prepareStatement("UPDATE `AFFECTATION` SET IdAffectation=CONCAT(NumVol, DateVol)");
-			stmt1.executeUpdate();*/
 			
 			System.out.println(affectation.getId() + "L'affectation à bien été ajouté");
 			new SDialog("Ajout", "L'ajout de l'affectation à reussie", "Valider", "").setVisible(true);
