@@ -38,9 +38,9 @@ public class MenuMaFiche extends JMenu{
     itemMe=new JMenuItem("Mon Compte");
     itemMe.addActionListener(new ActionListener()
     {
-    	public void actionPerformed(ActionEvent evt){
+    	public void actionPerformed(ActionEvent evt)
+        {
             new MaFiche(idUser);
-
     	}
     });
 
