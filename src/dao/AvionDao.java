@@ -105,8 +105,8 @@ public class AvionDao implements Dao {
       conn = ConnectionBdd.getConnection();
       stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
       //Les points d'interogation vont prendre les info de stmt.setString() dans l'ordre par rapport � la requete
-      stmt.setString(1, params[0]);
-      stmt.setString(2, params[1]);
+      stmt.setString(1, params[1]);
+      stmt.setString(2, params[2]);
       stmt.execute();
 
       System.out.println(avion.getTypeAvion() + " a bien été ajouté");
