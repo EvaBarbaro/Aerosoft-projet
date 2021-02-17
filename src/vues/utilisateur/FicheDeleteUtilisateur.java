@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 
 import dao.*;
 import models.*;
-import vues.Fiche;
+import vues.FicheFirstFieldFalse;
 
 
 public class FicheDeleteUtilisateur extends JFrame {
@@ -28,7 +28,7 @@ public class FicheDeleteUtilisateur extends JFrame {
 		String[] listTextBtns = { "Valider","Annuler" };
 		String[] listMethodeDoa = { "delete","" };
 
-		new Fiche(
+		new FicheFirstFieldFalse(
 				"Suppression d'un Utilisateur", 
 				utilisateurDao, 
 				(Object)utilisateur, 

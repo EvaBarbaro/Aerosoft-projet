@@ -26,7 +26,7 @@ import java.awt.event.ActionListener;
 //import java.util.concurrent.Callable;
 import java.awt.event.ActionEvent;
 
-public class FichePilote extends JFrame {
+public class FicheFirstFieldFalse extends JFrame {
 	/**
 	 *
 	 */
@@ -69,7 +69,7 @@ public class FichePilote extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FichePilote(
+	public FicheFirstFieldFalse(
 			String titre, 
 			Dao dao, 
 			Object transport,

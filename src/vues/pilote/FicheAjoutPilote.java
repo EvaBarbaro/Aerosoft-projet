@@ -9,7 +9,7 @@ import dao.*;
 // import models
 import models.*;
 // import fiches
-import vues.FichePilote;
+import vues.FicheFirstFieldFalse;
 import vues.FicheUtilisateurPilote;
 
 
@@ -44,7 +44,7 @@ public class FicheAjoutPilote extends JFrame {
 		String[] listMethodeDoa = { "save","" };
 		piloteDao = new PiloteDao();
 
-		new FichePilote(
+		new FicheFirstFieldFalse(
 				"Ajout d'un pilote", 
 				piloteDao, 
 				(Object)pilote, 
@@ -67,13 +67,17 @@ public class FicheAjoutPilote extends JFrame {
 		// Récupération des rôles
 		ArrayList<Role> listeRoles = new RoleDao().getAll();
 
+		// Ajout des rôles à la comboBox
 		Map<String, String> jComboBoxTitles = new HashMap<>();
 
 		for (Role r : listeRoles) {
 			jComboBoxTitles.put(r.getRoleNom(), r.getIdRole());
 		}
 				
+		// Tableau des boutons
 		String[] listTextBtnsUser = { "Valider","Annuler" };
+
+		// Tableau des méthodes
 		String[] listMethodeDoaUser = { "save","" };
 		utilisateurDao = new UtilisateurDao();
 
