@@ -6,6 +6,11 @@ import javax.swing.JPanel;
 
 import javax.swing.border.EmptyBorder;
 
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.SqlDateModel;
+import org.jdatepicker.impl.UtilDateModel;
+
 import interfaces.Dao;
 
 import javax.swing.GroupLayout;
@@ -25,7 +30,16 @@ import javax.swing.JComboBox;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.time.format.DateTimeFormatter;
 import java.awt.event.ActionEvent;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Properties;
+
+import javax.swing.JFormattedTextField.AbstractFormatter;
 
 public class FicheAffectation extends JFrame {
 	/**
@@ -54,14 +68,15 @@ public class FicheAffectation extends JFrame {
 	private JLabel lblNewLabel_6 = new JLabel("");
 	
 	private JTextField textField_1;
-	private JTextField textField_2 = new JTextField();
-	private JTextField textField_3 = new JTextField();
-	/*private JTextField textField_4 = new JTextField();*/
-	private JTextField textField_5 = new JTextField();
+	/*private JTextField textField_3 = new JTextField()*/
 	
 	//private DetailedComboBox jComboBoxList;
-	private JComboBox jComboBox;
+	private JComboBox jComboBoxPilotes;
+	private JComboBox jComboBoxNumVols;
+	private JComboBox jComboBoxNumAvions;
 	private JCheckBox affectationCode = new JCheckBox();
+
+	private JDatePickerImpl datePicker;
 
 	private String oldValue_1;
 	private String oldValue_2;
@@ -81,9 +96,10 @@ public class FicheAffectation extends JFrame {
 			String [] listTextFields,
 			String [] listTextBtns,
 			String [] listMethodeDoa,
-			String [] jComboBoxTitles
+			String [] jComboBoxPilotesTitles,
+			String[] jComboBoxNumVolsTitles,
+			String [] jComboBoxNumAvionsTitles
 	) {
-		//this.jComboBoxTitles = jComboBoxTitlesParam;
 
 		setTitle(titre);
 
@@ -119,11 +135,10 @@ public class FicheAffectation extends JFrame {
 
 			lblNewLabel_2 = new JLabel(listLabels[1]);
 			lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-
-			textField_2 = new JTextField();
-			textField_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			textField_2.setColumns(10);
-			textField_2.setText(listTextFields[1]);
+			
+			jComboBoxNumVols = new JComboBox<String>(jComboBoxNumVolsTitles);
+			jComboBoxNumVols.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			jComboBoxNumVols.setSelectedItem(listTextFields[1]);
 
 			oldValue_2 = listTextFields[1];
 		}
@@ -133,10 +148,23 @@ public class FicheAffectation extends JFrame {
 			lblNewLabel_3 = new JLabel(listLabels[2]);
 			lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
-			textField_3 = new JTextField();
+			/*textField_3 = new JTextField();
 			textField_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
 			textField_3.setColumns(10);
-			textField_3.setText(listTextFields[2]);
+			textField_3.setText(listTextFields[2]);*/
+
+			SqlDateModel model = new SqlDateModel();
+
+			//model.setDate(year, month, day);
+
+			Properties p = new Properties();
+			p.put("text.today", "Today");
+			p.put("text.month", "Month");
+			p.put("text.year", "Year");
+
+			JDatePanelImpl datePanel = new JDatePanelImpl(model,p);
+			datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+			//this.add(datePicker);
 
 			oldValue_3 = listTextFields[2];
 		}
@@ -145,11 +173,6 @@ public class FicheAffectation extends JFrame {
 
 			lblNewLabel_4 = new JLabel(listLabels[3]);
 			lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
-
-			/*textField_4 = new JTextField();
-			textField_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			textField_4.setColumns(10);
-			textField_4.setText(listTextFields[3]);*/
 	
 			affectationCode.setSelected(Boolean.parseBoolean(listTextFields[3]));
 			oldValue_4 = listTextFields[3];
@@ -160,10 +183,9 @@ public class FicheAffectation extends JFrame {
 			lblNewLabel_5 = new JLabel(listLabels[4]);
 			lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
-			textField_5 = new JTextField();
-			textField_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			textField_5.setColumns(10);
-			textField_5.setText(listTextFields[4]);
+			jComboBoxNumAvions = new JComboBox<String>(jComboBoxNumAvionsTitles);
+			jComboBoxNumAvions.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			jComboBoxNumAvions.setSelectedItem(listTextFields[4]);
 
 			oldValue_5 = listTextFields[4];
 		}
@@ -173,16 +195,11 @@ public class FicheAffectation extends JFrame {
 			lblNewLabel_6 = new JLabel(listLabels[5]);
 			lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
-			/*textField_6 = new JTextField();
-			textField_6.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			textField_6.setColumns(10);
-			textField_6.setText(listTextFields[5]);*/
-
 			oldValue_6 = listTextFields[5];
 
-			jComboBox = new JComboBox<String>(jComboBoxTitles);
-			jComboBox.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			jComboBox.setSelectedItem(listTextFields[5]);
+			jComboBoxPilotes = new JComboBox<String>(jComboBoxPilotesTitles);
+			jComboBoxPilotes.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			jComboBoxPilotes.setSelectedItem(listTextFields[5]);
 		}
 
 		JButton btn_2 = new JButton(listTextBtns[0]);
@@ -190,12 +207,14 @@ public class FicheAffectation extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 
+				java.sql.Date selectedDate = (Date) datePicker.getModel().getValue();
+
 				if (!(oldValue_1.equals(textField_1.getText()))
-						|| (oldValue_2 != null && !(oldValue_2.equals(textField_2.getText())))
-						|| (oldValue_3 != null && !(oldValue_3.equals(textField_3.getText())))
+						|| (oldValue_2 != null && !(oldValue_2.equals(jComboBoxNumVols.getSelectedItem())))
+						|| (oldValue_3 != null && !(oldValue_3.equals(selectedDate.toString())))
 						|| (oldValue_4 != null && !(oldValue_4.equals(affectationCode.getText())))
-						|| (oldValue_5 != null && !(oldValue_5.equals(textField_5.getText()))) 
-						|| (oldValue_6 != null && !(oldValue_6.equals(jComboBox.getSelectedItem())))) {
+						|| (oldValue_5 != null && !(oldValue_5.equals(jComboBoxNumAvions.getSelectedItem()))) 
+						|| (oldValue_6 != null && !(oldValue_6.equals(jComboBoxPilotes.getSelectedItem())))) {
 			
 					String[] params = new String[listTextFields.length];
 					System.out.println("listTextFields.length : "  + listTextFields.length);				
@@ -203,23 +222,23 @@ public class FicheAffectation extends JFrame {
 					params[0] = textField_1.getText();
 
 					if (listTextFields.length >= 2) {
-						params[1] = textField_2.getText();
+						params[1] = (String) jComboBoxNumVols.getSelectedItem();
 					}
 					
 					if (listTextFields.length >= 3) {
-						params[2] = textField_3.getText();						
+						params[2] = selectedDate.toString();						
 					} 
-			
+					
 					if (listLabels.length >= 4) {
 						params[3] = ""+ affectationCode.isSelected();						
 					} 
 			
 					if (listLabels.length >= 5) {
-						params[4] = textField_5.getText();
+						params[4] = (String) jComboBoxNumAvions.getSelectedItem();
 					}
 					
 					if (listLabels.length >= 6) {
-						params[5] = (String) jComboBox.getSelectedItem();						
+						params[5] = (String) jComboBoxPilotes.getSelectedItem();						
 					}
 					
 					System.out.println("params.length : "  + params.length);				
@@ -276,12 +295,12 @@ public class FicheAffectation extends JFrame {
 								.addComponent(lblNewLabel_6))
 							.addPreferredGap(ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(textField_5, Alignment.TRAILING)
+								.addComponent(jComboBoxNumAvions, Alignment.TRAILING)
 								.addComponent(affectationCode, Alignment.TRAILING)
-								.addComponent(textField_3)
-								.addComponent(textField_2)
+								.addComponent(datePicker)
+								.addComponent(jComboBoxNumVols)
 								.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
-								.addComponent(jComboBox))))
+								.addComponent(jComboBoxPilotes))))
 					.addGap(46))
 		);
 		gl_contentPane.setVerticalGroup(
@@ -299,11 +318,11 @@ public class FicheAffectation extends JFrame {
 									.addGap(30)
 									.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 										.addComponent(lblNewLabel_3)
-										.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+										.addComponent(datePicker, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 								.addGroup(gl_contentPane.createSequentialGroup()
 									.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 									.addGap(18)
-									.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+									.addComponent(jComboBoxNumVols, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 							.addGap(18)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addComponent(lblNewLabel_4)
@@ -312,10 +331,10 @@ public class FicheAffectation extends JFrame {
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblNewLabel_5)
-						.addComponent(textField_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(jComboBoxNumAvions, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(jComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(jComboBoxPilotes, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblNewLabel_6))
 					.addPreferredGap(ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
@@ -327,15 +346,15 @@ public class FicheAffectation extends JFrame {
 		lblNewID.setVisible(false);
 
 		if (listTextFields.length >= 2) {
-			textField_2.setVisible(true);
+			jComboBoxNumVols.setVisible(true);
 		} else {
-			textField_2.setVisible(false);
+			jComboBoxNumVols.setVisible(false);
 		}
 
 		if (listTextFields.length >= 3) {
-			textField_3.setVisible(true);
+			datePicker.setVisible(true);
 		} else {
-			textField_3.setVisible(false);
+			datePicker.setVisible(false);
 		}
 
 		if (listTextFields.length >= 4) {
@@ -345,21 +364,22 @@ public class FicheAffectation extends JFrame {
 		}
 
 		if (listTextFields.length >= 5) {
-			textField_5.setVisible(true);
+			jComboBoxNumAvions.setVisible(true);
 		} else {
-			textField_5.setVisible(false);
+			jComboBoxNumAvions.setVisible(false);
 		}
 
 		if (listTextFields.length >= 6) {
-			jComboBox.setVisible(true);
+			jComboBoxPilotes.setVisible(true);
 		} else {
-			jComboBox.setVisible(false);
+			jComboBoxPilotes.setVisible(false);
 		}
 
 		final Toolkit toolkit = Toolkit.getDefaultToolkit();
 		final Dimension screenSize = toolkit.getScreenSize();
 		final int x = (screenSize.width - this.getWidth()) / 2;
 		final int y = (screenSize.height - this.getHeight()) / 2;
+
 		setLocation(x, y);
 		setLocationRelativeTo(null);
 		setVisible(true);
@@ -396,14 +416,4 @@ public class FicheAffectation extends JFrame {
                 ; 
 		}
 	}
-	/*private Image getScaledImage(Image srcImg, int w, int h){
-		BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-		Graphics2D g2 = resizedImg.createGraphics();
-	
-		g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-		g2.drawImage(srcImg, 0, 0, w, h, null);
-		g2.dispose();
-	
-		return resizedImg;
-	}	*/
 }

@@ -1,11 +1,10 @@
 package vues.affectation;
 
-import dao.AffectationDao;
-import dao.PiloteDao;
+import dao.*;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import models.Affectation;
-import models.Pilote;
+import models.*;
 import vues.FicheAffectation;
 
 public class FicheAjoutAffectation extends JFrame {
@@ -19,42 +18,44 @@ public class FicheAjoutAffectation extends JFrame {
   /**
    * Create the frame.
    */
-  public FicheAjoutAffectation(Affectation a) {
-    String[] listLabels = {
-      "Id de l'affectation",
-      "Numéro du vol",
-      "Dat du vol",
-      "Code de l'affectation",
-      "Numéro de l'avion",
-      "Pilote",
-    };
+	public FicheAjoutAffectation(Affectation af) {
+		String[] listLabels = { "Id de l'affectation", "Numéro du vol", "Dat du vol", "Code de l'affectation",
+				"Numéro de l'avion", "Pilote", };
 
-    String[] listTextFields = { "", "", "", "", "", "" };
+		String[] listTextFields = { "", "", "", "", "", "" };
 
-    String[] listTextBtns = { "Valider", "Annuler" };
-    String[] listMethodeDoa = { "save", "" };
+		String[] listTextBtns = { "Valider", "Annuler" };
+		String[] listMethodeDoa = { "save", "" };
 
-    bdao = new AffectationDao();
+		bdao = new AffectationDao();
 
-    ArrayList<Pilote> listePilotes = new PiloteDao().getAll();
+		ArrayList<Pilote> 	listePilotes 	= new PiloteDao().getAll();
+		ArrayList<Vol> 		listeVols 		= new VolDao().getAll();
+		ArrayList<Avion> 	listeAvions 	= new AvionDao().getAll();
 
-    String[] jComboBoxTitles = new String[listePilotes.size()];
+		String[] jComboBoxPiloteTitles 		= new String[listePilotes.size()];
+		String[] jComboBoxNumVolTitles 		= new String[listeVols.size()];
+		String[] jComboBoxNumAvionTitles 	= new String[listeAvions.size()];
 
-    int i = 0;
-    for (Pilote p : listePilotes) {
-      jComboBoxTitles[i] = p.getNomPilote();
-      i++;
-    }
+		int i = 0;
+		for (Pilote p : listePilotes) {
+			jComboBoxPiloteTitles[i] = p.getNomPilote();
+			i++;
+		}
 
-    new FicheAffectation(
-      "Ajout d'une affectation",
-      bdao,
-      (Object) a,
-      listLabels,
-      listTextFields,
-      listTextBtns,
-      listMethodeDoa,
-      jComboBoxTitles
-    );
-  }
+		i = 0;
+		for (Vol v : listeVols) {
+			jComboBoxNumVolTitles[i] = v.getNumVol();
+			i++;
+		}
+
+		i = 0;
+		for (Avion av : listeAvions) {
+			jComboBoxNumAvionTitles[i] = "" + av.getNumAvion();
+			i++;
+		}
+
+		new FicheAffectation("Ajout d'une affectation", bdao, (Object) af, listLabels, listTextFields, listTextBtns,
+				listMethodeDoa, jComboBoxPiloteTitles, jComboBoxNumVolTitles, jComboBoxNumAvionTitles);
+	}
 }
