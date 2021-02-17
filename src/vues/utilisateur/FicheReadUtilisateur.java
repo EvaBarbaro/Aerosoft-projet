@@ -36,8 +36,6 @@ public class FicheReadUtilisateur extends JFrame {
 		l1 = new JLabel("LISTE DES UTILISATEURS");
 		l1.setForeground(Color.blue);
 		l1.setFont(new Font("Serif", Font.BOLD, 20));
-
-		/* Placement */
 		l1.setBounds(100, 30, 400, 30);
 
 		getContentPane().add(l1);
@@ -46,8 +44,6 @@ public class FicheReadUtilisateur extends JFrame {
 		
 		data = new JTable(tableModel);
 		data.setEnabled(false);
-		
-		//javax.swing.JTable.setInner(5); 
 		
 		data.setFont(new Font("Chandas", Font.BOLD, 15));
 		data.setRowHeight(25);
@@ -72,6 +68,7 @@ public class FicheReadUtilisateur extends JFrame {
 		final Dimension screenSize = toolkit.getScreenSize();
 		final int x = (screenSize.width - this.getWidth()) / 2;
 		final int y = (screenSize.height - this.getHeight()) / 2;
+		
 		setLocation(x, y);
 		setLocationRelativeTo(null);
 

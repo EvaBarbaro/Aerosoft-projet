@@ -35,24 +35,19 @@ public class FicheSearchUtilisateur extends JFrame implements ActionListener {
 		l1 = new JLabel("RECHERCHER UN UTILISATEUR");
 		l1.setForeground(Color.blue);
 		l1.setFont(new Font("Serif", Font.BOLD, 20));
+		l1.setBounds(100, 30, 400, 30);
 
 		l2 = new JLabel("ID Utilisateur");
+		l2.setBounds(100, 70, 200, 30);
 
 		tf1 = new JTextField();
+		tf1.setBounds(149, 70, 200, 30);
 
 		/* Bouton */
 		btn1 = new JButton("Rechercher");
-
-		/* Placement */
-		l1.setBounds(100, 30, 400, 30);
-		l2.setBounds(100, 70, 200, 30);
-
-		tf1.setBounds(149, 70, 200, 30);
-
 		btn1.setBounds(361, 69, 176, 30);
-
 		btn1.addActionListener(this);
-
+		
 		getContentPane().add(l1);
 		getContentPane().add(l2);
 		getContentPane().add(tf1);

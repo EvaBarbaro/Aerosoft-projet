@@ -30,13 +30,13 @@ public class FicheSupprAeroport extends JFrame {
 		bdao = new AeroportDao();
 
 		new Fiche(
-				"Suppression d'un Aeroport", 
-				bdao, 
-				(Object)a, 
-				listLabels, 
-				listTextFields,
-				listTextBtns,
-				listMethodeDoa
-				);
+			"Suppression d'un Aeroport", 
+			bdao, 
+			(Object)a, 
+			listLabels, 
+			listTextFields,
+			listTextBtns,
+			listMethodeDoa
+			);
 	}
 }

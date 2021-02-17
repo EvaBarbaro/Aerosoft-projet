@@ -9,9 +9,6 @@ import vues.Fiche;
 
 public class FicheDeleteUtilisateur extends JFrame {
 
-	/**
-	 *
-	 */
 	private static final long serialVersionUID = 1L;
 
 	UtilisateurDao utilisateurDao = new UtilisateurDao();

@@ -8,15 +8,10 @@ import javax.swing.JFrame;
 
 import dao.*;
 import models.*;
-import vues.Fiche;
 import vues.FicheUtilisateur;
-
 
 public class FicheModifUtilisateur extends JFrame {
 
-	/**
-	 *
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	UtilisateurDao utilisateurDao;

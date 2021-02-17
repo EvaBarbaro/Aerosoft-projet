@@ -26,6 +26,7 @@ public class PiloteDao implements Dao {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		String sql = "SELECT * FROM `PILOTE` WHERE IdPilote=?";
+		
 		try {
 			conn = ConnectionBdd.getConnection();
 			stmt = conn.prepareStatement(sql);

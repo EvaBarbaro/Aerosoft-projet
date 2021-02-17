@@ -15,10 +15,7 @@ import java.util.ListIterator;
 
  
 public class FicheListDeleteUtilisateur extends JFrame implements ActionListener{
-	
-	/**
-	 *
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	JLabel l1;
@@ -40,8 +37,6 @@ public class FicheListDeleteUtilisateur extends JFrame implements ActionListener
 		l1 = new JLabel("LISTE DES UTILISATEURS");
 		l1.setForeground(Color.blue);
 		l1.setFont(new Font("Serif", Font.BOLD, 20));
-
-		/* Placement */
 		l1.setBounds(100, 30, 400, 30);
 
 		getContentPane().add(l1);

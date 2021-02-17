@@ -1,42 +1,39 @@
 package vues.avion;
 
-import javax.swing.JFrame;
-
 import dao.AvionDao;
+import javax.swing.JFrame;
 import models.Avion;
 import vues.Fiche;
 
-
 public class FicheSupprAvion extends JFrame {
+  /**
+   *
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	AvionDao bdao;
+  AvionDao bdao;
 
-	/**
-	 * Create the frame.
-	 */
-	public FicheSupprAvion(Avion av) {
+  /**
+   * Create the frame.
+   */
+  public FicheSupprAvion(Avion av) {
+    String[] listLabels = { "Id de l'avion à supprimer" };
 
-		String[] listLabels = { "Id de l'avion à supprimer"};
-		
-		String[] listTextFields = {"" + av.getNumAvion()};
-				
-		String[] listTextBtns = { "Valider","Annuler" };
-		String[] listMethodeDoa = { "delete","" };
-		bdao = new AvionDao();
+    String[] listTextFields = { "" + av.getNumAvion() };
 
-		new Fiche(
-				"Suppression d'un Vol", 
-				bdao, 
-				(Object)av, 
-				listLabels, 
-				listTextFields,
-				listTextBtns,
-				listMethodeDoa
-				);
-	}
+    String[] listTextBtns = { "Valider", "Annuler" };
+    String[] listMethodeDoa = { "delete", "" };
+
+    bdao = new AvionDao();
+
+    new Fiche(
+      "Suppression d'un Vol",
+      bdao,
+      (Object) av,
+      listLabels,
+      listTextFields,
+      listTextBtns,
+      listMethodeDoa
+    );
+  }
 }
