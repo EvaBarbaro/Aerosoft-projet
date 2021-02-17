@@ -33,7 +33,9 @@ public class FicheListUtilisateur extends JFrame implements ActionListener{
 	 
 	String[] tblHead = { "IdUtilisateur", "Mail", "Statut", "IdRole" };
 	 
-
+	/**
+	 * Création de la frame du tableau d'utilisateur pour modification
+	 */
 	public FicheListUtilisateur() {
 		
 		/* Label */
@@ -61,6 +63,7 @@ public class FicheListUtilisateur extends JFrame implements ActionListener{
 		
 		data.setDefaultEditor(Object.class, null);
 		
+		// Evenement du clic
 		data.addMouseListener(new MouseAdapter() {
 		    
 			public void mousePressed(MouseEvent mouseEvent) {
@@ -71,6 +74,7 @@ public class FicheListUtilisateur extends JFrame implements ActionListener{
 		        
 		        int row = table.rowAtPoint(point);
 		        
+				// Evenement du double clic
 		        if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
 		        	
 					int column = 0;
@@ -82,6 +86,7 @@ public class FicheListUtilisateur extends JFrame implements ActionListener{
 
 					if (b1 != null) {
 						
+						// Appel de la fiche de modification d'un utilisateur
 						FicheModifUtilisateur fm = new FicheModifUtilisateur(b1);
 						
 						fm.addWindowListener(new WindowListener() {
@@ -159,6 +164,7 @@ public class FicheListUtilisateur extends JFrame implements ActionListener{
 	
 	/** 
 	 * @param dao
+	 * Récupération des données de tous les utilisateurs
 	 */
 	public void chargeData(UtilisateurDao dao) {
 			

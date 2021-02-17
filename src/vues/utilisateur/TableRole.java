@@ -25,7 +25,9 @@ public class TableRole extends JFrame implements TableModelListener{
     private JComboBox comboBox1;
     private int row;
 
-    
+    /**
+    * 
+    */    
     public TableRole() {
         RoleDao rd = new RoleDao();
 

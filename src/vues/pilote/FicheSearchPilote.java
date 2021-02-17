@@ -6,7 +6,10 @@ import java.awt.Dimension;
 import java.awt.*;
 import java.awt.event.*;
 
+// import des daos
 import dao.*;
+
+// import des models
 import models.*;
 
 import javax.swing.*;
@@ -30,6 +33,7 @@ public class FicheSearchPilote extends JFrame implements ActionListener {
 
 	String[] tblHead = { "Id Pilote", "Nom", "Prénom", "Matricule"};
 
+	// Création de la frame de recherche des pilotes
 	public FicheSearchPilote() {
 		/* Label */
 		l1 = new JLabel("RECHERCHER UN PILOTE");
@@ -95,6 +99,7 @@ public class FicheSearchPilote extends JFrame implements ActionListener {
 		setVisible(true);
 	}
 	
+	// Range les données récupérer lors de la recherche dans l'objet pilote
 	public void chargeData(){
 		Object[] donnees = { 
 			pilote.getIdPilote(),
@@ -112,6 +117,7 @@ public class FicheSearchPilote extends JFrame implements ActionListener {
 	
 	/** 
 	 * @param e
+	 * Evenement du bouton recherche
 	 */
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btn1) {
@@ -122,6 +128,7 @@ public class FicheSearchPilote extends JFrame implements ActionListener {
 			//int id = Integer.parseInt(tf1.getText());
 			String id = (String) tf1.getText();
 								
+			// Récupére le pilote rechercher
 			pilote = (Pilote) piloteDao.get(Integer.parseInt(id));
 
 			if (pilote != null) {

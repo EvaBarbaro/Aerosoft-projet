@@ -21,8 +21,12 @@ public class FicheAjoutUtilisateur extends JFrame implements ActionListener, Key
     JButton btnInscription;
     JPasswordField passwordField;
 
+    /**
+     * Création de la frame d'ajout utilisateurs
+     */
     public FicheAjoutUtilisateur() {
 
+    // Ajout du logo
     JLabel labelimage = new JLabel();
         ImageIcon img = new ImageIcon(
             Toolkit.getDefaultToolkit().getImage(
@@ -33,10 +37,13 @@ public class FicheAjoutUtilisateur extends JFrame implements ActionListener, Key
         labelimage.setIcon(img);
         add(labelimage);
 
+    // label
     labelEmail = new JLabel("Votre Email:");
     labelEmail.setFont(new Font("Tahoma", Font.PLAIN, 15));
     labelPassword = new JLabel("Votre Mot de passe:");
     labelPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
+
+    // textField
     textFieldLogin = new JTextField("");
     textFieldLogin.setFont(new Font("Tahoma", Font.PLAIN, 15));
     /* Mot de passe*/
@@ -69,6 +76,9 @@ public class FicheAjoutUtilisateur extends JFrame implements ActionListener, Key
     setVisible(true);
     }
 
+    /**
+     * Création de la frame d'inscription
+     */
     public void register() {
         RoleDao roleDao = new RoleDao();
         ArrayList<Role> roles = roleDao.getAll();
@@ -81,9 +91,11 @@ public class FicheAjoutUtilisateur extends JFrame implements ActionListener, Key
             i++;
         }
 
+        // ComboBos role
         JComboBox<String> comboBoxRole = new JComboBox<String>(roleTab);
         comboBoxRole.setBounds(310, 170, 180, 20);
 
+        // bouton
         JButton btnValidateReg;
 
         btnValidateReg = new JButton("Valider votre inscription");
@@ -101,12 +113,16 @@ public class FicheAjoutUtilisateur extends JFrame implements ActionListener, Key
         this.validate();
         this.repaint();
 
+        // évènement comboBox
         comboBoxRole.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent eventComboBox) {
+                // Récupération de l'item séletionné dans la comboBox
                 String stringBox = (String) comboBoxRole.getSelectedItem();
 
+                // Récupértion de l'ID du role selon son nom
                 Role roleAtt = (Role) roleDao.get(stringBox);
 
+                // Switch de la ComboBox
                 switch (stringBox) {
                     case "Chargé Clientèle":
                         roleField = new JTextField(roleAtt.getIdRole());
@@ -115,6 +131,7 @@ public class FicheAjoutUtilisateur extends JFrame implements ActionListener, Key
                         revalidate();
                         repaint();
                         break;
+                    // Création d'une frame d'ajout de pilote
                     case "Pilote":
                         JFrame framePilote = new JFrame("Informations pilote");
                         JLabel nomPiloteLabel, prenomPiloteLabel, matriculeLabel;
@@ -124,6 +141,7 @@ public class FicheAjoutUtilisateur extends JFrame implements ActionListener, Key
 
                         roleDao.get(stringBox);
 
+                        // Ajout du logo
                         JLabel labelimage = new JLabel();
                         ImageIcon img = new ImageIcon(
                             Toolkit.getDefaultToolkit().getImage(
@@ -134,6 +152,7 @@ public class FicheAjoutUtilisateur extends JFrame implements ActionListener, Key
                         labelimage.setIcon(img);
                         framePilote.add(labelimage);
 
+                        // Label + textField + bouton
                         nomPiloteLabel = new JLabel("Votre nom");
                         nomPiloteLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
@@ -169,12 +188,14 @@ public class FicheAjoutUtilisateur extends JFrame implements ActionListener, Key
                         matriculeField.setBounds(300, 180, 200, 30);
                         matriculeField.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
+                        // Récupération des utilisateurs
                         ArrayList<Utilisateur> userAll = utilisateurDao.getAll();
 
                         Boolean duplicate[] = new Boolean[userAll.size()];
         
                         int i = 0;
-                
+
+                        // Range le résultat de comparaison des utilisateurs avec le login entré
                         for (Utilisateur user : userAll) {
                             if (user.getMail().equals(textFieldLogin.getText())) {
                                 duplicate[i] = true;
@@ -184,7 +205,8 @@ public class FicheAjoutUtilisateur extends JFrame implements ActionListener, Key
                             }
                             i++;
                         }
-        
+
+                        // Test si le Tableau duplicate contient true ou false
                         if (Arrays.asList(duplicate).contains(true)) {
                             JLabel labelError = new JLabel("Cette adresse mail existe déjà.");
                             labelError.setBounds(300, 230, 250, 30);
@@ -215,10 +237,13 @@ public class FicheAjoutUtilisateur extends JFrame implements ActionListener, Key
                         roleField.setVisible(false);
                         add(roleField);
 
+                        // Evenement pour l'inscription d'un pilote
                         btnValidatePilote.addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent eventValidatePilote) {
                                 UtilisateurDao utilisateurDao = new UtilisateurDao();
                                 Utilisateur utilisateur = new Utilisateur();
+
+                                // Création d'un ID Unique
                                 int uniqueID = UUID.randomUUID().hashCode();
 
                                 String userString[] = new String[5];
@@ -259,14 +284,16 @@ public class FicheAjoutUtilisateur extends JFrame implements ActionListener, Key
                         ArrayList<Utilisateur> userAdmin = utilisateurDaoAdmin.getAll();
         
                         int adminCount = 0;
-                
+ 
+                        // Boucle permettant de compter le nombre d'Admin
                         for (Utilisateur users : userAdmin) {
                             System.out.println(users.getIdRole());
                             if (users.getIdRole().equals("55555")){
                                 adminCount++;
                             }
                         }
-        
+
+                        // Test permettant de Bloquer l'ajout d'un admin s'il y en a déjà deux
                         if (adminCount == 2) {
                             JLabel labelErrorAdmin = new JLabel("Le nombre maximal de compte admin a été atteint.");
                             labelErrorAdmin.setBounds(270, 230, 340, 30);
@@ -286,6 +313,7 @@ public class FicheAjoutUtilisateur extends JFrame implements ActionListener, Key
             }
         });
 
+        // Evènement d'ajout utilisateur classique
         btnValidateReg.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent eventValidateReg) {
 
@@ -294,6 +322,7 @@ public class FicheAjoutUtilisateur extends JFrame implements ActionListener, Key
         });
     }
     
+    // Création d'un utilisateur
     private void testUtilisateur() {
                 UtilisateurDao utilisateurDao = new UtilisateurDao();
                 Utilisateur utilisateur = new Utilisateur();
