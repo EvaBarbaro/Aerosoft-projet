@@ -1,223 +1,213 @@
 package vues.affectation;
 
+import dao.*;
+import java.awt.*;
 import java.awt.Color;
 import java.awt.Dimension;
-
-import java.awt.*;
 import java.awt.event.*;
-
-import dao.*;
-import models.*;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import models.*;
 
 public class RechercherAffectation extends JFrame implements ActionListener {
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 1L;
+  /**
+   *
+   */
+  private static final long serialVersionUID = 1L;
 
-	JLabel l1, l2, l3;
-	JTextField tf1, tf2;
+  JLabel l1, l2, l3;
+  JTextField tf1, tf2;
 
-	DefaultTableModel tableModel;
-	JTable data;
+  DefaultTableModel tableModel;
+  JTable data;
 
-	JButton btn1;
+  JButton btn1;
 
-	Affectation b1;
+  Affectation b1;
 
-	AffectationDao dao = new AffectationDao();
+  AffectationDao dao = new AffectationDao();
 
-	String[] tblHead = { 
-		"IdAffectation", 
-		"NumVol", 
-		"DateVol",
-		"AffectationCode", 
-		"NumAvion", 
-		"IdPilote"  
-};
+  String[] tblHead = {
+    "IdAffectation",
+    "NumVol",
+    "DateVol",
+    "AffectationCode",
+    "NumAvion",
+    "IdPilote",
+  };
 
-	public RechercherAffectation() {
-		/* Label */
-		l1 = new JLabel("RECHERCHER UNE AFFECTTION");
-		l1.setForeground(Color.blue);
-		l1.setFont(new Font("Serif", Font.BOLD, 20));
+  public RechercherAffectation() {
+    /* Label */
+    l1 = new JLabel("RECHERCHER UNE AFFECTTION");
+    l1.setForeground(Color.blue);
+    l1.setFont(new Font("Serif", Font.BOLD, 20));
+    l1.setBounds(100, 30, 400, 30);
 
-		l2 = new JLabel("ID");
+    l2 = new JLabel("ID");
+    l2.setBounds(100, 70, 200, 30);
 
-		tf1 = new JTextField();
+    tf1 = new JTextField();
+    tf1.setBounds(149, 70, 200, 30);
 
-		/* Bouton */
-		btn1 = new JButton("Rechercher");
+    /* Bouton */
+    btn1 = new JButton("Rechercher");
+    btn1.setBounds(361, 69, 176, 30);
+    btn1.addActionListener(this);
 
-		/* Placement */
-		l1.setBounds(100, 30, 400, 30);
-		l2.setBounds(100, 70, 200, 30);
+    getContentPane().add(l1);
+    getContentPane().add(l2);
+    getContentPane().add(tf1);
 
-		tf1.setBounds(149, 70, 200, 30);
+    getContentPane().add(btn1);
 
-		btn1.setBounds(361, 69, 176, 30);
+    tableModel = new DefaultTableModel(tblHead, 0);
 
-		btn1.addActionListener(this);
+    data = new JTable(tableModel);
 
-		getContentPane().add(l1);
-		getContentPane().add(l2);
-		getContentPane().add(tf1);
+    //javax.swing.JTable.setInner(5);
 
-		getContentPane().add(btn1);
+    data.setFont(new Font("Chandas", Font.BOLD, 15));
+    data.setRowHeight(25);
 
-		tableModel = new DefaultTableModel(tblHead, 0);
+    data.setBounds(50, 50, 500, 200);
 
-		data = new JTable(tableModel);
+    data.setDefaultEditor(Object.class, null);
 
-		//javax.swing.JTable.setInner(5); 
+    JScrollPane scrollPane = new JScrollPane(data);
+    scrollPane.setFont(new Font("DejaVu Sans Mono", Font.BOLD, 15));
 
-		data.setFont(new Font("Chandas", Font.BOLD, 15));
-		data.setRowHeight(25);
+    scrollPane.setSize(500, 200);
+    scrollPane.setLocation(149, 143);
+    getContentPane().add(scrollPane);
 
-		data.setBounds(50, 50, 500, 200);
+    setTitle("Rechercher un Livre");
 
-		data.setDefaultEditor(Object.class, null);
+    setSize(700, 540);
+    getContentPane().setLayout(null);
 
-		JScrollPane scrollPane = new JScrollPane(data);
-		scrollPane.setFont(new Font("DejaVu Sans Mono", Font.BOLD, 15));
+    final Toolkit toolkit = Toolkit.getDefaultToolkit();
+    final Dimension screenSize = toolkit.getScreenSize();
+    final int x = (screenSize.width - this.getWidth()) / 2;
+    final int y = (screenSize.height - this.getHeight()) / 2;
 
-		scrollPane.setSize(500, 200);
-		scrollPane.setLocation(149, 143);
-		getContentPane().add(scrollPane);
+    setLocation(x, y);
+    setLocationRelativeTo(null);
 
-		setTitle("Rechercher un Livre");
+    setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    setVisible(true);
+  }
 
-		setSize(700, 540);
-		getContentPane().setLayout(null);
+  public void chargeData() {
+    Object[] donnees = {
+      b1.getId(),
+      b1.getNumVol(),
+      b1.getDateVol(),
+      b1.getAffectationCode(),
+      b1.getNumAvion(),
+      b1.getPilote().getNomPilote(),
+    };
 
-		final Toolkit toolkit = Toolkit.getDefaultToolkit();
-		final Dimension screenSize = toolkit.getScreenSize();
-		final int x = (screenSize.width - this.getWidth()) / 2;
-		final int y = (screenSize.height - this.getHeight()) / 2;
-		setLocation(x, y);
-		setLocationRelativeTo(null);
+    tableModel.setRowCount(0);
+    tableModel.addRow(donnees);
 
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setVisible(true);
-	}
-	
-	public void chargeData(){
-		Object[] donnees = { 
-			b1.getId(), 
-			b1.getNumVol(), 
-			b1.getDateVol(),
-			b1.getAffectationCode(), 
-			b1.getNumAvion(), 
-			b1.getPilote().getNomPilote()
-		};
+    data.setModel(tableModel);
+  }
 
-		tableModel.setRowCount(0);
-		tableModel.addRow(donnees);
-		
-		data.setModel(tableModel);
-	}
+  /**
+   * @param e
+   */
+  public void actionPerformed(ActionEvent e) {
+    if (e.getSource() == btn1) {
+      /* instanciation d'un objet */
+      // b1 = new Book(tf1.getText(), tf2.getText());
 
-	
-	/** 
-	 * @param e
-	 */
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btn1) {
+      //int id = Integer.parseInt(tf1.getText());
+      Object id = (Object) tf1.getText();
 
-			/* instanciation d'un objet */
-			// b1 = new Book(tf1.getText(), tf2.getText());
+      b1 = (Affectation) dao.get(id);
 
-			//int id = Integer.parseInt(tf1.getText());
-			Object id = (Object) tf1.getText();
-								
-			b1 = (Affectation) dao.get(id);
+      if (b1 != null) {
+        chargeData();
 
-			if (b1 != null) {
-				
-				chargeData();	
+        data.addMouseListener(
+          new MouseAdapter() {
 
-				data.addMouseListener(new MouseAdapter() {
-		    
-					public void mousePressed(MouseEvent mouseEvent) {
-						
-						JTable table =(JTable) mouseEvent.getSource();
-						
-						Point point = mouseEvent.getPoint();
-						
-						int row = table.rowAtPoint(point);
-						
-						if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
-							
-							int column = 0;
-							
-							//int id = Integer.parseInt(table.getModel().getValueAt(row, column).toString());
-							Object id = (Object) table.getModel().getValueAt(row, column).toString();
-												
-							b1 = (Affectation) dao.get(id);
-		
-							if (b1 != null) {
-								
-								FicheModifAffectation fm = new FicheModifAffectation(b1);
-								
-								fm.addWindowListener(new WindowListener() {
-		
-									@Override
-									public void windowOpened(WindowEvent e) {
-										// TODO Auto-generated method stub								
-									}
-		
-									@Override
-									public void windowClosing(WindowEvent e) {
-											
-									}
-		
-									@Override
-									public void windowClosed(WindowEvent e) {								
-										chargeData();
-									}
-		
-									@Override
-									public void windowIconified(WindowEvent e) {
-										// TODO Auto-generated method stub
-										
-									}
-		
-									@Override
-									public void windowDeiconified(WindowEvent e) {
-										// TODO Auto-generated method stub
-										
-									}
-		
-									@Override
-									public void windowActivated(WindowEvent e) {
-										// TODO Auto-generated method stub
-										
-									}
-		
-									@Override
-									public void windowDeactivated(WindowEvent e) {
-										// TODO Auto-generated method stub
-										
-									}
-									
-								});
-		
-							}				
-							
-						}
-					}
-				});
+            public void mousePressed(MouseEvent mouseEvent) {
+              JTable table = (JTable) mouseEvent.getSource();
 
-				repaint();
+              Point point = mouseEvent.getPoint();
 
-				tf1.setText("");
-			}else {
-				JOptionPane.showMessageDialog(null, "Aeroport non Trouvé");
-			}
-		}
-	}
+              int row = table.rowAtPoint(point);
 
+              if (
+                mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1
+              ) {
+                int column = 0;
+
+                //int id = Integer.parseInt(table.getModel().getValueAt(row, column).toString());
+                Object id = (Object) table
+                  .getModel()
+                  .getValueAt(row, column)
+                  .toString();
+
+                b1 = (Affectation) dao.get(id);
+
+                if (b1 != null) {
+                  FicheModifAffectation fm = new FicheModifAffectation(b1);
+
+                  fm.addWindowListener(
+                    new WindowListener() {
+
+                      @Override
+                      public void windowOpened(WindowEvent e) {
+                        // TODO Auto-generated method stub
+                      }
+
+                      @Override
+                      public void windowClosing(WindowEvent e) {}
+
+                      @Override
+                      public void windowClosed(WindowEvent e) {
+                        chargeData();
+                      }
+
+                      @Override
+                      public void windowIconified(WindowEvent e) {
+                        // TODO Auto-generated method stub
+
+                      }
+
+                      @Override
+                      public void windowDeiconified(WindowEvent e) {
+                        // TODO Auto-generated method stub
+
+                      }
+
+                      @Override
+                      public void windowActivated(WindowEvent e) {
+                        // TODO Auto-generated method stub
+
+                      }
+
+                      @Override
+                      public void windowDeactivated(WindowEvent e) {
+                        // TODO Auto-generated method stub
+
+                      }
+                    }
+                  );
+                }
+              }
+            }
+          }
+        );
+
+        repaint();
+
+        tf1.setText("");
+      } else {
+        JOptionPane.showMessageDialog(null, "Aeroport non Trouvé");
+      }
+    }
+  }
 }

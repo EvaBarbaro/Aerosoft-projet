@@ -14,9 +14,6 @@ import vues.FicheFirstFieldFalse;
 
 public class FicheDeleteUtilisateur extends JFrame {
 
-	/**
-	 *
-	 */
 	private static final long serialVersionUID = 1L;
 
 	UtilisateurDao utilisateurDao = new UtilisateurDao();

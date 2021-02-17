@@ -1,106 +1,110 @@
 package vues.home;
 
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-
-import models.Pilote;
-
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.Font;
-
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import models.Pilote;
 import vues.pilote.*;
 
-public class MenuPilote extends JMenu{
-    
-    /**
-	 *
-	 */
-    private static final long serialVersionUID = 1L;
+public class MenuPilote extends JMenu {
+  /**
+   *
+   */
+  private static final long serialVersionUID = 1L;
 
-    //Creation de la variable droit qui va recevoir le code droits du module actuel
-    private int droit = 0;
-    
-    private JMenuItem itemReadPilote, itemAddPilote, itemModifPilote, itemDeletePilote, itemSearchPilote;
+  // Creation de la variable droit qui va recevoir le code droits du module actuel
+  private int droit = 0;
 
-    private JMenu menuPilote;
+  private JMenuItem itemReadPilote, itemAddPilote, itemModifPilote, itemDeletePilote, itemSearchPilote;
 
-    
-    /** 
-     * @return JMenu
-     */
-    public JMenu getMenu() {
-        return this.menuPilote;
+  private JMenu menuPilote;
+
+  /**
+   * @return JMenu
+   */
+  public JMenu getMenu() {
+    return this.menuPilote;
+  }
+
+  public MenuPilote(int droitInt) {
+    // Affectation du droit recuperer en paramètre dans la variable droit
+    this.droit = droitInt;
+
+    menuPilote = new JMenu("Pilote");
+    Font font = new Font("Serial", Font.BOLD, 16);
+    menuPilote.setFont(font);
+
+    // Selon le niveau de droits les modules s'affichent
+    if (droit >= 1) {
+      itemReadPilote = new JMenuItem("Lister les pilotes");
+
+      itemReadPilote.addActionListener(
+        new ActionListener() {
+
+          public void actionPerformed(ActionEvent evt) {
+            new FicheReadPilote();
+          }
+        }
+      );
+
+      menuPilote.add(itemReadPilote);
+
+      itemSearchPilote = new JMenuItem("Rechercher un pilote");
+      itemSearchPilote.addActionListener(
+        new ActionListener() {
+
+          public void actionPerformed(ActionEvent evt) {
+            new FicheSearchPilote();
+          }
+        }
+      );
+
+      menuPilote.add(itemSearchPilote);
     }
 
-    public MenuPilote(int droitInt) {
-        //Affectation du droit recuperer en paramètre dans la variable droit
-        this.droit = droitInt;
+    if (droit >= 2) {
+      itemModifPilote = new JMenuItem("Modifier les pilotes");
+      itemModifPilote.addActionListener(
+        new ActionListener() {
 
-        menuPilote = new JMenu("Pilote");
-        Font font = new Font("Serial", Font.BOLD, 16);
-        menuPilote.setFont(font);
-
-        //Selon le niveau de droits les modules s'affichent
-        if(droit >=1){
-            itemReadPilote=new JMenuItem("Lister les pilotes");
-            itemReadPilote.addActionListener(new ActionListener()
-            {
-                public void actionPerformed(ActionEvent evt)
-                {
-                    new FicheReadPilote();
-                }
-            });
-            menuPilote.add(itemReadPilote);
-
-            itemSearchPilote=new JMenuItem("Rechercher un pilote");
-            itemSearchPilote.addActionListener(new ActionListener()
-            {
-                public void actionPerformed(ActionEvent evt)
-                {
-                    new FicheSearchPilote();
-                }
-            });
-            menuPilote.add(itemSearchPilote);
+          public void actionPerformed(ActionEvent evt) {
+            new FicheListPilote();
+          }
         }
+      );
 
-        if(droit >=2){
-            itemModifPilote=new JMenuItem("Modifier les pilotes");
-            itemModifPilote.addActionListener(new ActionListener()
-            {
-                public void actionPerformed(ActionEvent evt)
-                {
-                    new FicheListPilote();
-                }
-            });
-            menuPilote.add(itemModifPilote);
-        }
-
-        if(droit >=3){
-            itemAddPilote=new JMenuItem("Ajouter un pilote");
-            itemAddPilote.addActionListener(new ActionListener()
-            {
-                public void actionPerformed(ActionEvent evt)
-                {
-                    
-                    Pilote pilote = new Pilote();
-                    new FicheAjoutPilote(pilote);
-                }
-            });
-            menuPilote.add(itemAddPilote);
-        }
-
-        if(droit >=3){
-
-            itemDeletePilote=new JMenuItem("Supprimer un pilote");
-            itemDeletePilote.addActionListener(new ActionListener()
-            {
-                public void actionPerformed(ActionEvent evt)
-                {
-                    new FicheListDeletePilot();
-                }
-            });
-            menuPilote.add(itemDeletePilote);
-        }     
+      menuPilote.add(itemModifPilote);
     }
+
+    if (droit >= 3) {
+      itemAddPilote = new JMenuItem("Ajouter un pilote");
+      itemAddPilote.addActionListener(
+        new ActionListener() {
+
+          public void actionPerformed(ActionEvent evt) {
+            Pilote pilote = new Pilote();
+            new FicheAjoutPilote(pilote);
+          }
+        }
+      );
+
+      menuPilote.add(itemAddPilote);
+    }
+
+    if (droit >= 3) {
+      itemDeletePilote = new JMenuItem("Supprimer un pilote");
+      itemDeletePilote.addActionListener(
+        new ActionListener() {
+
+          public void actionPerformed(ActionEvent evt) {
+            new FicheListDeletePilot();
+          }
+        }
+      );
+
+      menuPilote.add(itemDeletePilote);
+    }
+  }
 }

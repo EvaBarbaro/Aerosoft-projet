@@ -1,21 +1,20 @@
 package vues.compte;
 
-import javax.swing.*;
+import dao.UtilisateurDao;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.Font;
-import java.awt.Color;
-
-import dao.UtilisateurDao;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
 import models.Utilisateur;
 import vues.Fiche;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 public class MaFiche {
 
-    public MaFiche(int idUser) {
+  public MaFiche(int idUser) {
     JFrame meFrame = new JFrame();
     JLabel labelEmail, labelPassword;
     JTextField textFieldId, textFieldLogin, textFieldStatut, textFieldRole;
@@ -28,11 +27,13 @@ public class MaFiche {
 
     JLabel labelimage = new JLabel();
     ImageIcon img = new ImageIcon(
-        Toolkit.getDefaultToolkit().getImage(
-                Fiche.class.getResource("/images/Aerosoft-logo.PNG"))
-                .getScaledInstance(160, 50, Image.SCALE_DEFAULT)
-            );
-    labelimage.setBounds(80, 10, 400, 70); 
+      Toolkit
+        .getDefaultToolkit()
+        .getImage(Fiche.class.getResource("/images/Aerosoft-logo.PNG"))
+        .getScaledInstance(160, 50, Image.SCALE_DEFAULT)
+    );
+    
+    labelimage.setBounds(80, 10, 400, 70);
     labelimage.setIcon(img);
     meFrame.add(labelimage);
 
@@ -67,29 +68,44 @@ public class MaFiche {
     btnModifier.setFont(new Font("Tahoma", Font.BOLD, 15));
     btnModifier.setBackground(new Color(1, 175, 228));
     btnModifier.setForeground(Color.WHITE);
-    btnModifier.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent eventUpdateUser) 
-        {
-            String userString[] = new String[5];
-            userString[0] = textFieldId.getText();
-            userString[1] = textFieldLogin.getText();
-            userString[2] = String.valueOf(passwordField.getPassword());
-            userString[3] = textFieldStatut.getText();
-            userString[4] = textFieldRole.getText();
+    btnModifier.addActionListener(
+      new ActionListener() {
 
-            utilisateurDao.update(utilisateur, userString);
+        public void actionPerformed(ActionEvent eventUpdateUser) {
+          String userString[] = new String[5];
+          userString[0] = textFieldId.getText();
+          userString[1] = textFieldLogin.getText();
+          userString[2] = String.valueOf(passwordField.getPassword());
+          userString[3] = textFieldStatut.getText();
+          userString[4] = textFieldRole.getText();
 
-            meFrame.dispose();
+          utilisateurDao.update(utilisateur, userString);
+
+          meFrame.dispose();
         }
-    });
+      }
+    );
 
-    meFrame.add(labelEmail);meFrame.add(textFieldLogin);meFrame.add(labelPassword);meFrame.add(passwordField);meFrame.add(btnModifier);
+    meFrame.add(labelEmail);
+    meFrame.add(textFieldLogin);
+    meFrame.add(labelPassword);
+    meFrame.add(passwordField);
+    meFrame.add(btnModifier);
 
     meFrame.setTitle("Aerosoft");
 
     meFrame.setSize(650, 350);
     meFrame.setLayout(null);
     meFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+
+    final Toolkit toolkit = Toolkit.getDefaultToolkit();
+    final Dimension screenSize = toolkit.getScreenSize();
+    final int x = (screenSize.width - meFrame.getWidth()) / 2;
+    final int y = (screenSize.height - meFrame.getHeight()) / 2;
+
+    meFrame.setLocation(x, y);
+    meFrame.setLocationRelativeTo(null);
+
     meFrame.setVisible(true);
-    }
+  }
 }

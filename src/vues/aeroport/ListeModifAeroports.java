@@ -40,8 +40,6 @@ public class ListeModifAeroports extends JFrame implements ActionListener{
 		l1 = new JLabel("LISTE DES AEROPORTS");
 		l1.setForeground(Color.blue);
 		l1.setFont(new Font("Serif", Font.BOLD, 20));
-
-		/* Placement */
 		l1.setBounds(100, 30, 400, 30);
 
 		getContentPane().add(l1);

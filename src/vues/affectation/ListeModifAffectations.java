@@ -1,208 +1,191 @@
 package vues.affectation;
 
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-
 import dao.AffectationDao;
-import models.Affectation;
-
 import java.awt.*;
 import java.awt.event.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import models.Affectation;
 
- 
-public class ListeModifAffectations extends JFrame implements ActionListener{
-	
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 1L;
+public class ListeModifAffectations extends JFrame implements ActionListener {
+  private static final long serialVersionUID = 1L;
 
-	JLabel l1;
-	
-	DefaultTableModel tableModel;
-	JTable data;
-	
-	Affectation b1;
-	AffectationDao dao = new AffectationDao();
-	
-	List<Affectation> list = new ArrayList<Affectation>();
-	 
-	String[] tblHead = { 
-			"IdAffectation", 
-			"NumVol", 
-			"DateVol",
-			"AffectationCode", 
-			"NumAvion", 
-			"IdPilote"  
-	};
-	 
+  JLabel l1;
 
-	public ListeModifAffectations() {
-		
-		/* Label */
-		l1 = new JLabel("LISTE DES AFFECTATIONS");
-		l1.setForeground(Color.blue);
-		l1.setFont(new Font("Serif", Font.BOLD, 20));
+  DefaultTableModel tableModel;
+  JTable data;
 
-		/* Placement */
-		l1.setBounds(100, 30, 400, 30);
+  Affectation b1;
+  AffectationDao dao = new AffectationDao();
 
-		getContentPane().add(l1);
+  List<Affectation> list = new ArrayList<Affectation>();
 
-		tableModel = new DefaultTableModel(tblHead, 0);
-		
-		data = new JTable(tableModel);		
-		data.setFont(new Font("Chandas", Font.BOLD, 15));
-		data.setRowHeight(25);		
-		data.setBounds(100, 100, 450, 450);
-		
-		chargeData(dao);
-		
-		data.setDefaultEditor(Object.class, null);
-		
-		data.addMouseListener(new MouseAdapter() {
-		    
-			public void mousePressed(MouseEvent mouseEvent) {
-		        
-				JTable table =(JTable) mouseEvent.getSource();
-				
-		        Point point = mouseEvent.getPoint();
-		        
-		        int row = table.rowAtPoint(point);
-		        
-		        if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
-		        	
-					int column = 0;
-					
-					//int id = Integer.parseInt(table.getModel().getValueAt(row, column).toString());
-					Object id = (Object) table.getModel().getValueAt(row, column).toString();
-										
-					b1 = (Affectation) dao.get(id);
+  String[] tblHead = {
+    "IdAffectation",
+    "NumVol",
+    "DateVol",
+    "AffectationCode",
+    "NumAvion",
+    "IdPilote",
+  };
 
-					if (b1 != null) {
-						
-						FicheModifAffectation fm = new FicheModifAffectation(b1);
+  public ListeModifAffectations() {
+    /* Label */
+    l1 = new JLabel("LISTE DES AFFECTATIONS");
+    l1.setForeground(Color.blue);
+    l1.setFont(new Font("Serif", Font.BOLD, 20));
+    l1.setBounds(100, 30, 400, 30);
 
-						fm.addWindowListener(new WindowListener() {
+    getContentPane().add(l1);
 
-							@Override
-							public void windowOpened(WindowEvent e) {
-								// TODO Auto-generated method stub								
-							}
+    tableModel = new DefaultTableModel(tblHead, 0);
 
-							@Override
-							public void windowClosing(WindowEvent e) {
-								chargeData(dao);
-							}
+    data = new JTable(tableModel);
+    data.setFont(new Font("Chandas", Font.BOLD, 15));
+    data.setRowHeight(25);
+    data.setBounds(100, 100, 450, 450);
 
-							@Override
-							public void windowClosed(WindowEvent e) {								
-								chargeData(dao);
-							}
+    chargeData(dao);
 
-							@Override
-							public void windowIconified(WindowEvent e) {
-								// TODO Auto-generated method stub
-								
-							}
+    data.setDefaultEditor(Object.class, null);
 
-							@Override
-							public void windowDeiconified(WindowEvent e) {
-								// TODO Auto-generated method stub
-								
-							}
+    data.addMouseListener(
+      new MouseAdapter() {
 
-							@Override
-							public void windowActivated(WindowEvent e) {
-								// TODO Auto-generated method stub
-								
-							}
+        public void mousePressed(MouseEvent mouseEvent) {
+          JTable table = (JTable) mouseEvent.getSource();
 
-							@Override
-							public void windowDeactivated(WindowEvent e) {
-								// TODO Auto-generated method stub
-								
-							}
-							
-						});
+          Point point = mouseEvent.getPoint();
 
-					}				
-					
-		        }
-		    }
-		});
-		
-		JScrollPane scrollPane = new JScrollPane(data);
-		scrollPane.setFont(new Font("DejaVu Sans Mono", Font.BOLD, 15));
-		
-		scrollPane.setSize(550, 300);
-		scrollPane.setLocation(50, 100);
-		getContentPane().add(scrollPane);
+          int row = table.rowAtPoint(point);
 
-		setTitle("LISTE DES AFFECTATIONS");
+          if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
+            int column = 0;
 
-		setSize(639, 540);
-		getContentPane().setLayout(null);
+            //int id = Integer.parseInt(table.getModel().getValueAt(row, column).toString());
+            Object id = (Object) table
+              .getModel()
+              .getValueAt(row, column)
+              .toString();
 
-		final Toolkit toolkit = Toolkit.getDefaultToolkit();
-		final Dimension screenSize = toolkit.getScreenSize();
-		final int x = (screenSize.width - this.getWidth()) / 2;
-		final int y = (screenSize.height - this.getHeight()) / 2;
-		setLocation(x, y);
-		setLocationRelativeTo(null);
+            b1 = (Affectation) dao.get(id);
 
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setVisible(true);
-	}
+            if (b1 != null) {
+              FicheModifAffectation fm = new FicheModifAffectation(b1);
 
-	
-	/** 
-	 * @param dao
-	 */
-	public void chargeData(AffectationDao dao) {
-			
-			
-			list = (List<Affectation>) dao.getAll();
-							
-			ListIterator<Affectation> listIterator = ((java.util.List<Affectation>) list).listIterator();
-			
-			tableModel.setRowCount(0);
-						
-			if (list != null) {
+              fm.addWindowListener(
+                new WindowListener() {
 
-				while(listIterator.hasNext()) {
-					b1 = listIterator.next();
+                  @Override
+                  public void windowOpened(WindowEvent e) {
+                    // TODO Auto-generated method stub
+                  }
 
-					Object[] donnees = { 
-						b1.getId(), 
-						b1.getNumVol(), 
-						b1.getDateVol(), 
-						b1.getAffectationCode(), 
-						b1.getNumAvion(), 
-						b1.getPilote().getNomPilote() 
-					};
+                  @Override
+                  public void windowClosing(WindowEvent e) {
+                    chargeData(dao);
+                  }
 
-					tableModel.addRow(donnees);	
-					
-				}
-				tableModel.fireTableDataChanged();			
-				data.setModel(tableModel);
-				data.repaint();
-			}
-		}
+                  @Override
+                  public void windowClosed(WindowEvent e) {
+                    chargeData(dao);
+                  }
 
-	
-	/** 
-	 * @param e
-	 */
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	
+                  @Override
+                  public void windowIconified(WindowEvent e) {
+                    // TODO Auto-generated method stub
+
+                  }
+
+                  @Override
+                  public void windowDeiconified(WindowEvent e) {
+                    // TODO Auto-generated method stub
+
+                  }
+
+                  @Override
+                  public void windowActivated(WindowEvent e) {
+                    // TODO Auto-generated method stub
+
+                  }
+
+                  @Override
+                  public void windowDeactivated(WindowEvent e) {
+                    // TODO Auto-generated method stub
+
+                  }
+                }
+              );
+            }
+          }
+        }
+      }
+    );
+
+    JScrollPane scrollPane = new JScrollPane(data);
+    scrollPane.setFont(new Font("DejaVu Sans Mono", Font.BOLD, 15));
+
+    scrollPane.setSize(550, 300);
+    scrollPane.setLocation(50, 100);
+    getContentPane().add(scrollPane);
+
+    setTitle("LISTE DES AFFECTATIONS");
+
+    setSize(639, 540);
+    getContentPane().setLayout(null);
+
+    final Toolkit toolkit = Toolkit.getDefaultToolkit();
+    final Dimension screenSize = toolkit.getScreenSize();
+    final int x = (screenSize.width - this.getWidth()) / 2;
+    final int y = (screenSize.height - this.getHeight()) / 2;
+    setLocation(x, y);
+    setLocationRelativeTo(null);
+
+    setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    setVisible(true);
+  }
+
+  /**
+   * @param dao
+   */
+  public void chargeData(AffectationDao dao) {
+    list = (List<Affectation>) dao.getAll();
+
+    ListIterator<Affectation> listIterator =
+      ((java.util.List<Affectation>) list).listIterator();
+
+    tableModel.setRowCount(0);
+
+    if (list != null) {
+      while (listIterator.hasNext()) {
+        b1 = listIterator.next();
+
+        Object[] donnees = {
+          b1.getId(),
+          b1.getNumVol(),
+          b1.getDateVol(),
+          b1.getAffectationCode(),
+          b1.getNumAvion(),
+          b1.getPilote().getNomPilote(),
+        };
+
+        tableModel.addRow(donnees);
+      }
+      tableModel.fireTableDataChanged();
+      data.setModel(tableModel);
+      data.repaint();
+    }
+  }
+
+  /**
+   * @param e
+   */
+  @Override
+  public void actionPerformed(ActionEvent e) {
+    // TODO Auto-generated method stub
+
+  }
 }

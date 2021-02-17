@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 import java.awt.event.*;
 import java.awt.Font;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.sql.*;
 import java.util.*;
 
@@ -83,9 +84,18 @@ public class Login extends JFrame implements ActionListener, KeyListener{
 
     setSize(650, 350);
     setLayout(null);
+
+    final Toolkit toolkit = Toolkit.getDefaultToolkit();
+    final Dimension screenSize = toolkit.getScreenSize();
+    final int x = (screenSize.width - this.getWidth()) / 2;
+    final int y = (screenSize.height - this.getHeight()) / 2;
+    
+    setLocation(x, y);
+    setLocationRelativeTo(null);
+
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setVisible(true);
-    }
+}
 
 public void getLogged() {
 

@@ -35,28 +35,33 @@ public class RechercherAeroport extends JFrame implements ActionListener {
 		l1 = new JLabel("RECHERCHER UN AEROPORT");
 		l1.setForeground(Color.blue);
 		l1.setFont(new Font("Serif", Font.BOLD, 20));
+		l1.setBounds(100, 30, 400, 30);
 
+		/* label 1*/  
 		l2 = new JLabel("ID");
-
+		l2.setBounds(100, 70, 200, 30);
+		
+		/* Texfield Recherche*/  
 		tf1 = new JTextField();
+		tf1.setBounds(149, 70, 200, 30);
+		tf1.addKeyListener(new KeyAdapter() {
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					rechercherAeroport();
+				}
+			}
+		});
 
 		/* Bouton */
 		btn1 = new JButton("Rechercher");
-
-		/* Placement */
-		l1.setBounds(100, 30, 400, 30);
-		l2.setBounds(100, 70, 200, 30);
-
-		tf1.setBounds(149, 70, 200, 30);
-
 		btn1.setBounds(361, 69, 176, 30);
-
 		btn1.addActionListener(this);
 
 		getContentPane().add(l1);
 		getContentPane().add(l2);
 		getContentPane().add(tf1);
-
 		getContentPane().add(btn1);
 
 		tableModel = new DefaultTableModel(tblHead, 0);
@@ -75,19 +80,20 @@ public class RechercherAeroport extends JFrame implements ActionListener {
 		JScrollPane scrollPane = new JScrollPane(data);
 		scrollPane.setFont(new Font("DejaVu Sans Mono", Font.BOLD, 15));
 
-		scrollPane.setSize(388, 200);
+		scrollPane.setSize(700, 200);
 		scrollPane.setLocation(149, 143);
 		getContentPane().add(scrollPane);
 
 		setTitle("Rechercher un Livre");
 
-		setSize(639, 540);
+		setSize(900, 540);
 		getContentPane().setLayout(null);
 
 		final Toolkit toolkit = Toolkit.getDefaultToolkit();
 		final Dimension screenSize = toolkit.getScreenSize();
 		final int x = (screenSize.width - this.getWidth()) / 2;
 		final int y = (screenSize.height - this.getHeight()) / 2;
+
 		setLocation(x, y);
 		setLocationRelativeTo(null);
 
@@ -114,97 +120,96 @@ public class RechercherAeroport extends JFrame implements ActionListener {
 	 */
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btn1) {
+			rechercherAeroport(); 
+		}
+	}
 
-			/* instanciation d'un objet */
-			// b1 = new Book(tf1.getText(), tf2.getText());
-
-			//int id = Integer.parseInt(tf1.getText());
-			Object id = (Object) tf1.getText();
+	private void rechercherAeroport() {
+		Object id = (Object) tf1.getText();
 								
-			b1 = (Aeroport) dao.get(id);
+		b1 = (Aeroport) dao.get(id);
 
-			if (b1 != null) {
-				
-				chargeData();	
+		if (b1 != null) {
+			
+			chargeData();	
 
-				data.addMouseListener(new MouseAdapter() {
-		    
-					public void mousePressed(MouseEvent mouseEvent) {
-						
-						JTable table =(JTable) mouseEvent.getSource();
-						
-						Point point = mouseEvent.getPoint();
-						
-						int row = table.rowAtPoint(point);
-						
-						if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
-							
-							int column = 0;
-							
-							//int id = Integer.parseInt(table.getModel().getValueAt(row, column).toString());
-							Object id = (Object) table.getModel().getValueAt(row, column).toString();
-												
-							b1 = (Aeroport) dao.get(id);
+			data.addMouseListener(new MouseAdapter() {
 		
-							if (b1 != null) {
-								
-								FicheModifAeroport fm = new FicheModifAeroport(b1);
-								
-								fm.addWindowListener(new WindowListener() {
-		
-									@Override
-									public void windowOpened(WindowEvent e) {
-										// TODO Auto-generated method stub								
-									}
-		
-									@Override
-									public void windowClosing(WindowEvent e) {
+				public void mousePressed(MouseEvent mouseEvent) {
+					
+					JTable table =(JTable) mouseEvent.getSource();
+					
+					Point point = mouseEvent.getPoint();
+					
+					int row = table.rowAtPoint(point);
+					
+					if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
+						
+						int column = 0;
+						
+						//int id = Integer.parseInt(table.getModel().getValueAt(row, column).toString());
+						Object id = (Object) table.getModel().getValueAt(row, column).toString();
 											
-									}
-		
-									@Override
-									public void windowClosed(WindowEvent e) {								
-										chargeData();
-									}
-		
-									@Override
-									public void windowIconified(WindowEvent e) {
-										// TODO Auto-generated method stub
-										
-									}
-		
-									@Override
-									public void windowDeiconified(WindowEvent e) {
-										// TODO Auto-generated method stub
-										
-									}
-		
-									@Override
-									public void windowActivated(WindowEvent e) {
-										// TODO Auto-generated method stub
-										
-									}
-		
-									@Override
-									public void windowDeactivated(WindowEvent e) {
-										// TODO Auto-generated method stub
-										
-									}
-									
-								});
-		
-							}				
+						b1 = (Aeroport) dao.get(id);
+	
+						if (b1 != null) {
 							
-						}
+							FicheModifAeroport fm = new FicheModifAeroport(b1);
+							
+							fm.addWindowListener(new WindowListener() {
+	
+								@Override
+								public void windowOpened(WindowEvent e) {
+									// TODO Auto-generated method stub								
+								}
+	
+								@Override
+								public void windowClosing(WindowEvent e) {
+										
+								}
+	
+								@Override
+								public void windowClosed(WindowEvent e) {								
+									chargeData();
+								}
+	
+								@Override
+								public void windowIconified(WindowEvent e) {
+									// TODO Auto-generated method stub
+									
+								}
+	
+								@Override
+								public void windowDeiconified(WindowEvent e) {
+									// TODO Auto-generated method stub
+									
+								}
+	
+								@Override
+								public void windowActivated(WindowEvent e) {
+									// TODO Auto-generated method stub
+									
+								}
+	
+								@Override
+								public void windowDeactivated(WindowEvent e) {
+									// TODO Auto-generated method stub
+									
+								}
+								
+							});
+	
+						}				
+						
 					}
-				});
+				}
+			});
 
-				repaint();
+			repaint();
 
-				tf1.setText("");
-			}else {
-				JOptionPane.showMessageDialog(null, "Aeroport non Trouvé");
-			}
+			tf1.setText("");
+		}else {
+			JOptionPane.showMessageDialog(null, "Aeroport non Trouvé");
 		}
 	}
 

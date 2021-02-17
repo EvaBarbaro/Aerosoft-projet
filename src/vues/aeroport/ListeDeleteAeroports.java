@@ -40,8 +40,6 @@ public class ListeDeleteAeroports extends JFrame implements ActionListener{
 		l1 = new JLabel("LISTE DES AEROPORTS");
 		l1.setForeground(Color.blue);
 		l1.setFont(new Font("Serif", Font.BOLD, 20));
-
-		/* Placement */
 		l1.setBounds(100, 30, 400, 30);
 
 		getContentPane().add(l1);
@@ -49,9 +47,6 @@ public class ListeDeleteAeroports extends JFrame implements ActionListener{
 		tableModel = new DefaultTableModel(tblHead, 0);
 		
 		data = new JTable(tableModel);
-		
-		//javax.swing.JTable.setInner(5); 
-		
 		data.setFont(new Font("Chandas", Font.BOLD, 15));
 		data.setRowHeight(25);
 		

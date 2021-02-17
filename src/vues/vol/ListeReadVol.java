@@ -31,7 +31,7 @@ public class ListeReadVol extends JFrame implements ActionListener{
 	
 	List<Vol> list = new ArrayList<Vol>();
 	 
-	String[] tblHead = { "Id du vol", "Aeroport de depart", "Heure de depart", "Aeroport d'arrivé'", "Heure d'arrivé'" };
+	String[] tblHead = { "Id du vol", "Aeroport de depart", "Heure de depart", "Aeroport d'arrivé", "Heure d'arrivé" };
 	 
 
 	public ListeReadVol() {
@@ -63,13 +63,13 @@ public class ListeReadVol extends JFrame implements ActionListener{
 		JScrollPane scrollPane = new JScrollPane(data);
 		scrollPane.setFont(new Font("DejaVu Sans Mono", Font.BOLD, 15));
 		
-		scrollPane.setSize(550, 300);
+		scrollPane.setSize(900, 300);
 		scrollPane.setLocation(50, 100);
 		getContentPane().add(scrollPane);
 
 		setTitle("LISTE DES AEROPORT");
 
-		setSize(639, 540);
+		setSize(1000, 540);
 		getContentPane().setLayout(null);
 
 		final Toolkit toolkit = Toolkit.getDefaultToolkit();

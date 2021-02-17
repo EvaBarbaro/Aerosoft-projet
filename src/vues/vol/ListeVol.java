@@ -31,7 +31,7 @@ public class ListeVol extends JFrame implements ActionListener{
 	
 	List<Vol> list = new ArrayList<Vol>();
 	 
-	String[] tblHead = { "Id du vol", "Aeroport de depart", "Heure de depart", "Aeroport d'arrivé'", "Heure d'arrivé'" };
+	String[] tblHead = { "Id du vol", "Aeroport de depart", "Heure de depart", "Aeroport d'arrivé", "Heure d'arrivé" };
 	 
 
 	public ListeVol() {
@@ -52,10 +52,10 @@ public class ListeVol extends JFrame implements ActionListener{
 		
 		//javax.swing.JTable.setInner(5); 
 		
-		data.setFont(new Font("Chandas", Font.BOLD, 15));
+		data.setFont(new Font("Chandas", Font.BOLD, 15));		
 		data.setRowHeight(25);
 		
-		data.setBounds(100, 100, 450, 450);
+		data.setBounds(100, 100, 450, 900);
 		
 		chargeData(dao);
 		
@@ -136,19 +136,22 @@ public class ListeVol extends JFrame implements ActionListener{
 		JScrollPane scrollPane = new JScrollPane(data);
 		scrollPane.setFont(new Font("DejaVu Sans Mono", Font.BOLD, 15));
 		
-		scrollPane.setSize(550, 300);
+		scrollPane.setSize(900, 300);
 		scrollPane.setLocation(50, 100);
 		getContentPane().add(scrollPane);
 
+
+		
 		setTitle("LISTE DES AEROPORT");
 
-		setSize(639, 540);
+		setSize(1000, 540);
 		getContentPane().setLayout(null);
 
 		final Toolkit toolkit = Toolkit.getDefaultToolkit();
 		final Dimension screenSize = toolkit.getScreenSize();
 		final int x = (screenSize.width - this.getWidth()) / 2;
 		final int y = (screenSize.height - this.getHeight()) / 2;
+
 		setLocation(x, y);
 		setLocationRelativeTo(null);
 

@@ -353,8 +353,10 @@ public class Fiche extends JFrame {
 		final Dimension screenSize = toolkit.getScreenSize();
 		final int x = (screenSize.width - this.getWidth()) / 2;
 		final int y = (screenSize.height - this.getHeight()) / 2;
+
 		setLocation(x, y);
 		setLocationRelativeTo(null);
+		
 		setVisible(true);
 	}
 
