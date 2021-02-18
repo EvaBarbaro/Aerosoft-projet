@@ -105,7 +105,6 @@ public class FichePilote extends JFrame {
 		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textField_1.setColumns(10);
 		textField_1.setText(listTextFields[0]);
-        textField_1.setEnabled(false);
 
 		oldValue_1 = listTextFields[0];
 
