@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.*;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.*;
 
 import dao.RoleDao;
@@ -22,7 +20,7 @@ public class TableRole extends JFrame{
 
     private JTable table;
 
-    private JComboBox comboBox1;
+    private JComboBox<String> comboBox1;
     private int row;
 
     /**
@@ -36,7 +34,7 @@ public class TableRole extends JFrame{
  
         String[] items1 = { "0", "1", "2", "3", "4", "5" };
         
-        comboBox1 = new JComboBox(items1);
+        comboBox1 = new JComboBox<String>(items1);
         comboBox1.addActionListener (new ActionListener () {
             public void actionPerformed(ActionEvent e) {
                 
@@ -123,7 +121,7 @@ public class TableRole extends JFrame{
 
     }
   
-    class ComboBoxRenderer extends JComboBox implements TableCellRenderer {
+    class ComboBoxRenderer extends JComboBox<String> implements TableCellRenderer {
         private static final long serialVersionUID = 1L;
 
         public ComboBoxRenderer() {
@@ -134,7 +132,7 @@ public class TableRole extends JFrame{
                 int row, int column) {
 
             removeAllItems();
-            addItem(value);
+            addItem((String) value);
             return this;
         }
     }

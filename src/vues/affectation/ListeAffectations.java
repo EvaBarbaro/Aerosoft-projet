@@ -71,7 +71,7 @@ public class ListeAffectations extends JFrame implements ActionListener {
     final Toolkit toolkit = Toolkit.getDefaultToolkit();
     final Dimension screenSize = toolkit.getScreenSize();
     final int x = (screenSize.width - this.getWidth()) / 2;
-	final int y = (screenSize.height - this.getHeight()) / 2;
+	  final int y = (screenSize.height - this.getHeight()) / 2;
 	
     setLocation(x, y);
     setLocationRelativeTo(null);
@@ -84,6 +84,7 @@ public class ListeAffectations extends JFrame implements ActionListener {
    * @param dao
    */
   public void chargeData(AffectationDao dao) {
+
     list = (List<Affectation>) dao.getAll();
 
     ListIterator<Affectation> listIterator =
@@ -92,23 +93,28 @@ public class ListeAffectations extends JFrame implements ActionListener {
     tableModel.setRowCount(0);
 
     if (list != null) {
+
       while (listIterator.hasNext()) {
+
         b1 = listIterator.next();
 
         Object[] donnees = {
-          b1.getId(),
-          b1.getNumVol(),
-          b1.getDateVol(),
-          b1.getAffectationCode(),
-          b1.getNumAvion(),
-          b1.getPilote().getNomPilote(),
-        };
+            b1.getId(),
+            b1.getNumVol(),
+            b1.getDateVol(),
+            b1.getAffectationCode(),
+            b1.getNumAvion(), 
+            b1.getPilote().getNomPilote()
+          };
 
         tableModel.addRow(donnees);
       }
+      
       tableModel.fireTableDataChanged();
+
       data.setModel(tableModel);
       data.repaint();
+      
     }
   }
 

@@ -14,9 +14,6 @@ import vues.Fiche;
 
 public class FicheAjoutRole extends JFrame {
 
-	/**
-	 *
-	 */
 	private static final long serialVersionUID = 1L;
 
 	RoleDao roleDao;
@@ -27,24 +24,25 @@ public class FicheAjoutRole extends JFrame {
 	public FicheAjoutRole(Role role) {
 
 		// Tableau des labels
-		String[] listLabelsRole = { "IdRole", "RoleNom" };
+		String[] listLabelsRole = {"IdRole", "RoleNom"};
 
 		// Tableau des champs de textes
 		String[] listTextFieldsRole = {"", ""};
-				
+
 		// Tableau des boutons
-		String[] listTextBtnsRole = { "Valider","Annuler" };
+		String[] listTextBtnsRole = {"Valider", "Annuler"};
 
 		// Tableau des méthodes
-		String[] listMethodeDoaRole = { "save","" };
+		String[] listMethodeDoaRole = {"save", ""};
+
 		roleDao = new RoleDao();
 
 		new Fiche(
-				"Création d'un role", 
-				roleDao, 
-				(Object)role, 
-				listLabelsRole, 
-				listTextFieldsRole,
+				"Création d'un role",
+				roleDao,
+				(Object) role,
+				listLabelsRole,
+			    listTextFieldsRole,
 				listTextBtnsRole,
 				listMethodeDoaRole
 				);

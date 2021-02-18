@@ -13,9 +13,10 @@ import vues.Fiche;
 import models.*;
 import dao.*;
 
-public class FicheAjoutUtilisateur extends JFrame implements ActionListener, KeyListener{
+public class FicheAjoutUtilisateur extends JFrame implements ActionListener, KeyListener {
 
     private static final long serialVersionUID = 1618223497137316296L;
+
     JLabel labelTitle, labelEmail, labelPassword;
     JTextField textFieldLogin, roleField;
     JButton btnInscription;
@@ -26,56 +27,57 @@ public class FicheAjoutUtilisateur extends JFrame implements ActionListener, Key
      */
     public FicheAjoutUtilisateur() {
 
-    // Ajout du logo
-    JLabel labelimage = new JLabel();
-        ImageIcon img = new ImageIcon(
-            Toolkit.getDefaultToolkit().getImage(
-                    Fiche.class.getResource("/images/Aerosoft-logo.PNG"))
-                    .getScaledInstance(160, 50, Image.SCALE_DEFAULT)
-        );
-                
-    labelimage.setBounds(80, 10, 400, 70); 
-    labelimage.setIcon(img);
-    add(labelimage);
+        // Ajout du logo
+        JLabel labelimage = new JLabel();
 
-    // label
-    labelEmail = new JLabel("Votre Email:");
-    labelEmail.setFont(new Font("Tahoma", Font.PLAIN, 15));
-    labelEmail.setBounds(80, 90, 200, 30);
+        ImageIcon img = new ImageIcon(Toolkit.getDefaultToolkit()
+                .getImage(Fiche.class.getResource("/images/Aerosoft-logo.PNG"))
+                .getScaledInstance(160, 50, Image.SCALE_DEFAULT));
 
-    labelPassword = new JLabel("Votre Mot de passe:");
-    labelPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        labelimage.setBounds(80, 10, 400, 70);
+        labelimage.setIcon(img);
+        add(labelimage);
 
-    
-    labelPassword.setBounds(80, 130, 200, 30);     
-    
-    // textField
-    textFieldLogin = new JTextField("");
-    textFieldLogin.setFont(new Font("Tahoma", Font.PLAIN, 15));
-    textFieldLogin.setBounds(300, 90, 200, 30);
-    
-    /* Mot de passe*/
-    passwordField = new JPasswordField();
-    passwordField.setFont(new Font("Tahoma", Font.PLAIN, 15));
-    passwordField.setBounds(300, 130, 200, 30);
-        
-    /*Bouton */
-    btnInscription = new JButton("Inscrivez-vous");
-    btnInscription.setBounds(300, 170, 150, 30);
-    btnInscription.setFont(new Font("Tahoma", Font.BOLD, 15));
-    btnInscription.setBackground(new Color(22, 219, 170));
-    btnInscription.setForeground(Color.WHITE);
-    btnInscription.addActionListener(this);
-    
-    // add(labelTitle);
-    add(labelEmail);add(textFieldLogin); add(labelPassword);add(passwordField);add(btnInscription);
+        // label
+        labelEmail = new JLabel("Votre Email:");
+        labelEmail.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        labelEmail.setBounds(80, 90, 200, 30);
 
-    setTitle("Aerosoft");
+        labelPassword = new JLabel("Votre Mot de passe:");
+        labelPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        labelPassword.setBounds(80, 130, 200, 30);
 
-    setSize(650, 350);
-    setLayout(null);
-    setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-    setVisible(true);
+        // textField
+        textFieldLogin = new JTextField("");
+        textFieldLogin.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        textFieldLogin.setBounds(300, 90, 200, 30);
+
+        /* Mot de passe */
+        passwordField = new JPasswordField();
+        passwordField.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        passwordField.setBounds(300, 130, 200, 30);
+
+        /* Bouton Inscription */
+        btnInscription = new JButton("Inscrivez-vous");
+        btnInscription.setBounds(300, 170, 150, 30);
+        btnInscription.setFont(new Font("Tahoma", Font.BOLD, 15));
+        btnInscription.setBackground(new Color(22, 219, 170));
+        btnInscription.setForeground(Color.WHITE);
+        btnInscription.addActionListener(this);
+
+        // add(labelTitle);
+        add(labelEmail);
+        add(textFieldLogin);
+        add(labelPassword);
+        add(passwordField);
+        add(btnInscription);
+
+        setTitle("Aerosoft");
+
+        setSize(650, 350);
+        setLayout(null);
+        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        setVisible(true);
     }
 
     /**
@@ -84,9 +86,11 @@ public class FicheAjoutUtilisateur extends JFrame implements ActionListener, Key
     public void register() {
 
         RoleDao roleDao = new RoleDao();
-        ArrayList<Role> roles = roleDao.getAll();
-        String roleTab[] = new String[roles.size() + 1];
         
+        ArrayList<Role> roles = roleDao.getAll();
+
+        String roleTab[] = new String[roles.size() + 1];
+
         roleTab[0] = "Selectionner votre rôle";
 
         int i = 1;
@@ -95,6 +99,7 @@ public class FicheAjoutUtilisateur extends JFrame implements ActionListener, Key
 
             roleTab[i] = role.getRoleNom();
             i++;
+
         }
 
         // ComboBos role
@@ -122,7 +127,9 @@ public class FicheAjoutUtilisateur extends JFrame implements ActionListener, Key
 
         // évènement comboBox
         comboBoxRole.addActionListener(new ActionListener() {
+
             public void actionPerformed(ActionEvent eventComboBox) {
+
                 // Récupération de l'item séletionné dans la comboBox
                 String stringBox = (String) comboBoxRole.getSelectedItem();
 
@@ -131,6 +138,7 @@ public class FicheAjoutUtilisateur extends JFrame implements ActionListener, Key
 
                 // Switch de la ComboBox
                 switch (stringBox) {
+
                     case "Chargé Clientèle":
                         roleField = new JTextField(roleAtt.getIdRole());
                         roleField.setVisible(false);
@@ -138,6 +146,7 @@ public class FicheAjoutUtilisateur extends JFrame implements ActionListener, Key
                         revalidate();
                         repaint();
                         break;
+
                     // Création d'une frame d'ajout de pilote
                     case "Pilote":
                         JFrame framePilote = new JFrame("Informations pilote");
@@ -150,13 +159,14 @@ public class FicheAjoutUtilisateur extends JFrame implements ActionListener, Key
 
                         // Ajout du logo
                         JLabel labelimage = new JLabel();
-                        ImageIcon img = new ImageIcon(
-                            Toolkit.getDefaultToolkit().getImage(
-                                    Fiche.class.getResource("/images/Aerosoft-logo.PNG"))
-                                    .getScaledInstance(160, 50, Image.SCALE_DEFAULT)
-                                );
-                        labelimage.setBounds(80, 10, 400, 70); 
+
+                        ImageIcon img = new ImageIcon(Toolkit.getDefaultToolkit()
+                                .getImage(Fiche.class.getResource("/images/Aerosoft-logo.PNG"))
+                                .getScaledInstance(160, 50, Image.SCALE_DEFAULT));
+
+                        labelimage.setBounds(80, 10, 400, 70);
                         labelimage.setIcon(img);
+
                         framePilote.add(labelimage);
 
                         // Label + textField + bouton
@@ -199,18 +209,21 @@ public class FicheAjoutUtilisateur extends JFrame implements ActionListener, Key
                         ArrayList<Utilisateur> userAll = utilisateurDao.getAll();
 
                         Boolean duplicate[] = new Boolean[userAll.size()];
-        
+
                         int i = 0;
 
                         // Range le résultat de comparaison des utilisateurs avec le login entré
                         for (Utilisateur user : userAll) {
 
                             if (user.getMail().equals(textFieldLogin.getText())) {
+
                                 duplicate[i] = true;
-                            }
-                            else {
+
+                            } else {
+
                                 duplicate[i] = false;
                             }
+
                             i++;
                         }
 
@@ -218,6 +231,7 @@ public class FicheAjoutUtilisateur extends JFrame implements ActionListener, Key
                         if (Arrays.asList(duplicate).contains(true)) {
 
                             JLabel labelError = new JLabel("Cette adresse mail existe déjà.");
+
                             labelError.setBounds(300, 230, 250, 30);
                             labelError.setFont(new Font("Tahoma", Font.PLAIN, 15));
                             labelError.setForeground(Color.RED);
@@ -229,7 +243,7 @@ public class FicheAjoutUtilisateur extends JFrame implements ActionListener, Key
                         } else {
 
                             btnInscription.setVisible(false);
-    
+
                             framePilote.add(nomPiloteLabel);
                             framePilote.add(nomPiloteField);
                             framePilote.add(prenomPiloteLabel);
@@ -237,7 +251,7 @@ public class FicheAjoutUtilisateur extends JFrame implements ActionListener, Key
                             framePilote.add(matriculeLabel);
                             framePilote.add(matriculeField);
                             framePilote.add(btnValidatePilote);
-    
+
                             framePilote.setTitle("Aerosoft");
                             framePilote.setSize(650, 350);
                             framePilote.setLayout(null);
@@ -302,24 +316,31 @@ public class FicheAjoutUtilisateur extends JFrame implements ActionListener, Key
                     case "Administrateur":
                         UtilisateurDao utilisateurDaoAdmin = new UtilisateurDao();
                         ArrayList<Utilisateur> userAdmin = utilisateurDaoAdmin.getAll();
-        
+
                         int adminCount = 0;
- 
+
                         // Boucle permettant de compter le nombre d'Admin
                         for (Utilisateur users : userAdmin) {
+
                             System.out.println(users.getIdRole());
-                            if (users.getIdRole().equals("55555")){
+
+                            if (users.getIdRole().equals("55555")) {
+
                                 adminCount++;
+
                             }
                         }
 
                         // Test permettant de Bloquer l'ajout d'un admin s'il y en a déjà deux
                         if (adminCount == 2) {
 
-                            JLabel labelErrorAdmin = new JLabel("Le nombre maximal de compte admin a été atteint.");
+                            JLabel labelErrorAdmin =
+                                    new JLabel("Le nombre maximal de compte admin a été atteint.");
+
                             labelErrorAdmin.setBounds(270, 230, 340, 30);
                             labelErrorAdmin.setFont(new Font("Tahoma", Font.PLAIN, 15));
                             labelErrorAdmin.setForeground(Color.RED);
+
                             add(labelErrorAdmin);
                             revalidate();
                             repaint();
@@ -338,65 +359,75 @@ public class FicheAjoutUtilisateur extends JFrame implements ActionListener, Key
 
         // Evènement d'ajout utilisateur classique
         btnValidateReg.addActionListener(new ActionListener() {
+
             public void actionPerformed(ActionEvent eventValidateReg) {
 
                 testUtilisateur();
+
             }
+
         });
     }
-    
+
     // Création d'un utilisateur
     private void testUtilisateur() {
 
-                UtilisateurDao utilisateurDao = new UtilisateurDao();
-                Utilisateur utilisateur = new Utilisateur();
-                int uniqueID = UUID.randomUUID().hashCode();
+        UtilisateurDao utilisateurDao = new UtilisateurDao();
 
-                String userPiloteString[] = new String[5];
+        Utilisateur utilisateur = new Utilisateur();
 
-                userPiloteString[0] = String.valueOf(uniqueID);
-                userPiloteString[1] = textFieldLogin.getText();
-                userPiloteString[2] = String.valueOf(passwordField.getPassword());
-                userPiloteString[3] = "false";
-                userPiloteString[4] = roleField.getText();
+        int uniqueID = UUID.randomUUID().hashCode();
 
-                ArrayList<Utilisateur> userAll = utilisateurDao.getAll();
+        String userPiloteString[] = new String[5];
 
-                Boolean duplicate[] = new Boolean[userAll.size()];
+        userPiloteString[0] = String.valueOf(uniqueID);
+        userPiloteString[1] = textFieldLogin.getText();
+        userPiloteString[2] = String.valueOf(passwordField.getPassword());
+        userPiloteString[3] = "false";
+        userPiloteString[4] = roleField.getText();
 
-                int i = 0;
-        
-                for (Utilisateur user : userAll) {
+        ArrayList<Utilisateur> userAll = utilisateurDao.getAll();
 
-                    if (user.getMail().equals(userPiloteString[1])) {
-                        duplicate[i] = true;
-                    }
-                    else {
-                        duplicate[i] = false;
-                    }
-                    i++;
-                }
+        Boolean duplicate[] = new Boolean[userAll.size()];
 
-                if (Arrays.asList(duplicate).contains(true)) {
+        int i = 0;
 
-                    JLabel labelError = new JLabel("Cette adresse mail existe déjà.");
-                    labelError.setBounds(300, 230, 250, 30);
-                    labelError.setFont(new Font("Tahoma", Font.PLAIN, 15));
-                    labelError.setForeground(Color.RED);
-                    add(labelError);
-                    revalidate();
-                    repaint();
-                    
-                } else {
-                    utilisateurDao.save(utilisateur, userPiloteString);
+        for (Utilisateur user : userAll) {
 
-                    dispose();
-                }
+            if (user.getMail().equals(userPiloteString[1])) {
+
+                duplicate[i] = true;
+
+            } else {
+
+                duplicate[i] = false;
+
+            }
+
+            i++;
+        }
+
+        if (Arrays.asList(duplicate).contains(true)) {
+
+            JLabel labelError = new JLabel("Cette adresse mail existe déjà.");
+
+            labelError.setBounds(300, 230, 250, 30);
+            labelError.setFont(new Font("Tahoma", Font.PLAIN, 15));
+            labelError.setForeground(Color.RED);
+
+            add(labelError);
+            revalidate();
+            repaint();
+
+        } else {
+
+            utilisateurDao.save(utilisateur, userPiloteString);
+            dispose();
+        }
 
     }
 
-    
-    /** 
+    /**
      * @param btnEvent
      */
     public void actionPerformed(ActionEvent btnEvent) {
@@ -405,35 +436,35 @@ public class FicheAjoutUtilisateur extends JFrame implements ActionListener, Key
             register();
         }
     }
-    
-    
-    /** 
+
+    /**
      * @param e
      */
     public void keyPressed(KeyEvent e) {
-		
-		
-	}
 
-	
-    /** 
+    }
+
+
+    /**
      * @param e
      */
     @Override
-	public void keyTyped(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			testUtilisateur();
-		}
-	}
+    public void keyTyped(KeyEvent e) {
 
-	
-    /** 
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+            
+            testUtilisateur();
+            
+        }
+    }
+
+
+    /**
      * @param e
      */
     @Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+    public void keyReleased(KeyEvent e) {        
+
+    }
 
 }

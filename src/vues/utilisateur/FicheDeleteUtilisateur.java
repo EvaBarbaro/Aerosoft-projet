@@ -24,25 +24,18 @@ public class FicheDeleteUtilisateur extends JFrame {
 	public FicheDeleteUtilisateur(Utilisateur utilisateur) {
 
 		// Tableau des labels
-		String[] listLabels = { "Id de l'aeroport à supprimer"};
+		String[] listLabels = {"Id de l'aeroport à supprimer"};
 
 		// Tableau des textField
 		String[] listTextFields = {"" + utilisateur.getIdUtilisateur()};
 
 		// Tableau des boutons
-		String[] listTextBtns = { "Valider","Annuler" };
+		String[] listTextBtns = {"Valider", "Annuler"};
 
 		// Tableau des méthodes
-		String[] listMethodeDoa = { "delete","" };
+		String[] listMethodeDoa = {"delete", ""};
 
-		new FicheFirstFieldFalse(
-				"Suppression d'un Utilisateur", 
-				utilisateurDao, 
-				(Object)utilisateur, 
-				listLabels, 
-				listTextFields,
-				listTextBtns,
-				listMethodeDoa
-				);
+		new FicheFirstFieldFalse("Suppression d'un Utilisateur", utilisateurDao,
+				(Object) utilisateur, listLabels, listTextFields, listTextBtns, listMethodeDoa);
 	}
 }

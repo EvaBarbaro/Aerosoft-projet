@@ -160,12 +160,12 @@ public class RechercherAeroport extends JFrame implements ActionListener {
 	
 								@Override
 								public void windowOpened(WindowEvent e) {
-									// TODO Auto-generated method stub								
+																	
 								}
 	
 								@Override
 								public void windowClosing(WindowEvent e) {
-										
+									chargeData();										
 								}
 	
 								@Override
@@ -174,26 +174,22 @@ public class RechercherAeroport extends JFrame implements ActionListener {
 								}
 	
 								@Override
-								public void windowIconified(WindowEvent e) {
-									// TODO Auto-generated method stub
+								public void windowIconified(WindowEvent e) {									
 									
 								}
 	
 								@Override
-								public void windowDeiconified(WindowEvent e) {
-									// TODO Auto-generated method stub
+								public void windowDeiconified(WindowEvent e) {									
 									
 								}
 	
 								@Override
-								public void windowActivated(WindowEvent e) {
-									// TODO Auto-generated method stub
+								public void windowActivated(WindowEvent e) {									
 									
 								}
 	
 								@Override
-								public void windowDeactivated(WindowEvent e) {
-									// TODO Auto-generated method stub
+								public void windowDeactivated(WindowEvent e) {									
 									
 								}
 								
@@ -208,8 +204,11 @@ public class RechercherAeroport extends JFrame implements ActionListener {
 			repaint();
 
 			tf1.setText("");
-		}else {
+
+		} else {
+			
 			JOptionPane.showMessageDialog(null, "Aeroport non Trouvé");
+			
 		}
 	}
 

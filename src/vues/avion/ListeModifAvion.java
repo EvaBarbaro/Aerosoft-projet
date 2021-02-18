@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import models.Avion;
 
 public class ListeModifAvion extends JFrame implements ActionListener {
+
   private static final long serialVersionUID = 1L;
 
   JLabel l1;
@@ -23,9 +24,10 @@ public class ListeModifAvion extends JFrame implements ActionListener {
 
   List<Avion> list = new ArrayList<Avion>();
 
-  String[] tblHead = { "Numéro avion", "Type avion", "Base aeroport" };
+  String[] tblHead = {"Numéro avion", "Type avion", "Base aeroport"};
 
   public ListeModifAvion() {
+
     /* Label */
     l1 = new JLabel("LISTE DES Avions");
     l1.setForeground(Color.blue);
@@ -45,76 +47,68 @@ public class ListeModifAvion extends JFrame implements ActionListener {
 
     data.setDefaultEditor(Object.class, null);
 
-    data.addMouseListener(
-      new MouseAdapter() {
+    data.addMouseListener(new MouseAdapter() {
 
-        public void mousePressed(MouseEvent mouseEvent) {
-          JTable table = (JTable) mouseEvent.getSource();
+      public void mousePressed(MouseEvent mouseEvent) {
 
-          Point point = mouseEvent.getPoint();
+        JTable table = (JTable) mouseEvent.getSource();
 
-          int row = table.rowAtPoint(point);
+        Point point = mouseEvent.getPoint();
 
-          if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
-            int column = 0;
+        int row = table.rowAtPoint(point);
 
-            //int id = Integer.parseInt(table.getModel().getValueAt(row, column).toString());
-            Object id = (Object) table
-              .getModel()
-              .getValueAt(row, column)
-              .toString();
+        if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
 
-            av1 = (Avion) dao.get(id);
+          int column = 0;
 
-            if (av1 != null) {
-              FicheModifAvion fm = new FicheModifAvion(av1);
+          Object id = (Object) table.getModel().getValueAt(row, column).toString();
 
-              fm.addWindowListener(
-                new WindowListener() {
+          av1 = (Avion) dao.get(id);
 
-                  @Override
-                  public void windowOpened(WindowEvent e) {
-                    // TODO Auto-generated method stub
-                  }
+          if (av1 != null) {
 
-                  @Override
-                  public void windowClosing(WindowEvent e) {}
+            FicheModifAvion fm = new FicheModifAvion(av1);
 
-                  @Override
-                  public void windowClosed(WindowEvent e) {
-                    chargeData(dao);
-                  }
+            fm.addWindowListener(new WindowListener() {
 
-                  @Override
-                  public void windowIconified(WindowEvent e) {
-                    // TODO Auto-generated method stub
+              @Override
+              public void windowOpened(WindowEvent e) {
+                
+              }
 
-                  }
+              @Override
+              public void windowClosing(WindowEvent e) {
+              }
 
-                  @Override
-                  public void windowDeiconified(WindowEvent e) {
-                    // TODO Auto-generated method stub
+              @Override
+              public void windowClosed(WindowEvent e) {
+                chargeData(dao);
+              }
 
-                  }
+              @Override
+              public void windowIconified(WindowEvent e) {                
 
-                  @Override
-                  public void windowActivated(WindowEvent e) {
-                    // TODO Auto-generated method stub
+              }
 
-                  }
+              @Override
+              public void windowDeiconified(WindowEvent e) {                
 
-                  @Override
-                  public void windowDeactivated(WindowEvent e) {
-                    // TODO Auto-generated method stub
+              }
 
-                  }
-                }
-              );
-            }
+              @Override
+              public void windowActivated(WindowEvent e) {                
+
+              }
+
+              @Override
+              public void windowDeactivated(WindowEvent e) {                
+
+              }
+            });
           }
         }
       }
-    );
+    });
 
     JScrollPane scrollPane = new JScrollPane(data);
     scrollPane.setFont(new Font("DejaVu Sans Mono", Font.BOLD, 15));
@@ -132,39 +126,41 @@ public class ListeModifAvion extends JFrame implements ActionListener {
     final Dimension screenSize = toolkit.getScreenSize();
     final int x = (screenSize.width - this.getWidth()) / 2;
     final int y = (screenSize.height - this.getHeight()) / 2;
+
     setLocation(x, y);
     setLocationRelativeTo(null);
 
     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     setVisible(true);
+
   }
 
   /**
    * @param dao
    */
   public void chargeData(AvionDao dao) {
+
     list = (List<Avion>) dao.getAll();
 
-    ListIterator<Avion> listIterator =
-      ((java.util.List<Avion>) list).listIterator();
+    ListIterator<Avion> listIterator = ((java.util.List<Avion>) list).listIterator();
 
     tableModel.setRowCount(0);
 
     if (list != null) {
+
       while (listIterator.hasNext()) {
+
         av1 = listIterator.next();
 
-        Object[] donnees = {
-          av1.getNumAvion(),
-          av1.getTypeAvion(),
-          av1.getBaseAeroport(),
-        };
+        Object[] donnees = {av1.getNumAvion(), av1.getTypeAvion(), av1.getBaseAeroport(),};
 
         tableModel.addRow(donnees);
       }
+
       tableModel.fireTableDataChanged();
       data.setModel(tableModel);
       data.repaint();
+
     }
   }
 
@@ -173,7 +169,6 @@ public class ListeModifAvion extends JFrame implements ActionListener {
    */
   @Override
   public void actionPerformed(ActionEvent e) {
-    // TODO Auto-generated method stub
-
+    
   }
 }

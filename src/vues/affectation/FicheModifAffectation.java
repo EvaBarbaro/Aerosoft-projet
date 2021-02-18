@@ -68,7 +68,17 @@ public class FicheModifAffectation extends JFrame {
 			i++;
 		}
 
-		new FicheAffectation("Ajout d'une affectation", bdao, (Object) af, listLabels, listTextFields, listTextBtns,
-				listMethodeDoa, jComboBoxPiloteTitles, jComboBoxNumVolTitles, jComboBoxNumAvionTitles);
+        new FicheAffectation(
+            "Ajout d'une affectation",
+            bdao,
+            (Object) af,
+            listLabels,
+            listTextFields,
+            listTextBtns,
+            listMethodeDoa, 
+            jComboBoxPiloteTitles, 
+            jComboBoxNumVolTitles, 
+            jComboBoxNumAvionTitles
+            );
   }
 }

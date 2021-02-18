@@ -21,17 +21,12 @@ public class FicheExample extends JFrame {
 	 */
 	public FicheExample(Utilisateur u) {
 
-		String [] listLabels= {"IdUtilisateur","Mail","MotDePasse","Statut","IdRole","IdRole"};
+		String[] listLabels = { "IdUtilisateur", "Mail", "MotDePasse", "Statut", "IdRole", "IdRole" };
+		
 		String[] listTextFields = { "" + u.getIdUtilisateur(), u.getMail(),u.getMotDePasse(), "" + u.getStatut(), u.getIdRole(), u.getIdRole()  };
-
-
-		/*listSuperDialog Transferer dans la DOA*/
-		/*String [][] listSuperDialog={ 
-				{"Supprimer","Voulez-vous vraiment supprimer", "Oui", "Non"},
-				{"Enregistrer", "Il y a eu des modifications. Voulez-vous enregistrer", "Oui", "Non"} 
-		};*/
 				
 		String[] listTextBtns = { "Supprimer", "Valider" };
+		
 		String[] listMethodeDoa = { "delete", "update" };
 
 		bdao = new UtilisateurDao();

@@ -116,8 +116,7 @@ public class ListeAeroports extends JFrame implements ActionListener{
 	 * @param e
 	 */
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+	public void actionPerformed(ActionEvent e) {		
 		
 	}
 	

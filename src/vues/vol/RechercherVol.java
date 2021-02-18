@@ -56,8 +56,11 @@ public class RechercherVol extends JFrame implements ActionListener {
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					
 					rechercherVol();
+
 				}
 			}
 		});
@@ -111,7 +114,8 @@ public class RechercherVol extends JFrame implements ActionListener {
 	/**
 	 * Récupération du vol recherchée
 	 */
-	public void chargeData(){
+	public void chargeData() {
+		
 		Object[] donnees = { 
 			v1.getNumVol(), 
 			v1.getAeroportDepart(), 
@@ -125,15 +129,17 @@ public class RechercherVol extends JFrame implements ActionListener {
 		
 		data.setModel(tableModel);
 	}
-
 	
 	/** 
 	 * @param e
 	 * Evenement du bouton rechercher
 	 */
 	public void actionPerformed(ActionEvent e) {
+
 		if (e.getSource() == btn1) {
+			
 			rechercherVol();
+			
 		}
 	}
 

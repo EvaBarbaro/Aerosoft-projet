@@ -11,11 +11,13 @@ import javax.swing.table.DefaultTableModel;
 import models.Affectation;
 
 public class ListeDeleteAffectations extends JFrame implements ActionListener {
+
   private static final long serialVersionUID = 1L;
 
   JLabel l1;
 
   DefaultTableModel tableModel;
+
   JTable data;
 
   Affectation b1;
@@ -23,16 +25,11 @@ public class ListeDeleteAffectations extends JFrame implements ActionListener {
 
   List<Affectation> list = new ArrayList<Affectation>();
 
-  String[] tblHead = {
-    "IdAffectation",
-    "NumVol",
-    "DateVol",
-    "AffectationCode",
-    "NumAvion",
-    "IdPilote",
-  };
+  String[] tblHead =
+      {"IdAffectation", "NumVol", "DateVol", "AffectationCode", "NumAvion", "IdPilote",};
 
   public ListeDeleteAffectations() {
+
     /* Label */
     l1 = new JLabel("LISTE DES AFFECTATIONS");
     l1.setForeground(Color.blue);
@@ -55,37 +52,36 @@ public class ListeDeleteAffectations extends JFrame implements ActionListener {
     data.setDefaultEditor(Object.class, null);
 
     data.addMouseListener(
-      new MouseAdapter() {
 
-        public void mousePressed(MouseEvent mouseEvent) {
-          JTable table = (JTable) mouseEvent.getSource();
+        new MouseAdapter() {
 
-          Point point = mouseEvent.getPoint();
+          public void mousePressed(MouseEvent mouseEvent) {
 
-          int row = table.rowAtPoint(point);
+            JTable table = (JTable) mouseEvent.getSource();
 
-          if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
-            int column = 0;
+            Point point = mouseEvent.getPoint();
 
-            //int id = Integer.parseInt(table.getModel().getValueAt(row, column).toString());
-            Object id = (Object) table
-              .getModel()
-              .getValueAt(row, column)
-              .toString();
+            int row = table.rowAtPoint(point);
 
-            b1 = (Affectation) dao.get(id);
+            if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
 
-            System.out.println("LISTE DES AFFECTATIONS del b1 " + b1);
+              int column = 0;
 
-            if (b1 != null) {
-              FicheSupprAffectation fm = new FicheSupprAffectation(b1);
+              Object id = (Object) table.getModel().getValueAt(row, column).toString();
 
-              fm.addWindowListener(
-                new WindowListener() {
+              b1 = (Affectation) dao.get(id);
+
+              System.out.println("LISTE DES AFFECTATIONS del b1 " + b1);
+
+              if (b1 != null) {
+
+                FicheSupprAffectation fm = new FicheSupprAffectation(b1);
+
+                fm.addWindowListener(new WindowListener() {
 
                   @Override
                   public void windowOpened(WindowEvent e) {
-                    // TODO Auto-generated method stub
+                    
                   }
 
                   @Override
@@ -100,34 +96,28 @@ public class ListeDeleteAffectations extends JFrame implements ActionListener {
 
                   @Override
                   public void windowIconified(WindowEvent e) {
-                    // TODO Auto-generated method stub
-
+                    
                   }
 
                   @Override
                   public void windowDeiconified(WindowEvent e) {
-                    // TODO Auto-generated method stub
-
+                    
                   }
 
                   @Override
                   public void windowActivated(WindowEvent e) {
-                    // TODO Auto-generated method stub
-
+                    
                   }
 
                   @Override
                   public void windowDeactivated(WindowEvent e) {
-                    // TODO Auto-generated method stub
-
+                   
                   }
-                }
-              );
+                });
+              }
             }
           }
-        }
-      }
-    );
+        });
 
     JScrollPane scrollPane = new JScrollPane(data);
     scrollPane.setFont(new Font("DejaVu Sans Mono", Font.BOLD, 15));
@@ -145,6 +135,7 @@ public class ListeDeleteAffectations extends JFrame implements ActionListener {
     final Dimension screenSize = toolkit.getScreenSize();
     final int x = (screenSize.width - this.getWidth()) / 2;
     final int y = (screenSize.height - this.getHeight()) / 2;
+
     setLocation(x, y);
     setLocationRelativeTo(null);
 
@@ -156,31 +147,30 @@ public class ListeDeleteAffectations extends JFrame implements ActionListener {
    * @param dao
    */
   public void chargeData(AffectationDao dao) {
+
     list = (List<Affectation>) dao.getAll();
 
-    ListIterator<Affectation> listIterator =
-      ((java.util.List<Affectation>) list).listIterator();
+    ListIterator<Affectation> listIterator = ((java.util.List<Affectation>) list).listIterator();
 
     tableModel.setRowCount(0);
 
     if (list != null) {
+
       while (listIterator.hasNext()) {
+
         b1 = listIterator.next();
 
-        Object[] donnees = {
-          b1.getId(),
-          b1.getNumVol(),
-          b1.getDateVol(),
-          b1.getAffectationCode(),
-          b1.getNumAvion(),
-          b1.getPilote().getNomPilote(),
-        };
+        Object[] donnees = {b1.getId(), b1.getNumVol(), b1.getDateVol(), b1.getAffectationCode(),
+            b1.getNumAvion(), b1.getPilote().getNomPilote(),};
 
         tableModel.addRow(donnees);
+
       }
+
       tableModel.fireTableDataChanged();
       data.setModel(tableModel);
       data.repaint();
+
     }
   }
 
@@ -188,8 +178,7 @@ public class ListeDeleteAffectations extends JFrame implements ActionListener {
    * @param e
    */
   @Override
-  public void actionPerformed(ActionEvent e) {
-    // TODO Auto-generated method stub
+  public void actionPerformed(ActionEvent e) {    
 
   }
 }

@@ -13,28 +13,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
- 
-public class FicheListUtilisateur extends JFrame implements ActionListener{
+
+public class FicheListUtilisateur extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 
 	JLabel l1;
-	
+
 	DefaultTableModel tableModel;
 	JTable data;
-	
+
 	Utilisateur b1;
 	UtilisateurDao dao = new UtilisateurDao();
-	
+
 	List<Utilisateur> list = new ArrayList<Utilisateur>();
-	 
-	String[] tblHead = { "IdUtilisateur", "Mail", "Statut", "IdRole" };
-	 
+
+	String[] tblHead = {"IdUtilisateur", "Mail", "Statut", "IdRole"};
+
 	/**
 	 * Création de la frame du tableau d'utilisateur pour modification
 	 */
 	public FicheListUtilisateur() {
-		
+
 		/* Label */
 		l1 = new JLabel("LISTE DES UTILISATEURS");
 		l1.setForeground(Color.blue);
@@ -44,96 +44,91 @@ public class FicheListUtilisateur extends JFrame implements ActionListener{
 		getContentPane().add(l1);
 
 		tableModel = new DefaultTableModel(tblHead, 0);
-		
+
 		data = new JTable(tableModel);
 
 		data.setFont(new Font("Chandas", Font.BOLD, 15));
 		data.setRowHeight(25);
-		
+
 		data.setBounds(100, 100, 450, 450);
-		
+
 		chargeData(dao);
-		
+
 		data.setDefaultEditor(Object.class, null);
-		
+
 		// Evenement du clic
 		data.addMouseListener(new MouseAdapter() {
-		    
+
 			public void mousePressed(MouseEvent mouseEvent) {
-		        
-				JTable table =(JTable) mouseEvent.getSource();
-				
-		        Point point = mouseEvent.getPoint();
-		        
-		        int row = table.rowAtPoint(point);
-		        
+
+				JTable table = (JTable) mouseEvent.getSource();
+
+				Point point = mouseEvent.getPoint();
+
+				int row = table.rowAtPoint(point);
+
 				// Evenement du double clic
-		        if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
-		        	
+				if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
+
 					int column = 0;
-					
-					// int id = Integer.parseInt(table.getModel().getValueAt(row, column).toString());
+
 					int id = (int) table.getModel().getValueAt(row, column);
-										
+
 					b1 = (Utilisateur) dao.get(id);
 
 					if (b1 != null) {
-						
+
 						// Appel de la fiche de modification d'un utilisateur
 						FicheModifUtilisateur fm = new FicheModifUtilisateur(b1);
-						
+
 						fm.addWindowListener(new WindowListener() {
 
 							@Override
 							public void windowOpened(WindowEvent e) {
-								// TODO Auto-generated method stub								
+								
 							}
 
 							@Override
 							public void windowClosing(WindowEvent e) {
-									
-							}
-
-							@Override
-							public void windowClosed(WindowEvent e) {								
 								chargeData(dao);
 							}
 
 							@Override
-							public void windowIconified(WindowEvent e) {
-								// TODO Auto-generated method stub
-								
+							public void windowClosed(WindowEvent e) {
+								chargeData(dao);
 							}
 
 							@Override
-							public void windowDeiconified(WindowEvent e) {
-								// TODO Auto-generated method stub
-								
+							public void windowIconified(WindowEvent e) {								
+
 							}
 
 							@Override
-							public void windowActivated(WindowEvent e) {
-								// TODO Auto-generated method stub
-								
+							public void windowDeiconified(WindowEvent e) {								
+
 							}
 
 							@Override
-							public void windowDeactivated(WindowEvent e) {
-								// TODO Auto-generated method stub
-								
+							public void windowActivated(WindowEvent e) {								
+
 							}
-							
+
+							@Override
+							public void windowDeactivated(WindowEvent e) {								
+
+							}
+
 						});
 
-					}				
-					
-		        }
-		    }
+					}
+
+				}
+			}
 		});
-		
+
 		JScrollPane scrollPane = new JScrollPane(data);
 		scrollPane.setFont(new Font("DejaVu Sans Mono", Font.BOLD, 15));
-		
+
 		scrollPane.setSize(550, 300);
 		scrollPane.setLocation(50, 100);
 		getContentPane().add(scrollPane);
@@ -147,6 +142,7 @@ public class FicheListUtilisateur extends JFrame implements ActionListener{
 		final Dimension screenSize = toolkit.getScreenSize();
 		final int x = (screenSize.width - this.getWidth()) / 2;
 		final int y = (screenSize.height - this.getHeight()) / 2;
+
 		setLocation(x, y);
 		setLocationRelativeTo(null);
 
@@ -154,49 +150,45 @@ public class FicheListUtilisateur extends JFrame implements ActionListener{
 		setVisible(true);
 	}
 
-	
-	/** 
-	 * @param dao
-	 * Récupération des données de tous les utilisateurs
+
+	/**
+	 * @param dao Récupération des données de tous les utilisateurs
 	 */
 	public void chargeData(UtilisateurDao dao) {
-			
-			
-			list = (List<Utilisateur>) dao.getAll();
-							
-			ListIterator<Utilisateur> listIterator = ((java.util.List<Utilisateur>) list).listIterator();
-			
-			tableModel.setRowCount(0);
-						
-			if (list != null) {
 
-				while(listIterator.hasNext()) {
-					b1 = listIterator.next();
+		list = (List<Utilisateur>) dao.getAll();
 
-					Object[] donnees = { 
-						b1.getIdUtilisateur(),
-						b1.getMail(),
-						b1.getStatut(),
-						b1.getIdRole()
-					};
+		ListIterator<Utilisateur> listIterator =
+				((java.util.List<Utilisateur>) list).listIterator();
 
-					tableModel.addRow(donnees);	
-					
-				}
-				tableModel.fireTableDataChanged();			
-				data.setModel(tableModel);
-				data.repaint();
+		tableModel.setRowCount(0);
+
+		if (list != null) {
+
+			while (listIterator.hasNext()) {
+
+				b1 = listIterator.next();
+
+				Object[] donnees =
+						{b1.getIdUtilisateur(), b1.getMail(), b1.getStatut(), b1.getIdRole()};
+
+				tableModel.addRow(donnees);
+
 			}
-		}
 
-	
-	/** 
+			tableModel.fireTableDataChanged();
+			data.setModel(tableModel);
+			data.repaint();
+		}
+	}
+
+
+	/**
 	 * @param e
 	 */
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+	public void actionPerformed(ActionEvent e) {		
+
 	}
-	
+
 }

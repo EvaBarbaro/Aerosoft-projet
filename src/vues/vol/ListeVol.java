@@ -18,10 +18,7 @@ import java.util.ListIterator;
 
  
 public class ListeVol extends JFrame implements ActionListener{
-	
-	/**
-	 *
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	JLabel l1;
@@ -34,7 +31,13 @@ public class ListeVol extends JFrame implements ActionListener{
 	
 	List<Vol> list = new ArrayList<Vol>();
 	 
-	String[] tblHead = { "Id du vol", "Aeroport de depart", "Heure de depart", "Aeroport d'arrivé", "Heure d'arrivé" };
+	String[] tblHead = {
+			"Id du vol",
+			"Aeroport de depart", 
+			"Heure de depart", 
+			"Aeroport d'arrivé", 
+			"Heure d'arrivé"
+		};
 	 
 	/**
 	 * Création de la frame pour la liste des vols pour modification
@@ -81,8 +84,7 @@ public class ListeVol extends JFrame implements ActionListener{
 		        if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
 		        	
 					int column = 0;
-					
-					//int id = Integer.parseInt(table.getModel().getValueAt(row, column).toString());
+
 					Object id = (Object) table.getModel().getValueAt(row, column).toString();
 					
 					// récupération du vol sélectionné
@@ -97,12 +99,12 @@ public class ListeVol extends JFrame implements ActionListener{
 
 							@Override
 							public void windowOpened(WindowEvent e) {
-								// TODO Auto-generated method stub								
+																
 							}
 
 							@Override
 							public void windowClosing(WindowEvent e) {
-									
+								chargeData(dao);									
 							}
 
 							@Override
@@ -111,26 +113,22 @@ public class ListeVol extends JFrame implements ActionListener{
 							}
 
 							@Override
-							public void windowIconified(WindowEvent e) {
-								// TODO Auto-generated method stub
+							public void windowIconified(WindowEvent e) {								
 								
 							}
 
 							@Override
-							public void windowDeiconified(WindowEvent e) {
-								// TODO Auto-generated method stub
+							public void windowDeiconified(WindowEvent e) {								
 								
 							}
 
 							@Override
-							public void windowActivated(WindowEvent e) {
-								// TODO Auto-generated method stub
+							public void windowActivated(WindowEvent e) {								
 								
 							}
 
 							@Override
-							public void windowDeactivated(WindowEvent e) {
-								// TODO Auto-generated method stub
+							public void windowDeactivated(WindowEvent e) {								
 								
 							}
 							
@@ -198,6 +196,7 @@ public class ListeVol extends JFrame implements ActionListener{
 					tableModel.addRow(donnees);	
 					
 				}
+				
 				tableModel.fireTableDataChanged();			
 				data.setModel(tableModel);
 				data.repaint();
@@ -210,7 +209,7 @@ public class ListeVol extends JFrame implements ActionListener{
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 	

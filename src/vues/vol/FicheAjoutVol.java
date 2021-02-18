@@ -14,9 +14,6 @@ import vues.Fiche;
 
 public class FicheAjoutVol extends JFrame {
 
-	/**
-	 *
-	 */
 	private static final long serialVersionUID = 1L;
 
 	VolDao bdao;
@@ -27,26 +24,20 @@ public class FicheAjoutVol extends JFrame {
 	public FicheAjoutVol(Vol a) {
 
 		// Tableau de la liste des vols
-		String[] listLabels = { "Id du vol", "Aeroport de depart", "Heure de depart", "Aeroport d'arrivé", "Heure d'arrivé" };
-	
+		String[] listLabels = {"Id du vol", "Aeroport de depart", "Heure de depart",
+				"Aeroport d'arrivé", "Heure d'arrivé"};
+
 		// Tableau des TextFields
-		String[] listTextFields = {"","","","",""};
-	
+		String[] listTextFields = {"", "", "", "", ""};
+
 		// Tableau des boutons
-		String[] listTextBtns = { "Valider","Annuler" };
+		String[] listTextBtns = {"Valider", "Annuler"};
 
 		// Tableau des méthodes
-		String[] listMethodeDoa = { "save","" };
+		String[] listMethodeDoa = {"save", ""};
 		bdao = new VolDao();
 
-		new Fiche(
-				"Ajout d'un vol", 
-				bdao, 
-				(Object)a, 
-				listLabels, 
-				listTextFields,
-				listTextBtns,
-				listMethodeDoa
-				);
+		new Fiche("Ajout d'un vol", bdao, (Object) a, listLabels, listTextFields, listTextBtns,
+				listMethodeDoa);
 	}
 }

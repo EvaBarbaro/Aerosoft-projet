@@ -14,11 +14,8 @@ import vues.FicheFirstFieldFalse;
 
 public class FicheModifVol extends JFrame {
 
-	/**
-	 *
-	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	VolDao bdao;
 
 	/**
@@ -27,26 +24,38 @@ public class FicheModifVol extends JFrame {
 	public FicheModifVol(Vol v) {
 
 		// Tableau des labels
-		String[] listLabels = { "Id du vol", "Aeroport de depart", "Heure de depart", "Aeroport d'arrivé'", "Heure d'arrivé'"};
+		String[] listLabels = {
+				"Id du vol",
+				"Aeroport de depart",
+			  	"Heure de depart",
+				"Aeroport d'arrivé'",
+				"Heure d'arrivé'"
+			};
 
 		// tableau des textFields
-		String[] listTextFields = {v.getNumVol(),v.getAeroportDepart(),v.getHeureDepart(),v.getAeroportArrive(), v.getHeureArrive()};
+		String[] listTextFields = {
+				v.getNumVol(),
+				v.getAeroportDepart(),
+				v.getHeureDepart(),
+				v.getAeroportArrive(), 
+				v.getHeureArrive()
+			};
 
 		// Tableau des boutons
-		String[] listTextBtns = { "Valider","Annuler" };
+		String[] listTextBtns = {"Valider", "Annuler"};
 
 		// Tableau des méthodes
-		String[] listMethodeDoa = { "update","" };
+		String[] listMethodeDoa = {"update", ""};
 		bdao = new VolDao();
 
 		new FicheFirstFieldFalse(
-				"Modification d'un vol", 
-				bdao, 
-				(Object)v, 
-				listLabels, 
+				"Modification d'un vol",
+				bdao,
+				(Object) v,
+				listLabels,
 				listTextFields,
 				listTextBtns,
 				listMethodeDoa
-				);
+			);
 	}
 }

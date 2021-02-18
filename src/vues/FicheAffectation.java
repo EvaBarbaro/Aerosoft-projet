@@ -5,16 +5,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.synth.SynthLookAndFeel;
 
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.SqlDateModel;
 import org.jdatepicker.impl.UtilDateModel;
 
 import interfaces.Dao;
 
-import javax.security.auth.callback.Callback;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
@@ -32,17 +29,10 @@ import javax.swing.JComboBox;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
-import java.net.Socket;
 import java.sql.Date;
-import java.time.format.DateTimeFormatter;
+
 import java.awt.event.ActionEvent;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Properties;
-
-import javax.swing.JFormattedTextField.AbstractFormatter;
 
 public class FicheAffectation extends JFrame {
 	/**
@@ -74,9 +64,9 @@ public class FicheAffectation extends JFrame {
 	/*private JTextField textField_3 = new JTextField()*/
 	
 	//private DetailedComboBox jComboBoxList;
-	private JComboBox jComboBoxPilotes;
-	private JComboBox jComboBoxNumVols;
-	private JComboBox jComboBoxNumAvions;
+	private JComboBox<String> jComboBoxPilotes;
+	private JComboBox<String> jComboBoxNumVols;
+	private JComboBox<String> jComboBoxNumAvions;
 	private JCheckBox affectationCode = new JCheckBox();
 
 	private JDatePickerImpl datePicker;

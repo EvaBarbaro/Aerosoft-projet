@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import models.Affectation;
 
 public class ListeModifAffectations extends JFrame implements ActionListener {
+
   private static final long serialVersionUID = 1L;
 
   JLabel l1;
@@ -23,16 +24,11 @@ public class ListeModifAffectations extends JFrame implements ActionListener {
 
   List<Affectation> list = new ArrayList<Affectation>();
 
-  String[] tblHead = {
-    "IdAffectation",
-    "NumVol",
-    "DateVol",
-    "AffectationCode",
-    "NumAvion",
-    "IdPilote",
-  };
+  String[] tblHead =
+      {"IdAffectation", "NumVol", "DateVol", "AffectationCode", "NumAvion", "IdPilote",};
 
   public ListeModifAffectations() {
+
     /* Label */
     l1 = new JLabel("LISTE DES AFFECTATIONS");
     l1.setForeground(Color.blue);
@@ -52,78 +48,73 @@ public class ListeModifAffectations extends JFrame implements ActionListener {
 
     data.setDefaultEditor(Object.class, null);
 
-    data.addMouseListener(
-      new MouseAdapter() {
+    data.addMouseListener(new MouseAdapter() {
 
-        public void mousePressed(MouseEvent mouseEvent) {
-          JTable table = (JTable) mouseEvent.getSource();
+      public void mousePressed(MouseEvent mouseEvent) {
 
-          Point point = mouseEvent.getPoint();
+        JTable table = (JTable) mouseEvent.getSource();
 
-          int row = table.rowAtPoint(point);
+        Point point = mouseEvent.getPoint();
 
-          if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
-            int column = 0;
+        int row = table.rowAtPoint(point);
 
-            //int id = Integer.parseInt(table.getModel().getValueAt(row, column).toString());
-            Object id = (Object) table
-              .getModel()
-              .getValueAt(row, column)
-              .toString();
+        if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
 
-            b1 = (Affectation) dao.get(id);
+          int column = 0;
 
-            if (b1 != null) {
-              FicheModifAffectation fm = new FicheModifAffectation(b1);
+          Object id = (Object) table.getModel().getValueAt(row, column).toString();
 
-              fm.addWindowListener(
-                new WindowListener() {
+          b1 = (Affectation) dao.get(id);
 
-                  @Override
-                  public void windowOpened(WindowEvent e) {
-                    // TODO Auto-generated method stub
-                  }
+          if (b1 != null) {
 
-                  @Override
-                  public void windowClosing(WindowEvent e) {
-                    chargeData(dao);
-                  }
+            FicheModifAffectation fm = new FicheModifAffectation(b1);
 
-                  @Override
-                  public void windowClosed(WindowEvent e) {
-                    chargeData(dao);
-                  }
+            fm.addWindowListener(new WindowListener() {
 
-                  @Override
-                  public void windowIconified(WindowEvent e) {
-                    // TODO Auto-generated method stub
+              @Override
+              public void windowOpened(WindowEvent e) {
+                
+              }
 
-                  }
+              @Override
+              public void windowClosing(WindowEvent e) {
+                chargeData(dao);
+              }
 
-                  @Override
-                  public void windowDeiconified(WindowEvent e) {
-                    // TODO Auto-generated method stub
+              @Override
+              public void windowClosed(WindowEvent e) {
+                chargeData(dao);
+              }
 
-                  }
+              @Override
+              public void windowIconified(WindowEvent e) {
+                
 
-                  @Override
-                  public void windowActivated(WindowEvent e) {
-                    // TODO Auto-generated method stub
+              }
 
-                  }
+              @Override
+              public void windowDeiconified(WindowEvent e) {
+                
 
-                  @Override
-                  public void windowDeactivated(WindowEvent e) {
-                    // TODO Auto-generated method stub
+              }
 
-                  }
-                }
-              );
-            }
+              @Override
+              public void windowActivated(WindowEvent e) {
+                
+
+              }
+
+              @Override
+              public void windowDeactivated(WindowEvent e) {
+                
+
+              }
+            });
           }
         }
       }
-    );
+    });
 
     JScrollPane scrollPane = new JScrollPane(data);
     scrollPane.setFont(new Font("DejaVu Sans Mono", Font.BOLD, 15));
@@ -141,6 +132,7 @@ public class ListeModifAffectations extends JFrame implements ActionListener {
     final Dimension screenSize = toolkit.getScreenSize();
     final int x = (screenSize.width - this.getWidth()) / 2;
     final int y = (screenSize.height - this.getHeight()) / 2;
+
     setLocation(x, y);
     setLocationRelativeTo(null);
 
@@ -152,28 +144,25 @@ public class ListeModifAffectations extends JFrame implements ActionListener {
    * @param dao
    */
   public void chargeData(AffectationDao dao) {
+
     list = (List<Affectation>) dao.getAll();
 
-    ListIterator<Affectation> listIterator =
-      ((java.util.List<Affectation>) list).listIterator();
+    ListIterator<Affectation> listIterator = ((java.util.List<Affectation>) list).listIterator();
 
     tableModel.setRowCount(0);
 
     if (list != null) {
+
       while (listIterator.hasNext()) {
+
         b1 = listIterator.next();
 
-        Object[] donnees = {
-          b1.getId(),
-          b1.getNumVol(),
-          b1.getDateVol(),
-          b1.getAffectationCode(),
-          b1.getNumAvion(),
-          b1.getPilote().getNomPilote(),
-        };
+        Object[] donnees = {b1.getId(), b1.getNumVol(), b1.getDateVol(), b1.getAffectationCode(),
+            b1.getNumAvion(), b1.getPilote().getNomPilote(),};
 
         tableModel.addRow(donnees);
       }
+
       tableModel.fireTableDataChanged();
       data.setModel(tableModel);
       data.repaint();
@@ -184,8 +173,7 @@ public class ListeModifAffectations extends JFrame implements ActionListener {
    * @param e
    */
   @Override
-  public void actionPerformed(ActionEvent e) {
-    // TODO Auto-generated method stub
+  public void actionPerformed(ActionEvent e) {    
 
   }
 }

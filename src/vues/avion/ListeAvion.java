@@ -11,9 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import models.Avion;
 
 public class ListeAvion extends JFrame implements ActionListener {
-  /**
-   *
-   */
+
   private static final long serialVersionUID = 1L;
 
   JLabel l1;
@@ -26,9 +24,10 @@ public class ListeAvion extends JFrame implements ActionListener {
 
   List<Avion> list = new ArrayList<Avion>();
 
-  String[] tblHead = { "Numéro avion", "Type avion", "Base aeroport" };
+  String[] tblHead = {"Numéro avion", "Type avion", "Base aeroport"};
 
   public ListeAvion() {
+
     /* Label */
     l1 = new JLabel("LISTE DES Avions");
     l1.setForeground(Color.blue);
@@ -41,8 +40,6 @@ public class ListeAvion extends JFrame implements ActionListener {
 
     data = new JTable(tableModel);
     data.setEnabled(false);
-
-    //javax.swing.JTable.setInner(5);
 
     data.setFont(new Font("Chandas", Font.BOLD, 15));
     data.setRowHeight(25);
@@ -67,39 +64,41 @@ public class ListeAvion extends JFrame implements ActionListener {
     final Dimension screenSize = toolkit.getScreenSize();
     final int x = (screenSize.width - this.getWidth()) / 2;
     final int y = (screenSize.height - this.getHeight()) / 2;
+
     setLocation(x, y);
     setLocationRelativeTo(null);
 
     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     setVisible(true);
+
   }
 
   /**
    * @param dao
    */
   public void chargeData(AvionDao dao) {
+
     list = (List<Avion>) dao.getAll();
 
-    ListIterator<Avion> listIterator =
-      ((java.util.List<Avion>) list).listIterator();
+    ListIterator<Avion> listIterator = ((java.util.List<Avion>) list).listIterator();
 
     tableModel.setRowCount(0);
 
     if (list != null) {
+
       while (listIterator.hasNext()) {
+
         av1 = listIterator.next();
 
-        Object[] donnees = {
-          av1.getNumAvion(),
-          av1.getTypeAvion(),
-          av1.getBaseAeroport(),
-        };
+        Object[] donnees = {av1.getNumAvion(), av1.getTypeAvion(), av1.getBaseAeroport(),};
 
         tableModel.addRow(donnees);
       }
+
       tableModel.fireTableDataChanged();
       data.setModel(tableModel);
       data.repaint();
+      
     }
   }
 
@@ -107,8 +106,7 @@ public class ListeAvion extends JFrame implements ActionListener {
    * @param e
    */
   @Override
-  public void actionPerformed(ActionEvent e) {
-    // TODO Auto-generated method stub
+  public void actionPerformed(ActionEvent e) {    
 
   }
 }

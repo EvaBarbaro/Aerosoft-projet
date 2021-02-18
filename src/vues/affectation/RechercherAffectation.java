@@ -10,9 +10,7 @@ import javax.swing.table.DefaultTableModel;
 import models.*;
 
 public class RechercherAffectation extends JFrame implements ActionListener {
-  /**
-   *
-   */
+
   private static final long serialVersionUID = 1L;
 
   JLabel l1, l2, l3;
@@ -27,16 +25,11 @@ public class RechercherAffectation extends JFrame implements ActionListener {
 
   AffectationDao dao = new AffectationDao();
 
-  String[] tblHead = {
-    "IdAffectation",
-    "NumVol",
-    "DateVol",
-    "AffectationCode",
-    "NumAvion",
-    "IdPilote",
-  };
+  String[] tblHead =
+      {"IdAffectation", "NumVol", "DateVol", "AffectationCode", "NumAvion", "IdPilote",};
 
   public RechercherAffectation() {
+
     /* Label */
     l1 = new JLabel("RECHERCHER UNE AFFECTTION");
     l1.setForeground(Color.blue);
@@ -63,8 +56,6 @@ public class RechercherAffectation extends JFrame implements ActionListener {
     tableModel = new DefaultTableModel(tblHead, 0);
 
     data = new JTable(tableModel);
-
-    //javax.swing.JTable.setInner(5);
 
     data.setFont(new Font("Chandas", Font.BOLD, 15));
     data.setRowHeight(25);
@@ -95,33 +86,28 @@ public class RechercherAffectation extends JFrame implements ActionListener {
 
     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     setVisible(true);
+
   }
 
   public void chargeData() {
-    Object[] donnees = {
-      b1.getId(),
-      b1.getNumVol(),
-      b1.getDateVol(),
-      b1.getAffectationCode(),
-      b1.getNumAvion(),
-      b1.getPilote().getNomPilote(),
-    };
+
+    Object[] donnees = {b1.getId(), b1.getNumVol(), b1.getDateVol(), b1.getAffectationCode(),
+        b1.getNumAvion(), b1.getPilote().getNomPilote(),};
 
     tableModel.setRowCount(0);
     tableModel.addRow(donnees);
 
     data.setModel(tableModel);
+
   }
 
   /**
    * @param e
    */
   public void actionPerformed(ActionEvent e) {
-    if (e.getSource() == btn1) {
-      /* instanciation d'un objet */
-      // b1 = new Book(tf1.getText(), tf2.getText());
 
-      //int id = Integer.parseInt(tf1.getText());
+    if (e.getSource() == btn1) {
+
       Object id = (Object) tf1.getText();
 
       b1 = (Affectation) dao.get(id);
@@ -129,84 +115,78 @@ public class RechercherAffectation extends JFrame implements ActionListener {
       if (b1 != null) {
         chargeData();
 
-        data.addMouseListener(
-          new MouseAdapter() {
+        data.addMouseListener(new MouseAdapter() {
 
-            public void mousePressed(MouseEvent mouseEvent) {
-              JTable table = (JTable) mouseEvent.getSource();
+          public void mousePressed(MouseEvent mouseEvent) {
+            JTable table = (JTable) mouseEvent.getSource();
 
-              Point point = mouseEvent.getPoint();
+            Point point = mouseEvent.getPoint();
 
-              int row = table.rowAtPoint(point);
+            int row = table.rowAtPoint(point);
 
-              if (
-                mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1
-              ) {
-                int column = 0;
+            if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
+              int column = 0;
 
-                //int id = Integer.parseInt(table.getModel().getValueAt(row, column).toString());
-                Object id = (Object) table
-                  .getModel()
-                  .getValueAt(row, column)
-                  .toString();
+              Object id = (Object) table.getModel().getValueAt(row, column).toString();
 
-                b1 = (Affectation) dao.get(id);
+              b1 = (Affectation) dao.get(id);
 
-                if (b1 != null) {
-                  FicheModifAffectation fm = new FicheModifAffectation(b1);
+              if (b1 != null) {
+                FicheModifAffectation fm = new FicheModifAffectation(b1);
 
-                  fm.addWindowListener(
-                    new WindowListener() {
+                fm.addWindowListener(new WindowListener() {
 
-                      @Override
-                      public void windowOpened(WindowEvent e) {
-                        // TODO Auto-generated method stub
-                      }
+                  @Override
+                  public void windowOpened(WindowEvent e) {
+                    
+                  }
 
-                      @Override
-                      public void windowClosing(WindowEvent e) {}
+                  @Override
+                  public void windowClosing(WindowEvent e) {
+                  }
 
-                      @Override
-                      public void windowClosed(WindowEvent e) {
-                        chargeData();
-                      }
+                  @Override
+                  public void windowClosed(WindowEvent e) {
+                    chargeData();
+                  }
 
-                      @Override
-                      public void windowIconified(WindowEvent e) {
-                        // TODO Auto-generated method stub
+                  @Override
+                  public void windowIconified(WindowEvent e) {
+                    
 
-                      }
+                  }
 
-                      @Override
-                      public void windowDeiconified(WindowEvent e) {
-                        // TODO Auto-generated method stub
+                  @Override
+                  public void windowDeiconified(WindowEvent e) {
+                    
 
-                      }
+                  }
 
-                      @Override
-                      public void windowActivated(WindowEvent e) {
-                        // TODO Auto-generated method stub
+                  @Override
+                  public void windowActivated(WindowEvent e) {
+                    
 
-                      }
+                  }
 
-                      @Override
-                      public void windowDeactivated(WindowEvent e) {
-                        // TODO Auto-generated method stub
+                  @Override
+                  public void windowDeactivated(WindowEvent e) {
+                    
 
-                      }
-                    }
-                  );
-                }
+                  }
+                });
               }
             }
           }
-        );
+        });
 
         repaint();
 
         tf1.setText("");
+
       } else {
+
         JOptionPane.showMessageDialog(null, "Aeroport non Trouvé");
+        
       }
     }
   }

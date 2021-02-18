@@ -86,7 +86,7 @@ public class ListeModifAeroports extends JFrame implements ActionListener{
 
 							@Override
 							public void windowOpened(WindowEvent e) {
-								// TODO Auto-generated method stub								
+																
 							}
 
 							@Override
@@ -100,26 +100,22 @@ public class ListeModifAeroports extends JFrame implements ActionListener{
 							}
 
 							@Override
-							public void windowIconified(WindowEvent e) {
-								// TODO Auto-generated method stub
+							public void windowIconified(WindowEvent e) {								
 								
 							}
 
 							@Override
-							public void windowDeiconified(WindowEvent e) {
-								// TODO Auto-generated method stub
+							public void windowDeiconified(WindowEvent e) {								
 								
 							}
 
 							@Override
-							public void windowActivated(WindowEvent e) {
-								// TODO Auto-generated method stub
+							public void windowActivated(WindowEvent e) {								
 								
 							}
 
 							@Override
-							public void windowDeactivated(WindowEvent e) {
-								// TODO Auto-generated method stub
+							public void windowDeactivated(WindowEvent e) {								
 								
 							}
 							
@@ -147,13 +143,13 @@ public class ListeModifAeroports extends JFrame implements ActionListener{
 		final Dimension screenSize = toolkit.getScreenSize();
 		final int x = (screenSize.width - this.getWidth()) / 2;
 		final int y = (screenSize.height - this.getHeight()) / 2;
+
 		setLocation(x, y);
 		setLocationRelativeTo(null);
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
 	}
-
 	
 	/** 
 	 * @param dao
@@ -181,6 +177,7 @@ public class ListeModifAeroports extends JFrame implements ActionListener{
 					tableModel.addRow(donnees);	
 					
 				}
+				
 				tableModel.fireTableDataChanged();			
 				data.setModel(tableModel);
 				data.repaint();
@@ -192,8 +189,7 @@ public class ListeModifAeroports extends JFrame implements ActionListener{
 	 * @param e
 	 */
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+	public void actionPerformed(ActionEvent e) {		
 		
 	}
 	

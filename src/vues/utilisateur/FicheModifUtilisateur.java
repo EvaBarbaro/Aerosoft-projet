@@ -13,7 +13,7 @@ import vues.FicheUtilisateur;
 public class FicheModifUtilisateur extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	UtilisateurDao utilisateurDao;
 
 	/**
@@ -21,29 +21,35 @@ public class FicheModifUtilisateur extends JFrame {
 	 */
 	public FicheModifUtilisateur(Utilisateur utilisateur) {
 
-		String[] listLabels = { "IdUtilisateur", "Mail", "MotDePasse", "Statut", "IdRole" };
-		
-		String[] listTextFields = {String.valueOf(utilisateur.getIdUtilisateur()), utilisateur.getMail(), utilisateur.getMotDePasse(), String.valueOf(utilisateur.getStatut()), utilisateur.getIdRole()};
-		
+		String[] listLabels = {"IdUtilisateur", "Mail", "MotDePasse", "Statut", "IdRole"};
+
+		String[] listTextFields = {
+				String.valueOf(utilisateur.getIdUtilisateur()),
+				utilisateur.getMail(),
+				utilisateur.getMotDePasse(),
+				String.valueOf(utilisateur.getStatut()),
+				utilisateur.getIdRole()
+			};
+
 		ArrayList<Role> listeRoles = new RoleDao().getAll();
 
 		Map<String, String> jComboBoxTitles = new HashMap<>();
 
 		for (Role r : listeRoles) {
+
 			jComboBoxTitles.put(r.getRoleNom(), r.getIdRole());
 		}
 
-		/*Role[] jComboBoxTitles = (Role) listeRoles.toArray();*/
-				
-		String[] listTextBtns = { "Valider","Annuler" };
-		String[] listMethodeDoa = { "update","" };
+		String[] listTextBtns = {"Valider", "Annuler"};
+		String[] listMethodeDoa = {"update", ""};
+
 		utilisateurDao = new UtilisateurDao();
 
 		new FicheUtilisateur(
-				"Modification d'un utilisateur", 
-				utilisateurDao, 
-				(Object)utilisateur, 
-				listLabels, 
+				"Modification d'un utilisateur",
+				utilisateurDao,
+			  	(Object) utilisateur,
+				listLabels,
 				listTextFields,
 				listTextBtns,
 				listMethodeDoa,

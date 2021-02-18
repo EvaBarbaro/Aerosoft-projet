@@ -61,7 +61,7 @@ public class FicheUtilisateurPilote extends JFrame {
 
 	private JTextField textField_6 = new JTextField();
 	
-	private JComboBox jComboBox;
+	private JComboBox<String> jComboBox;
 	private String valeurRetourjComboBox;
 	private JCheckBox utilisateurStatut = new JCheckBox();
 
@@ -398,8 +398,8 @@ public class FicheUtilisateurPilote extends JFrame {
 	 * @param map
 	 * @return JComboBox
 	 */
-	private JComboBox createComboBox(final Map<String, String> map) {
-		final JComboBox cbox = new JComboBox();
+	private JComboBox<String> createComboBox(final Map<String, String> map) {
+		final JComboBox<String> cbox = new JComboBox<String>();
 
 		for (String r : map.keySet()) {
 		  cbox.addItem(r);

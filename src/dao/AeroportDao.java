@@ -9,176 +9,206 @@ import vues.SDialog;
 
 public class AeroportDao implements Dao {
 
-  public AeroportDao() {}
+	public AeroportDao() {
+	}
 
-  /**
-   * @return ArrayList<Aeroport>
-   */
-  @Override
-  public ArrayList<Aeroport> getAll() {
-    Connection conn = null;
-    PreparedStatement stmt = null;
-    String sql = "SELECT * FROM `AEROPORT` ORDER BY NomVilleDesservie";
+	/**
+	 * @return ArrayList<Aeroport>
+	 */
+	@Override
+	public ArrayList<Aeroport> getAll() {
 
-    ArrayList<Aeroport> listeAeroports = new ArrayList<>();
+		Connection conn = null;
+		PreparedStatement stmt = null;
 
-    try {
-      conn = ConnectionBdd.getConnection();
-      stmt = conn.prepareStatement(sql);
-      ResultSet res = stmt.executeQuery(sql);
+		String sql = "SELECT * FROM `AEROPORT` ORDER BY NomVilleDesservie";
 
-      while (res.next()) {
-        //Retrieve by column name
-        Aeroport aeroport = new Aeroport(
-          res.getString("IdAeroport"),
-          res.getString("NomAeroport"),
-          res.getString("NomVilleDesservie")
-        );
+		ArrayList<Aeroport> listeAeroports = new ArrayList<>();
 
-        listeAeroports.add(aeroport);
-      }
+		try {
 
-      res.close();
-      conn.close();
-    } catch (SQLException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
-    return listeAeroports;
-  }
+			conn = ConnectionBdd.getConnection();
+			stmt = conn.prepareStatement(sql);
+			ResultSet res = stmt.executeQuery(sql);
 
-  /**
-   * @param id
-   * @return Object
-   */
-  @Override
-  public Object get(Object id) {
-    Aeroport aeroport = null;
-    String idSearch = String.valueOf(id);
-    Connection conn = null;
-    PreparedStatement stmt = null;
-    String sql = "SELECT * FROM `AEROPORT` WHERE IdAeroport=?";
-    try {
-      conn = ConnectionBdd.getConnection();
-      stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-      stmt.setString(1, idSearch);
-      ResultSet res = stmt.executeQuery();
-      System.out.println("Voici les informations de l'aeroport " + id);
+			while (res.next()) {
 
-      while (res.next()) {
-        aeroport =
-          new Aeroport(
-            res.getString("IdAeroport"),
-            res.getString("NomAeroport"),
-            res.getString("NomVilleDesservie")
-          );
-      }
-      res.close();
-      conn.close();
-    } catch (SQLException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
+				// Retrieve by column name
+				Aeroport aeroport = new Aeroport(res.getString("IdAeroport"),
+						res.getString("NomAeroport"), res.getString("NomVilleDesservie"));
 
-    return aeroport;
-  }
+				listeAeroports.add(aeroport);
+			}
 
-  /**
-   * @param t
-   * @param params
-   */
-  @Override
-  public void save(Object t, String[] params) {
-    Aeroport aeroport = (Aeroport) t;
+			res.close();
+			conn.close();
 
-    Connection conn = null;
-    PreparedStatement stmt = null;
-    String sql =
-      "INSERT INTO `AEROPORT` (IdAeroport,NomAeroport,NomVilleDesservie) VALUES (?,?,?)";
-    try {
-      conn = ConnectionBdd.getConnection();
-      stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-      stmt.setString(1, params[0]);
-      stmt.setString(2, params[1]);
-      stmt.setString(3, params[2]);
+		} catch (SQLException e) {
 
-      stmt.execute();
+			e.printStackTrace();
+		}
+		return listeAeroports;
+	}
 
-      System.out.println(aeroport.getNomAeroport() + " a bien été ajouté");
-      new SDialog("Ajout", "Ajouter reussie", "Valider", "").setVisible(true);
-    } catch (SQLException e) {
-      e.printStackTrace();
-      new SDialog("Echec", "L'ajout n'a pas reussie car " + e, "ok", "")
-      .setVisible(true);
-    }
-  }
+	/**
+	 * @param id
+	 * @return Object
+	 */
+	@Override
+	public Object get(Object id) {
 
-  /**
-   * @param t
-   * @param params
-   */
-  @Override
-  public void update(Object t, String[] params) {
-    Aeroport aeroport = (Aeroport) t;
+		Aeroport aeroport = null;
+		String idSearch = String.valueOf(id);
 
-    Connection conn = null;
-    PreparedStatement stmt = null;
+		Connection conn = null;
+		PreparedStatement stmt = null;
 
-    String sql =
-      "UPDATE `AEROPORT` SET NomAeroport=?,NomVilleDesservie=? WHERE IdAeroport=?";
-    try {
-      conn = ConnectionBdd.getConnection();
+		String sql = "SELECT * FROM `AEROPORT` WHERE IdAeroport=?";
 
-      stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		try {
 
-      stmt.setString(1, params[1]);
-      stmt.setString(2, params[2]);
-      stmt.setString(3, aeroport.getIdAeroport());
-      stmt.executeUpdate();
+			conn = ConnectionBdd.getConnection();
+			stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-      System.out.println(aeroport.getIdAeroport() + " a bien �t� modifi�");
-      new SDialog("Modification", "Modification reussie", "Valider", "")
-      .setVisible(true);
-    } catch (SQLException e) {
-      new SDialog("Echec", "La modification n'a pas reussie car " + e, "ok", "")
-      .setVisible(true);
-      throw new RuntimeException(e);
-    }
-  }
+			stmt.setString(1, idSearch);
 
-  /**
-   * @param t
-   */
-  @Override
-  public void delete(Object t) {
-    Aeroport aeroport = (Aeroport) t;
-    System.out.println("delete aeroport : " + aeroport.getNomAeroport());
+			ResultSet res = stmt.executeQuery();
 
-    Connection conn = null;
-    PreparedStatement stmt = null;
+			System.out.println("Voici les informations de l'aeroport " + id);
 
-    String sql = "DELETE FROM `AEROPORT` WHERE IdAeroport=?";
-    try {
-      conn = ConnectionBdd.getConnection();
-      stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-      stmt.setString(1, aeroport.getIdAeroport());
-      System.out.println("delete stmt : " + stmt);
-      stmt.execute();
+			while (res.next()) {
 
-      System.out.println(aeroport.getIdAeroport() + " a bien �t� supprim�");
-      new SDialog("Suppresssion", "Suppresssion reussie", "Valider", "")
-      .setVisible(true);
-    } catch (SQLException e) {
-      e.printStackTrace();
-      new SDialog("Echec", "La suppresssion n'a pas reussie car " + e, "ok", "")
-      .setVisible(true);
-    }
+				aeroport = new Aeroport(res.getString("IdAeroport"), res.getString("NomAeroport"),
+						res.getString("NomVilleDesservie"));
+			}
 
-    try {
-      stmt.close();
-      conn.close();
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-  }
+			res.close();
+			conn.close();
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+		return aeroport;
+	}
+
+	/**
+	 * @param t
+	 * @param params
+	 */
+	@Override
+	public void save(Object t, String[] params) {
+
+		Aeroport aeroport = (Aeroport) t;
+
+		Connection conn = null;
+		PreparedStatement stmt = null;
+
+		String sql =
+				"INSERT INTO `AEROPORT` (IdAeroport,NomAeroport,NomVilleDesservie) VALUES (?,?,?)";
+
+		try {
+
+			conn = ConnectionBdd.getConnection();
+			stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			stmt.setString(1, params[0]);
+			stmt.setString(2, params[1]);
+			stmt.setString(3, params[2]);
+
+			stmt.execute();
+
+			System.out.println(aeroport.getNomAeroport() + " a bien été ajouté");
+
+			new SDialog("Ajout", "Ajouter reussie", "Valider", "").setVisible(true);
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			new SDialog("Echec", "L'ajout n'a pas reussie car " + e, "ok", "").setVisible(true);
+
+		}
+	}
+
+	/**
+	 * @param t
+	 * @param params
+	 */
+	@Override
+	public void update(Object t, String[] params) {
+
+		Aeroport aeroport = (Aeroport) t;
+
+		Connection conn = null;
+		PreparedStatement stmt = null;
+
+		String sql = "UPDATE `AEROPORT` SET NomAeroport=?,NomVilleDesservie=? WHERE IdAeroport=?";
+
+		try {
+
+			conn = ConnectionBdd.getConnection();
+
+			stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+			stmt.setString(1, params[1]);
+			stmt.setString(2, params[2]);
+			stmt.setString(3, aeroport.getIdAeroport());
+			stmt.executeUpdate();
+
+			System.out.println(aeroport.getIdAeroport() + " a bien �t� modifi�");
+
+			new SDialog("Modification", "Modification reussie", "Valider", "").setVisible(true);
+
+		} catch (SQLException e) {
+
+			new SDialog("Echec", "La modification n'a pas reussie car " + e, "ok", "")
+					.setVisible(true);
+
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * @param t
+	 */
+	@Override
+	public void delete(Object t) {
+
+		Aeroport aeroport = (Aeroport) t;
+
+		System.out.println("delete aeroport : " + aeroport.getNomAeroport());
+
+		Connection conn = null;
+		PreparedStatement stmt = null;
+
+		String sql = "DELETE FROM `AEROPORT` WHERE IdAeroport=?";
+
+		try {
+			conn = ConnectionBdd.getConnection();
+			stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			stmt.setString(1, aeroport.getIdAeroport());
+
+			stmt.execute();
+
+			System.out.println(aeroport.getIdAeroport() + " a bien �t� supprim�");
+
+			new SDialog("Suppresssion", "Suppresssion reussie", "Valider", "").setVisible(true);
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			new SDialog("Echec", "La suppresssion n'a pas reussie car " + e, "ok", "")
+					.setVisible(true);
+
+		}
+
+		try {
+
+			stmt.close();
+			conn.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

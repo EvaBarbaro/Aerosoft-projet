@@ -10,9 +10,7 @@ import javax.swing.table.DefaultTableModel;
 import models.*;
 
 public class RechercherAvion extends JFrame implements ActionListener {
-  /**
-   *
-   */
+
   private static final long serialVersionUID = 1L;
 
   JLabel l1, l2, l3;
@@ -25,9 +23,10 @@ public class RechercherAvion extends JFrame implements ActionListener {
   Avion av1;
   AvionDao dao = new AvionDao();
 
-  String[] tblHead = { "Numéro avion", "Type avion", "Base aeroport" };
+  String[] tblHead = {"Numéro avion", "Type avion", "Base aeroport"};
 
   public RechercherAvion() {
+
     /* Label */
     l1 = new JLabel("RECHERCHER UN avion");
     l1.setForeground(Color.blue);
@@ -53,9 +52,6 @@ public class RechercherAvion extends JFrame implements ActionListener {
     tableModel = new DefaultTableModel(tblHead, 0);
 
     data = new JTable(tableModel);
-
-    //javax.swing.JTable.setInner(5);
-
     data.setFont(new Font("Chandas", Font.BOLD, 15));
     data.setRowHeight(25);
     data.setBounds(100, 100, 400, 200);
@@ -77,120 +73,110 @@ public class RechercherAvion extends JFrame implements ActionListener {
     final Dimension screenSize = toolkit.getScreenSize();
     final int x = (screenSize.width - this.getWidth()) / 2;
     final int y = (screenSize.height - this.getHeight()) / 2;
+
     setLocation(x, y);
     setLocationRelativeTo(null);
 
     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     setVisible(true);
+
   }
 
   public void chargeData() {
-    Object[] donnees = {
-      av1.getNumAvion(),
-      av1.getTypeAvion(),
-      av1.getBaseAeroport(),
-    };
+
+    Object[] donnees = {av1.getNumAvion(), av1.getTypeAvion(), av1.getBaseAeroport(),};
 
     tableModel.setRowCount(0);
     tableModel.addRow(donnees);
 
     data.setModel(tableModel);
+
   }
 
   /**
    * @param e
    */
   public void actionPerformed(ActionEvent e) {
-    if (e.getSource() == btn1) {
-      /* instanciation d'un objet */
-      // b1 = new Book(tf1.getText(), tf2.getText());
 
-      //int id = Integer.parseInt(tf1.getText());
+    if (e.getSource() == btn1) {
+
       Object id = (Object) tf1.getText();
 
       av1 = (Avion) dao.get(id);
 
       if (av1 != null) {
+
         chargeData();
 
-        data.addMouseListener(
-          new MouseAdapter() {
+        data.addMouseListener(new MouseAdapter() {
 
-            public void mousePressed(MouseEvent mouseEvent) {
-              JTable table = (JTable) mouseEvent.getSource();
+          public void mousePressed(MouseEvent mouseEvent) {
 
-              Point point = mouseEvent.getPoint();
+            JTable table = (JTable) mouseEvent.getSource();
 
-              int row = table.rowAtPoint(point);
+            Point point = mouseEvent.getPoint();
 
-              if (
-                mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1
-              ) {
-                int column = 0;
+            int row = table.rowAtPoint(point);
 
-                //int id = Integer.parseInt(table.getModel().getValueAt(row, column).toString());
-                Object id = (Object) table
-                  .getModel()
-                  .getValueAt(row, column)
-                  .toString();
+            if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
+              int column = 0;
 
-                av1 = (Avion) dao.get(id);
+              Object id = (Object) table.getModel().getValueAt(row, column).toString();
 
-                if (av1 != null) {
-                  FicheModifAvion fm = new FicheModifAvion(av1);
+              av1 = (Avion) dao.get(id);
 
-                  fm.addWindowListener(
-                    new WindowListener() {
+              if (av1 != null) {
+                FicheModifAvion fm = new FicheModifAvion(av1);
 
-                      @Override
-                      public void windowOpened(WindowEvent e) {
-                        // TODO Auto-generated method stub
-                      }
+                fm.addWindowListener(new WindowListener() {
 
-                      @Override
-                      public void windowClosing(WindowEvent e) {}
+                  @Override
+                  public void windowOpened(WindowEvent e) {
+                    
+                  }
 
-                      @Override
-                      public void windowClosed(WindowEvent e) {
-                        chargeData();
-                      }
+                  @Override
+                  public void windowClosing(WindowEvent e) {
+                  }
 
-                      @Override
-                      public void windowIconified(WindowEvent e) {
-                        // TODO Auto-generated method stub
+                  @Override
+                  public void windowClosed(WindowEvent e) {
+                    chargeData();
+                  }
 
-                      }
+                  @Override
+                  public void windowIconified(WindowEvent e) {                    
 
-                      @Override
-                      public void windowDeiconified(WindowEvent e) {
-                        // TODO Auto-generated method stub
+                  }
 
-                      }
+                  @Override
+                  public void windowDeiconified(WindowEvent e) {
+                    
+                  }
 
-                      @Override
-                      public void windowActivated(WindowEvent e) {
-                        // TODO Auto-generated method stub
+                  @Override
+                  public void windowActivated(WindowEvent e) {                    
 
-                      }
+                  }
 
-                      @Override
-                      public void windowDeactivated(WindowEvent e) {
-                        // TODO Auto-generated method stub
+                  @Override
+                  public void windowDeactivated(WindowEvent e) {                    
 
-                      }
-                    }
-                  );
-                }
+                  }
+                });
               }
             }
           }
-        );
+        });
 
         repaint();
 
         tf1.setText("");
+
       } else {
+
         JOptionPane.showMessageDialog(null, "Avion introuvable");
+        
       }
     }
   }
