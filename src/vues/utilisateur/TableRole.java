@@ -3,13 +3,16 @@ package vues.utilisateur;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.table.*;
 
 import dao.RoleDao;
+import dao.UtilisateurDao;
 import models.Role;
+import models.Utilisateur;
  
 public class TableRole extends JFrame{
 
@@ -31,8 +34,10 @@ public class TableRole extends JFrame{
     private Role roleEnCours;
     String newIdRole;
 
+    RoleDao rd = new RoleDao();
+
     public TableRole() {
-        RoleDao rd = new RoleDao();
+        // RoleDao rd = new RoleDao();
 
         listeRoles = new RoleDao().getAll();
 
@@ -142,35 +147,7 @@ public class TableRole extends JFrame{
                     
             public void actionPerformed(ActionEvent e) {
 
-                params = new String[2];
-
-                params[0] = newIdRole;
-
-                Boolean duplicate[] = new Boolean[listeRoles.size()];
-                int i = 0;
-
-                String newRoleNom = "";
-
-                for (Role r : listeRoles) {
-
-                    if (r.getRoleNom().equals(roleEnCours.getRoleNom() + "+")) {
-                        newRoleNom = roleEnCours.getRoleNom() + "+";
-                        duplicate[i] = true;
-                        break;
-                    }
-                    else {
-                        newRoleNom = roleEnCours.getRoleNom();
-                        duplicate[i] = false;
-                    }
-                    i++;
-                }
-
-
-
-                params[1] = newRoleNom + "+";
-                
-
-                rd.save(roleEnCours, params);
+                FicheListRoleUser();
 			}
         });
         
@@ -243,5 +220,199 @@ public class TableRole extends JFrame{
     public Object getCellEditorValue(int row) {
         return comboBox1.getSelectedItem();
     } 
+
+    JLabel l1;
+
+	DefaultTableModel tableModel;
+	JTable data;
+
+	Utilisateur b1;
+	UtilisateurDao dao = new UtilisateurDao();
+
+	List<Utilisateur> list = new ArrayList<Utilisateur>();
+
+	String[] tblHead = {"IdUtilisateur", "Mail", "Statut", "IdRole"};
+
+	/**
+	 * Création de la frame du tableau d'utilisateur pour modification
+	 */
+	public void FicheListRoleUser() {
+
+        JFrame frameUser = new JFrame();
+
+		/* Label */
+		l1 = new JLabel("LISTE DES UTILISATEURS");
+		l1.setForeground(Color.blue);
+		l1.setFont(new Font("Serif", Font.BOLD, 20));
+		l1.setBounds(100, 30, 400, 30);
+
+		frameUser.getContentPane().add(l1);
+
+		tableModel = new DefaultTableModel(tblHead, 0);
+
+		data = new JTable(tableModel);
+
+		data.setFont(new Font("Chandas", Font.BOLD, 15));
+		data.setRowHeight(25);
+
+		data.setBounds(100, 100, 450, 450);
+
+		chargeData(dao);
+
+		data.setDefaultEditor(Object.class, null);
+
+		// Evenement du clic
+		data.addMouseListener(new MouseAdapter() {
+
+			public void mousePressed(MouseEvent mouseEvent) {
+
+				JTable table = (JTable) mouseEvent.getSource();
+
+				Point point = mouseEvent.getPoint();
+
+				int row = table.rowAtPoint(point);
+
+				// Evenement du double clic
+				if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
+
+					int column = 0;
+
+					int id = (int) table.getModel().getValueAt(row, column);
+
+					b1 = (Utilisateur) dao.get(id);
+
+					if (b1 != null) {
+
+						// Appel de la fiche de modification d'un utilisateur
+                        params = new String[2];
+
+                        params[0] = newIdRole;
+        
+                        Boolean duplicate[] = new Boolean[listeRoles.size()];
+                        int i = 0;
+        
+                        String newRoleNom = "";
+        
+                        for (Role r : listeRoles) {
+        
+                            if (r.getRoleNom().equals(roleEnCours.getRoleNom() + b1.getMail())){
+                                newRoleNom = roleEnCours.getRoleNom() + " " + b1.getMail();
+                                duplicate[i] = true;
+                                break;
+                            }
+                            else {
+                                newRoleNom = roleEnCours.getRoleNom();
+                                duplicate[i] = false;
+                            }
+                            i++;
+                        }
+        
+        
+        
+                        params[1] = newRoleNom + " " + b1.getMail();
+                        
+        
+                        rd.save(roleEnCours, params);
+
+						addWindowListener(new WindowListener() {
+
+							@Override
+							public void windowOpened(WindowEvent e) {
+								
+							}
+
+							@Override
+							public void windowClosing(WindowEvent e) {
+								chargeData(dao);
+							}
+
+							@Override
+							public void windowClosed(WindowEvent e) {
+								chargeData(dao);
+							}
+
+							@Override
+							public void windowIconified(WindowEvent e) {								
+
+							}
+
+							@Override
+							public void windowDeiconified(WindowEvent e) {								
+
+							}
+
+							@Override
+							public void windowActivated(WindowEvent e) {								
+
+							}
+
+							@Override
+							public void windowDeactivated(WindowEvent e) {								
+
+							}
+
+						});
+
+					}
+
+				}
+			}
+		});
+
+		JScrollPane scrollPane = new JScrollPane(data);
+		scrollPane.setFont(new Font("DejaVu Sans Mono", Font.BOLD, 15));
+
+		scrollPane.setSize(550, 300);
+		scrollPane.setLocation(50, 100);
+		frameUser.getContentPane().add(scrollPane);
+
+		frameUser.setTitle("LISTE DES UTILISATEURS");
+
+		frameUser.setSize(639, 540);
+		frameUser.getContentPane().setLayout(null);
+
+		final Toolkit toolkit = Toolkit.getDefaultToolkit();
+		final Dimension screenSize = toolkit.getScreenSize();
+		final int x = (screenSize.width - this.getWidth()) / 2;
+		final int y = (screenSize.height - this.getHeight()) / 2;
+
+		frameUser.setLocation(x, y);
+		frameUser.setLocationRelativeTo(null);
+
+		frameUser.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frameUser.setVisible(true);
+	}
+
+
+	/**
+	 * @param dao Récupération des données de tous les utilisateurs
+	 */
+	public void chargeData(UtilisateurDao dao) {
+
+		list = (List<Utilisateur>) dao.getAll();
+
+		ListIterator<Utilisateur> listIterator =
+				((java.util.List<Utilisateur>) list).listIterator();
+
+		tableModel.setRowCount(0);
+
+		if (list != null) {
+
+			while (listIterator.hasNext()) {
+
+				b1 = listIterator.next();
+
+				Object[] donnees =
+						{b1.getIdUtilisateur(), b1.getMail(), b1.getStatut(), b1.getIdRole()};
+
+				tableModel.addRow(donnees);
+
+			}
+
+			tableModel.fireTableDataChanged();
+			data.setModel(tableModel);
+			data.repaint();
+		}
+	}
     
 }
