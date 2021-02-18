@@ -9,9 +9,7 @@ import dao.*;
 import models.*;
 
 // import de la fiche générique
-import vues.Fiche;
-import vues.FicheFirstFieldFalse;
-
+import vues.*;
 
 public class FicheModifPilote extends JFrame {
 
@@ -40,14 +38,15 @@ public class FicheModifPilote extends JFrame {
 		String[] listMethodeDoa = { "update","" };
 		piloteDao = new PiloteDao();
 
-		new Fiche(
+		new FichePilote(
 				"Modification d'un pilote", 
 				piloteDao, 
 				(Object)pilote, 
 				listLabels, 
 				listTextFields,
 				listTextBtns,
-				listMethodeDoa
+				listMethodeDoa,
+				false
 				);
 	}
 }
