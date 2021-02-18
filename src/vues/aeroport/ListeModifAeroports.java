@@ -16,23 +16,26 @@ import java.util.ListIterator;
  
 public class ListeModifAeroports extends JFrame implements ActionListener{
 	
-	/**
-	 *
-	 */
 	private static final long serialVersionUID = 1L;
 
 	JLabel l1;
 	
+	//Creation du tableau
 	DefaultTableModel tableModel;
-	JTable data;
-	
-	Aeroport b1;
-	AeroportDao dao = new AeroportDao();
-	
-	List<Aeroport> list = new ArrayList<Aeroport>();
-	 
+
+	//Creation des titres de colonnes
 	String[] tblHead = { "IdAeroport", "NomAeroport", "NomVilleDesservie" };
-	 
+
+	JTable data;
+
+	//Creation de la liste aeroport
+	List<Aeroport> list = new ArrayList<Aeroport>(); 
+	
+	//Creation de l'objet aeroport
+	Aeroport b1;
+
+	//Creation de la dao aeroport
+	AeroportDao dao = new AeroportDao();
 
 	public ListeModifAeroports() {
 		
@@ -40,6 +43,8 @@ public class ListeModifAeroports extends JFrame implements ActionListener{
 		l1 = new JLabel("LISTE DES AEROPORTS");
 		l1.setForeground(Color.blue);
 		l1.setFont(new Font("Serif", Font.BOLD, 20));
+
+		/* Placement */
 		l1.setBounds(100, 30, 400, 30);
 
 		getContentPane().add(l1);
@@ -61,6 +66,7 @@ public class ListeModifAeroports extends JFrame implements ActionListener{
 		
 		data.addMouseListener(new MouseAdapter() {
 		    
+			//Ajout d'un evenement au clic
 			public void mousePressed(MouseEvent mouseEvent) {
 		        
 				JTable table =(JTable) mouseEvent.getSource();
@@ -69,24 +75,25 @@ public class ListeModifAeroports extends JFrame implements ActionListener{
 		        
 		        int row = table.rowAtPoint(point);
 		        
+				//pour que l'event soit pris au double clic
 		        if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
 		        	
 					int column = 0;
 					
 					//int id = Integer.parseInt(table.getModel().getValueAt(row, column).toString());
 					Object id = (Object) table.getModel().getValueAt(row, column).toString();
-										
+					//Recuperation des données de l'element cliquer avec la fonction get()
 					b1 = (Aeroport) dao.get(id);
 
 					if (b1 != null) {
-						
+						//Creation d'une fiche modif
 						FicheModifAeroport fm = new FicheModifAeroport(b1);
 
 						fm.addWindowListener(new WindowListener() {
 
 							@Override
 							public void windowOpened(WindowEvent e) {
-																
+								// TODO Auto-generated method stub								
 							}
 
 							@Override
@@ -100,22 +107,26 @@ public class ListeModifAeroports extends JFrame implements ActionListener{
 							}
 
 							@Override
-							public void windowIconified(WindowEvent e) {								
+							public void windowIconified(WindowEvent e) {
+								// TODO Auto-generated method stub
 								
 							}
 
 							@Override
-							public void windowDeiconified(WindowEvent e) {								
+							public void windowDeiconified(WindowEvent e) {
+								// TODO Auto-generated method stub
 								
 							}
 
 							@Override
-							public void windowActivated(WindowEvent e) {								
+							public void windowActivated(WindowEvent e) {
+								// TODO Auto-generated method stub
 								
 							}
 
 							@Override
-							public void windowDeactivated(WindowEvent e) {								
+							public void windowDeactivated(WindowEvent e) {
+								// TODO Auto-generated method stub
 								
 							}
 							
@@ -143,53 +154,53 @@ public class ListeModifAeroports extends JFrame implements ActionListener{
 		final Dimension screenSize = toolkit.getScreenSize();
 		final int x = (screenSize.width - this.getWidth()) / 2;
 		final int y = (screenSize.height - this.getHeight()) / 2;
-
 		setLocation(x, y);
 		setLocationRelativeTo(null);
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
 	}
+
 	
 	/** 
 	 * @param dao
 	 */
 	public void chargeData(AeroportDao dao) {
-			
-			
-			list = (List<Aeroport>) dao.getAll();
-							
-			ListIterator<Aeroport> listIterator = ((java.util.List<Aeroport>) list).listIterator();
-			
-			tableModel.setRowCount(0);
+		//Recuperation des données de la requete getAll() dans une list
+		list = (List<Aeroport>) dao.getAll();
 						
-			if (list != null) {
+		ListIterator<Aeroport> listIterator = ((java.util.List<Aeroport>) list).listIterator();
+		
+		tableModel.setRowCount(0);
+		
+		//Isertion des données dans le tableau
+		if (list != null) {
 
-				while(listIterator.hasNext()) {
-					b1 = listIterator.next();
+			while(listIterator.hasNext()) {
+				b1 = listIterator.next();
 
-					Object[] donnees = { 
-						b1.getIdAeroport(), 
-						b1.getNomAeroport(), 
-						b1.getNomVille() 
-					};
+				Object[] donnees = { 
+					b1.getIdAeroport(), 
+					b1.getNomAeroport(), 
+					b1.getNomVille() 
+				};
 
-					tableModel.addRow(donnees);	
-					
-				}
+				tableModel.addRow(donnees);	
 				
-				tableModel.fireTableDataChanged();			
-				data.setModel(tableModel);
-				data.repaint();
 			}
+			tableModel.fireTableDataChanged();			
+			data.setModel(tableModel);
+			data.repaint();
 		}
+	}
 
 	
 	/** 
 	 * @param e
 	 */
 	@Override
-	public void actionPerformed(ActionEvent e) {		
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 	

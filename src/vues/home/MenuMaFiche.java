@@ -1,75 +1,73 @@
 package vues.home;
 
-import dao.PiloteDao;
+import javax.swing.*;
 import java.awt.Font;
+
+import dao.PiloteDao;
+
+import models.Pilote;
+
+import vues.Login;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import models.Pilote;
-import vues.Login;
-import vues.compte.MaFiche;
 
-public class MenuMaFiche extends JMenu {
-  private static final long serialVersionUID = 1L;
+public class MenuMaFiche extends JMenu{
 
-  private JMenuItem itemMe, itemMePilote, itemLogOut;
+    private static final long serialVersionUID = 1L;
+    
+    private JMenuItem itemMe, itemMePilote, itemLogOut;
 
-  private JMenu menuMaFiche;
+    private JMenu menuMaFiche;
 
-  PiloteDao piloteDao = new PiloteDao();
+    PiloteDao piloteDao = new PiloteDao();
 
-  Pilote pilote;
+    Pilote pilote;
 
-  public JMenu getMenu() {
-    return this.menuMaFiche;
-  }
+    public JMenu getMenu() {
+        return this.menuMaFiche;
+    }
 
-  public MenuMaFiche(int idUser, JFrame frame) {
+    public MenuMaFiche(int idUser, JFrame frame) {
+
     menuMaFiche = new JMenu("Ma Fiche");
     Font font = new Font("Serial", Font.BOLD, 16);
     menuMaFiche.setFont(font);
 
-    itemMe = new JMenuItem("Mon Compte");
-    itemMe.addActionListener(
-      new ActionListener() {
-
-        public void actionPerformed(ActionEvent evt) {
-          new MaFiche(idUser);
-        }
-      }
-    );
+    itemMe=new JMenuItem("Mon Compte");
+    itemMe.addActionListener(new ActionListener()
+    {
+    	public void actionPerformed(ActionEvent evt){
+            
+            new Login();
+    	}
+    });
 
     pilote = (Pilote) piloteDao.get(idUser);
 
-    itemMePilote = new JMenuItem("Mes informations pilote");
-    itemMePilote.addActionListener(
-      new ActionListener() {
+        itemMePilote=new JMenuItem("Mes informations pilote");
+        itemMePilote.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent evt)
+            {
+                new InfosPilote(pilote);
+            }
+        });
+        //Deconexion 
+        itemLogOut=new JMenuItem("Déconnexion");
+        itemLogOut.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent evt)
+            {
+                frame.dispose();
+                new Login();
+            }
+        });
 
-        public void actionPerformed(ActionEvent evt) {
-          new InfosPilote(pilote);
+        menuMaFiche.add(itemMe);  
+        if (pilote != null) {
+            menuMaFiche.add(itemMePilote);   
         }
-      }
-    );
-
-    itemLogOut = new JMenuItem("Déconnexion");
-    itemLogOut.addActionListener(
-      new ActionListener() {
-
-        public void actionPerformed(ActionEvent evt) {
-          frame.dispose();
-          new Login();
-        }
-      }
-    );
-
-    menuMaFiche.add(itemMe);
-
-    if (pilote != null) {
-      menuMaFiche.add(itemMePilote);
-    }
-
-    menuMaFiche.add(itemLogOut);
-  }
+        menuMaFiche.add(itemLogOut);
+    }     
 }
