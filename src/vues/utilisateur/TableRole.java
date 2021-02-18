@@ -20,6 +20,7 @@ public class TableRole extends JFrame{
 
     JButton btn_1 ;
     JButton btn_2 ;
+    JButton btn_3 ;
 
     private JTable table;
 
@@ -43,8 +44,6 @@ public class TableRole extends JFrame{
         comboBox1.addActionListener(new ActionListener() {
             
             public void actionPerformed(ActionEvent e) {
-                
-                roleEnCours = listeRoles.get(row);
  
                 newIdRole =  table.getModel().getValueAt(row, 1).toString() +
                                     table.getModel().getValueAt(row, 2).toString() +
@@ -119,7 +118,10 @@ public class TableRole extends JFrame{
 				
 		        Point point = mouseEvent.getPoint();
 		        
-		        row = table.rowAtPoint(point);  
+                row = table.rowAtPoint(point);
+                
+                roleEnCours = listeRoles.get(row);
+                System.out.println(roleEnCours.getRoleNom() + " est en cours");
 		    }
         });
         
@@ -138,6 +140,10 @@ public class TableRole extends JFrame{
         getContentPane().add(scrollPane);
 
         btn_1 = new JButton("Ajouter");
+        btn_1.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btn_1.setBackground(new Color(1, 175, 228));
+        btn_1.setForeground(Color.WHITE);
+        btn_1.setBounds(50, 270, 150, 30);
         btn_1.addActionListener(new ActionListener() {
                     
             public void actionPerformed(ActionEvent e) {
@@ -146,39 +152,27 @@ public class TableRole extends JFrame{
 
                 params[0] = newIdRole;
 
-                Boolean duplicate[] = new Boolean[listeRoles.size()];
-                int i = 0;
-
                 String newRoleNom = "";
 
                 for (Role r : listeRoles) {
 
                     if (r.getRoleNom().equals(roleEnCours.getRoleNom() + "+")) {
+
                         newRoleNom = roleEnCours.getRoleNom() + "+";
-                        duplicate[i] = true;
                         break;
-                    }
+                    } 
                     else {
+
                         newRoleNom = roleEnCours.getRoleNom();
-                        duplicate[i] = false;
                     }
-                    i++;
                 }
 
-
-
-                params[1] = newRoleNom + "+";
-                
+                params[1] = newRoleNom + "+";                
 
                 rd.save(roleEnCours, params);
 			}
         });
-        
-		btn_1.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btn_1.setBackground(new Color(1, 175, 228));
-        btn_1.setForeground(Color.WHITE);
-        btn_1.setBounds(50, 270, 150, 30);
-        
+                
         btn_2 = new JButton("Modifier");
         btn_2.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btn_2.setBackground(new Color(22, 219, 170));
@@ -197,9 +191,23 @@ public class TableRole extends JFrame{
             }
 
         });
+
+        btn_3 = new JButton("Suprimer");
+        btn_3.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btn_3.setBackground(new Color(200, 0, 70));
+        btn_3.setForeground(Color.WHITE);
+        btn_3.setBounds(450, 270, 150, 30);
+        btn_3.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+
+                rd.delete(roleEnCours);
+            }
+        });
         
         getContentPane().add(btn_1);
         getContentPane().add(btn_2);
+        getContentPane().add(btn_3);
         
         setFont(new Font("Dialog", Font.PLAIN, 15));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

@@ -73,7 +73,6 @@ public class AffectationDao implements Dao {
 		return affectation;
 	}
 
-
 	/**
 	 * @return ArrayList<Affectation>
 	 */
@@ -130,6 +129,7 @@ public class AffectationDao implements Dao {
 			throw new RuntimeException(e);
 
 		}
+
 		return listeAffectations;
 	}
 
@@ -179,7 +179,6 @@ public class AffectationDao implements Dao {
 
 		}
 	}
-
 
 	/**
 	 * @param t
@@ -231,7 +230,6 @@ public class AffectationDao implements Dao {
 			throw new RuntimeException(e);
 		}
 	}
-
 
 	/**
 	 * @param t

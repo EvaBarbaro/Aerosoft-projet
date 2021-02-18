@@ -39,10 +39,15 @@ public class PiloteDao implements Dao {
 
 			while (res.next()) {
 
-				pilote = new Pilote(res.getInt("IdPilote"), res.getString("NomPilote"),
-						res.getString("PrenomPilote"), res.getString("Matricule"));
+				pilote = new Pilote(
+						res.getInt("IdPilote"),
+						res.getString("NomPilote"), 
+						res.getString("PrenomPilote"),
+						res.getString("Matricule")
+					);
 
 			}
+			
 			res.close();
 			conn.close();
 
@@ -77,8 +82,12 @@ public class PiloteDao implements Dao {
 
 			while (res.next()) {
 
-				Pilote pilote = new Pilote(res.getInt("IdPilote"), res.getString("NomPilote"),
-						res.getString("PrenomPilote"), res.getString("Matricule"));
+				Pilote pilote = new Pilote(
+						res.getInt("IdPilote"),
+						res.getString("NomPilote"),
+						res.getString("PrenomPilote"), 
+						res.getString("Matricule")
+					);
 
 				listePilotes.add(pilote);
 			}

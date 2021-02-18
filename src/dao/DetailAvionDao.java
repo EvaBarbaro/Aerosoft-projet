@@ -5,33 +5,37 @@ import interfaces.Dao;
 import java.sql.*;
 import java.util.ArrayList;
 import models.*;
-import vues.SDialog;
-
 public class DetailAvionDao implements Dao {
 
   /**
    * @return ArrayList<DetailAvion>
    */
   public ArrayList<DetailAvion> getAll() {
+
     Connection conn = null;
     PreparedStatement stmt = null;
+
     String sql = "SELECT * FROM `DETAILAVION`";
 
     ArrayList<DetailAvion> listeDetailAvion = new ArrayList<>();
 
     try {
+
       conn = ConnectionBdd.getConnection();
       stmt = conn.prepareStatement(sql);
+
       ResultSet res = stmt.executeQuery(sql);
 
       while (res.next()) {
+
         DetailAvion detailAvion = new DetailAvion(
           res.getString("TypeAvion"),
           res.getInt("Capacite"),
           res.getInt("IdConstructeur")
           );
 
-        listeDetailAvion.add(detailAvion);
+          listeDetailAvion.add(detailAvion);
+        
       }
 
       res.close();
@@ -41,6 +45,7 @@ public class DetailAvionDao implements Dao {
 
       e.printStackTrace();
       System.out.println("Impossible d'afficher les details avions");
+      
     }
     
     return listeDetailAvion;
