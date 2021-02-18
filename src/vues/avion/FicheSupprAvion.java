@@ -1,39 +1,46 @@
 package vues.avion;
 
-import dao.AvionDao;
 import javax.swing.JFrame;
+
+import dao.AvionDao;
 import models.Avion;
 import vues.Fiche;
 
+
 public class FicheSupprAvion extends JFrame {
-  /**
-   *
-   */
-  private static final long serialVersionUID = 1L;
 
-  AvionDao bdao;
+	private static final long serialVersionUID = 1L;
+	
+	AvionDao bdao;
 
-  /**
-   * Create the frame.
-   */
-  public FicheSupprAvion(Avion av) {
-    String[] listLabels = { "Id de l'avion à supprimer" };
+	/**
+	 * Create the frame.
+	 */
+	public FicheSupprAvion(Avion av) {
+		//Ajout des labels
+		String[] listLabels = { "Id de l'avion à supprimer"};
+		
+		//Ajout des text fields remplis avec les infos demandé
+		String[] listTextFields = {"" + av.getNumAvion()};
 
-    String[] listTextFields = { "" + av.getNumAvion() };
+		//Ajout des boutons
+		String[] listTextBtns = { "Valider","Annuler" };
 
-    String[] listTextBtns = { "Valider", "Annuler" };
-    String[] listMethodeDoa = { "delete", "" };
+		//Ajout de la methode
+		String[] listMethodeDoa = { "delete","" };
 
-    bdao = new AvionDao();
+		//Ajout de la dao
+		bdao = new AvionDao();
 
-    new Fiche(
-      "Suppression d'un Vol",
-      bdao,
-      (Object) av,
-      listLabels,
-      listTextFields,
-      listTextBtns,
-      listMethodeDoa
-    );
-  }
+		//Creation de la fiche avec les elements ajouté au dessus
+		new Fiche(
+				"Suppression d'un Vol", 
+				bdao, 
+				(Object)av, 
+				listLabels, 
+				listTextFields,
+				listTextBtns,
+				listMethodeDoa
+				);
+	}
 }

@@ -9,7 +9,6 @@ import models.*;
 import vues.Fiche;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.Image;
 
 public class Home {
@@ -29,13 +28,11 @@ public class Home {
     public void setDroitInt(int[] droitInt) {
         this.droitInt = droitInt;
     }
-    
     //marge à droite
     private JPanel pan;
 
     //constructeur
     public Home(int idUser) {
-
         System.out.println(idUser);
         Utilisateur u;
         UtilisateurDao daoU = new UtilisateurDao();
@@ -43,6 +40,7 @@ public class Home {
         
         //Recuperation du droit depuis la base via la fonction get() : "55555"
         getDroit = u.getIdRole();
+        //System.out.println(getDroit);
 
         //Split le droit en un tableau : String{"5","5","5","5","5"}
         String[] droitArray = getDroit.split("");
@@ -50,12 +48,10 @@ public class Home {
         //Conversion des elements du tableau en int en les ajoutant à un nouveau tableau : int{5,5,5,5,5}
         this.droitInt = new int[droitArray.length];
 
-        for (int i = 0; i < droitInt.length; i++) {
-            
+        for (int i = 0; i < droitInt.length; i++){ 
             this.droitInt[i] = Integer.parseInt(droitArray[i]);
 
         }
-        
         initialize(idUser);
 	}
     
@@ -82,7 +78,14 @@ public class Home {
   
         /*
         On autorise les utilisateurs à acceder aux elements du menu par rapport a leurs droits.
-        Chaque indice du tableau droitInt correspond à un module 0 = pas d'acces
+        Chaque indice du tableau droitInt correspond à un module :
+        [0] Aéroport
+        [1] Vol
+        [2] Pilotes
+        [3] Affectations
+        [4] Avions
+        Pour afficher le module il ne faut pas que l'indice soit à 0
+        0 = pas d'acces le module ne s'affichera pas
         */
 
         /*MenuAeroport*/
@@ -111,7 +114,7 @@ public class Home {
             mb.add(new MenuAvion(this.droitInt[4]).getMenu());
         }
 
-        //MenuUtilisateur
+        //MenuUtilisateur uniquement pour un administrateur
         if(this.getDroit.equals("55555")){
             mb.add(new MenuUtilisateur().getMenu());
         }
@@ -125,20 +128,18 @@ public class Home {
         mb.add(pan);
 
         frame.setJMenuBar(mb);
-
         /*Ajout d'une image*/
         ImageIcon background = new ImageIcon(
-                Toolkit.getDefaultToolkit().getImage(Fiche.class.getResource("/images/Banniere_aerosoft.jpg"))
+            Toolkit.getDefaultToolkit().getImage(Fiche.class.getResource("/images/Banniere_aerosoft.jpg"))
+        /*.getScaledInstance(160, 50, Image.SCALE_DEFAULT)*/
         );
 
         /*label pour afficher l'image*/
         JLabel labelimage = new JLabel();
         labelimage.setIcon(background);
-
         panel.add(labelimage);
 
-        UIManager.put("TableHeader.font", new Font("Arial", Font.BOLD, 15));
-
+        //Fenetre
         frame.add(panel);
         frame.setSize(1280, 780);
         frame.setLocationRelativeTo(null);

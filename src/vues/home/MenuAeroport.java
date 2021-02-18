@@ -40,7 +40,7 @@ public class MenuAeroport extends JMenu{
             i1 = new JMenuItem("Lister les aeroports");
             i1.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
-                    //frame.setVisible(true);
+                    
                     new ListeAeroports();
                 }
             });
@@ -49,7 +49,7 @@ public class MenuAeroport extends JMenu{
             i2 = new JMenuItem("Trouver un aeroport");
             i2.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
-                    //frame.setVisible(true);
+
                     new RechercherAeroport();
                 }
             });
@@ -62,7 +62,7 @@ public class MenuAeroport extends JMenu{
             i3 = new JMenuItem("Modifier un aeroport");
             i3.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
-                    //frame.setVisible(true);
+                    
                     new ListeModifAeroports();
                 }
             });
@@ -75,10 +75,7 @@ public class MenuAeroport extends JMenu{
             i4 = new JMenuItem("Ajouter un aeroport");
             i4.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
-                    //frame.setVisible(true);
-
-                    /*AeroportDao aeDao = new AeroportDao();
-                    String idAe = "CDG"; */
+                    
                     Aeroport ae = new Aeroport();
                     new FicheAjoutAeroport(ae);
                 }
@@ -92,9 +89,7 @@ public class MenuAeroport extends JMenu{
             i5 = new JMenuItem("Suprimer un aeroport");
             i5.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
-                    //frame.setVisible(true);
-                    //Aeroport ae = new Aeroport();
-                    
+            
                     new ListeDeleteAeroports();
                 }
             });

@@ -13,9 +13,6 @@ import vues.affectation.*;
 
 public class MenuAffectation extends JMenu{
     
-    /**
-	 *
-	 */
     private static final long serialVersionUID = 1L;
 
     //Creation de la variable droit qui va recevoir le code droits du module actuel
@@ -53,7 +50,6 @@ public class MenuAffectation extends JMenu{
             i2.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
             
-                    //new searchLivre();
                     new RechercherAffectation();
                 }
             });

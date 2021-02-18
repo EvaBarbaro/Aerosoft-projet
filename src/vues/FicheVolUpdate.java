@@ -28,7 +28,7 @@ import java.awt.event.ActionListener;
 //import java.util.concurrent.Callable;
 import java.awt.event.ActionEvent;
 
-public class FicheAvion extends JFrame {
+public class FicheVolUpdate extends JFrame {
 	/**
 	 *
 	 */
@@ -39,7 +39,7 @@ public class FicheAvion extends JFrame {
 	
 	ImageIcon i = new ImageIcon(
 			Toolkit.getDefaultToolkit().getImage(
-					FicheAvion.class.getResource("/images/Aerosoft-logo.PNG"))
+					Fiche.class.getResource("/images/Aerosoft-logo.PNG"))
 					.getScaledInstance(160, 50, Image.SCALE_DEFAULT)
 				);
 	
@@ -55,7 +55,7 @@ public class FicheAvion extends JFrame {
 	private JLabel lblNewLabel_6 = new JLabel("");
 	
 	private JTextField textField_1;
-	private JTextField textField_4 = new JTextField();
+	private JTextField textField_3 = new JTextField();
 	private JTextField textField_5 = new JTextField();
 	private JTextField textField_6 = new JTextField();
 
@@ -66,13 +66,13 @@ public class FicheAvion extends JFrame {
 	private String oldValue_5;
 	private String oldValue_6;
 
-	private JComboBox jComboBoxType;
-	private JComboBox jComboBoxBase;
+	private JComboBox jComboBoxDept;
+	private JComboBox jComboBoxArr;
 
 	/**
 	 * Create the frame.
 	 */
-	public FicheAvion(
+	public FicheVolUpdate(
 			String titre, 
 			Dao dao, 
 			Object transport,
@@ -80,8 +80,8 @@ public class FicheAvion extends JFrame {
 			String [] listTextFields,
 			String [] listTextBtns,
 			String [] listMethodeDoa,
-			String [] jComboBoxTypeTitles,
-			String [] jComboBoxBaseTitles){
+			String [] jComboBoxDeptTitles,
+			String [] jComboBoxArrTitles){
 
 		setTitle(titre);
 
@@ -118,9 +118,9 @@ public class FicheAvion extends JFrame {
 			lblNewLabel_2 = new JLabel(listLabels[1]);
 			lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
-			jComboBoxType = new JComboBox<String>(jComboBoxTypeTitles);
-			jComboBoxType.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			jComboBoxType.setSelectedItem(listTextFields[1]);
+			jComboBoxDept = new JComboBox<String>(jComboBoxDeptTitles);
+			jComboBoxDept.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			jComboBoxDept.setSelectedItem(listTextFields[1]);
 
 			oldValue_2 = listTextFields[1];
 		}
@@ -130,9 +130,10 @@ public class FicheAvion extends JFrame {
 			lblNewLabel_3 = new JLabel(listLabels[2]);
 			lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
-			jComboBoxBase = new JComboBox<String>(jComboBoxBaseTitles);
-			jComboBoxBase.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			jComboBoxBase.setSelectedItem(listTextFields[2]);
+			textField_3 = new JTextField();
+			textField_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			textField_3.setColumns(10);
+			textField_3.setText(listTextFields[2]);
 
 			oldValue_3 = listTextFields[2];
 		}
@@ -142,10 +143,9 @@ public class FicheAvion extends JFrame {
 			lblNewLabel_4 = new JLabel(listLabels[3]);
 			lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
-			textField_4 = new JTextField();
-			textField_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			textField_4.setColumns(10);
-			textField_4.setText(listTextFields[3]);
+			jComboBoxArr = new JComboBox<String>(jComboBoxArrTitles);
+			jComboBoxArr.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			jComboBoxArr.setSelectedItem(listTextFields[2]);
 
 			oldValue_4 = listTextFields[3];
 		}
@@ -182,9 +182,9 @@ public class FicheAvion extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				if (oldValue_1 != null
-						|| (oldValue_2 != null && !(oldValue_2.equals(jComboBoxType.getSelectedItem())))
-						|| (oldValue_3 != null && !(oldValue_3.equals(jComboBoxBase.getSelectedItem())))
-						|| (oldValue_4 != null && !(oldValue_4.equals(textField_4.getText())))
+						|| (oldValue_2 != null && !(oldValue_2.equals(jComboBoxDept.getSelectedItem())))
+						|| (oldValue_3 != null && !(oldValue_3.equals(textField_3.getText())))
+						|| (oldValue_4 != null && !(oldValue_4.equals(jComboBoxArr.getSelectedItem())))
 						|| (oldValue_5 != null && !(oldValue_5.equals(textField_5.getText()))) 
 						|| (oldValue_6 != null && !(oldValue_6.equals(textField_6.getText())))) {
 			
@@ -194,16 +194,15 @@ public class FicheAvion extends JFrame {
 					params[0] = textField_1.getText();
 
 					if (listTextFields.length >= 2) {
-						params[1] = (String) jComboBoxType.getSelectedItem();
+						params[1] = (String) jComboBoxDept.getSelectedItem();
 					}
 					
 					if (listTextFields.length >= 3) {
-						params[2] = (String) jComboBoxBase.getSelectedItem();
-						
+						params[2] = textField_3.getText();
 					} 
 			
 					if (listLabels.length >= 4) {
-						params[3] = textField_4.getText();						
+						params[3] = (String) jComboBoxArr.getSelectedItem();				
 					} 
 			
 					if (listLabels.length >= 5) {
@@ -269,9 +268,9 @@ public class FicheAvion extends JFrame {
 							.addPreferredGap(ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
 								.addComponent(textField_5, Alignment.TRAILING)
-								.addComponent(textField_4, Alignment.TRAILING)
-								.addComponent(jComboBoxBase)
-								.addComponent(jComboBoxType)
+								.addComponent(jComboBoxDept, Alignment.TRAILING)
+								.addComponent(textField_3)
+								.addComponent(jComboBoxArr)
 								.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
 								.addComponent(textField_6))))
 					.addGap(46))
@@ -291,15 +290,15 @@ public class FicheAvion extends JFrame {
 									.addGap(30)
 									.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 										.addComponent(lblNewLabel_3)
-										.addComponent(jComboBoxBase, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+										.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 								.addGroup(gl_contentPane.createSequentialGroup()
 									.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 									.addGap(18)
-									.addComponent(jComboBoxType, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+									.addComponent(jComboBoxDept, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 							.addGap(18)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addComponent(lblNewLabel_4)
-								.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+								.addComponent(jComboBoxArr, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 						.addComponent(lblNewID))
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -319,21 +318,21 @@ public class FicheAvion extends JFrame {
 		lblNewID.setVisible(false);
 
 		if (listTextFields.length >= 2) {
-			jComboBoxType.setVisible(true);
+			jComboBoxArr.setVisible(true);
 		} else {
-			jComboBoxType.setVisible(false);
+			jComboBoxArr.setVisible(false);
 		}
 
 		if (listTextFields.length >= 3) {
-			jComboBoxBase.setVisible(true);
+			textField_3.setVisible(true);
 		} else {
-			jComboBoxBase.setVisible(false);
+			textField_3.setVisible(false);
 		}
 
 		if (listTextFields.length >= 4) {
-			textField_4.setVisible(true);
+			jComboBoxArr.setVisible(true);
 		} else {
-			textField_4.setVisible(false);
+			jComboBoxArr.setVisible(false);
 		}
 
 		if (listTextFields.length >= 5) {
