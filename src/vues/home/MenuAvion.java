@@ -54,7 +54,7 @@ public class MenuAvion extends JMenu {
             i2.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
 
-                    new RechercherAvion();
+                    new RechercherAvion(droit);
                 }
             });
             menu.add(i2);

@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import dao.AeroportDao;
 import models.Aeroport;
 import vues.Fiche;
+import vues.FicheFirstFieldFalse;
 
 
 public class FicheSupprAeroport extends JFrame {
@@ -33,7 +34,7 @@ public class FicheSupprAeroport extends JFrame {
 		bdao = new AeroportDao();
 		
 		//Creation de la fiche avec les elements ajouté au dessus
-		new Fiche(
+		new FicheFirstFieldFalse(
 				"Suppression d'un Aeroport", 
 				bdao, 
 				(Object)a, 

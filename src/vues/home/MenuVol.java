@@ -52,7 +52,7 @@ public class MenuVol extends JMenu {
             i2.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
 
-                    new RechercherVol();
+                    new RechercherVol(droit);
                 }
             });
             menu.add(i2);

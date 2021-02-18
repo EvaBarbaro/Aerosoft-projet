@@ -50,7 +50,7 @@ public class MenuAeroport extends JMenu{
             i2.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
 
-                    new RechercherAeroport();
+                    new RechercherAeroport(droit);
                 }
             });
             menu.add(i2);

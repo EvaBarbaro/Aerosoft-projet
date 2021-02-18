@@ -43,7 +43,7 @@ public class ListeSupprAvion extends JFrame implements ActionListener{
 	public ListeSupprAvion() {
 		
 		/* Label */
-		l1 = new JLabel("LISTE DES Avions");
+		l1 = new JLabel("LISTE DES AVIONS");
 		l1.setForeground(Color.blue);
 		l1.setFont(new Font("Serif", Font.BOLD, 20));
 
@@ -88,7 +88,7 @@ public class ListeSupprAvion extends JFrame implements ActionListener{
 
 					if (av1 != null) {
 						//Creation de la fiche pour modif l'element cliquer
-						FicheModifAvion fm = new FicheModifAvion(av1);
+						FicheSupprAvion fm = new FicheSupprAvion(av1);
 						
 						fm.addWindowListener(new WindowListener() {
 

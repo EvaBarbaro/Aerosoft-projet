@@ -54,7 +54,7 @@ public class MenuPilote extends JMenu{
             {
                 public void actionPerformed(ActionEvent evt)
                 {
-                    new FicheSearchPilote();
+                    new FicheSearchPilote(droit);
                 }
             });
             menuPilote.add(itemSearchPilote);

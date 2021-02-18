@@ -19,8 +19,6 @@ import java.awt.Image;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
@@ -28,30 +26,36 @@ import java.awt.event.ActionListener;
 //import java.util.concurrent.Callable;
 import java.awt.event.ActionEvent;
 
-public class FicheVolUpdate extends JFrame {
+public class FichePilote extends JFrame {
 	/**
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
-	
+
 	private JPanel contentPane;
-	
-	ImageIcon i = new LogoAeroSoft().getLogoAerosoft();
-	
+
+	ImageIcon i = new ImageIcon(
+			Toolkit.getDefaultToolkit().getImage(
+					Fiche.class.getResource("/images/Aerosoft-logo.PNG"))
+					.getScaledInstance(160, 50, Image.SCALE_DEFAULT)
+				);
+
 	private JLabel lblNewTitre;
-	
+
 	private JLabel lblNewID;
-	
+
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_2 = new JLabel("");
 	private JLabel lblNewLabel_3 = new JLabel("");
 	private JLabel lblNewLabel_4 = new JLabel("");
 	private JLabel lblNewLabel_5 = new JLabel("");
 	private JLabel lblNewLabel_6 = new JLabel("");
-	
+
 	private JTextField textField_1;
+	private JTextField textField_2 = new JTextField();
 	private JTextField textField_3 = new JTextField();
+	private JTextField textField_4 = new JTextField();
 	private JTextField textField_5 = new JTextField();
 	private JTextField textField_6 = new JTextField();
 
@@ -62,22 +66,18 @@ public class FicheVolUpdate extends JFrame {
 	private String oldValue_5;
 	private String oldValue_6;
 
-	private JComboBox jComboBoxDept;
-	private JComboBox jComboBoxArr;
-
 	/**
 	 * Create the frame.
 	 */
-	public FicheVolUpdate(
+	public FichePilote(
 			String titre, 
 			Dao dao, 
 			Object transport,
 			String [] listLabels, 
 			String [] listTextFields,
 			String [] listTextBtns,
-			String [] listMethodeDoa,
-			String [] jComboBoxDeptTitles,
-			String [] jComboBoxArrTitles){
+			String[] listMethodeDoa,
+			Boolean... booleanForSetEnabledFalse){
 
 		setTitle(titre);
 
@@ -105,7 +105,6 @@ public class FicheVolUpdate extends JFrame {
 		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textField_1.setColumns(10);
 		textField_1.setText(listTextFields[0]);
-		textField_1.setEnabled(false);
 
 		oldValue_1 = listTextFields[0];
 
@@ -114,9 +113,10 @@ public class FicheVolUpdate extends JFrame {
 			lblNewLabel_2 = new JLabel(listLabels[1]);
 			lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
-			jComboBoxDept = new JComboBox<String>(jComboBoxDeptTitles);
-			jComboBoxDept.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			jComboBoxDept.setSelectedItem(listTextFields[1]);
+			textField_2 = new JTextField();
+			textField_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			textField_2.setColumns(10);
+			textField_2.setText(listTextFields[1]);
 
 			oldValue_2 = listTextFields[1];
 		}
@@ -139,9 +139,10 @@ public class FicheVolUpdate extends JFrame {
 			lblNewLabel_4 = new JLabel(listLabels[3]);
 			lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
-			jComboBoxArr = new JComboBox<String>(jComboBoxArrTitles);
-			jComboBoxArr.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			jComboBoxArr.setSelectedItem(listTextFields[2]);
+			textField_4 = new JTextField();
+			textField_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			textField_4.setColumns(10);
+			textField_4.setText(listTextFields[3]);
 
 			oldValue_4 = listTextFields[3];
 		}
@@ -178,39 +179,39 @@ public class FicheVolUpdate extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				if (oldValue_1 != null
-						|| (oldValue_2 != null && !(oldValue_2.equals(jComboBoxDept.getSelectedItem())))
+						|| (oldValue_2 != null && !(oldValue_2.equals(textField_2.getText())))
 						|| (oldValue_3 != null && !(oldValue_3.equals(textField_3.getText())))
-						|| (oldValue_4 != null && !(oldValue_4.equals(jComboBoxArr.getSelectedItem())))
+						|| (oldValue_4 != null && !(oldValue_4.equals(textField_4.getText())))
 						|| (oldValue_5 != null && !(oldValue_5.equals(textField_5.getText()))) 
 						|| (oldValue_6 != null && !(oldValue_6.equals(textField_6.getText())))) {
-			
+
 					String[] params = new String[listTextFields.length];
 					System.out.println("listTextFields.length : "  + listTextFields.length);				
 
 					params[0] = textField_1.getText();
 
 					if (listTextFields.length >= 2) {
-						params[1] = (String) jComboBoxDept.getSelectedItem();
+						params[1] = textField_2.getText();
 					}
-					
+
 					if (listTextFields.length >= 3) {
-						params[2] = textField_3.getText();
+						params[2] = textField_3.getText();						
 					} 
-			
+
 					if (listLabels.length >= 4) {
-						params[3] = (String) jComboBoxArr.getSelectedItem();				
+						params[3] = textField_4.getText();						
 					} 
-			
+
 					if (listLabels.length >= 5) {
 						params[4] = textField_5.getText();
 					}
-					
+
 					if (listLabels.length >= 6) {
 						params[5] = textField_6.getText();						
 					}
-					
+
 					System.out.println("params.length : "  + params.length);				
-		
+
 					executeDoa(listMethodeDoa[0], dao, transport, params);
 
 					}
@@ -264,9 +265,9 @@ public class FicheVolUpdate extends JFrame {
 							.addPreferredGap(ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
 								.addComponent(textField_5, Alignment.TRAILING)
-								.addComponent(jComboBoxDept, Alignment.TRAILING)
+								.addComponent(textField_4, Alignment.TRAILING)
 								.addComponent(textField_3)
-								.addComponent(jComboBoxArr)
+								.addComponent(textField_2)
 								.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
 								.addComponent(textField_6))))
 					.addGap(46))
@@ -290,11 +291,11 @@ public class FicheVolUpdate extends JFrame {
 								.addGroup(gl_contentPane.createSequentialGroup()
 									.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 									.addGap(18)
-									.addComponent(jComboBoxDept, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+									.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 							.addGap(18)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addComponent(lblNewLabel_4)
-								.addComponent(jComboBoxArr, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+								.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 						.addComponent(lblNewID))
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -314,9 +315,9 @@ public class FicheVolUpdate extends JFrame {
 		lblNewID.setVisible(false);
 
 		if (listTextFields.length >= 2) {
-			jComboBoxDept.setVisible(true);
+			textField_2.setVisible(true);
 		} else {
-			jComboBoxDept.setVisible(false);
+			textField_2.setVisible(false);
 		}
 
 		if (listTextFields.length >= 3) {
@@ -326,9 +327,9 @@ public class FicheVolUpdate extends JFrame {
 		}
 
 		if (listTextFields.length >= 4) {
-			jComboBoxArr.setVisible(true);
+			textField_4.setVisible(true);
 		} else {
-			jComboBoxArr.setVisible(false);
+			textField_4.setVisible(false);
 		}
 
 		if (listTextFields.length >= 5) {
@@ -347,14 +348,12 @@ public class FicheVolUpdate extends JFrame {
 		final Dimension screenSize = toolkit.getScreenSize();
 		final int x = (screenSize.width - this.getWidth()) / 2;
 		final int y = (screenSize.height - this.getHeight()) / 2;
-
 		setLocation(x, y);
 		setLocationRelativeTo(null);
-		
 		setVisible(true);
 	}
 
-	
+
 	/** 
 	 * @param methodeDao
 	 * @param dao
@@ -362,7 +361,7 @@ public class FicheVolUpdate extends JFrame {
 	 * @param params
 	 */
 	private void executeDoa(String methodeDao, Dao dao, Object transport, String[] params) {
-		
+
 		System.out.println("methodeDao: "  + methodeDao);
 		switch (methodeDao) {
 			case "get":

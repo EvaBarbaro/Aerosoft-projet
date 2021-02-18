@@ -50,7 +50,7 @@ public class MenuAffectation extends JMenu{
             i2.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
             
-                    new RechercherAffectation();
+                    new RechercherAffectation(droit);
                 }
             });
             menu.add(i2);

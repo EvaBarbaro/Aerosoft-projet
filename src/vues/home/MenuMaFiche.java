@@ -2,15 +2,15 @@ package vues.home;
 
 import javax.swing.*;
 import java.awt.Font;
-
 import dao.PiloteDao;
-
 import models.Pilote;
-
 import vues.Login;
+import vues.compte.MaFiche;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+
 
 public class MenuMaFiche extends JMenu{
 
@@ -39,20 +39,20 @@ public class MenuMaFiche extends JMenu{
     {
     	public void actionPerformed(ActionEvent evt){
             
-            new Login();
+            new MaFiche(idUser);
     	}
     });
 
     pilote = (Pilote) piloteDao.get(idUser);
 
-        itemMePilote=new JMenuItem("Mes informations pilote");
-        itemMePilote.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent evt)
-            {
-                new InfosPilote(pilote);
-            }
-        });
+    itemMePilote=new JMenuItem("Mes informations pilotes");
+    itemMePilote.addActionListener(new ActionListener()
+    {
+    	public void actionPerformed(ActionEvent evt)
+    	{
+            new InfosPilote(pilote);
+    	}
+    });
         //Deconexion 
         itemLogOut=new JMenuItem("Déconnexion");
         itemLogOut.addActionListener(new ActionListener()

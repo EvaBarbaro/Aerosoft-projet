@@ -33,8 +33,14 @@ public class FicheSearchPilote extends JFrame implements ActionListener {
 
 	String[] tblHead = { "Id Pilote", "Nom", "Prénom", "Matricule"};
 
+	//Ajout du droit
+	private int droitA = 0;
+
 	// Création de la frame de recherche des pilotes
-	public FicheSearchPilote() {
+	public FicheSearchPilote(int droit) {
+		//instanciation du droit
+		droitA = droit;
+
 		/* Label */
 		l1 = new JLabel("RECHERCHER UN PILOTE");
 		l1.setForeground(Color.blue);
@@ -144,8 +150,8 @@ public class FicheSearchPilote extends JFrame implements ActionListener {
 						Point point = mouseEvent.getPoint();
 						
 						int row = table.rowAtPoint(point);
-						
-						if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
+						//Ajout d'un evenement au double clic et teste si l'utilisateur à le droit de modif
+						if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1 && droitA >=2) {
 							
 							int column = 0;
 							

@@ -5,6 +5,7 @@ import javax.swing.*;
 import dao.PiloteDao;
 import models.Pilote;
 import vues.Fiche;
+import vues.FichePilote;
 
 public class InfosPilote extends JFrame{
 
@@ -16,14 +17,12 @@ public class InfosPilote extends JFrame{
     public InfosPilote(Pilote pilote) {
         piloteDao = new PiloteDao();
         
-        String[] listLabels = { " ",
-                                "Votre Nom:", 
+        String[] listLabels = { "Votre Nom:", 
                                 "Votre Prenom:",
                                 "Votre Matricule:"
                             };
 		
-        String[] listTextFields = { "" + pilote.getIdPilote(),
-                                    pilote.getNomPilote(),
+        String[] listTextFields = { pilote.getNomPilote(),
                                     pilote.getPrenomPilote(),
                                     "" + pilote.getMatricule()
                                 };
@@ -32,15 +31,14 @@ public class InfosPilote extends JFrame{
         String[] listMethodeDoa = { "update", "" };
         
         
-        new Fiche(
+        new FichePilote(
 				"Mes informations Pilote", 
 				piloteDao, 
 				(Object)pilote, 
 				listLabels, 
 				listTextFields,
 				listTextBtns,
-				listMethodeDoa,
-                false
+				listMethodeDoa
 				);
         
 

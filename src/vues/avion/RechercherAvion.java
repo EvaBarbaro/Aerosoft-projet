@@ -38,9 +38,15 @@ public class RechercherAvion extends JFrame implements ActionListener {
 	//Creation des titres de colonnes
 	String[] tblHead = { "Numéro avion", "Type avion", "Base aeroport" };
 
-	public RechercherAvion() {
+	//Ajout du droit
+	private int droitA = 0;
+
+	public RechercherAvion(int droit) {
+		//instanciation du droit
+		droitA = droit;
+		
 		/* Label */
-		l1 = new JLabel("RECHERCHER UN avion");
+		l1 = new JLabel("RECHERCHER UN AVION");
 		l1.setForeground(Color.blue);
 		l1.setFont(new Font("Serif", Font.BOLD, 20));
 
@@ -145,8 +151,8 @@ public class RechercherAvion extends JFrame implements ActionListener {
 						Point point = mouseEvent.getPoint();
 						
 						int row = table.rowAtPoint(point);
-						
-						if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
+						//Ajout d'un evenement au double clic et teste si l'utilisateur à le droit de modif
+						if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1 && droitA >=2) {
 							
 							int column = 0;
 							

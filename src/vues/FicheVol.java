@@ -313,9 +313,9 @@ public class FicheVol extends JFrame {
 		lblNewID.setVisible(false);
 
 		if (listTextFields.length >= 2) {
-			jComboBoxArr.setVisible(true);
+			jComboBoxDept.setVisible(true);
 		} else {
-			jComboBoxArr.setVisible(false);
+			jComboBoxDept.setVisible(false);
 		}
 
 		if (listTextFields.length >= 3) {
