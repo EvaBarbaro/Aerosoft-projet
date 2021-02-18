@@ -1,3 +1,9 @@
+DROP DATABASE IF EXISTS aerosoft;
+
+CREATE DATABASE aerosoft;
+
+USE aerosoft;
+
 CREATE TABLE ROLES (
     IdRole       	varchar(20) primary key,
     RoleNom 		varchar(50) not null
@@ -8,7 +14,7 @@ CREATE TABLE UTILISATEUR (
 	Mail 		    varchar(50) not null,
     MotDePasse 		varchar(50) not null,
     Statut          boolean,
-	IdRole 	        varchar(20) not null, foreign key(IdRole) references ROLES(IdRole)
+	IdRole 	        varchar(20) not null, foreign key(IdRole) references ROLES(IdRole) ON DELETE CASCADE
 ) ENGINE InnoDB;
 
 CREATE TABLE CONSTRUCTEUR (
@@ -32,30 +38,30 @@ CREATE TABLE PILOTE (
 CREATE TABLE DETAILAVION (
 	TypeAvion 		varchar(50) primary key,
 	Capacite 		integer not null,
-	IdConstructeur 	integer not null, foreign key(IdConstructeur) references CONSTRUCTEUR(IdConstructeur)
+	IdConstructeur 	integer not null, foreign key(IdConstructeur) references CONSTRUCTEUR(IdConstructeur) ON DELETE CASCADE
 ) ENGINE InnoDB;
 
 CREATE TABLE AVION (
 	NumAvion 		integer primary key auto_increment,
-	TypeAvion 		varchar(50) not null, foreign key(TypeAvion) references DETAILAVION(TypeAvion),
-	BaseAeroport 	varchar(3) not null, foreign key(BaseAeroport) references AEROPORT(IdAeroport)
+	TypeAvion 		varchar(50) not null, foreign key(TypeAvion) references DETAILAVION(TypeAvion) ON DELETE CASCADE,
+	BaseAeroport 	varchar(3), foreign key(BaseAeroport) references AEROPORT(IdAeroport) ON DELETE SET NULL
 ) ENGINE InnoDB;
 
 CREATE TABLE VOL (
 	NumVol			varchar(50) primary key,
-	AeroportDept 	varchar(3) not null, foreign key(AeroportDept) references AEROPORT(IdAeroport),
+	AeroportDept 	varchar(3) not null, foreign key(AeroportDept) references AEROPORT(IdAeroport) ON DELETE CASCADE,
 	HDepart			time not null,
-	AeroportArr 	varchar(3) not null, foreign key(AeroportArr) references AEROPORT(IdAeroport),
+	AeroportArr 	varchar(3) not null, foreign key(AeroportArr) references AEROPORT(IdAeroport) ON DELETE CASCADE,
 	HArrivee		time not null
 ) ENGINE InnoDB;
 
 CREATE TABLE AFFECTATION (
 	IdAffectation	varchar(30) primary key,
-	NumVol			varchar(50) not null, foreign key(NumVol) references VOL(NumVol),
+	NumVol			varchar(50) not null, foreign key(NumVol) references VOL(NumVol) ON DELETE CASCADE,
 	DateVol 		date,
     AffectationCode boolean,
-	NumAvion		integer not null, foreign key(NumAvion) references AVION(NumAvion),
-	IdPilote 		integer not null, foreign key(IdPilote) references PILOTE(IdPilote)
+	NumAvion		integer not null, foreign key(NumAvion) references AVION(NumAvion) ON DELETE CASCADE,
+	IdPilote 		integer not null, foreign key(IdPilote) references PILOTE(IdPilote) ON DELETE CASCADE
 ) ENGINE InnoDB;
 
 -- création des tuples
