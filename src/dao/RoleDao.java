@@ -129,7 +129,8 @@ public class RoleDao implements Dao {
 	 */
 	@Override
 	public void update(Object t, String[] params) {
-				Role role = (Role) t;
+		
+		Role role = (Role) t;
 
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -164,8 +165,44 @@ public class RoleDao implements Dao {
 	 */
 	@Override
 	public void delete(Object t) {
-		// TODO Auto-generated method stub
+		
+		Role role = (Role) t;
 
+		Connection conn = null;
+		PreparedStatement stmt = null;
+
+		try {
+
+			conn = ConnectionBdd.getConnection();
+			stmt = conn.prepareStatement("DELETE FROM `roles` WHERE `IdRole`=?",
+					Statement.RETURN_GENERATED_KEYS);
+
+			stmt.setString(1, role.getIdRole());
+			stmt.execute();
+
+			System.out.println(role.getIdRole() + " a bien été Supprimé");
+
+			new SDialog("Suppresssion", "Suppresssion reussie", "Valider", "").setVisible(true);
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			new SDialog("Echec", "La suppresssion n'a pas reussie car " + e, "ok", "")
+					.setVisible(true);
+
+			throw new RuntimeException(e);
+		}
+
+		try {
+
+			stmt.close();
+			conn.close();
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
 	}
 
 	/**
