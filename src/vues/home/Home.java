@@ -7,9 +7,10 @@ import java.awt.Toolkit;
 import dao.*;
 import models.*;
 import vues.Fiche;
+import vues.LogoAeroSoft;
 
 import javax.swing.*;
-import java.awt.Image;
+import java.awt.*;
 
 public class Home {
 
@@ -67,11 +68,7 @@ public class Home {
         JMenuBar mb = new JMenuBar();
 
         /* Mise en place du logo  */
-        ImageIcon icon = new ImageIcon(
-			Toolkit.getDefaultToolkit().getImage(
-					Home.class.getResource("/images/Aerosoft-logo.PNG"))
-					.getScaledInstance(160, 40, Image.SCALE_DEFAULT)
-        );
+        ImageIcon icon = new LogoAeroSoft().getLogoAerosoft();
         
         JMenuItem item = new JMenuItem(icon);
         mb.add(item);
@@ -138,6 +135,8 @@ public class Home {
         JLabel labelimage = new JLabel();
         labelimage.setIcon(background);
         panel.add(labelimage);
+
+        UIManager.put("TableHeader.font", new Font("Arial", Font.BOLD, 15));
 
         //Fenetre
         frame.add(panel);

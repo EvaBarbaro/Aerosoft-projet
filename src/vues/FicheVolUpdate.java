@@ -37,11 +37,7 @@ public class FicheVolUpdate extends JFrame {
 	
 	private JPanel contentPane;
 	
-	ImageIcon i = new ImageIcon(
-			Toolkit.getDefaultToolkit().getImage(
-					Fiche.class.getResource("/images/Aerosoft-logo.PNG"))
-					.getScaledInstance(160, 50, Image.SCALE_DEFAULT)
-				);
+	ImageIcon i = new LogoAeroSoft().getLogoAerosoft();
 	
 	private JLabel lblNewTitre;
 	

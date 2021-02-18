@@ -23,6 +23,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
 
+
+
 //import java.util.concurrent.Callable;
 import java.awt.event.ActionEvent;
 
@@ -35,11 +37,7 @@ public class Fiche extends JFrame {
 	
 	private JPanel contentPane;
 	
-	ImageIcon i = new ImageIcon(
-			Toolkit.getDefaultToolkit().getImage(
-					Fiche.class.getResource("/images/Aerosoft-logo.PNG"))
-					.getScaledInstance(160, 40, Image.SCALE_DEFAULT)
-				);
+	ImageIcon i = new LogoAeroSoft().getLogoAerosoft();
 	
 	private JLabel lblNewTitre;
 	

@@ -37,14 +37,12 @@ public class Login extends JFrame implements ActionListener, KeyListener{
 
     // Logo
     JLabel labelimage = new JLabel();
-        ImageIcon img = new ImageIcon(
-            Toolkit.getDefaultToolkit().getImage(
-                    Fiche.class.getResource("/images/Aerosoft-logo.PNG"))
-                    .getScaledInstance(160, 40, Image.SCALE_DEFAULT)
-                );
-        labelimage.setBounds(80, 10, 400, 70); 
-        labelimage.setIcon(img);
-        add(labelimage);
+
+    ImageIcon img = new LogoAeroSoft().getLogoAerosoft();
+    
+    labelimage.setBounds(80, 10, 400, 70); 
+    labelimage.setIcon(img);
+    add(labelimage);
 
     // Label
     labelEmail = new JLabel("Votre Email:");
