@@ -88,7 +88,7 @@ public class ListeSupprAvion extends JFrame implements ActionListener{
 
 					if (av1 != null) {
 						//Creation de la fiche pour modif l'element cliquer
-						FicheModifAvion fm = new FicheModifAvion(av1);
+						FicheSupprAvion fm = new FicheSupprAvion(av1);
 						
 						fm.addWindowListener(new WindowListener() {
 
