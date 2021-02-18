@@ -8,6 +8,7 @@ import dao.PiloteDao;
 import models.Pilote;
 
 import vues.Login;
+import vues.compte.MaFiche;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -39,7 +40,7 @@ public class MenuMaFiche extends JMenu{
     {
     	public void actionPerformed(ActionEvent evt){
             
-            new Login();
+            new MaFiche(idUser);
     	}
     });
 

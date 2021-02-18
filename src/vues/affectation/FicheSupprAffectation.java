@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import dao.AffectationDao;
 import models.Affectation;
 import vues.Fiche;
+import vues.FicheFirstFieldFalse;
 
 
 public class FicheSupprAffectation extends JFrame {
@@ -36,7 +37,7 @@ public class FicheSupprAffectation extends JFrame {
 		bdao = new AffectationDao();
 
 		//Creation de la fiche avec les elements ajouté au dessus
-		new Fiche(
+		new FicheFirstFieldFalse(
 				"Suppression d'une affectation", 
 				bdao, 
 				(Object)a, 

@@ -43,7 +43,7 @@ public class ListeSupprAvion extends JFrame implements ActionListener{
 	public ListeSupprAvion() {
 		
 		/* Label */
-		l1 = new JLabel("LISTE DES Avions");
+		l1 = new JLabel("LISTE DES AVIONS");
 		l1.setForeground(Color.blue);
 		l1.setFont(new Font("Serif", Font.BOLD, 20));
 

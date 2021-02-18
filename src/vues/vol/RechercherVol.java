@@ -44,7 +44,7 @@ public class RechercherVol extends JFrame implements ActionListener {
 		droitA = droit;
 
 		/* Label 1 */
-		l1 = new JLabel("RECHERCHER UN Vol");
+		l1 = new JLabel("RECHERCHER UN VOL");
 		l1.setForeground(Color.blue);
 		l1.setFont(new Font("Serif", Font.BOLD, 20));
 		l1.setBounds(100, 30, 400, 30);
