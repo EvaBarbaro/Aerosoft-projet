@@ -30,7 +30,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.sql.Date;
-
+import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import java.util.Properties;
 
@@ -192,7 +192,10 @@ public class FicheAffectation extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 
-				java.sql.Date selectedDate = (Date) datePicker.getModel().getValue();
+				java.util.Date selectedDate = (java.util.Date) datePicker.getModel().getValue();
+
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+				String strDate = formatter.format(selectedDate);
 
 				if (!(oldValue_1.equals(textField_1.getText()))
 						|| (oldValue_2 != null && !(oldValue_2.equals(jComboBoxNumVols.getSelectedItem())))
@@ -211,7 +214,9 @@ public class FicheAffectation extends JFrame {
 					}
 					
 					if (listTextFields.length >= 3) {
-						params[2] = selectedDate.toString();						
+						params[2] = strDate;
+						System.out.println("selectedDate :" + params[2]);				
+										
 					} 
 					
 					if (listLabels.length >= 4) {

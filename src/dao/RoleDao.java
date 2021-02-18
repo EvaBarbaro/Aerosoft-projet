@@ -129,6 +129,34 @@ public class RoleDao implements Dao {
 	 */
 	@Override
 	public void update(Object t, String[] params) {
+				Role role = (Role) t;
+
+		Connection conn = null;
+		PreparedStatement stmt = null;
+
+		String sql = "UPDATE `ROLES` set IdRole=?,RoleNom=? WHERE IdRole=?";
+
+		try {
+
+			conn = ConnectionBdd.getConnection();
+			stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+			stmt.setString(1, params[0]);
+			stmt.setString(2, params[1]);
+			stmt.setString(3, params[2]);
+
+			stmt.executeUpdate();
+
+			System.out.println(role.getIdRole() + " a bien été ajouté");
+			new SDialog("Modification", "Modification reussie", "Valider", "").setVisible(true);
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			System.out.println("Impossible de modifier un role");
+			new SDialog("Echec", "La modification n'a pas reussie car " + e, "ok", "").setVisible(true);
+			throw new RuntimeException(e);
+		}
 	}
 
 	/**

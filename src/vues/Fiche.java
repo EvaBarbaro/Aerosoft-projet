@@ -14,7 +14,6 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Toolkit;
-import java.awt.Image;
 
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -23,26 +22,18 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
 
-
-
-//import java.util.concurrent.Callable;
 import java.awt.event.ActionEvent;
 
 public class Fiche extends JFrame {
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 1L;
 
+	private static final long serialVersionUID = 1L;
 	
 	private JPanel contentPane;
 	
 	ImageIcon i = new LogoAeroSoft().getLogoAerosoft();
 	
-	private JLabel lblNewTitre;
-	
-	private JLabel lblNewID;
-	
+	private JLabel lblNewTitre;	
+	private JLabel lblNewID;	
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_2 = new JLabel("");
 	private JLabel lblNewLabel_3 = new JLabel("");
@@ -241,6 +232,7 @@ public class Fiche extends JFrame {
 		btn_1.setForeground(Color.WHITE);
 
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()

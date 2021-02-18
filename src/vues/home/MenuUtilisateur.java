@@ -88,7 +88,7 @@ public class MenuUtilisateur extends JMenu{
     });
     menuUtilisateur.add(itemDeleteUtilisateur);
 
-    itemAddRole=new JMenuItem("Créer un rôle");
+    itemAddRole=new JMenuItem("Créer ou modifier un rôle");
     itemAddRole.addActionListener(new ActionListener()
     {
     	public void actionPerformed(ActionEvent evt)
