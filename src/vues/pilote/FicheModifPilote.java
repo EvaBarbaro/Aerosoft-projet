@@ -10,6 +10,7 @@ import models.*;
 
 // import de la fiche générique
 import vues.Fiche;
+import vues.FicheFirstFieldFalse;
 
 
 public class FicheModifPilote extends JFrame {
@@ -27,10 +28,10 @@ public class FicheModifPilote extends JFrame {
 	public FicheModifPilote(Pilote pilote) {
 
 		// Tableau des labels
-		String[] listLabels = { "Nom du pilote", "Prenom du Pilote", "Matricule"};
+		String[] listLabels = {"IdPilote", "Nom du pilote", "Prenom du Pilote", "Matricule"};
 		
 		// Tableau des champs de textes
-		String[] listTextFields = {pilote.getNomPilote(),pilote.getPrenomPilote(),pilote.getMatricule()};
+		String[] listTextFields = {"" + pilote.getIdPilote(), pilote.getNomPilote(),pilote.getPrenomPilote(),pilote.getMatricule()};
 				
 		// Tableau des boutons
 		String[] listTextBtns = { "Valider","Annuler" };
@@ -39,7 +40,7 @@ public class FicheModifPilote extends JFrame {
 		String[] listMethodeDoa = { "update","" };
 		piloteDao = new PiloteDao();
 
-		new Fiche(
+		new FicheFirstFieldFalse(
 				"Modification d'un pilote", 
 				piloteDao, 
 				(Object)pilote, 
