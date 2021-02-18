@@ -14,7 +14,7 @@ CREATE TABLE UTILISATEUR (
 	Mail 		    varchar(50) not null,
     MotDePasse 		varchar(50) not null,
     Statut          boolean,
-	IdRole 	        varchar(20) not null, foreign key(IdRole) references ROLES(IdRole) ON DELETE SET null
+	IdRole 	        varchar(20), foreign key(IdRole) references ROLES(IdRole) ON DELETE SET null
 ) ENGINE InnoDB;
 
 CREATE TABLE CONSTRUCTEUR (
