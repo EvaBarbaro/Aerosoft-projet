@@ -143,11 +143,11 @@ public class FicheAffectation extends JFrame {
 
 			UtilDateModel model = new UtilDateModel();
 			
-			String[] parts = listTextFields[2].split("-");
-			
-			model.setDate(Integer.parseInt(parts[0]), (Integer.parseInt(parts[1])-1), Integer.parseInt(parts[2]));
-			model.setSelected(true);
-
+			if (!listTextFields[2].equals("")) {
+				String[] parts = listTextFields[2].split("-");
+				model.setDate(Integer.parseInt(parts[0]), (Integer.parseInt(parts[1]) - 1), Integer.parseInt(parts[2]));
+				model.setSelected(true);
+			}
 			Properties p = new Properties();
 			p.put("text.today", "Today");
 			p.put("text.month", "Month");
