@@ -74,7 +74,7 @@ public class Home {
         ImageIcon icon = new ImageIcon(
 			Toolkit.getDefaultToolkit().getImage(
 					Home.class.getResource("/images/Aerosoft-logo.PNG"))
-					.getScaledInstance(160, 50, Image.SCALE_DEFAULT)
+					.getScaledInstance(160, 40, Image.SCALE_DEFAULT)
         );
         
         JMenuItem item = new JMenuItem(icon);

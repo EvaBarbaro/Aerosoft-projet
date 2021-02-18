@@ -46,7 +46,7 @@ public class FicheAffectation extends JFrame {
 	ImageIcon i = new ImageIcon(
 			Toolkit.getDefaultToolkit().getImage(
 				FicheAffectation.class.getResource("/images/Aerosoft-logo.PNG"))
-					.getScaledInstance(160, 50, Image.SCALE_DEFAULT)
+					.getScaledInstance(160, 40, Image.SCALE_DEFAULT)
 				);
 	
 	private JLabel lblNewTitre;

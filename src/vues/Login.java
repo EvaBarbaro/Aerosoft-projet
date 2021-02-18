@@ -40,7 +40,7 @@ public class Login extends JFrame implements ActionListener, KeyListener{
         ImageIcon img = new ImageIcon(
             Toolkit.getDefaultToolkit().getImage(
                     Fiche.class.getResource("/images/Aerosoft-logo.PNG"))
-                    .getScaledInstance(160, 50, Image.SCALE_DEFAULT)
+                    .getScaledInstance(160, 40, Image.SCALE_DEFAULT)
                 );
         labelimage.setBounds(80, 10, 400, 70); 
         labelimage.setIcon(img);

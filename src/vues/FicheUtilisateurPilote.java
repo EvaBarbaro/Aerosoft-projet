@@ -41,7 +41,7 @@ public class FicheUtilisateurPilote extends JFrame {
 	ImageIcon i = new ImageIcon(
 			Toolkit.getDefaultToolkit().getImage(
 					Fiche.class.getResource("/images/Aerosoft-logo.PNG"))
-					.getScaledInstance(160, 50, Image.SCALE_DEFAULT)
+					.getScaledInstance(160, 40, Image.SCALE_DEFAULT)
 				);
 	
 	private JLabel lblNewTitre;
