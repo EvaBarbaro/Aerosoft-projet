@@ -28,10 +28,10 @@ public class FicheModifPilote extends JFrame {
 	public FicheModifPilote(Pilote pilote) {
 
 		// Tableau des labels
-		String[] listLabels = {"IdPilote", "Nom du pilote", "Prenom du Pilote", "Matricule"};
+		String[] listLabels = { "Nom du pilote", "Prenom du Pilote", "Matricule"};
 		
 		// Tableau des champs de textes
-		String[] listTextFields = {"" + pilote.getIdPilote(), pilote.getNomPilote(),pilote.getPrenomPilote(),pilote.getMatricule()};
+		String[] listTextFields = {pilote.getNomPilote(),pilote.getPrenomPilote(),pilote.getMatricule()};
 				
 		// Tableau des boutons
 		String[] listTextBtns = { "Valider","Annuler" };
@@ -40,7 +40,7 @@ public class FicheModifPilote extends JFrame {
 		String[] listMethodeDoa = { "update","" };
 		piloteDao = new PiloteDao();
 
-		new FicheFirstFieldFalse(
+		new Fiche(
 				"Modification d'un pilote", 
 				piloteDao, 
 				(Object)pilote, 
