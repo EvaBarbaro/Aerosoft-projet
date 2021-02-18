@@ -32,6 +32,9 @@ public class RechercherAffectation extends JFrame implements ActionListener {
 	//Creation de la dao affectation
 	AffectationDao dao = new AffectationDao();
 
+	//Ajout du droit
+	private int droitA = 0;
+
 	//Creation des titres de colonnes
 	String[] tblHead = { 
 		"IdAffectation", 
@@ -42,7 +45,10 @@ public class RechercherAffectation extends JFrame implements ActionListener {
 		"IdPilote"  
 };
 
-	public RechercherAffectation() {
+	public RechercherAffectation(int droit) {
+		//instanciation du droit
+		droitA = droit;
+
 		/* Label */
 		l1 = new JLabel("RECHERCHER UNE AFFECTTION");
 		l1.setForeground(Color.blue);
@@ -151,9 +157,9 @@ public class RechercherAffectation extends JFrame implements ActionListener {
 						Point point = mouseEvent.getPoint();
 						
 						int row = table.rowAtPoint(point);
-						
-						if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
-							//Ajout d'un evenement au double clic
+						//Ajout d'un evenement au double clic et teste si l'utilisateur à le droit de modif
+						if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1 && droitA >=2) {
+							
 							int column = 0;
 							
 							//int id = Integer.parseInt(table.getModel().getValueAt(row, column).toString());

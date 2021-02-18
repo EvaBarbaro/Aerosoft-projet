@@ -32,11 +32,17 @@ public class RechercherVol extends JFrame implements ActionListener {
 	VolDao dao = new VolDao();
 
 	String[] tblHead = { "Id du vol", "Aeroport de depart", "Heure de depart", "Aeroport d'arrivé", "Heure d'arrivé" };
-
+	//Ajout du droit
+	private int droitA = 0;
+	
 	/**
 	 * Création de la frame de Recherche d'un vol
+	 * @param droit
 	 */
-	public RechercherVol() {
+	public RechercherVol(int droit) {
+		//instanciation du droit
+		droitA = droit;
+
 		/* Label 1 */
 		l1 = new JLabel("RECHERCHER UN Vol");
 		l1.setForeground(Color.blue);
@@ -168,8 +174,8 @@ public class RechercherVol extends JFrame implements ActionListener {
 					
 					int row = table.rowAtPoint(point);
 					
-					// Evenement double clic
-					if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
+					//Ajout d'un evenement au double clic et teste si l'utilisateur à le droit de modif
+					if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1 && droitA >=2) {
 						
 						int column = 0;
 						

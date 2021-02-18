@@ -38,7 +38,13 @@ public class RechercherAeroport extends JFrame implements ActionListener {
 	//Creation de la dao aeroport
 	AeroportDao dao = new AeroportDao();
 
-	public RechercherAeroport() {
+	//Ajout du droit
+	private int droitA = 0;
+
+	public RechercherAeroport(int droit) {
+		//instanciation du droit
+		droitA = droit;
+		
 		/* Label */
 		l1 = new JLabel("RECHERCHER UN AEROPORT");
 		l1.setForeground(Color.blue);
@@ -145,8 +151,8 @@ public class RechercherAeroport extends JFrame implements ActionListener {
 						Point point = mouseEvent.getPoint();
 						
 						int row = table.rowAtPoint(point);
-						//pour que l'event soit pris au double clic
-						if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
+						//Ajout d'un evenement au double clic et teste si l'utilisateur à le droit de modif
+						if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1 && droitA >=2) {
 							
 							int column = 0;
 							
