@@ -19,6 +19,7 @@ public class FicheModifAffectation extends JFrame {
    * Create the frame.
    */
   public FicheModifAffectation(Affectation af) {
+    //Ajout des labels
     String[] listLabels = {
       "Id de l'affectation",
       "Numéro du vol",
@@ -27,7 +28,7 @@ public class FicheModifAffectation extends JFrame {
       "Numéro de l'avion",
       "Pilote",
     };
-
+    //Ajout des text fields pre-remplis
     String[] listTextFields = {
       af.getId(),
       af.getNumVol(),
@@ -37,19 +38,26 @@ public class FicheModifAffectation extends JFrame {
       af.getPilote().getNomPilote(),
     };
 
+    //Ajout des boutons
     String[] listTextBtns = { "Valider", "Annuler" };
-	String[] listMethodeDoa = { "update", "" };
-	
+
+		//Ajout de la methode
+	  String[] listMethodeDoa = { "update", "" };
+    
+    //Ajout de la dao
     bdao = new AffectationDao();
 
+    //Ajout des listes
     ArrayList<Pilote> 	listePilotes 	= new PiloteDao().getAll();
 		ArrayList<Vol> 		listeVols 		= new VolDao().getAll();
 		ArrayList<Avion> 	listeAvions 	= new AvionDao().getAll();
 
+    //ajout des combo box qui va recevoir les listes
 		String[] jComboBoxPiloteTitles 		= new String[listePilotes.size()];
 		String[] jComboBoxNumVolTitles 		= new String[listeVols.size()];
 		String[] jComboBoxNumAvionTitles 	= new String[listeAvions.size()];
 
+    //Insertion des listes dans les combobox
 		int i = 0;
 		for (Pilote p : listePilotes) {
 			jComboBoxPiloteTitles[i] = p.getNomPilote();
@@ -67,18 +75,18 @@ public class FicheModifAffectation extends JFrame {
 			jComboBoxNumAvionTitles[i] = "" + av.getNumAvion();
 			i++;
 		}
-
-        new FicheAffectation(
-            "Ajout d'une affectation",
-            bdao,
-            (Object) af,
-            listLabels,
-            listTextFields,
-            listTextBtns,
-            listMethodeDoa, 
-            jComboBoxPiloteTitles, 
-            jComboBoxNumVolTitles, 
-            jComboBoxNumAvionTitles
-            );
+    //Creation de la fiche avec les elements ajouté au dessus
+    new FicheAffectation(
+      "Ajout d'une affectation",
+      bdao,
+      (Object) af,
+      listLabels,
+      listTextFields,
+      listTextBtns,
+      listMethodeDoa, 
+      jComboBoxPiloteTitles, 
+      jComboBoxNumVolTitles, 
+      jComboBoxNumAvionTitles
+      );
   }
 }

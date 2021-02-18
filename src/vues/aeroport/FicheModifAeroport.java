@@ -1,41 +1,47 @@
 package vues.aeroport;
 
-import dao.AeroportDao;
 import javax.swing.JFrame;
+
+import dao.AeroportDao;
 import models.Aeroport;
 import vues.Fiche;
-import vues.FicheFirstFieldFalse;
+
 
 public class FicheModifAeroport extends JFrame {
-  /**
-   *
-   */
-  private static final long serialVersionUID = 1L;
 
-  AeroportDao bdao;
+	private static final long serialVersionUID = 1L;
+	
+	AeroportDao bdao;
 
-  /**
-   * Create the frame.
-   */
+	/**
+	 * Create the frame.
+	 */
+	//Constructeur
 	public FicheModifAeroport(Aeroport a) {
-	  
-		String[] listLabels = { "Id de l'aeroport", "Nom de l'aeroport", "Ville de l'aeroport", };
+		//Ajout des labels
+		String[] listLabels = { "Id de l'aeroport", "Nom de l'aeroport", "Ville de l'aeroport"};
+		
+		//Ajout des text fields remplis avec les infos demandé
+		String[] listTextFields = {a.getIdAeroport(),a.getNomAeroport(),a.getNomVille()};
+		
+		//Ajout des boutons
+		String[] listTextBtns = { "Valider","Annuler" };
 
-		String[] listTextFields = { a.getIdAeroport(), a.getNomAeroport(), a.getNomVille(), };
+		//Ajout de la methode
+		String[] listMethodeDoa = { "update","" };
 
-		String[] listTextBtns = { "Valider", "Annuler" };
-		String[] listMethodeDoa = { "update", "" };
+		//Ajout de la dao
+		bdao = new AeroportDao();
 
-    	bdao = new AeroportDao();
-
-    	new FicheFirstFieldFalse(
-      		"Modification d'un aeroport",
-      		bdao,
-			(Object) a,
-      		listLabels,
-      		listTextFields,
-      		listTextBtns,
-      		listMethodeDoa
-    );
-  }
+		//Creation de la fiche avec les elements ajouté au dessus
+		new Fiche(
+				"Modification d'un aeroport", 
+				bdao, 
+				(Object)a, 
+				listLabels, 
+				listTextFields,
+				listTextBtns,
+				listMethodeDoa
+				);
+	}
 }

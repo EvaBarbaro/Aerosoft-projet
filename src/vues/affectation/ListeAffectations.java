@@ -1,129 +1,140 @@
 package vues.affectation;
 
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
 import dao.AffectationDao;
+import models.Affectation;
+
 import java.awt.*;
 import java.awt.event.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import models.Affectation;
 
-public class ListeAffectations extends JFrame implements ActionListener {
-  /**
-   *
-   */
-  private static final long serialVersionUID = 1L;
-
-  JLabel l1;
-
-  DefaultTableModel tableModel;
-  JTable data;
-
-  Affectation b1;
-  AffectationDao dao = new AffectationDao();
-
-  List<Affectation> list = new ArrayList<Affectation>();
-
-  String[] tblHead = {
-    "IdAffectation",
-    "NumVol",
-    "DateVol",
-    "AffectationCode",
-    "NumAvion",
-    "IdPilote",
-  };
-
-  public ListeAffectations() {
-    /* Label */
-    l1 = new JLabel("LISTE DES AFFECTATIONS");
-    l1.setForeground(Color.blue);
-    l1.setFont(new Font("Serif", Font.BOLD, 20));
-
-    /* Placement */
-    l1.setBounds(100, 30, 400, 30);
-
-    getContentPane().add(l1);
-
-    tableModel = new DefaultTableModel(tblHead, 0);
-
-    data = new JTable(tableModel);
-    data.setEnabled(false);
-    data.setFont(new Font("Chandas", Font.BOLD, 15));
-    data.setRowHeight(25);
-    data.setBounds(100, 100, 450, 450);
-
-    chargeData(dao);
-
-    JScrollPane scrollPane = new JScrollPane(data);
-    scrollPane.setFont(new Font("DejaVu Sans Mono", Font.BOLD, 15));
-
-    scrollPane.setSize(900, 300);
-    scrollPane.setLocation(50, 100);
-    getContentPane().add(scrollPane);
-
-    setTitle("LISTE DES AFFECTATIONS");
-
-    setSize(1000, 540);
-    getContentPane().setLayout(null);
-
-    final Toolkit toolkit = Toolkit.getDefaultToolkit();
-    final Dimension screenSize = toolkit.getScreenSize();
-    final int x = (screenSize.width - this.getWidth()) / 2;
-	  final int y = (screenSize.height - this.getHeight()) / 2;
+ 
+public class ListeAffectations extends JFrame implements ActionListener{
 	
-    setLocation(x, y);
-    setLocationRelativeTo(null);
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
 
-    setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    setVisible(true);
-  }
+	JLabel l1;
+	//Creation du tableau
+	DefaultTableModel tableModel;
 
-  /**
-   * @param dao
-   */
-  public void chargeData(AffectationDao dao) {
+	JTable data;
+	//Creation de l'objet affectation
+	Affectation b1;
 
-    list = (List<Affectation>) dao.getAll();
+	//Creation de la dao affectation
+	AffectationDao dao = new AffectationDao();
 
-    ListIterator<Affectation> listIterator =
-      ((java.util.List<Affectation>) list).listIterator();
+	//Creation de la liste affectation
+	List<Affectation> list = new ArrayList<Affectation>();
+	 
+	//Creation des titres de colonnes
+	String[] tblHead = { 
+			"IdAffectation", 
+			"NumVol", 
+			"DateVol",
+			"AffectationCode", 
+			"NumAvion", 
+			"IdPilote"  
+	};
+	 
+	public ListeAffectations() {
+		
+		/* Label */
+		l1 = new JLabel("LISTE DES AFFECTATIONS");
+		l1.setForeground(Color.blue);
+		l1.setFont(new Font("Serif", Font.BOLD, 20));
 
-    tableModel.setRowCount(0);
+		/* Placement */
+		l1.setBounds(100, 30, 400, 30);
 
-    if (list != null) {
+		getContentPane().add(l1);
 
-      while (listIterator.hasNext()) {
+		tableModel = new DefaultTableModel(tblHead, 0);
+		
+		data = new JTable(tableModel);
+		data.setEnabled(false);	
+		data.setFont(new Font("Chandas", Font.BOLD, 15));
+		data.setRowHeight(25);		
+		data.setBounds(100, 100, 450, 450);
+		
+		chargeData(dao);
+		
+		JScrollPane scrollPane = new JScrollPane(data);
+		scrollPane.setFont(new Font("DejaVu Sans Mono", Font.BOLD, 15));
+		
+		scrollPane.setSize(550, 300);
+		scrollPane.setLocation(50, 100);
+		getContentPane().add(scrollPane);
 
-        b1 = listIterator.next();
+		setTitle("LISTE DES AFFECTATIONS");
 
-        Object[] donnees = {
-            b1.getId(),
-            b1.getNumVol(),
-            b1.getDateVol(),
-            b1.getAffectationCode(),
-            b1.getNumAvion(), 
-            b1.getPilote().getNomPilote()
-          };
+		setSize(639, 540);
+		getContentPane().setLayout(null);
 
-        tableModel.addRow(donnees);
-      }
-      
-      tableModel.fireTableDataChanged();
+		final Toolkit toolkit = Toolkit.getDefaultToolkit();
+		final Dimension screenSize = toolkit.getScreenSize();
+		final int x = (screenSize.width - this.getWidth()) / 2;
+		final int y = (screenSize.height - this.getHeight()) / 2;
+		setLocation(x, y);
+		setLocationRelativeTo(null);
 
-      data.setModel(tableModel);
-      data.repaint();
-      
-    }
-  }
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setVisible(true);
+	}
 
-  /**
-   * @param e
-   */
-  @Override
-  public void actionPerformed(ActionEvent e) {
-    // TODO Auto-generated method stub
+	
+	/** 
+	 * @param dao
+	 */
+	public void chargeData(AffectationDao dao) {
+			
+		//Recuperation des données de la requete getAll() dans une list
+		list = (List<Affectation>) dao.getAll();
+						
+		ListIterator<Affectation> listIterator = ((java.util.List<Affectation>) list).listIterator();
+		
+		tableModel.setRowCount(0);
+		
+		//Isertion des données dans le tableau
+		if (list != null) {
 
-  }
+			while(listIterator.hasNext()) {
+				b1 = listIterator.next();
+
+				Object[] donnees = { 
+					b1.getId(), 
+					b1.getNumVol(), 
+					b1.getDateVol(), 
+					b1.getAffectationCode(), 
+					b1.getNumAvion(), 
+					b1.getPilote().getNomPilote() 
+				};
+
+				tableModel.addRow(donnees);	
+				
+			}
+			tableModel.fireTableDataChanged();			
+			data.setModel(tableModel);
+			data.repaint();
+		}
+	}
+
+	
+	/** 
+	 * @param e
+	 */
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }

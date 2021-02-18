@@ -13,9 +13,6 @@ import vues.avion.*;
 
 public class MenuAvion extends JMenu {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 1L;
 
     //Creation de la variable droit qui va recevoir le code droits du module actuel
@@ -46,8 +43,9 @@ public class MenuAvion extends JMenu {
             i1 = new JMenuItem("Lister les Avions");
             i1.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
-                    //frame.setVisible(true);
+
                     new ListeAvion();
+
                 }
             });
             menu.add(i1);
@@ -55,8 +53,7 @@ public class MenuAvion extends JMenu {
             i2= new JMenuItem("Rechercher un avion");
             i2.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
-                    //frame.setVisible(true);
-                    //new searchLivre();
+
                     new RechercherAvion();
                 }
             });
@@ -67,7 +64,7 @@ public class MenuAvion extends JMenu {
             i3 = new JMenuItem("Modifier les Avions");
             i3.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
-                    //frame.setVisible(true);
+
                     new ListeModifAvion();
                 }
             });
@@ -78,10 +75,7 @@ public class MenuAvion extends JMenu {
             i4 = new JMenuItem("Ajouter un avion");
             i4.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
-                    //frame.setVisible(true);
 
-                    /*AeroportDao aeDao = new AeroportDao();
-                    String idAe = "CDG"; */
                     Avion av = new Avion();
                     new FicheAjoutAvion(av);
                 }
@@ -92,6 +86,7 @@ public class MenuAvion extends JMenu {
                 i5 = new JMenuItem("Suprimer un avion");
                 i5.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
+                    
                     new ListeSupprAvion();
                 }
             });

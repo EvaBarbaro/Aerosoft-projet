@@ -13,9 +13,6 @@ import vues.vol.*;
 
 public class MenuVol extends JMenu {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 1L;
 
     //Creation de la variable droit qui va recevoir le code droits du module actuel
@@ -25,7 +22,6 @@ public class MenuVol extends JMenu {
 
     private JMenu menu;
 
-    
     /** 
      * @return JMenu
      */
@@ -34,38 +30,31 @@ public class MenuVol extends JMenu {
     }
 
     public MenuVol(int droitInt) {
-
         //Affectation du droit recuperer en paramètre dans la variable droit
         this.droit = droitInt;
 
         menu = new JMenu("Vols");
-
         Font font = new Font("Serial", Font.BOLD, 16);
         menu.setFont(font);
-
         //Selon le niveau de droits les modules s'affichent
         if(droit >=1){
 
             i1 = new JMenuItem("Lister les vols");
             i1.addActionListener(new ActionListener() {
-
                 public void actionPerformed(ActionEvent evt) {
-   
+
                     new ListeReadVol();
                 }
             });
-
             menu.add(i1);
 
             i2 = new JMenuItem("Rechercher un vol");
             i2.addActionListener(new ActionListener() {
-
                 public void actionPerformed(ActionEvent evt) {
 
                     new RechercherVol();
                 }
             });
-
             menu.add(i2);
         }
 
@@ -73,21 +62,17 @@ public class MenuVol extends JMenu {
 
             i3 = new JMenuItem("Modifier un vol");
             i3.addActionListener(new ActionListener() {
-
                 public void actionPerformed(ActionEvent evt) {
 
                     new ListeVol();
                 }
             });
-
             menu.add(i3);
         }
 
-        if (droit >= 3) {
-            
+        if(droit >=3){
             i4 = new JMenuItem("Ajouter un vol");
             i4.addActionListener(new ActionListener() {
-
                 public void actionPerformed(ActionEvent evt) {
 
                     Vol v = new Vol();
@@ -97,17 +82,14 @@ public class MenuVol extends JMenu {
             menu.add(i4);
         }
 
-        if (droit >= 4) {
-            
-            i5 = new JMenuItem("Suprimer un vol");        
-            i5.addActionListener(new ActionListener() {
-            
-                public void actionPerformed(ActionEvent evt) {
+        if(droit >=4){
+        i5 = new JMenuItem("Suprimer un vol");
+        i5.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 
                 new ListeSupprVol();
             }
         });
-        
         menu.add(i5);
         }
     }     
