@@ -36,10 +36,13 @@ public class DetailAvionDao implements Dao {
 
       res.close();
       conn.close();
+
     } catch (SQLException e) {
+
       e.printStackTrace();
       System.out.println("Impossible d'afficher les details avions");
     }
+    
     return listeDetailAvion;
   }
 
