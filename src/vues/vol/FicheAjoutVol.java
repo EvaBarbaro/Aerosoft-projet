@@ -1,15 +1,17 @@
 package vues.vol;
 
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
 
-// import de volDao
-import dao.VolDao;
+// import des daos
+import dao.*;
 
-// import de model Vol
-import models.Vol;
+// import des models
+import models.*;
 
-// import de la fiche générique
-import vues.Fiche;
+// import des fiches génériques
+import vues.*;
 
 
 public class FicheAjoutVol extends JFrame {
@@ -37,7 +39,25 @@ public class FicheAjoutVol extends JFrame {
 		String[] listMethodeDoa = {"save", ""};
 		bdao = new VolDao();
 
-		new Fiche("Ajout d'un vol", bdao, (Object) a, listLabels, listTextFields, listTextBtns,
-				listMethodeDoa);
+		ArrayList<Aeroport> listeDept = new AeroportDao().getAll();
+		ArrayList<Aeroport> listeArr = new AeroportDao().getAll();
+
+		String[] jComboBoxDeptTitles = new String[listeDept.size()];
+		String[] jComboBoxArrTitles = new String[listeArr.size()];
+
+		int i = 0;
+		for (Aeroport aeroport : listeDept) {
+		jComboBoxDeptTitles[i] = aeroport.getIdAeroport();
+		i++;
+		}
+
+		i = 0;
+		for (Aeroport aeroport : listeArr) {
+			jComboBoxArrTitles[i] = aeroport.getIdAeroport();
+			i++;
+		}
+
+		new FicheVol("Ajout d'un vol", bdao, (Object) a, listLabels, listTextFields, listTextBtns,
+				listMethodeDoa, jComboBoxDeptTitles, jComboBoxArrTitles);
 	}
 }
