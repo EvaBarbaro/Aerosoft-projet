@@ -40,7 +40,7 @@ public class RechercherAvion extends JFrame implements ActionListener {
 
 	public RechercherAvion() {
 		/* Label */
-		l1 = new JLabel("RECHERCHER UN avion");
+		l1 = new JLabel("RECHERCHER UN AVION");
 		l1.setForeground(Color.blue);
 		l1.setFont(new Font("Serif", Font.BOLD, 20));
 

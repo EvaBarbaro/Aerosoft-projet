@@ -1,10 +1,12 @@
 package vues.avion;
 
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
 
-import dao.AvionDao;
-import models.Avion;
-import vues.Fiche;
+import dao.*;
+import models.*;
+import vues.*;
 
 
 public class FicheAjoutAvion extends JFrame {
@@ -33,16 +35,34 @@ public class FicheAjoutAvion extends JFrame {
 
 		//Ajout de la dao
 		bdao = new AvionDao();
+		ArrayList<DetailAvion> listeType = new DetailAvionDao().getAll();
+		ArrayList<Aeroport> listeBase = new AeroportDao().getAll();
 
-		//Creation de la fiche avec les elements ajouté au dessus
-		new Fiche(
-				"Ajout d'un vol", 
-				bdao, 
-				(Object)av, 
-				listLabels, 
-				listTextFields,
-				listTextBtns,
-				listMethodeDoa
-				);
+		String[] jComboBoxTypeTitles = new String[listeType.size()];
+		String[] jComboBoxBaseTitles = new String[listeBase.size()];
+
+		int i = 0;
+		for (DetailAvion detailAvion : listeType) {
+		jComboBoxTypeTitles[i] = detailAvion.getTypeAvion();
+		i++;
+		}
+
+		i = 0;
+		for (Aeroport aeroport : listeBase) {
+			jComboBoxBaseTitles[i] = aeroport.getIdAeroport();
+			i++;
+		}
+
+		new FicheAvion(
+		"Ajout d'un vol",
+		bdao,
+		(Object) av,
+		listLabels,
+		listTextFields,
+		listTextBtns,
+		listMethodeDoa,
+		jComboBoxTypeTitles,
+		jComboBoxBaseTitles
+		);
 	}
 }
