@@ -44,7 +44,8 @@ public class FicheAjoutRole extends JFrame {
 				listLabelsRole,
 			    listTextFieldsRole,
 				listTextBtnsRole,
-				listMethodeDoaRole
+				listMethodeDoaRole,
+				""
 				);
 	}
 }

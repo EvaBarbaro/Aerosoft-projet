@@ -5,9 +5,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import javax.swing.border.EmptyBorder;
-
+import dao.AeroportDao;
 import interfaces.Dao;
-
+import vues.aeroport.ListeModifAeroports;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
@@ -21,10 +21,15 @@ import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
-
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 
-public class Fiche extends JFrame {
+import java.awt.event.WindowListener;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.List;
+
+public class Fiche extends JFrame implements WindowListener{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -55,6 +60,10 @@ public class Fiche extends JFrame {
 	private String oldValue_5;
 	private String oldValue_6;
 
+	private String jFrameClassName;
+
+	//private Dao dao;
+
 	/**
 	 * Create the frame.
 	 */
@@ -66,9 +75,14 @@ public class Fiche extends JFrame {
 			String [] listTextFields,
 			String [] listTextBtns,
 			String[] listMethodeDoa,
-			Boolean... booleanForSetEnabledFalse){
+			String jFrameClassName,
+			Boolean... booleanForSetEnabledFalse
+	) {
+		this.jFrameClassName = jFrameClassName;
 
 		setTitle(titre);
+
+		addWindowListener(this);
 
 		lblNewTitre = new JLabel(titre);
 		lblNewTitre.setForeground(Color.blue);
@@ -383,4 +397,85 @@ public class Fiche extends JFrame {
                 ; 
 		}
 	}
+
+
+  @Override
+  public void windowOpened(WindowEvent e) {
+    // TODO Auto-generated method stub
+    System.out.println("Fiche windowOpened");
+  }
+
+
+  @Override
+  public void windowClosing(WindowEvent e) {
+    // TODO Auto-generated method stub
+    System.out.println("Fiche windowClosing");
+  }
+
+
+  @Override
+  public void windowClosed(WindowEvent e) {
+
+	System.out.println("Fiche windowClosed");
+	if (!jFrameClassName.equals("")) {
+		Class<?> jFramClass = null;
+		try {
+			jFramClass = Class.forName(jFrameClassName);
+		} catch (ClassNotFoundException e1) {
+
+			e1.printStackTrace();
+		} // convert string classname to class
+		Object jFram = new Object();
+		try {
+			jFram = jFramClass.getDeclaredConstructor().newInstance();
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException | NoSuchMethodException | SecurityException e1) {
+
+			e1.printStackTrace();
+		}
+
+		String methodName = "chargeData";
+		Method setNameMethod = (Method) new Object();
+		try {
+			setNameMethod = jFram.getClass().getMethod(methodName, String.class);
+		} catch (NoSuchMethodException | SecurityException e1) {
+
+			e1.printStackTrace();
+		}
+		try {
+			setNameMethod.invoke(jFram);
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e1) {
+
+			e1.printStackTrace();
+		}
+	}
+  }
+
+
+  @Override
+  public void windowIconified(WindowEvent e) {
+    // TODO Auto-generated method stub
+    
+  }
+
+
+  @Override
+  public void windowDeiconified(WindowEvent e) {
+    // TODO Auto-generated method stub
+    
+  }
+
+
+  @Override
+  public void windowActivated(WindowEvent e) {
+    // TODO Auto-generated method stub
+    
+  }
+
+
+  @Override
+  public void windowDeactivated(WindowEvent e) {
+    // TODO Auto-generated method stub
+    
+  }
 }

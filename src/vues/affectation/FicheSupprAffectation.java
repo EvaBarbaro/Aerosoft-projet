@@ -43,6 +43,7 @@ public class FicheSupprAffectation extends JFrame {
 				listTextFields,
 				listTextBtns,
 				listMethodeDoa,
+				"",
 				true
 				);
 	}

@@ -40,6 +40,7 @@ public class FicheSupprAvion extends JFrame {
 				listTextFields,
 				listTextBtns,
 				listMethodeDoa,
+				"",
 				true
 				);
 	}

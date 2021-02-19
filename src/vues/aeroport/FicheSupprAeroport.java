@@ -40,6 +40,7 @@ public class FicheSupprAeroport extends JFrame {
 				listTextFields,
 				listTextBtns,
 				listMethodeDoa,
+				"",
 				true
 				);
 	}

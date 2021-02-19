@@ -42,7 +42,8 @@ public class FicheAjoutAeroport extends JFrame {
 				listLabels, 
 				listTextFields,
 				listTextBtns,
-				listMethodeDoa
+				listMethodeDoa,
+				""
 				);
 	}
 }

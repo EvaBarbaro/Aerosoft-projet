@@ -52,6 +52,7 @@ public class FicheAjoutPilote extends JFrame {
 				listTextFields,
 				listTextBtns,
 				listMethodeDoa,
+				"",
 				true
 				);
 

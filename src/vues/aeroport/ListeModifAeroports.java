@@ -35,7 +35,7 @@ public class ListeModifAeroports extends JFrame implements ActionListener{
 	Aeroport b1;
 
 	//Creation de la dao aeroport
-	AeroportDao dao = new AeroportDao();
+	AeroportDao dao = new AeroportDao();	
 
 	public ListeModifAeroports() {
 		
@@ -60,7 +60,7 @@ public class ListeModifAeroports extends JFrame implements ActionListener{
 		
 		data.setBounds(100, 100, 450, 450);
 		
-		chargeData(dao);
+		chargeData();
 		
 		data.setDefaultEditor(Object.class, null);
 		
@@ -68,18 +68,18 @@ public class ListeModifAeroports extends JFrame implements ActionListener{
 		    
 			//Ajout d'un evenement au clic
 			public void mousePressed(MouseEvent mouseEvent) {
-		        
-				JTable table =(JTable) mouseEvent.getSource();
-				
-		        Point point = mouseEvent.getPoint();
-		        
-		        int row = table.rowAtPoint(point);
-		        
+
+				JTable table = (JTable) mouseEvent.getSource();
+
+				Point point = mouseEvent.getPoint();
+
+				int row = table.rowAtPoint(point);
+
 				//pour que l'event soit pris au double clic
-		        if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
-		        	
+				if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
+
 					int column = 0;
-					
+
 					//int id = Integer.parseInt(table.getModel().getValueAt(row, column).toString());
 					Object id = (Object) table.getModel().getValueAt(row, column).toString();
 					//Recuperation des données de l'element cliquer avec la fonction get()
@@ -89,53 +89,15 @@ public class ListeModifAeroports extends JFrame implements ActionListener{
 						//Creation d'une fiche modif
 						FicheModifAeroport fm = new FicheModifAeroport(b1);
 
-						fm.addWindowListener(new WindowListener() {
+						//fm.addWindowListener(fm);
+						fm.setVisible(true);
+						dispose();
+					}
+				}
 
-							@Override
-							public void windowOpened(WindowEvent e) {
-								// TODO Auto-generated method stub								
-							}
-
-							@Override
-							public void windowClosing(WindowEvent e) {
-								chargeData(dao);
-							}
-
-							@Override
-							public void windowClosed(WindowEvent e) {								
-								chargeData(dao);
-							}
-
-							@Override
-							public void windowIconified(WindowEvent e) {
-								// TODO Auto-generated method stub
-								
-							}
-
-							@Override
-							public void windowDeiconified(WindowEvent e) {
-								// TODO Auto-generated method stub
-								
-							}
-
-							@Override
-							public void windowActivated(WindowEvent e) {
-								// TODO Auto-generated method stub
-								
-							}
-
-							@Override
-							public void windowDeactivated(WindowEvent e) {
-								// TODO Auto-generated method stub
-								
-							}
-							
-						});
-
-					}				
-					
-		        }
-		    }
+			}
+		
+		
 		});
 		
 		JScrollPane scrollPane = new JScrollPane(data);
@@ -156,16 +118,19 @@ public class ListeModifAeroports extends JFrame implements ActionListener{
 		final int y = (screenSize.height - this.getHeight()) / 2;
 		setLocation(x, y);
 		setLocationRelativeTo(null);
+		setVisible(true);
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setVisible(true);
+
 	}
 
 	
 	/** 
 	 * @param dao
 	 */
-	public void chargeData(AeroportDao dao) {
+	public void chargeData() {
+		AeroportDao dao = new AeroportDao();
+
 		//Recuperation des données de la requete getAll() dans une list
 		list = (List<Aeroport>) dao.getAll();
 						
@@ -201,7 +166,7 @@ public class ListeModifAeroports extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
-	}
+
+	}	
 	
 }

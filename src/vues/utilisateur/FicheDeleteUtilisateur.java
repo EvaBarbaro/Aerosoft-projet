@@ -34,6 +34,6 @@ public class FicheDeleteUtilisateur extends JFrame {
 		String[] listMethodeDoa = {"delete", ""};
 
 		new Fiche("Suppression d'un Utilisateur", utilisateurDao,
-				(Object) utilisateur, listLabels, listTextFields, listTextBtns, listMethodeDoa,true);
+				(Object) utilisateur, listLabels, listTextFields, listTextBtns, listMethodeDoa,"",true);
 	}
 }

@@ -42,6 +42,7 @@ public class FicheSupprVol extends JFrame {
 				listTextFields,
 				listTextBtns,
 				listMethodeDoa,
+				"",
 				true
 			);
 	}

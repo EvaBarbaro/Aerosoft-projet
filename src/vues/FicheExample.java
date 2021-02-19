@@ -50,8 +50,8 @@ public class FicheExample extends JFrame {
 				listLabels, 
 				listTextFields,
 				listTextBtns,
-				listMethodeDoa
-
+				listMethodeDoa,
+				""
 				);
 	}
 }

@@ -51,6 +51,7 @@ public class FicheDeletePilote extends JFrame {
 				listTextFields,
 				listTextBtns,
 				listMethodeDoa,
+				"",
 				true
 				);
 
@@ -79,6 +80,7 @@ public class FicheDeletePilote extends JFrame {
 				listTextFieldUser,
 				listTextBtnUser,
 				listMethodeDoaUser,
+				"",
 				true
 				);
 	}
