@@ -119,7 +119,7 @@ public class Home {
         // Mon Compte
         mb.add(new MenuMaFiche(idUser, frame).getMenu());
 
-        pan =new JPanel();
+        pan = new JPanel();
         pan.setLayout(null);
 
         mb.add(pan);

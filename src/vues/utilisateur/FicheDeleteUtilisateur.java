@@ -7,10 +7,8 @@ import dao.*;
 
 // import des models
 import models.*;
-
+import vues.Fiche;
 // import des fiches
-import vues.FicheFirstFieldFalse;
-
 
 public class FicheDeleteUtilisateur extends JFrame {
 
@@ -35,7 +33,7 @@ public class FicheDeleteUtilisateur extends JFrame {
 		// Tableau des méthodes
 		String[] listMethodeDoa = {"delete", ""};
 
-		new FicheFirstFieldFalse("Suppression d'un Utilisateur", utilisateurDao,
-				(Object) utilisateur, listLabels, listTextFields, listTextBtns, listMethodeDoa);
+		new Fiche("Suppression d'un Utilisateur", utilisateurDao,
+				(Object) utilisateur, listLabels, listTextFields, listTextBtns, listMethodeDoa,true);
 	}
 }

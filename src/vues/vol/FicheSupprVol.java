@@ -7,10 +7,8 @@ import dao.VolDao;
 
 // import du model Vol
 import models.Vol;
-
+import vues.Fiche;
 // Import de Fiche générique avec le premier textField disabled
-import vues.FicheFirstFieldFalse;
-
 
 public class FicheSupprVol extends JFrame {
 
@@ -36,14 +34,15 @@ public class FicheSupprVol extends JFrame {
 		String[] listMethodeDoa = {"delete", ""};
 		bdao = new VolDao();
 
-		new FicheFirstFieldFalse(
+		new Fiche(
 				"Suppression d'un Vol",
 				bdao,
 				(Object) v,
 			   	listLabels,
 				listTextFields,
 				listTextBtns,
-				listMethodeDoa
+				listMethodeDoa,
+				true
 			);
 	}
 }

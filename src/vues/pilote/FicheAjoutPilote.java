@@ -9,7 +9,7 @@ import dao.*;
 // import models
 import models.*;
 // import fiches
-import vues.FicheFirstFieldFalse;
+import vues.Fiche;
 import vues.FicheUtilisateurPilote;
 
 
@@ -44,14 +44,15 @@ public class FicheAjoutPilote extends JFrame {
 		String[] listMethodeDoa = { "save","" };
 		piloteDao = new PiloteDao();
 
-		new FicheFirstFieldFalse(
+		new Fiche(
 				"Ajout d'un pilote", 
 				piloteDao, 
 				(Object)pilote, 
 				listLabels, 
 				listTextFields,
 				listTextBtns,
-				listMethodeDoa
+				listMethodeDoa,
+				true
 				);
 
 		/**

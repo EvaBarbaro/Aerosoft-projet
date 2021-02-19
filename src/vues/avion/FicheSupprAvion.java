@@ -5,8 +5,6 @@ import javax.swing.JFrame;
 import dao.AvionDao;
 import models.Avion;
 import vues.Fiche;
-import vues.FicheFirstFieldFalse;
-
 
 public class FicheSupprAvion extends JFrame {
 
@@ -34,14 +32,15 @@ public class FicheSupprAvion extends JFrame {
 		bdao = new AvionDao();
 
 		//Creation de la fiche avec les elements ajouté au dessus
-		new FicheFirstFieldFalse(
+		new Fiche(
 				"Suppression d'un avion", 
 				bdao, 
 				(Object)av, 
 				listLabels, 
 				listTextFields,
 				listTextBtns,
-				listMethodeDoa
+				listMethodeDoa,
+				true
 				);
 	}
 }

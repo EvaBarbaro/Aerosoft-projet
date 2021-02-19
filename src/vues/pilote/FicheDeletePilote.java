@@ -9,7 +9,7 @@ import dao.*;
 import models.*;
 
 // import de la fiche avec le premier text field non-modifiable
-import vues.FicheFirstFieldFalse;
+import vues.Fiche;
 
 
 public class FicheDeletePilote extends JFrame {
@@ -43,14 +43,15 @@ public class FicheDeletePilote extends JFrame {
 		String[] listMethodeDoa = { "delete","" };
 		piloteDao = new PiloteDao();
 
-		new FicheFirstFieldFalse(
+		new Fiche(
 				"Suppression d'un Pilote", 
 				piloteDao, 
 				(Object)pilote, 
 				listLabels, 
 				listTextFields,
 				listTextBtns,
-				listMethodeDoa
+				listMethodeDoa,
+				true
 				);
 
 		/**
@@ -70,14 +71,15 @@ public class FicheDeletePilote extends JFrame {
 		String[] listMethodeDoaUser = { "delete","" };
 		utilisateurDao = new UtilisateurDao();
 
-		new FicheFirstFieldFalse(
+		new Fiche(
 				"Supression d'un utilisateur pilote", 
 				utilisateurDao, 
 				(Object)utilisateur, 
 				listLabelUser, 
 				listTextFieldUser,
 				listTextBtnUser,
-				listMethodeDoaUser
+				listMethodeDoaUser,
+				true
 				);
 	}
 }
