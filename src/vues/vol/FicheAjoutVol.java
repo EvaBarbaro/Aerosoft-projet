@@ -57,7 +57,19 @@ public class FicheAjoutVol extends JFrame {
 			i++;
 		}
 
-		new FicheVol("Ajout d'un vol", bdao, (Object) a, listLabels, listTextFields, listTextBtns,
-				listMethodeDoa, jComboBoxDeptTitles, jComboBoxArrTitles);
+		//Nom de la jFrame à rouvrir après la modification
+		String jFrameClassName = "vues.aeropo";
+
+		new FicheVol(
+				"Ajout d'un vol",
+				bdao, (Object) a,
+				listLabels,
+				listTextFields,
+			 	listTextBtns,
+				listMethodeDoa, 
+				jComboBoxDeptTitles, 
+				jComboBoxArrTitles,
+				jFrameClassName
+				);
 	}
 }

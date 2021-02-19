@@ -45,6 +45,9 @@ public class FicheModifUtilisateur extends JFrame {
 
 		utilisateurDao = new UtilisateurDao();
 
+		//Nom de la jFrame à rouvrir après la modification
+    String jFrameClassName = "vues.utilisateur.FicheListUtilisateur";
+
 		new FicheUtilisateur(
 				"Modification d'un utilisateur",
 				utilisateurDao,
@@ -53,7 +56,8 @@ public class FicheModifUtilisateur extends JFrame {
 				listTextFields,
 				listTextBtns,
 				listMethodeDoa,
-				jComboBoxTitles
+				jComboBoxTitles,
+				jFrameClassName
 				);
 	}
 }

@@ -33,7 +33,7 @@ public class MenuPilote extends JMenu{
         //Affectation du droit recuperer en paramètre dans la variable droit
         this.droit = droitInt;
 
-        menuPilote = new JMenu("Pilote");
+        menuPilote = new JMenu("Pilotes");
         Font font = new Font("Serial", Font.BOLD, 16);
         menuPilote.setFont(font);
 
@@ -66,7 +66,7 @@ public class MenuPilote extends JMenu{
             {
                 public void actionPerformed(ActionEvent evt)
                 {
-                    new FicheListPilote();
+                    new ListeModifPilote();
                 }
             });
             menuPilote.add(itemModifPilote);

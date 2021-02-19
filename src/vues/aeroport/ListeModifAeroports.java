@@ -51,13 +51,9 @@ public class ListeModifAeroports extends JFrame implements ActionListener{
 
 		tableModel = new DefaultTableModel(tblHead, 0);
 		
-		data = new JTable(tableModel);
-		
-		//javax.swing.JTable.setInner(5); 
-		
+		data = new JTable(tableModel);		
 		data.setFont(new Font("Chandas", Font.BOLD, 15));
-		data.setRowHeight(25);
-		
+		data.setRowHeight(25);		
 		data.setBounds(100, 100, 450, 450);
 		
 		chargeData();
@@ -82,22 +78,18 @@ public class ListeModifAeroports extends JFrame implements ActionListener{
 
 					//int id = Integer.parseInt(table.getModel().getValueAt(row, column).toString());
 					Object id = (Object) table.getModel().getValueAt(row, column).toString();
+
 					//Recuperation des données de l'element cliquer avec la fonction get()
 					b1 = (Aeroport) dao.get(id);
 
 					if (b1 != null) {
-						//Creation d'une fiche modif
-						FicheModifAeroport fm = new FicheModifAeroport(b1);
 
-						//fm.addWindowListener(fm);
-						fm.setVisible(true);
+						//Creation d'une fiche modif
+						new FicheModifAeroport(b1);
 						dispose();
 					}
 				}
-
-			}
-		
-		
+			}	
 		});
 		
 		JScrollPane scrollPane = new JScrollPane(data);
@@ -116,11 +108,12 @@ public class ListeModifAeroports extends JFrame implements ActionListener{
 		final Dimension screenSize = toolkit.getScreenSize();
 		final int x = (screenSize.width - this.getWidth()) / 2;
 		final int y = (screenSize.height - this.getHeight()) / 2;
+		
 		setLocation(x, y);
 		setLocationRelativeTo(null);
-		setVisible(true);
-
+		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setVisible(true);
 
 	}
 

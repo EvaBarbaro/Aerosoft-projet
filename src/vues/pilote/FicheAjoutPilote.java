@@ -91,7 +91,8 @@ public class FicheAjoutPilote extends JFrame {
 				listTextFieldUser,
 				listTextBtnsUser,
 				listMethodeDoaUser,
-				jComboBoxTitles
+				jComboBoxTitles,
+				""
 				);
 	}
 

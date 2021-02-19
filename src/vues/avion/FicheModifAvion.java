@@ -51,6 +51,9 @@ public class FicheModifAvion extends JFrame {
 			i++;
 		}
 
+		//Nom de la jFrame à rouvrir après la modification
+	    String jFrameClassName = "vues.avion.ListeModifAvion";
+
 		new FicheAvion(
 		"Modification d'un vol",
 		bdao,
@@ -60,7 +63,8 @@ public class FicheModifAvion extends JFrame {
 		listTextBtns,
 		listMethodeDoa,
 		jComboBoxTypeTitles,
-		jComboBoxBaseTitles
+		jComboBoxBaseTitles,
+		jFrameClassName
 		);
 	}
 }

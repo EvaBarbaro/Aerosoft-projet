@@ -75,7 +75,8 @@ public class FicheAjoutAffectation extends JFrame {
 				listMethodeDoa,
 				jComboBoxPiloteTitles, 
 				jComboBoxNumVolTitles, 
-				jComboBoxNumAvionTitles
+				jComboBoxNumAvionTitles,
+				""
 				);
 	}
 }

@@ -38,6 +38,9 @@ public class FicheModifPilote extends JFrame {
 		String[] listMethodeDoa = { "update","" };
 		piloteDao = new PiloteDao();
 
+		//Nom de la jFrame à rouvrir après la modification
+	    String jFrameClassName = "vues.pilote.ListeModifPilote";
+
 		new FichePilote(
 				"Modification d'un pilote", 
 				piloteDao, 
@@ -46,6 +49,7 @@ public class FicheModifPilote extends JFrame {
 				listTextFields,
 				listTextBtns,
 				listMethodeDoa,
+				jFrameClassName,
 				false
 				);
 	}

@@ -71,10 +71,14 @@ public class FicheModifAffectation extends JFrame {
 		}
 
 		i = 0;
-		for (Avion av : listeAvions) {
-			jComboBoxNumAvionTitles[i] = "" + av.getNumAvion();
-			i++;
-		}
+        for (Avion av : listeAvions) {
+          jComboBoxNumAvionTitles[i] = "" + av.getNumAvion();
+          i++;
+        }
+
+    //Nom de la jFrame à rouvrir après la modification
+    String jFrameClassName = "vues.affectation.ListeModifAffectations";
+
     //Creation de la fiche avec les elements ajouté au dessus
     new FicheAffectation(
       "Ajout d'une affectation",
@@ -86,7 +90,8 @@ public class FicheModifAffectation extends JFrame {
       listMethodeDoa, 
       jComboBoxPiloteTitles, 
       jComboBoxNumVolTitles, 
-      jComboBoxNumAvionTitles
+      jComboBoxNumAvionTitles,
+      jFrameClassName
       );
   }
 }

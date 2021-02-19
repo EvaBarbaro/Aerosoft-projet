@@ -32,7 +32,7 @@ public class MenuUtilisateur extends JMenu{
 
     public MenuUtilisateur() {
 
-            menuUtilisateur = new JMenu("Utilisateur");
+            menuUtilisateur = new JMenu("Utilisateurs");
             Font font = new Font("Serial", Font.BOLD, 16);
             menuUtilisateur.setFont(font);
 

@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.ListIterator;
 
  
-public class FicheListPilote extends JFrame implements ActionListener{
+public class ListeModifPilote extends JFrame implements ActionListener{
 	
 	/**
 	 *
@@ -30,7 +30,7 @@ public class FicheListPilote extends JFrame implements ActionListener{
 	JTable data;
 	
 	Pilote b1;
-	PiloteDao dao = new PiloteDao();
+	
 	
 	List<Pilote> list = new ArrayList<Pilote>();
 	 
@@ -39,7 +39,7 @@ public class FicheListPilote extends JFrame implements ActionListener{
 	/**
 	 * Crée la frame de la liste des pilotes pour modification
 	 */
-	public FicheListPilote() {
+	public ListeModifPilote() {
 		
 		/* Label */
 		l1 = new JLabel("LISTE DES PILOTES");
@@ -62,12 +62,13 @@ public class FicheListPilote extends JFrame implements ActionListener{
 		
 		data.setBounds(100, 100, 450, 450);
 		
-		chargeData(dao);
+		chargeData();
 		
 		data.setDefaultEditor(Object.class, null);
 
 		//Crée un évènement de clique
 		data.addMouseListener(new MouseAdapter() {
+			PiloteDao dao = new PiloteDao();
 		    
 			public void mousePressed(MouseEvent mouseEvent) {
 		        
@@ -91,51 +92,8 @@ public class FicheListPilote extends JFrame implements ActionListener{
 					if (b1 != null) {
 						
 						// Appel de la frame de modification du pilote				
-						FicheModifPilote fm = new FicheModifPilote(b1);
-						
-						fm.addWindowListener(new WindowListener() {
-
-							@Override
-							public void windowOpened(WindowEvent e) {
-								// TODO Auto-generated method stub								
-							}
-
-							@Override
-							public void windowClosing(WindowEvent e) {
-									
-							}
-
-							@Override
-							public void windowClosed(WindowEvent e) {								
-								chargeData(dao);
-							}
-
-							@Override
-							public void windowIconified(WindowEvent e) {
-								// TODO Auto-generated method stub
-								
-							}
-
-							@Override
-							public void windowDeiconified(WindowEvent e) {
-								// TODO Auto-generated method stub
-								
-							}
-
-							@Override
-							public void windowActivated(WindowEvent e) {
-								// TODO Auto-generated method stub
-								
-							}
-
-							@Override
-							public void windowDeactivated(WindowEvent e) {
-								// TODO Auto-generated method stub
-								
-							}
-							
-						});
-
+						new FicheModifPilote(b1);
+						dispose();
 					}				
 					
 		        }
@@ -170,8 +128,8 @@ public class FicheListPilote extends JFrame implements ActionListener{
 	 * @param dao
 	 * Récupère tout les pilotes en BDD pour les ajouter au tableau
 	 */
-	public void chargeData(PiloteDao dao) {
-			
+	public void chargeData() {
+			PiloteDao dao = new PiloteDao();
 			
 			list = (List<Pilote>) dao.getAll();
 			

@@ -93,47 +93,8 @@ public class ListeVol extends JFrame implements ActionListener{
 					if (v1 != null) {
 						
 						// Appel de la fiche de modification du vol
-						FicheModifVol fm = new FicheModifVol(v1);
-						
-						fm.addWindowListener(new WindowListener() {
-
-							@Override
-							public void windowOpened(WindowEvent e) {
-																
-							}
-
-							@Override
-							public void windowClosing(WindowEvent e) {
-								chargeData(dao);									
-							}
-
-							@Override
-							public void windowClosed(WindowEvent e) {								
-								chargeData(dao);
-							}
-
-							@Override
-							public void windowIconified(WindowEvent e) {								
-								
-							}
-
-							@Override
-							public void windowDeiconified(WindowEvent e) {								
-								
-							}
-
-							@Override
-							public void windowActivated(WindowEvent e) {								
-								
-							}
-
-							@Override
-							public void windowDeactivated(WindowEvent e) {								
-								
-							}
-							
-						});
-
+						new FicheModifVol(v1);
+						dispose();
 					}				
 					
 		        }

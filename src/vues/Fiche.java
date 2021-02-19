@@ -5,9 +5,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import javax.swing.border.EmptyBorder;
-import dao.AeroportDao;
+
 import interfaces.Dao;
-import vues.aeroport.ListeModifAeroports;
+
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
@@ -27,7 +27,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.WindowListener;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.List;
+
 
 public class Fiche extends JFrame implements WindowListener{
 
@@ -74,15 +74,16 @@ public class Fiche extends JFrame implements WindowListener{
 			String [] listLabels, 
 			String [] listTextFields,
 			String [] listTextBtns,
-			String[] listMethodeDoa,
+			String [] listMethodeDoa,
 			String jFrameClassName,
 			Boolean... booleanForSetEnabledFalse
-	) {
+		) {
+		
 		this.jFrameClassName = jFrameClassName;
+		addWindowListener(this);
 
 		setTitle(titre);
 
-		addWindowListener(this);
 
 		lblNewTitre = new JLabel(titre);
 		lblNewTitre.setForeground(Color.blue);
@@ -398,36 +399,42 @@ public class Fiche extends JFrame implements WindowListener{
 		}
 	}
 
-
   @Override
   public void windowOpened(WindowEvent e) {
     // TODO Auto-generated method stub
-    System.out.println("Fiche windowOpened");
-  }
 
+  }
 
   @Override
   public void windowClosing(WindowEvent e) {
     // TODO Auto-generated method stub
-    System.out.println("Fiche windowClosing");
+	
   }
-
 
   @Override
   public void windowClosed(WindowEvent e) {
-
-	System.out.println("Fiche windowClosed");
+	
 	if (!jFrameClassName.equals("")) {
+		new SDialog("Modification", "Modification reussie", "Valider", "").setVisible(true);
+		
 		Class<?> jFramClass = null;
+		
 		try {
+
 			jFramClass = Class.forName(jFrameClassName);
+
 		} catch (ClassNotFoundException e1) {
 
 			e1.printStackTrace();
-		} // convert string classname to class
+		}
+		
+		// convert string classname to class		
 		Object jFram = new Object();
+		
 		try {
+
 			jFram = jFramClass.getDeclaredConstructor().newInstance();
+
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
 				| InvocationTargetException | NoSuchMethodException | SecurityException e1) {
 
@@ -436,14 +443,19 @@ public class Fiche extends JFrame implements WindowListener{
 
 		String methodName = "chargeData";
 		Method setNameMethod = (Method) new Object();
+
 		try {
+
 			setNameMethod = jFram.getClass().getMethod(methodName, String.class);
+
 		} catch (NoSuchMethodException | SecurityException e1) {
 
 			e1.printStackTrace();
 		}
 		try {
+			
 			setNameMethod.invoke(jFram);
+			
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e1) {
 
 			e1.printStackTrace();

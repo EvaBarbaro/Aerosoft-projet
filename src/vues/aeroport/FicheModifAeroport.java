@@ -33,6 +33,7 @@ public class FicheModifAeroport extends JFrame {
 		//Ajout de la dao
 		bdao = new AeroportDao();
 
+		//Nom de la jFrame à rouvrir après la modification
 		String jFrameClassName = "vues.aeroport.ListeModifAeroports";
 
 		//Creation de la fiche avec les elements ajouté au dessus

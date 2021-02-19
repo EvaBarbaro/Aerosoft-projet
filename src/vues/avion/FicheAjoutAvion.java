@@ -62,7 +62,8 @@ public class FicheAjoutAvion extends JFrame {
 		listTextBtns,
 		listMethodeDoa,
 		jComboBoxTypeTitles,
-		jComboBoxBaseTitles
+		jComboBoxBaseTitles,
+		""
 		);
 	}
 }

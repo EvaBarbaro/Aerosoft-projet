@@ -79,47 +79,8 @@ public class FicheListUtilisateur extends JFrame implements ActionListener {
 					if (b1 != null) {
 
 						// Appel de la fiche de modification d'un utilisateur
-						FicheModifUtilisateur fm = new FicheModifUtilisateur(b1);
-
-						fm.addWindowListener(new WindowListener() {
-
-							@Override
-							public void windowOpened(WindowEvent e) {
-								
-							}
-
-							@Override
-							public void windowClosing(WindowEvent e) {
-								chargeData(dao);
-							}
-
-							@Override
-							public void windowClosed(WindowEvent e) {
-								chargeData(dao);
-							}
-
-							@Override
-							public void windowIconified(WindowEvent e) {								
-
-							}
-
-							@Override
-							public void windowDeiconified(WindowEvent e) {								
-
-							}
-
-							@Override
-							public void windowActivated(WindowEvent e) {								
-
-							}
-
-							@Override
-							public void windowDeactivated(WindowEvent e) {								
-
-							}
-
-						});
-
+						new FicheModifUtilisateur(b1);
+						dispose();
 					}
 
 				}

@@ -22,9 +22,10 @@ import models.*;
 // import des daos
 import dao.*;
 
-public class Login extends JFrame implements ActionListener, KeyListener{
+public class Login extends JFrame implements ActionListener, KeyListener {
 
     private static final long serialVersionUID = 1618223497137316296L;
+
     JLabel labelTitle, labelEmail, labelPassword;
     JTextField textFieldLogin, roleField;
     JButton btnValider, btnInscription;
@@ -35,109 +36,117 @@ public class Login extends JFrame implements ActionListener, KeyListener{
      */
     public Login() {
 
-    // Logo
-    JLabel labelimage = new JLabel();
+        // Logo
+        JLabel labelimage = new JLabel();
 
-    ImageIcon img = new LogoAeroSoft().getLogoAerosoft();
-    
-    labelimage.setBounds(80, 10, 400, 70); 
-    labelimage.setIcon(img);
-    add(labelimage);
+        ImageIcon img = new LogoAeroSoft().getLogoAerosoft();
 
-    // Label
-    labelEmail = new JLabel("Votre Email:");
-    labelEmail.setFont(new Font("Tahoma", Font.PLAIN, 15));
-    labelEmail.setBounds(80, 90, 200, 30);
+        labelimage.setBounds(80, 10, 400, 70);
+        labelimage.setIcon(img);
+        add(labelimage);
 
-    labelPassword = new JLabel("Votre Mot de passe:");
-    labelPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
-    labelPassword.setBounds(80, 130, 200, 30);     
+        // Label
+        labelEmail = new JLabel("Votre Email:");
+        labelEmail.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        labelEmail.setBounds(80, 90, 200, 30);
 
-    // TextField
-    textFieldLogin = new JTextField("");
-    textFieldLogin.setFont(new Font("Tahoma", Font.PLAIN, 15));
-    textFieldLogin.setBounds(300, 90, 200, 30);
-    
-    /* Mot de passe*/
-    passwordField = new JPasswordField();
-    passwordField.setFont(new Font("Tahoma", Font.PLAIN, 15));
-    passwordField.setBounds(300, 130, 200, 30);
-    passwordField.addKeyListener(new KeyAdapter() {
-        @Override
-        public void keyPressed(KeyEvent e) {
-            if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-                getLogged();
-               }
-        }
-    });
+        labelPassword = new JLabel("Votre Mot de passe:");
+        labelPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        labelPassword.setBounds(80, 130, 200, 30);
 
-    /*Bouton */   
-    
-    btnValider = new JButton("Valider");
-    btnValider.setBounds(270, 170, 100, 30);
-    btnValider.setFont(new Font("Tahoma", Font.BOLD, 15));
-    btnValider.setBackground(new Color(1, 175, 228));
-    btnValider.setForeground(Color.WHITE);
-    btnValider.addActionListener(this);
-    
-    btnInscription = new JButton("Inscrivez-vous");
-    btnInscription.setBounds(380, 170, 150, 30);
-    btnInscription.setFont(new Font("Tahoma", Font.BOLD, 15));
-    btnInscription.setBackground(new Color(22, 219, 170));
-    btnInscription.setForeground(Color.WHITE);
-    btnInscription.addActionListener(this);
+        // TextField
+        textFieldLogin = new JTextField("");
+        textFieldLogin.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        textFieldLogin.setBounds(300, 90, 200, 30);
 
-    // add(labelTitle);
-    add(labelEmail);add(textFieldLogin); add(labelPassword);add(passwordField);add(btnValider);add(btnInscription);
+        /* Mot de passe */
+        passwordField = new JPasswordField();
+        passwordField.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        passwordField.setBounds(300, 130, 200, 30);
 
-    setTitle("Aerosoft");
+        passwordField.addKeyListener(new KeyAdapter() {
 
-    setSize(650, 350);
-    setLayout(null);
+            @Override
+            public void keyPressed(KeyEvent e) {
 
-    final Toolkit toolkit = Toolkit.getDefaultToolkit();
-    final Dimension screenSize = toolkit.getScreenSize();
-    final int x = (screenSize.width - this.getWidth()) / 2;
-    final int y = (screenSize.height - this.getHeight()) / 2;
-    
-    setLocation(x, y);
-    setLocationRelativeTo(null);
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    getLogged();
+                }
 
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setVisible(true);
-}
+            }
+        });
 
-/**
- * Fonction de connexion utilisateur
- */
-public void getLogged() {
+        /* Bouton */
 
-String loginString = textFieldLogin.getText();
-char[] pass = passwordField.getPassword();
-String passwordString = new String(pass);
+        btnValider = new JButton("Valider");
+        btnValider.setBounds(270, 170, 100, 30);
+        btnValider.setFont(new Font("Tahoma", Font.BOLD, 15));
+        btnValider.setBackground(new Color(1, 175, 228));
+        btnValider.setForeground(Color.WHITE);
+        btnValider.addActionListener(this);
 
+        btnInscription = new JButton("Inscrivez-vous");
+        btnInscription.setBounds(380, 170, 150, 30);
+        btnInscription.setFont(new Font("Tahoma", Font.BOLD, 15));
+        btnInscription.setBackground(new Color(22, 219, 170));
+        btnInscription.setForeground(Color.WHITE);
+        btnInscription.addActionListener(this);
 
+        // add(labelTitle);
+        add(labelEmail);
+        add(textFieldLogin);
+        add(labelPassword);
+        add(passwordField);
+        add(btnValider);
+        add(btnInscription);
+
+        setTitle("Aerosoft");
+
+        setSize(650, 350);
+        setLayout(null);
+
+        final Toolkit toolkit = Toolkit.getDefaultToolkit();
+        final Dimension screenSize = toolkit.getScreenSize();
+        final int x = (screenSize.width - this.getWidth()) / 2;
+        final int y = (screenSize.height - this.getHeight()) / 2;
+
+        setLocation(x, y);
+        setLocationRelativeTo(null);
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+    }
+
+    /**
+     * Fonction de connexion utilisateur
+     */
+    public void getLogged() {
+
+        String loginString = textFieldLogin.getText();
+        char[] pass = passwordField.getPassword();
+        String passwordString = new String(pass);
 
         try {
 
-            String sql = "select IdUtilisateur from `UTILISATEUR` where Mail=? and MotDePasse=? and Statut=true";
+            String sql =
+                    "select IdUtilisateur from `UTILISATEUR` where Mail=? and MotDePasse=? and Statut=true";
 
             Connection conn = ConnectionBdd.getConnection();
-			PreparedStatement ps = conn.prepareStatement(sql);
-            
-        	
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+
             ps.setString(1, loginString);
             ps.setString(2, passwordString);
             System.out.println("sql : " + ps);
             ResultSet rs = ps.executeQuery();
-            
+
             if (rs.next()) {
                 this.setVisible(false);
                 new Home(rs.getInt("IdUtilisateur"));
                 dispose();
-            } 
-            else {
-            	JOptionPane.showMessageDialog(null,"Email ou Mot de passe incorrect, Veuillez réessayer");
+            } else {
+                JOptionPane.showMessageDialog(null,
+                        "Email ou Mot de passe incorrect, Veuillez réessayer");
             }
 
         }
@@ -155,7 +164,7 @@ String passwordString = new String(pass);
     public void register() {
         RoleDao roleDao = new RoleDao();
         ArrayList<Role> roles = roleDao.getAll();
-        String roleTab[] = new String[roles.size()+1];
+        String roleTab[] = new String[roles.size() + 1];
         roleTab[0] = "Selectionner votre rôle";
         int i = 1;
 
@@ -189,12 +198,15 @@ String passwordString = new String(pass);
 
         // Evenement de la comboBox
         comboBoxRole.addActionListener(new ActionListener() {
+
             public void actionPerformed(ActionEvent eventComboBox) {
+
                 String stringBox = (String) comboBoxRole.getSelectedItem();
 
                 Role roleAtt = (Role) roleDao.get(stringBox);
 
                 switch (stringBox) {
+
                     case "Chargé Clientèle":
                         roleField = new JTextField(roleAtt.getIdRole());
                         roleField.setVisible(false);
@@ -202,6 +214,7 @@ String passwordString = new String(pass);
                         revalidate();
                         repaint();
                         break;
+
                     case "Pilote":
                         JFrame framePilote = new JFrame("Informations pilote");
                         JLabel nomPiloteLabel, prenomPiloteLabel, matriculeLabel;
@@ -212,12 +225,10 @@ String passwordString = new String(pass);
                         roleDao.get(stringBox);
 
                         JLabel labelimage = new JLabel();
-                        ImageIcon img = new ImageIcon(
-                            Toolkit.getDefaultToolkit().getImage(
-                                    Fiche.class.getResource("/images/Aerosoft-logo.PNG"))
-                                    .getScaledInstance(160, 50, Image.SCALE_DEFAULT)
-                                );
-                        labelimage.setBounds(80, 10, 400, 70); 
+                        ImageIcon img = new ImageIcon(Toolkit.getDefaultToolkit()
+                                .getImage(Fiche.class.getResource("/images/Aerosoft-logo.PNG"))
+                                .getScaledInstance(160, 50, Image.SCALE_DEFAULT));
+                        labelimage.setBounds(80, 10, 400, 70);
                         labelimage.setIcon(img);
                         framePilote.add(labelimage);
 
@@ -259,20 +270,20 @@ String passwordString = new String(pass);
                         ArrayList<Utilisateur> userAll = utilisateurDao.getAll();
 
                         Boolean duplicate[] = new Boolean[userAll.size()];
-        
+
                         int i = 0;
-                
+
                         for (Utilisateur user : userAll) {
                             if (user.getMail().equals(textFieldLogin.getText())) {
                                 duplicate[i] = true;
-                            }
-                            else {
+                            } else {
                                 duplicate[i] = false;
                             }
                             i++;
                         }
-        
+
                         if (Arrays.asList(duplicate).contains(true)) {
+
                             JLabel labelError = new JLabel("Cette adresse mail existe déjà.");
                             labelError.setBounds(300, 230, 250, 30);
                             labelError.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -280,10 +291,12 @@ String passwordString = new String(pass);
                             add(labelError);
                             revalidate();
                             repaint();
+
                         } else {
+
                             btnValider.setVisible(false);
                             btnInscription.setVisible(false);
-    
+
                             framePilote.add(nomPiloteLabel);
                             framePilote.add(nomPiloteField);
                             framePilote.add(prenomPiloteLabel);
@@ -291,7 +304,7 @@ String passwordString = new String(pass);
                             framePilote.add(matriculeLabel);
                             framePilote.add(matriculeField);
                             framePilote.add(btnValidatePilote);
-    
+
                             framePilote.setTitle("Aerosoft");
                             framePilote.setSize(650, 350);
                             framePilote.setLayout(null);
@@ -304,12 +317,15 @@ String passwordString = new String(pass);
                         add(roleField);
 
                         btnValidatePilote.addActionListener(new ActionListener() {
+
                             public void actionPerformed(ActionEvent eventValidatePilote) {
+
                                 UtilisateurDao utilisateurDao = new UtilisateurDao();
                                 Utilisateur utilisateur = new Utilisateur();
                                 int uniqueID = UUID.randomUUID().hashCode();
 
                                 String userString[] = new String[5];
+
                                 userString[0] = String.valueOf(uniqueID);
                                 userString[1] = textFieldLogin.getText();
                                 userString[2] = String.valueOf(passwordField.getPassword());
@@ -335,37 +351,46 @@ String passwordString = new String(pass);
                                 new Login();
                             }
                         });
+
                         revalidate();
-                        repaint();
+                        repaint();                        
                         break;
+
                     case "Technicien d'exploitation":
                         roleDao.get(stringBox);
                         roleField = new JTextField(roleAtt.getIdRole());
                         roleField.setVisible(false);
                         add(roleField);
                         break;
+
                     case "Administrateur":
                         UtilisateurDao utilisateurDaoAdmin = new UtilisateurDao();
                         ArrayList<Utilisateur> userAdmin = utilisateurDaoAdmin.getAll();
-        
+
                         int adminCount = 0;
-                
+
                         for (Utilisateur users : userAdmin) {
+
                             System.out.println(users.getIdRole());
-                            if (users.getIdRole().equals("55555")){
+                            if (users.getIdRole().equals("55555")) {
                                 adminCount++;
                             }
                         }
-        
+
                         if (adminCount == 2) {
-                            JLabel labelErrorAdmin = new JLabel("Le nombre maximal de compte admin a été atteint.");
+
+                            JLabel labelErrorAdmin =
+                                    new JLabel("Le nombre maximal de compte admin a été atteint.");
+
                             labelErrorAdmin.setBounds(270, 270, 340, 30);
                             labelErrorAdmin.setFont(new Font("Tahoma", Font.PLAIN, 15));
                             labelErrorAdmin.setForeground(Color.RED);
                             add(labelErrorAdmin);
                             revalidate();
                             repaint();
+
                         } else {
+
                             roleDao.get(stringBox);
                             roleField = new JTextField(roleAtt.getIdRole());
                             roleField.setVisible(false);
@@ -377,56 +402,66 @@ String passwordString = new String(pass);
         });
 
         btnValidateReg.addActionListener(new ActionListener() {
+
             public void actionPerformed(ActionEvent eventValidateReg) {
 
                 testUtilisateur();
             }
         });
     }
-    
+
     private void testUtilisateur() {
-                UtilisateurDao utilisateurDao = new UtilisateurDao();
-                Utilisateur utilisateur = new Utilisateur();
-                int uniqueID = UUID.randomUUID().hashCode();
 
-                String userPiloteString[] = new String[5];
-                userPiloteString[0] = String.valueOf(uniqueID);
-                userPiloteString[1] = textFieldLogin.getText();
-                userPiloteString[2] = String.valueOf(passwordField.getPassword());
-                userPiloteString[3] = "false";
-                userPiloteString[4] = roleField.getText();
+        UtilisateurDao utilisateurDao = new UtilisateurDao();
+        Utilisateur utilisateur = new Utilisateur();
+        int uniqueID = UUID.randomUUID().hashCode();
 
-                ArrayList<Utilisateur> userAll = utilisateurDao.getAll();
+        String userPiloteString[] = new String[5];
 
-                Boolean duplicate[] = new Boolean[userAll.size()];
+        userPiloteString[0] = String.valueOf(uniqueID);
+        userPiloteString[1] = textFieldLogin.getText();
+        userPiloteString[2] = String.valueOf(passwordField.getPassword());
+        userPiloteString[3] = "false";
+        userPiloteString[4] = roleField.getText();
 
-                int i = 0;
-        
-                for (Utilisateur user : userAll) {
-                    if (user.getMail().equals(userPiloteString[1])) {
-                        duplicate[i] = true;
-                    }
-                    else {
-                        duplicate[i] = false;
-                    }
-                    i++;
-                }
+        ArrayList<Utilisateur> userAll = utilisateurDao.getAll();
 
-                if (Arrays.asList(duplicate).contains(true)) {
-                    JLabel labelError = new JLabel("Cette adresse mail existe déjà.");
-                    labelError.setBounds(300, 230, 250, 30);
-                    labelError.setFont(new Font("Tahoma", Font.PLAIN, 15));
-                    labelError.setForeground(Color.RED);
-                    add(labelError);
-                    revalidate();
-                    repaint();
-                } else {
-                    utilisateurDao.save(utilisateur, userPiloteString);
+        Boolean duplicate[] = new Boolean[userAll.size()];
 
-                    dispose();
-        
-                    new Login();
-                }
+        int i = 0;
+
+        for (Utilisateur user : userAll) {
+
+            if (user.getMail().equals(userPiloteString[1])) {
+
+                duplicate[i] = true;
+
+            } else {
+
+                duplicate[i] = false;
+
+            }
+            i++;
+        }
+
+        if (Arrays.asList(duplicate).contains(true)) {
+
+            JLabel labelError = new JLabel("Cette adresse mail existe déjà.");
+            labelError.setBounds(300, 230, 250, 30);
+            labelError.setFont(new Font("Tahoma", Font.PLAIN, 15));
+            labelError.setForeground(Color.RED);
+            add(labelError);
+            revalidate();
+            repaint();
+
+        } else {
+
+            utilisateurDao.save(utilisateur, userPiloteString);
+
+            dispose();
+
+            new Login();
+        }
 
     }
 
@@ -440,23 +475,24 @@ String passwordString = new String(pass);
             register();
         }
     }
-    
+
     public void keyPressed(KeyEvent e) {
-		
-		
-	}
 
-	@Override
-	public void keyTyped(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			testUtilisateur();
-		}
-	}
 
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+            testUtilisateur();
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        // TODO Auto-generated method stub
+
+    }
 
 }

@@ -15,10 +15,7 @@ import java.util.ListIterator;
 
  
 public class ListeModifAffectations extends JFrame implements ActionListener{
-	
-	/**
-	 *
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	JLabel l1;
@@ -29,9 +26,6 @@ public class ListeModifAffectations extends JFrame implements ActionListener{
 
 	//Creation de l'objet affectation
 	Affectation b1;
-
-	//Creation de la dao affectation
-	AffectationDao dao = new AffectationDao();
 	
 	//Creation de la liste affectation
 	List<Affectation> list = new ArrayList<Affectation>();
@@ -53,8 +47,6 @@ public class ListeModifAffectations extends JFrame implements ActionListener{
 		l1 = new JLabel("LISTE DES AFFECTATIONS");
 		l1.setForeground(Color.blue);
 		l1.setFont(new Font("Serif", Font.BOLD, 20));
-
-		/* Placement */
 		l1.setBounds(100, 30, 400, 30);
 
 		getContentPane().add(l1);
@@ -66,19 +58,22 @@ public class ListeModifAffectations extends JFrame implements ActionListener{
 		data.setRowHeight(25);		
 		data.setBounds(100, 100, 450, 450);
 		
-		chargeData(dao);
+		chargeData();
 		
 		data.setDefaultEditor(Object.class, null);
 		
 		data.addMouseListener(new MouseAdapter() {
 		    
 			public void mousePressed(MouseEvent mouseEvent) {
+
+				AffectationDao dao = new AffectationDao();
 		        
 				JTable table =(JTable) mouseEvent.getSource();
 				
 		        Point point = mouseEvent.getPoint();
 		        
-		        int row = table.rowAtPoint(point);
+				int row = table.rowAtPoint(point);
+				
 		        //Ajout d'un evenement au double clic
 		        if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
 		        	
@@ -86,58 +81,16 @@ public class ListeModifAffectations extends JFrame implements ActionListener{
 					
 					//int id = Integer.parseInt(table.getModel().getValueAt(row, column).toString());
 					Object id = (Object) table.getModel().getValueAt(row, column).toString();
+
 					//Recuperation des infos de l'affectation cliquer grace a get()					
 					b1 = (Affectation) dao.get(id);
 
 					if (b1 != null) {
+
 						//Creation de la fiche modif pour l'element cliquer
-						FicheModifAffectation fm = new FicheModifAffectation(b1);
-
-						fm.addWindowListener(new WindowListener() {
-
-							@Override
-							public void windowOpened(WindowEvent e) {
-								// TODO Auto-generated method stub								
-							}
-
-							@Override
-							public void windowClosing(WindowEvent e) {
-								chargeData(dao);
-							}
-
-							@Override
-							public void windowClosed(WindowEvent e) {								
-								chargeData(dao);
-							}
-
-							@Override
-							public void windowIconified(WindowEvent e) {
-								// TODO Auto-generated method stub
-								
-							}
-
-							@Override
-							public void windowDeiconified(WindowEvent e) {
-								// TODO Auto-generated method stub
-								
-							}
-
-							@Override
-							public void windowActivated(WindowEvent e) {
-								// TODO Auto-generated method stub
-								
-							}
-
-							@Override
-							public void windowDeactivated(WindowEvent e) {
-								// TODO Auto-generated method stub
-								
-							}
-							
-						});
-
-					}				
-					
+						new FicheModifAffectation(b1);
+						dispose();
+					}					
 		        }
 		    }
 		});
@@ -145,19 +98,20 @@ public class ListeModifAffectations extends JFrame implements ActionListener{
 		JScrollPane scrollPane = new JScrollPane(data);
 		scrollPane.setFont(new Font("DejaVu Sans Mono", Font.BOLD, 15));
 		
-		scrollPane.setSize(550, 300);
+		scrollPane.setSize(850, 300);
 		scrollPane.setLocation(50, 100);
 		getContentPane().add(scrollPane);
 
 		setTitle("LISTE DES AFFECTATIONS");
 
-		setSize(639, 540);
+		setSize(950, 540);
 		getContentPane().setLayout(null);
 
 		final Toolkit toolkit = Toolkit.getDefaultToolkit();
 		final Dimension screenSize = toolkit.getScreenSize();
 		final int x = (screenSize.width - this.getWidth()) / 2;
 		final int y = (screenSize.height - this.getHeight()) / 2;
+		
 		setLocation(x, y);
 		setLocationRelativeTo(null);
 
@@ -169,7 +123,10 @@ public class ListeModifAffectations extends JFrame implements ActionListener{
 	/** 
 	 * @param dao
 	 */
-	public void chargeData(AffectationDao dao) {
+	public void chargeData() {
+		
+		//Creation de la dao affectation
+		AffectationDao dao = new AffectationDao();
 			
 		//Recuperation des données de la requete getAll() dans une list
 		list = (List<Affectation>) dao.getAll();

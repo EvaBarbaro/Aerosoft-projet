@@ -151,7 +151,7 @@ public class UtilisateurDao implements Dao {
 
 			stmt.executeUpdate();
 
-			new SDialog("Modification", "Modification reussie", "Valider", "").setVisible(true);
+			//new SDialog("Modification", "Modification reussie", "Valider", "").setVisible(true);
 
 		} catch (SQLException e) {
 

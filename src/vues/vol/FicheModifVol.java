@@ -68,6 +68,9 @@ public class FicheModifVol extends JFrame {
 			i++;
 		}
 
+		//Nom de la jFrame à rouvrir après la modification
+    String jFrameClassName = "vues.vol.ListeVol";
+
 		new FicheVolUpdate(
 				"Modification d'un vol",
 				bdao,
@@ -77,7 +80,8 @@ public class FicheModifVol extends JFrame {
 				listTextBtns,
 				listMethodeDoa,
 				jComboBoxDeptTitles,
-				jComboBoxArrTitles
+				jComboBoxArrTitles,
+				jFrameClassName
 			);
 	}
 }
