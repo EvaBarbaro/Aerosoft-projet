@@ -415,6 +415,8 @@ public class Fiche extends JFrame implements WindowListener{
   public void windowClosed(WindowEvent e) {
 	
 	if (!jFrameClassName.equals("")) {
+		
+
 		new SDialog("Modification", "Modification reussie", "Valider", "").setVisible(true);
 		
 		Class<?> jFramClass = null;

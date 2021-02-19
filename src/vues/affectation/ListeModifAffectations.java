@@ -1,8 +1,9 @@
 package vues.affectation;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-
+import javax.swing.table.TableModel;
 import dao.AffectationDao;
 import models.Affectation;
 
@@ -51,7 +52,7 @@ public class ListeModifAffectations extends JFrame implements ActionListener{
 
 		getContentPane().add(l1);
 
-		tableModel = new DefaultTableModel(tblHead, 0);
+		tableModel = new AffectationTableModel(tblHead);
 		
 		data = new JTable(tableModel);		
 		data.setFont(new Font("Chandas", Font.BOLD, 15));
@@ -59,6 +60,23 @@ public class ListeModifAffectations extends JFrame implements ActionListener{
 		data.setBounds(100, 100, 450, 450);
 		
 		chargeData();
+
+		((DefaultTableCellRenderer) data.getTableHeader().getDefaultRenderer())
+		.setHorizontalAlignment(JLabel.CENTER);
+			
+		DefaultTableCellRenderer rendar = new DefaultTableCellRenderer();
+		rendar.setHorizontalAlignment(JLabel.CENTER);
+		
+		TableModel tableModel = data.getModel();
+
+		for (int x = 1; x < tableModel.getColumnCount(); x++) {
+
+			if (x != 3) {
+
+				data.getColumnModel().getColumn(x).setCellRenderer(rendar);
+			}
+
+		}
 		
 		data.setDefaultEditor(Object.class, null);
 		

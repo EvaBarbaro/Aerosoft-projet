@@ -173,7 +173,6 @@ public class AvionDao implements Dao {
       stmt.execute();
 
       System.out.println(avion.getTypeAvion() + " a bien été Modifier");
-      //new SDialog("Modification", "Modification reussie", "Valider", "").setVisible(true);
       
     } catch (SQLException e) {
 

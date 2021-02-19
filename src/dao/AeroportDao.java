@@ -157,8 +157,6 @@ public class AeroportDao implements Dao {
 
 			System.out.println(aeroport.getIdAeroport() + " a bien �t� modifi�");
 
-			//new SDialog("Modification", "Modification reussie", "Valider", "").setVisible(true);
-
 		} catch (SQLException e) {
 
 			new SDialog("Echec", "La modification n'a pas reussie car " + e, "ok", "")
