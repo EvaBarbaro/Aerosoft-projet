@@ -10,12 +10,12 @@ import dao.*;
 import models.*;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 public class RechercherAffectation extends JFrame implements ActionListener {
-	/**
-	 *
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	JLabel l1, l2, l3;
@@ -45,7 +45,8 @@ public class RechercherAffectation extends JFrame implements ActionListener {
 		"IdPilote"  
 };
 
-	public RechercherAffectation(int droit) {
+public RechercherAffectation(int droit) {
+		
 		//instanciation du droit
 		droitA = droit;
 
@@ -53,35 +54,27 @@ public class RechercherAffectation extends JFrame implements ActionListener {
 		l1 = new JLabel("RECHERCHER UNE AFFECTTION");
 		l1.setForeground(Color.blue);
 		l1.setFont(new Font("Serif", Font.BOLD, 20));
+		l1.setBounds(100, 30, 400, 30);
 
 		l2 = new JLabel("ID");
+		l2.setBounds(100, 70, 200, 30);
 
 		tf1 = new JTextField();
+		tf1.setBounds(149, 70, 200, 30);
 
 		/* Bouton */
 		btn1 = new JButton("Rechercher");
-
-		/* Placement */
-		l1.setBounds(100, 30, 400, 30);
-		l2.setBounds(100, 70, 200, 30);
-
-		tf1.setBounds(149, 70, 200, 30);
-
 		btn1.setBounds(361, 69, 176, 30);
-
 		btn1.addActionListener(this);
 
 		getContentPane().add(l1);
 		getContentPane().add(l2);
 		getContentPane().add(tf1);
-
 		getContentPane().add(btn1);
 
-		tableModel = new DefaultTableModel(tblHead, 0);
+		tableModel = new AffectationTableModel(tblHead);
 
 		data = new JTable(tableModel);
-
-		//javax.swing.JTable.setInner(5); 
 
 		data.setFont(new Font("Chandas", Font.BOLD, 15));
 		data.setRowHeight(25);
@@ -90,16 +83,33 @@ public class RechercherAffectation extends JFrame implements ActionListener {
 
 		data.setDefaultEditor(Object.class, null);
 
+		((DefaultTableCellRenderer) data.getTableHeader().getDefaultRenderer())
+		.setHorizontalAlignment(JLabel.CENTER);
+			
+		DefaultTableCellRenderer rendar = new DefaultTableCellRenderer();
+		rendar.setHorizontalAlignment(JLabel.CENTER);
+	
+		TableModel tableModel = data.getModel();
+
+		for (int x = 1; x < tableModel.getColumnCount(); x++) {
+
+			if (x != 3) {
+
+				data.getColumnModel().getColumn(x).setCellRenderer(rendar);
+			}
+
+		}
+
 		JScrollPane scrollPane = new JScrollPane(data);
 		scrollPane.setFont(new Font("DejaVu Sans Mono", Font.BOLD, 15));
 
-		scrollPane.setSize(500, 200);
-		scrollPane.setLocation(149, 143);
+		scrollPane.setSize(900, 200);
+		scrollPane.setLocation(50, 143);
 		getContentPane().add(scrollPane);
 
 		setTitle("Rechercher un Livre");
 
-		setSize(700, 540);
+		setSize(1000, 540);
 		getContentPane().setLayout(null);
 
 		final Toolkit toolkit = Toolkit.getDefaultToolkit();

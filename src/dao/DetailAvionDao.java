@@ -28,14 +28,11 @@ public class DetailAvionDao implements Dao {
 
       while (res.next()) {
 
-        DetailAvion detailAvion = new DetailAvion(
-          res.getString("TypeAvion"),
-          res.getInt("Capacite"),
-          res.getInt("IdConstructeur")
-          );
+        DetailAvion detailAvion = new DetailAvion(res.getString("TypeAvion"),
+            res.getInt("Capacite"), res.getInt("IdConstructeur"));
 
-          listeDetailAvion.add(detailAvion);
-        
+        listeDetailAvion.add(detailAvion);
+
       }
 
       res.close();
@@ -45,10 +42,16 @@ public class DetailAvionDao implements Dao {
 
       e.printStackTrace();
       System.out.println("Impossible d'afficher les details avions");
-      
+
     }
-    
+
     return listeDetailAvion;
+  }
+  
+    @Override
+  public ArrayList<DetailAvion> search(Object id) {
+    // TODO Auto-generated method stub
+    return null;
   }
 
   @Override

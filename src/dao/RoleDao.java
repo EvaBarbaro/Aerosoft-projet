@@ -11,6 +11,49 @@ public class RoleDao implements Dao {
 
 	/**
 	 * @param id
+	 * @return ArrayList<Role>
+	 */
+	public ArrayList<Role> search(Object id) {
+
+		Role role = null;
+		String idSearch = String.valueOf(id);
+
+		Connection conn = null;
+		PreparedStatement stmt = null;
+
+		ArrayList<Role> listeRole = new ArrayList<>();
+
+		String sql = "SELECT * FROM `ROLES` WHERE RoleNom LIKE '" + idSearch + "%'";
+
+		try {
+
+			conn = ConnectionBdd.getConnection();
+			stmt = conn.prepareStatement(sql);
+			
+			System.out.println("Voici les informations du role " + idSearch);
+			ResultSet res = stmt.executeQuery(sql);
+
+			while (res.next()) {
+
+				role = new Role(res.getString("IdRole"), res.getString("RoleNom"));
+
+				listeRole.add(role);
+
+			}
+
+			res.close();
+			conn.close();
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+		return listeRole;
+	}
+
+	/**
+	 * @param id
 	 * @return Object
 	 */
 	public Object get(Object id) {

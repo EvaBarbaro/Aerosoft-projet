@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public interface Dao {
     
     Object get(Object id);
+
+    ArrayList search(Object id);
     
     ArrayList getAll();
     

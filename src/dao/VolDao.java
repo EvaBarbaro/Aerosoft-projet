@@ -14,6 +14,53 @@ public class VolDao implements Dao {
 
 	/**
 	 * @param id
+	 * @return ArrayList<Vol>
+	 */
+	@Override
+	public ArrayList<Vol> search(Object id) {
+
+		String idSearch = String.valueOf(id);
+
+		Vol vol = null;
+
+		Connection conn = null;
+		PreparedStatement stmt = null;
+
+		ArrayList<Vol> listeVols = new ArrayList<>();
+
+		String sql = "SELECT * FROM `VOL` WHERE NumVol LIKE '" + idSearch + "%'";
+
+		try {
+
+			conn = ConnectionBdd.getConnection();
+			stmt = conn.prepareStatement(sql);
+			
+			System.out.println("Voici les informations du vol " + idSearch);
+			ResultSet res = stmt.executeQuery(sql);
+
+			while (res.next()) {
+
+				vol = new Vol(res.getString("NumVol"), res.getString("AeroportDept"),
+						res.getString("HDepart"), res.getString("AeroportArr"),
+						res.getString("HArrivee"));
+
+				listeVols.add(vol);
+			}
+
+			res.close();
+			conn.close();
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+
+		return listeVols;
+	}
+
+	/**
+	 * @param id
 	 * @return Object
 	 */
 	@Override

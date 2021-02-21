@@ -34,11 +34,8 @@ public class AvionDao implements Dao {
       while (res.next()) {
 
         //Retrieve by column name
-        Avion avion = new Avion(
-          res.getInt("NumAvion"),
-          res.getString("TypeAvion"),
-          res.getString("BaseAeroport")
-        );
+        Avion avion = new Avion(res.getInt("NumAvion"), res.getString("TypeAvion"),
+            res.getString("BaseAeroport"));
 
         listeAvions.add(avion);
       }
@@ -48,6 +45,58 @@ public class AvionDao implements Dao {
 
     } catch (SQLException e) {
 
+      e.printStackTrace();
+      System.out.println("Impossible d'afficher les vols");
+      throw new RuntimeException(e);
+
+    }
+
+    return listeAvions;
+  }
+  
+  /**
+   * @param id
+   * @return ArrayList<Avion>
+   */
+  @Override
+  public ArrayList<Avion> search(Object id) {
+
+    Avion avion = null;
+
+    Connection conn = null;
+    PreparedStatement stmt = null;
+
+    ArrayList<Avion> listeAvions = new ArrayList<>();
+
+    String sql = "SELECT * FROM `AVION` WHERE NumAvion LIKE '" + id + "%'";
+
+    System.out.println(sql);
+
+    try {
+
+      conn = ConnectionBdd.getConnection();
+      stmt = conn.prepareStatement(sql);
+
+      ResultSet res = stmt.executeQuery(sql);
+
+      while (res.next()) {
+
+        avion =
+          new Avion(
+            res.getInt("NumAvion"),
+            res.getString("typeAvion"),
+            res.getString("baseAeroport")
+            );
+
+        listeAvions.add(avion);
+          
+      }
+
+      res.close();
+      conn.close();
+
+    } catch (SQLException e) {
+      
       e.printStackTrace();
       System.out.println("Impossible d'afficher les vols");
       throw new RuntimeException(e);

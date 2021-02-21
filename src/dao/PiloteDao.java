@@ -14,6 +14,59 @@ public class PiloteDao implements Dao {
 
 	/**
 	 * @param idObj
+	 * @return ArrayList<Pilote>
+	 */
+	@Override
+	public ArrayList<Pilote> search(Object idObj) {
+
+		int idSearch = (int) idObj;
+		Pilote pilote = null;
+
+		Connection conn = null;
+		PreparedStatement stmt = null;
+
+		ArrayList<Pilote> listePilotes = new ArrayList<>();
+
+		String sql = "SELECT * FROM `PILOTE` WHERE IdPilote LIKE '" + idSearch + "%'";
+
+		try {
+
+			conn = ConnectionBdd.getConnection();
+			stmt = conn.prepareStatement(sql);
+			//stmt.setObject(1, idSearch);
+
+			System.out.println("Voici les informations du pilote " + idSearch);
+
+			ResultSet res = stmt.executeQuery(sql);
+
+			while (res.next()) {
+
+				pilote = new Pilote(
+						res.getInt("IdPilote"),
+						res.getString("NomPilote"), 
+						res.getString("PrenomPilote"),
+						res.getString("Matricule")
+				);
+					
+				listePilotes.add(pilote);
+
+			}
+			
+			res.close();
+			conn.close();
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+
+		return listePilotes;
+	}
+
+
+	/**
+	 * @param idObj
 	 * @return Object
 	 */
 	@Override

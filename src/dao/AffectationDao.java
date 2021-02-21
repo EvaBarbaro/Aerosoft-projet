@@ -13,6 +13,69 @@ public class AffectationDao implements Dao {
 	public AffectationDao() {
 	}
 
+		/**
+	 * @param id
+	 * @return ArrayList<Affectation>
+	 */
+	@Override
+	public ArrayList<Affectation> search(Object id) {
+
+		Affectation affectation = new Affectation();
+
+		// Transformer l'object 'id' en String pour l'envoyer dans la requete
+		String idSearch = String.valueOf(id);
+
+		Connection conn = null;
+		PreparedStatement stmt = null;
+
+		ArrayList<Affectation> listeAffectations = new ArrayList<>();
+
+		String sql = "SELECT " + "affectation.IdAffectation," + "affectation.NumVol,"
+				+ "affectation.DateVol," + "affectation.affectationCode," + "affectation.NumAvion, "
+				+ "affectation.idPilote, "
+				+ "(Select PrenomPilote FROM `PILOTE` as pilote WHERE pilote.idPilote = affectation.idPilote) as PrenomPilote,"
+				+ "(Select NomPilote FROM `PILOTE` as pilote WHERE  pilote.idPilote = affectation.idPilote) as NomPilote "
+				+ " FROM `AFFECTATION` as affectation WHERE affectation.IdAffectation LIKE '" + idSearch + "%'";
+
+		try {
+
+			conn = ConnectionBdd.getConnection();
+			stmt = conn.prepareStatement(sql);
+
+			ResultSet res = stmt.executeQuery(sql);
+
+			while (res.next()) {
+
+				affectation.setId(res.getString(1));
+				affectation.setNumVol(res.getString(2));
+				affectation.setDateVol(res.getDate(3));
+				affectation.setAffectationCode(res.getBoolean(4));
+				affectation.setNumAvion(res.getInt(5));
+
+				Pilote pilote = new Pilote();
+
+				pilote.setIdPilote(res.getInt(6));
+				pilote.setPrenomPilote(res.getString(7));
+				pilote.setNomPilote(res.getString(8));
+
+				affectation.setPilote(pilote);
+
+				listeAffectations.add(affectation);
+
+			}
+
+			res.close();
+			conn.close();
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+
+		return listeAffectations;
+	}
+
 	/**
 	 * @param id
 	 * @return Object

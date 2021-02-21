@@ -12,6 +12,49 @@ public class UtilisateurDao implements Dao {
 	public UtilisateurDao() {
 	}
 
+		/**
+	 * @param idOjb
+	 * @return ArrayList<Utilisateur>
+	 */
+	public ArrayList<Utilisateur> search(Object idOjb) {
+		
+		int idSearch = (int) idOjb;
+		Utilisateur utilisateur = null;
+
+		Connection conn = null;
+		PreparedStatement stmt = null;
+
+		ArrayList<Utilisateur> listeUtilisateurs = new ArrayList<>();
+
+		String sql = "SELECT * FROM `UTILISATEUR` WHERE IdUtilisateur LIKE '" + idSearch + "%'";
+
+		try {
+			conn = ConnectionBdd.getConnection();
+			stmt = conn.prepareStatement(sql);
+			ResultSet res = stmt.executeQuery(sql);
+
+			while (res.next()) {
+
+				utilisateur = new Utilisateur(res.getInt("IdUtilisateur"), res.getString("Mail"),
+						res.getString("MotDePasse"), res.getBoolean("Statut"),
+						res.getString("IdRole"));
+
+				listeUtilisateurs.add(utilisateur);
+			}
+
+			res.close();
+			conn.close();
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			System.out.println("Impossible d'afficher les Utilisateurs");
+			throw new RuntimeException(e);
+		}
+
+		return listeUtilisateurs;
+	}
+
 	/**
 	 * @param idOjb
 	 * @return Object

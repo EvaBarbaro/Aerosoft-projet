@@ -17,12 +17,10 @@ import java.util.ListIterator;
  
 public class ListeAffectations extends JFrame implements ActionListener {
 
-	/**
-	 *
-	 */
 	private static final long serialVersionUID = 1L;
 
 	JLabel l1;
+
 	//Creation du tableau
 	DefaultTableModel tableModel;
 
@@ -52,13 +50,10 @@ public class ListeAffectations extends JFrame implements ActionListener {
 
 		getContentPane().add(l1);
 
-		//tableModel = new DefaultTableModel(tblHead, 0);
 		tableModel = new AffectationTableModel(tblHead);
-
 		
 		data = new JTable(tableModel);
-		
-		
+				
 		data.setEnabled(false);
 		data.setFont(new Font("Chandas", Font.BOLD, 15));
 		data.setRowHeight(25);

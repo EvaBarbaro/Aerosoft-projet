@@ -50,6 +50,55 @@ public class AeroportDao implements Dao {
 		return listeAeroports;
 	}
 
+		/**
+	 * @param id
+	 * @return ArrayList<Aeroport>
+	 */
+	@Override
+	public ArrayList<Aeroport> search(Object id) {
+		
+		String idSearch = String.valueOf(id);
+		
+		Aeroport aeroport = null;
+
+		System.out.println("idSearch : " + idSearch);
+
+
+		Connection conn = null;
+		PreparedStatement stmt = null;
+
+		ArrayList<Aeroport> listeAeroports = new ArrayList<>();
+
+		String sql = "SELECT * FROM `AEROPORT` WHERE IdAeroport LIKE '" + idSearch + "%'";
+
+		try {
+
+			conn = ConnectionBdd.getConnection();
+			stmt = conn.prepareStatement(sql);
+
+			ResultSet res = stmt.executeQuery(sql);
+
+			System.out.println("Voici les informations de l'aeroport " + id);
+
+			while (res.next()) {
+
+				aeroport = new Aeroport(res.getString("IdAeroport"), res.getString("NomAeroport"),
+						res.getString("NomVilleDesservie"));
+
+				listeAeroports.add(aeroport);
+			}
+
+			res.close();
+			conn.close();
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+		return listeAeroports;
+	}
+
 	/**
 	 * @param id
 	 * @return Object
@@ -92,6 +141,7 @@ public class AeroportDao implements Dao {
 
 		return aeroport;
 	}
+
 
 	/**
 	 * @param t
