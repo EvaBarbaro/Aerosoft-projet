@@ -43,7 +43,7 @@ public class FicheListUtilisateur extends JFrame implements ActionListener {
 
 		getContentPane().add(l1);
 
-		tableModel = new DefaultTableModel(tblHead, 0);
+		tableModel = new UtilisateurTableModel(tblHead);
 
 		data = new JTable(tableModel);
 
