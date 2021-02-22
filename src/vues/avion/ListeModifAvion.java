@@ -63,7 +63,7 @@ public class ListeModifAvion extends JFrame implements ActionListener{
 		
 		data.setBounds(100, 100, 450, 450);
 		
-		chargeData(dao);
+		chargeData();
 		
 		data.setDefaultEditor(Object.class, null);
 		
@@ -124,7 +124,8 @@ public class ListeModifAvion extends JFrame implements ActionListener{
 	/** 
 	 * @param dao
 	 */
-	public void chargeData(AvionDao dao) {
+	public void chargeData() {
+		AvionDao dao = new AvionDao();
 			
 		//Recuperation des données de la requete getAll() dans une list
 		list = (List<Avion>) dao.getAll();

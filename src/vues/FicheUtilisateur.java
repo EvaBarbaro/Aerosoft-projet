@@ -460,24 +460,16 @@ public class FicheUtilisateur extends JFrame implements WindowListener {
 
 				jFramClass = Class.forName(jFrameClassName);
 
-			} catch (ClassNotFoundException e1) {
-
-				e1.printStackTrace();
-			}
-
-			// convert string classname to class
-			Object jFram = new Object();
-
-			try {
+				// convert string classname to class
+				Object jFram = new Object();
 
 				jFram = jFramClass.getDeclaredConstructor().newInstance();			
 
 				String methodName = "chargeData";
 				Method setNameMethod = jFram.getClass().getMethod(methodName);
-
 				setNameMethod.invoke(jFram);
 
-			} catch ( SecurityException | IllegalAccessException | IllegalArgumentException
+			} catch ( ClassNotFoundException | SecurityException | IllegalAccessException | IllegalArgumentException
 					| InvocationTargetException | InstantiationException | NoSuchMethodException e1) {
 
 				e1.printStackTrace();

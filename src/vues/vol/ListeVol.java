@@ -65,7 +65,7 @@ public class ListeVol extends JFrame implements ActionListener{
 		
 		data.setBounds(100, 100, 450, 900);
 		
-		chargeData(dao);
+		chargeData();
 		
 		data.setDefaultEditor(Object.class, null);
 		
@@ -132,8 +132,9 @@ public class ListeVol extends JFrame implements ActionListener{
 	 * @param dao
 	 * Récupération de tous les vols pour la liste
 	 */
-	public void chargeData(VolDao dao) {
-			
+	public void chargeData() {
+		
+		VolDao dao = new VolDao();
 			
 			list = (List<Vol>) dao.getAll();
 							

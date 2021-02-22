@@ -442,25 +442,19 @@ public class FicheVolUpdate extends JFrame implements WindowListener {
 
 				jFramClass = Class.forName(jFrameClassName);
 
-			} catch (ClassNotFoundException e1) {
+				// convert string classname to class
+				Object jFram = new Object();
 
-				e1.printStackTrace();
-			}
-
-			// convert string classname to class
-			Object jFram = new Object();
-
-			try {
 
 				jFram = jFramClass.getDeclaredConstructor().newInstance();
 
-			String methodName = "chargeData";
-			Method setNameMethod = jFram.getClass().getMethod(methodName);
+				String methodName = "chargeData";
+				Method setNameMethod = jFram.getClass().getMethod(methodName);
 
-			setNameMethod.invoke(jFram);
+				setNameMethod.invoke(jFram);
 
 			} catch ( NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException
-					| InvocationTargetException | InstantiationException e1) {
+					| InvocationTargetException | InstantiationException | ClassNotFoundException e1) {
 
 				e1.printStackTrace();
 			}

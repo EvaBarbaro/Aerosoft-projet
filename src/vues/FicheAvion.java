@@ -441,15 +441,8 @@ public class FicheAvion extends JFrame implements WindowListener {
 
 				jFramClass = Class.forName(jFrameClassName);
 
-			} catch (ClassNotFoundException e1) {
-
-				e1.printStackTrace();
-			}
-
-			// convert string classname to class
-			Object jFram = new Object();
-
-			try {
+				// convert string classname to class
+				Object jFram = new Object();
 
 				jFram = jFramClass.getDeclaredConstructor().newInstance();
 
@@ -458,7 +451,7 @@ public class FicheAvion extends JFrame implements WindowListener {
 				setNameMethod.invoke(jFram);
 
 			} catch (InstantiationException | NoSuchMethodException | SecurityException |IllegalAccessException | IllegalArgumentException
-					| InvocationTargetException e1) {
+					| InvocationTargetException | ClassNotFoundException e1) {
 
 				e1.printStackTrace();
 			}

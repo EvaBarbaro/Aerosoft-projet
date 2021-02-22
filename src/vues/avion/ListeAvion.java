@@ -64,7 +64,7 @@ public class ListeAvion extends JFrame implements ActionListener{
 		
 		data.setBounds(100, 100, 450, 450);
 		
-		chargeData(dao);
+		chargeData();
 		
 		JScrollPane scrollPane = new JScrollPane(data);
 		scrollPane.setFont(new Font("DejaVu Sans Mono", Font.BOLD, 15));
@@ -93,7 +93,8 @@ public class ListeAvion extends JFrame implements ActionListener{
 	/** 
 	 * @param dao
 	 */
-	public void chargeData(AvionDao dao) {
+	public void chargeData() {
+		AvionDao dao = new AvionDao();
 			
 		//Recuperation des données de la requete getAll() dans une list
 		list = (List<Avion>) dao.getAll();

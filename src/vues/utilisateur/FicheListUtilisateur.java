@@ -52,7 +52,7 @@ public class FicheListUtilisateur extends JFrame implements ActionListener {
 
 		data.setBounds(100, 100, 450, 450);
 
-		chargeData(dao);
+		chargeData();
 
 		data.setDefaultEditor(Object.class, null);
 
@@ -115,7 +115,8 @@ public class FicheListUtilisateur extends JFrame implements ActionListener {
 	/**
 	 * @param dao Récupération des données de tous les utilisateurs
 	 */
-	public void chargeData(UtilisateurDao dao) {
+	public void chargeData() {
+		UtilisateurDao dao = new UtilisateurDao();
 
 		list = (List<Utilisateur>) dao.getAll();
 
