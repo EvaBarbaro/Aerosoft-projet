@@ -1,4 +1,4 @@
-﻿# Aerosoft-projet
+# Aerosoft-projet
 
 ## Projet de création d'un logiciel de gestion aéroportuaire
 
