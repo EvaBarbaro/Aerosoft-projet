@@ -4,7 +4,7 @@
 
 ### Conception graphique
 
-[La navigation](.\Conception\Maquette+charte-graphique\Aerosoft-projet-navigation.pdf)
+[La navigation](Conception\Maquette+charte-graphique\Aerosoft-projet-navigation.pdf)
 
 [La maquette](Conception\Maquette+charte-graphique\Maquette-aerosoft.pdf)
 
