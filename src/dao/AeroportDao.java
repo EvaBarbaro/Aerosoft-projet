@@ -170,7 +170,7 @@ public class AeroportDao implements Dao {
 
 			System.out.println(aeroport.getNomAeroport() + " a bien été ajouté");
 
-			new SDialog("Ajout", "Ajouter reussie", "Valider", "").setVisible(true);
+			new SDialog("Ajout", "Ajout reussi", "Valider", "").setVisible(true);
 
 		} catch (SQLException e) {
 

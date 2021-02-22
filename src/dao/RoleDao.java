@@ -155,7 +155,7 @@ public class RoleDao implements Dao {
 			stmt.execute();
 
 			System.out.println(role.getIdRole() + " a bien été ajouté");
-			new SDialog("Ajout", "Ajouter reussie", "Valider", "").setVisible(true);
+			new SDialog("Ajout", "Ajout reussi", "Valider", "").setVisible(true);
 
 		} catch (SQLException e) {
 

@@ -157,7 +157,7 @@ public class UtilisateurDao implements Dao {
 			stmt.execute();
 
 			System.out.println(utilisateur.getIdUtilisateur() + " a bien été ajouté");
-			new SDialog("Ajout", "Ajouter reussie", "Valider", "").setVisible(true);
+			new SDialog("Ajout", "Ajout reussi", "Valider", "").setVisible(true);
 
 		} catch (SQLException e) {
 
