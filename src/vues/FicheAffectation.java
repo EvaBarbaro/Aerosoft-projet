@@ -464,32 +464,15 @@ public class FicheAffectation extends JFrame implements WindowListener {
 
 				jFram = jFramClass.getDeclaredConstructor().newInstance();
 
-			} catch (ClassCastException | InstantiationException | IllegalAccessException | IllegalArgumentException
-					| InvocationTargetException | NoSuchMethodException | SecurityException e1) {
-
-				e1.printStackTrace();
-			}
-
-			String methodName = "chargeData";
-			Method setNameMethod = (Method) new Object();
-
-			try {
-
-				setNameMethod = jFram.getClass().getMethod(methodName, String.class);
-
-			} catch ( NoSuchMethodException | SecurityException e1) {
-
-				e1.printStackTrace();
-			}
-			try {
-
+				String methodName = "chargeData";
+				Method setNameMethod = jFram.getClass().getMethod(methodName);
 				setNameMethod.invoke(jFram);
 
-			} catch (IllegalAccessException | IllegalArgumentException
-					| InvocationTargetException e1) {
+			} catch ( ClassCastException | InstantiationException | IllegalAccessException | IllegalArgumentException
+			| InvocationTargetException | NoSuchMethodException | SecurityException e1) {
 
 				e1.printStackTrace();
-			}
+			}			
 		}
 
 	}

@@ -464,7 +464,7 @@ public class FicheVol extends JFrame implements WindowListener {
 
 			try {
 
-				setNameMethod = jFram.getClass().getMethod(methodName, String.class);
+				setNameMethod = jFram.getClass().getMethod(methodName);
 
 			} catch (NoSuchMethodException | SecurityException e1) {
 

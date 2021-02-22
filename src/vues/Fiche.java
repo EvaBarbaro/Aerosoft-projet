@@ -437,28 +437,14 @@ public class Fiche extends JFrame implements WindowListener{
 
 			jFram = jFramClass.getDeclaredConstructor().newInstance();
 
-		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
-				| InvocationTargetException | NoSuchMethodException | SecurityException e1) {
+			String methodName = "chargeData";
 
-			e1.printStackTrace();
-		}
-
-		String methodName = "chargeData";
-		Method setNameMethod = (Method) new Object();
-
-		try {
-
-			setNameMethod = jFram.getClass().getMethod(methodName, String.class);
-
-		} catch (NoSuchMethodException | SecurityException e1) {
-
-			e1.printStackTrace();
-		}
-		try {
-			
+			Method setNameMethod = jFram.getClass().getMethod(methodName);			
 			setNameMethod.invoke(jFram);
 			
-		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e1) {
+		} catch (InstantiationException 
+				| NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e1) {
 
 			e1.printStackTrace();
 		}

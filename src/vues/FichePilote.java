@@ -443,21 +443,13 @@ public class FichePilote extends JFrame implements WindowListener {
 			}
 
 			String methodName = "chargeData";
-			Method setNameMethod = (Method) new Object();
 
 			try {
 
-				setNameMethod = jFram.getClass().getMethod(methodName, String.class);
-
-			} catch (NoSuchMethodException | SecurityException e1) {
-
-				e1.printStackTrace();
-			}
-			try {
-
+				Method setNameMethod = jFram.getClass().getMethod(methodName);
 				setNameMethod.invoke(jFram);
 
-			} catch (IllegalAccessException | IllegalArgumentException
+			} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException
 					| InvocationTargetException e1) {
 
 				e1.printStackTrace();
